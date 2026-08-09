@@ -49,8 +49,30 @@
   .logo { font-weight: 600; font-size: 1.3rem; letter-spacing: var(--tracking-lg); }
   .navlinks { display: none; align-items: center; gap: 2rem; font-size: 0.95rem; color: var(--ink-soft); }
   @media (min-width: 860px) { .navlinks { display: flex; } }
+
+  .nav-toggle {
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+    width: 38px; height: 38px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
+  }
+  .nav-toggle span { display: block; width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (min-width: 860px) { .nav-toggle { display: none; } }
+
+  .mobile-menu {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    background: var(--paper); box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+    padding: 5.2rem 1.6rem 1.6rem; display: flex; flex-direction: column; gap: 0.2rem;
+    transform: translateY(-100%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu a { padding: 0.9rem 0.2rem; color: var(--ink); font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+  .mobile-menu a.btn-solid { margin-top: 1rem; text-align: center; border-bottom: none; }
+  @media (min-width: 860px) { .mobile-menu { display: none; } }
   .navlinks a:hover { color: var(--ink); }
   .nav-cta { display: flex; align-items: center; gap: 0.7rem; }
+  @media (max-width: 859px) { .nav-cta { display: none; } }
   .btn {
     display: inline-block; padding: 0.75rem 1.35rem; font-size: 0.9rem; font-weight: 500;
     border: 1.5px solid var(--line-strong); background: transparent; color: var(--ink);
@@ -251,7 +273,17 @@
         <a class="btn" href="#footer-signup">Contacto</a>
         <a class="btn btn-solid" href="#footer-signup">Acceso anticipado</a>
       </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#criterio">Cómo elegimos</a>
+      <a href="#protocolo">Pack</a>
+      <a href="#footer-signup">Contacto</a>
+      <a class="btn btn-solid" href="#footer-signup">Acceso anticipado</a>
+    </div>
   </div>
   <div class="hero-content wrap">
     <div class="hero-text">
@@ -517,6 +549,26 @@
     var spotFigureFallback = spotSection.querySelector('.spot-figure');
     if (spotFigureFallback) spotFigureFallback.classList.add('in');
     spotCount.textContent = '20';
+  }
+
+  // mobile hamburger menu
+  var navToggle = document.getElementById('nav-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
   }
 
   var form = document.getElementById('waitlist-form');
