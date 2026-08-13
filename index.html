@@ -20,18 +20,6 @@
     --tracking-lg: -0.03em;
     --tracking-sm: -0.01em;
   }
-  :root[data-theme="dark"] {
-    --paper: #23272e; --tint: #2a2f37; --ink: #eef0f4; --ink-soft: #c7cfda;
-    --ink-faint: #8b9aa8; --khaki: #aebbd3; --khaki-pop: #4a6689; --khaki-deep: #c7d3e3;
-    --olive: #9aacc4; --olive-soft: #9aa6b4; --line: #33383f; --line-strong: #eef0f4;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #23272e; --tint: #2a2f37; --ink: #eef0f4; --ink-soft: #c7cfda;
-      --ink-faint: #8b9aa8; --khaki: #aebbd3; --khaki-pop: #4a6689; --khaki-deep: #c7d3e3;
-      --olive: #9aacc4; --olive-soft: #9aa6b4; --line: #33383f; --line-strong: #eef0f4;
-    }
-  }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-weight: 400; line-height: 1.5; -webkit-font-smoothing: antialiased; letter-spacing: var(--tracking-sm); }
