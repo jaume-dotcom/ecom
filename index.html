@@ -94,12 +94,19 @@
     position: fixed; top: 0; left: 0; bottom: 0; z-index: 1001;
     width: min(85vw, 340px); max-width: 100%;
     background: var(--paper); opacity: 1;
-    box-shadow: 8px 0 32px rgba(0,0,0,0.32);
     padding: 1.1rem 1.4rem 1.6rem; display: flex; flex-direction: column;
     overflow-y: auto; overscroll-behavior: contain;
-    transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    transform: translateX(-100%);
+    /* cerrado: sin sombra (su borde queda en x:0 y se colaría ~24px dentro de la
+       página) y oculto, para que no lo alcancen ni el tabulador ni el lector */
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.35s;
   }
-  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu.open {
+    transform: translateX(0); visibility: visible;
+    box-shadow: 8px 0 32px rgba(0,0,0,0.32);
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
+  }
   .mm-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
   .mm-logo { font-weight: 600; font-size: 1.2rem; letter-spacing: var(--tracking-lg); color: var(--ink); }
   .mm-close {
@@ -206,18 +213,20 @@
   .hero-carousel-prev { left: 1rem; }
   .hero-carousel-next { right: 1rem; }
   .hero-carousel-arrow svg { width: 1.2rem; height: 1.2rem; }
-  .hero-carousel-footer { position: absolute; bottom: 1rem; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 1rem; z-index: 4; }
-  .hero-carousel-dots { display: flex; gap: 0.5rem; }
-  .hero-carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(35,39,46,0.25); border: none; padding: 0; cursor: pointer; }
-  .hero-carousel-dot.active { background: #23272e; }
-  .hero-carousel-pause {
-    width: 1.6rem; height: 1.6rem; border-radius: 50%; background: rgba(255,255,255,0.9); border: 1px solid rgba(35,39,46,0.1);
-    display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; color: #23272e;
+  /* móvil: el hero manda. Sin proporción propia, la caja heredaba el 2,15:1 del
+     archivo y quedaba en una franja de 150px. Va a sangre y en vertical. */
+  @media (max-width: 859px) {
+    .hero-carousel { padding-left: 0; padding-right: 0; }
+    .hero-carousel-viewport { border-radius: 0; }
+    .hero-media-box { aspect-ratio: 1 / 1; }
+    .hero-media-box img {
+      height: 100%; object-fit: cover;
+      /* recortado a 4/5 solo cabe el 37% del ancho del original (2400x1109);
+         anclado a la izquierda el frasco entra entero, igual que en escritorio */
+      object-position: left center;
+    }
+    .hero-mobile-benefits { padding-left: 1.6rem; padding-right: 1.6rem; }
   }
-  .hero-carousel-pause .icon-play { display: none; width: 0.55rem; height: 0.65rem; }
-  .hero-carousel-pause .icon-pause { display: block; width: 0.6rem; height: 0.7rem; }
-  .hero-carousel-pause[data-state="paused"] .icon-play { display: block; }
-  .hero-carousel-pause[data-state="paused"] .icon-pause { display: none; }
   @media (min-width: 860px) {
     .hero-carousel-viewport { border-radius: 24px; }
     .hero-media-box { aspect-ratio: 16 / 9; }
@@ -481,18 +490,6 @@
     <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
       <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <div class="hero-carousel-footer">
-      <div class="hero-carousel-dots" id="hero-carousel-dots">
-        <button type="button" class="hero-carousel-dot active" aria-label="Ir a la fórmula 1"></button>
-        <button type="button" class="hero-carousel-dot" aria-label="Ir a la fórmula 2"></button>
-        <button type="button" class="hero-carousel-dot" aria-label="Ir a la fórmula 3"></button>
-        <button type="button" class="hero-carousel-dot" aria-label="Ir a la fórmula 4"></button>
-      </div>
-      <button type="button" class="hero-carousel-pause" id="hero-carousel-pause" data-state="play" aria-label="Detener rotación">
-        <svg class="icon-pause" viewBox="0 0 15 18"><rect x="2" y="2" width="4" height="14" rx="1" fill="currentColor"/><rect x="9" y="2" width="4" height="14" rx="1" fill="currentColor"/></svg>
-        <svg class="icon-play" viewBox="0 0 12 14"><path d="M1 1l10 6-10 6z" fill="currentColor"/></svg>
-      </button>
-    </div>
   </div>
 <ul class="hero-mobile-benefits active" data-slide="0">
       <li>Reduce el cansancio y la fatiga</li>
@@ -522,6 +519,7 @@
       <li>Apoyo a la flora intestinal</li>
       <li>Sin relleno, solo cepas activas</li>
       </ul>
+  </div>
 </div>
 
 <div class="wrap">
@@ -791,24 +789,28 @@
   var carouselTrack = document.getElementById('hero-carousel-track');
   if (carouselTrack) {
     var carouselSlides = Array.prototype.slice.call(carouselTrack.children);
-    var carouselDots = Array.prototype.slice.call(document.querySelectorAll('.hero-carousel-dot'));
     var carouselMobileLists = Array.prototype.slice.call(document.querySelectorAll('.hero-mobile-benefits'));
     var carouselPrev = document.getElementById('hero-carousel-prev');
     var carouselNext = document.getElementById('hero-carousel-next');
-    var carouselPause = document.getElementById('hero-carousel-pause');
+    var carouselRoot = carouselTrack.closest('.hero-carousel') || carouselTrack;
     var carouselIndex = 0;
     var carouselTimer = null;
+    // 7s: cada slide lleva 5 etiquetas de beneficio (~20 palabras) y con 5s
+    // cambiaba justo mientras se estaban leyendo
+    var CAROUSEL_MS = 7000;
+    var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function goToSlide(i) {
       carouselIndex = (i + carouselSlides.length) % carouselSlides.length;
       carouselTrack.style.transform = 'translateX(-' + (carouselIndex * 100) + '%)';
-      carouselDots.forEach(function (dot, di) { dot.classList.toggle('active', di === carouselIndex); });
       carouselMobileLists.forEach(function (list, li) { list.classList.toggle('active', li === carouselIndex); });
     }
 
     function startAutoplay() {
       stopAutoplay();
-      carouselTimer = setInterval(function () { goToSlide(carouselIndex + 1); }, 5000);
+      // sin botón de pausa, quien pida menos movimiento no debe ver rotación
+      if (sinMovimiento.matches) { return; }
+      carouselTimer = setInterval(function () { goToSlide(carouselIndex + 1); }, CAROUSEL_MS);
     }
 
     function stopAutoplay() {
@@ -817,21 +819,17 @@
 
     carouselPrev.addEventListener('click', function () { goToSlide(carouselIndex - 1); startAutoplay(); });
     carouselNext.addEventListener('click', function () { goToSlide(carouselIndex + 1); startAutoplay(); });
-    carouselDots.forEach(function (dot, di) {
-      dot.addEventListener('click', function () { goToSlide(di); startAutoplay(); });
-    });
-    carouselPause.addEventListener('click', function () {
-      var paused = carouselPause.getAttribute('data-state') === 'paused';
-      if (paused) {
-        carouselPause.setAttribute('data-state', 'play');
-        carouselPause.setAttribute('aria-label', 'Detener rotación');
-        startAutoplay();
-      } else {
-        carouselPause.setAttribute('data-state', 'paused');
-        carouselPause.setAttribute('aria-label', 'Iniciar rotación');
-        stopAutoplay();
-      }
-    });
+
+    // sustituye al botón de pausa: se detiene al pasar el ratón o al entrar
+    // con el teclado, y se reanuda al salir
+    carouselRoot.addEventListener('mouseenter', stopAutoplay);
+    carouselRoot.addEventListener('mouseleave', startAutoplay);
+    carouselRoot.addEventListener('focusin', stopAutoplay);
+    carouselRoot.addEventListener('focusout', startAutoplay);
+    // si el sistema cambia la preferencia en caliente, obedecer sin recargar
+    if (sinMovimiento.addEventListener) {
+      sinMovimiento.addEventListener('change', function () { startAutoplay(); });
+    }
 
     startAutoplay();
   }
