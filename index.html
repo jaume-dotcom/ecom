@@ -180,8 +180,25 @@
   .hero-center { position: relative; z-index: 2; text-align: center; max-width: 42rem; margin: 0 auto; padding: 1.5rem 0 2.2rem; }
   .hero-center h1 { font-size: clamp(2.3rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.05; margin: 0 0 1.2rem; text-wrap: balance; }
   .hero-center p { font-size: 1.1rem; color: var(--ink-soft); margin: 0 auto 1.8rem; max-width: 46ch; }
-  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.2rem; }
-  .hero-ctas .link-btn { font-weight: 500; border-bottom: 1.5px solid var(--ink); padding-bottom: 0.1rem; }
+  .hero-signup { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem; }
+  .hero-signup-field {
+    display: flex; align-items: center; gap: 0.6rem; background: var(--tint); border: 1px solid var(--line);
+    border-radius: 1000px; padding: 0.75rem 1.1rem; min-width: 240px;
+  }
+  .hero-signup-icon { width: 1.1rem; height: 1.1rem; color: var(--ink-faint); flex-shrink: 0; }
+  .hero-signup-field input {
+    border: none; background: none; outline: none; font-size: 0.95rem; color: var(--ink); width: 100%;
+    font-family: var(--font);
+  }
+  .hero-signup-field input::placeholder { color: var(--ink-faint); }
+  .hero-signup button {
+    display: flex; align-items: center; gap: 0.5rem; padding: 0.78rem 1.4rem; background: var(--ink); color: var(--paper);
+    border: none; border-radius: 1000px; font-weight: 500; font-size: 0.95rem; cursor: pointer; font-family: var(--font);
+  }
+  .hero-signup button:hover { background: var(--olive); }
+  .hero-signup-arrow { width: 1rem; height: 1rem; }
+  .hero-signup-success { text-align: center; font-size: 0.85rem; color: var(--olive-soft); margin: 0.9rem 0 0; display: none; }
+  .hero-signup-success.show { display: block; }
   .hero-media { position: relative; z-index: 2; width: 100%; padding-bottom: 3rem; }
   .hero-media-box { position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: #e9ebef; }
   .hero-media-box img { width: 100%; display: block; }
@@ -399,10 +416,14 @@
   <div class="hero-center wrap">
     <h1>Suplementación construida para lo que ya sabes que funciona.</h1>
     <p>Cuatro fórmulas con dosis clínicas, elegidas directamente de los temas que se tratan cada semana en el canal. Sin relleno de marketing.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-solid" href="#catalogo">Ver catálogo</a>
-      <a class="link-btn" href="#criterio">Cómo elegimos &rarr;</a>
-    </div>
+    <form class="hero-signup" id="hero-waitlist-form">
+      <span class="hero-signup-field">
+        <svg viewBox="0 0 24 24" class="hero-signup-icon"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input type="email" placeholder="tu@email.com" aria-label="Email" required />
+      </span>
+      <button type="submit">Únete <svg viewBox="0 0 24 24" class="hero-signup-arrow"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </form>
+    <p class="hero-signup-success" id="hero-signup-success">Apuntado. Serás de los primeros en saberlo.</p>
   </div>
 
   <div class="hero-media wrap">
@@ -748,4 +769,14 @@
     success.classList.add('show');
     form.reset();
   });
+
+  var heroForm = document.getElementById('hero-waitlist-form');
+  var heroSuccess = document.getElementById('hero-signup-success');
+  if (heroForm && heroSuccess) {
+    heroForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      heroSuccess.classList.add('show');
+      heroForm.reset();
+    });
+  }
 </script>
