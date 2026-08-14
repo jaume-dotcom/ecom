@@ -83,6 +83,39 @@
     display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 5px;
     width: 38px; height: 38px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
   }
+  /* mismo tamaño que la hamburguesa: equilibra la barra a izquierda y derecha */
+  .nav-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; color: var(--ink); flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+  .nav-icon:hover { opacity: 0.6; }
+
+  /* fila de pastillas de fórmula, bajo la barra de anuncio.
+     Resetea justify-content y padding: el <nav> global se los impone. */
+  .pills-row {
+    display: flex; justify-content: flex-start; align-items: center;
+    gap: 0.5rem; padding: 0.85rem 1.6rem;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+    /* sin esto el snap alinea la primera pastilla con el borde del contenedor
+       y se come el margen izquierdo al cargar */
+    scroll-padding-left: 1.6rem;
+  }
+  .pills-row::-webkit-scrollbar { display: none; }
+  .pill {
+    flex: 0 0 auto; scroll-snap-align: start;
+    padding: 0.5rem 1.05rem; border-radius: 1000px;
+    border: 1px solid var(--line); color: var(--ink);
+    font-size: 0.85rem; white-space: nowrap; letter-spacing: var(--tracking-sm);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .pill:hover { background: var(--tint); border-color: var(--ink-faint); }
+  .pill-ghost { border-color: transparent; color: var(--ink-soft); }
+  .pill-ghost:hover { border-color: var(--line); }
+  @media (min-width: 860px) {
+    .pills-row { justify-content: center; overflow-x: visible; padding: 1rem 1.6rem; }
+  }
   .nav-toggle span { display: block; width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
   .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
@@ -401,9 +434,25 @@
 
   .announce-bar { width: 100%; text-align: center; padding: 0.55rem 1rem; background: var(--ink); color: var(--paper); }
   .announce-bar p { margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: var(--tracking-sm); }
+
+  /* tira rotativa bajo el hero: dos pasadas idénticas y un desplazamiento
+     del 50%, para que el bucle no tenga costura */
+  .ticker { width: 100%; overflow: hidden; background: var(--ink); color: var(--paper); }
+  .ticker-track { display: flex; width: max-content; animation: ticker-scroll 24s linear infinite; }
+  .ticker-run { display: flex; }
+  .ticker span {
+    display: inline-flex; align-items: center; white-space: nowrap;
+    padding: 0.75rem 0; font-size: 0.82rem; letter-spacing: var(--tracking-sm);
+  }
+  .ticker span::after {
+    content: "\25CF"; font-size: 0.35rem; margin: 0 1.7rem; opacity: 0.5;
+  }
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* se detiene al pasar el ratón, como el carrusel */
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
 </style>
 
-<div class="announce-bar"><p>Creado en España</p></div>
 <div class="hero-full">
   <div class="hero-nav wrap">
     <nav>
@@ -438,17 +487,25 @@
         <a class="btn btn-solid" href="#footer-signup">Acceso anticipado</a>
       </div>
 
+      <a class="nav-icon" href="#catalogo" aria-label="Ir al catálogo">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true">
+          <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </a>
+
     </nav>
   </div>
 
-  <div class="hero-center wrap">
-    <h1>Cuatro fórmulas con la dosis que usaron los estudios.</h1>
-    <p>Elegidas directamente de los temas que se tratan cada semana en el canal. Sin relleno de marketing.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-solid" href="#catalogo">Ver las fórmulas</a>
-      <a class="btn" href="#criterio">Cómo elegimos</a>
-    </div>
-  </div>
+  <div class="announce-bar"><p>Creado en España</p></div>
+
+  <nav class="pills-row" aria-label="Fórmulas">
+    <a class="pill" href="#catalogo">Magnesio</a>
+    <a class="pill" href="#catalogo">Vitamina D3 + K2</a>
+    <a class="pill" href="#catalogo">Omega&ndash;3</a>
+    <a class="pill" href="#catalogo">Probiótico</a>
+    <a class="pill pill-ghost" href="#criterio">Cómo elegimos</a>
+  </nav>
 
   <div class="hero-carousel wrap">
   <div class="hero-carousel-viewport">
@@ -529,6 +586,36 @@
       <li>Apoyo a la flora intestinal</li>
       <li>Sin relleno, solo cepas activas</li>
       </ul>
+  </div>
+
+  <div class="ticker" aria-label="Claves de la marca">
+    <div class="ticker-track">
+      <div class="ticker-run">
+        <span>Dosis clínica real</span>
+        <span>Sin relleno de marketing</span>
+        <span>Forma quelada, alta absorción</span>
+        <span>Elegidas en el canal, cada semana</span>
+        <span>Sin óxido de magnesio</span>
+        <span>Fabricado en España &middot; GMP</span>
+      </div>
+      <div class="ticker-run" aria-hidden="true">
+        <span>Dosis clínica real</span>
+        <span>Sin relleno de marketing</span>
+        <span>Forma quelada, alta absorción</span>
+        <span>Elegidas en el canal, cada semana</span>
+        <span>Sin óxido de magnesio</span>
+        <span>Fabricado en España &middot; GMP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-center wrap">
+    <h1>Cuatro fórmulas con la dosis que usaron los estudios.</h1>
+    <p>Elegidas directamente de los temas que se tratan cada semana en el canal. Sin relleno de marketing.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="#catalogo">Ver las fórmulas</a>
+      <a class="btn" href="#criterio">Cómo elegimos</a>
+    </div>
   </div>
 </div>
 
