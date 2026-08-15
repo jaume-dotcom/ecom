@@ -273,9 +273,7 @@
   .hero-signup-label { font-size: 0.95rem; font-weight: 500; color: var(--ink); margin: 0 0 0.8rem; }
   /* el botón del formulario es la acción principal: va en ámbar como los demás */
   .hero-signup button { background: var(--khaki-deep); }
-  .hero-signup-legal { font-size: 0.78rem; color: var(--ink-faint); margin: 0.8rem auto 0; max-width: 40ch; }
-  .hero-signup-legal a { text-decoration: underline; }
-  .hero-ctas { margin-top: 1.2rem; }
+  .hero-ctas { margin-top: 1.4rem; }
   .hero-carousel { position: relative; z-index: 2; width: 100%; padding-bottom: 3rem; }
   .hero-carousel-viewport { position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: #e9ebef; }
   .hero-carousel-track { display: flex; transition: transform 0.5s ease; }
@@ -588,6 +586,25 @@
     .tb-1 { opacity: 1; }
   }
 
+  /* Aviso de cookies. La AEPD exige que rechazar sea tan fácil como aceptar,
+     así que los dos botones tienen el mismo tamaño y jerarquía visible.
+     No bloquea la página: no es un muro de cookies. */
+  .cookies {
+    position: fixed; z-index: 1100; left: 1rem; right: 1rem; bottom: 1rem;
+    max-width: 30rem; background: var(--paper);
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: 1.15rem 1.25rem; box-shadow: 0 12px 34px rgba(35,39,46,0.18);
+    display: flex; flex-direction: column; gap: 0.9rem;
+    transform: translateY(140%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cookies.show { transform: translateY(0); }
+  .cookies-text { margin: 0; font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft); }
+  .cookies-text a { text-decoration: underline; color: var(--ink); }
+  .cookies-btns { display: flex; gap: 0.6rem; }
+  .cookies-btns .btn { flex: 1; text-align: center; padding: 0.7rem 1rem; font-size: 0.92rem; cursor: pointer; }
+  @media (min-width: 620px) { .cookies { left: auto; right: 1.5rem; bottom: 1.5rem; } }
+  @media (prefers-reduced-motion: reduce) { .cookies { transition: none; } }
+
   /* barra fija inferior: alternativa al pop-up. No tapa el contenido, no hay
      que cerrarla y no cuenta como interstitial para Google. Solo en móvil. */
   .sticky-cta {
@@ -798,7 +815,6 @@
       <button type="submit">Apuntarme</button>
     </form>
     <p class="hero-signup-success" id="hero-success">Apuntado. Serás de los primeros en saberlo.</p>
-    <p class="hero-signup-legal">Solo para avisarte del lanzamiento. Puedes darte de baja cuando quieras &mdash; <a href="#footer-signup">privacidad</a>.</p>
     <div class="hero-ctas">
       <a class="btn" href="#catalogo">Ver las fórmulas</a>
     </div>
@@ -986,6 +1002,18 @@
 </footer>
 
 <!-- cajón de navegación móvil — fuera del hero para que no lo recorte ni lo tape -->
+<div class="cookies" id="cookies" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <p class="cookies-text">
+    Usamos cookies propias necesarias para que la web funcione. Si aceptas, usaremos
+    también cookies de medición para saber qué contenidos resultan útiles.
+    <a href="#footer-signup">Más información</a>.
+  </p>
+  <div class="cookies-btns">
+    <button type="button" class="btn" id="cookies-no">Rechazar</button>
+    <button type="button" class="btn btn-solid" id="cookies-si">Aceptar</button>
+  </div>
+</div>
+
 <div class="sticky-cta" id="sticky-cta">
   <span>Precio de lanzamiento para los primeros</span>
   <a class="btn btn-solid" href="#footer-signup">Apuntarme</a>
@@ -1211,6 +1239,42 @@
     });
   });
 
+  // Consentimiento de cookies. Hoy la web no instala ninguna cookie ni analítica:
+  // el aviso queda listo para cuando se añada. Cualquier script de medición debe
+  // cargarse dentro de activarMedicion(), nunca antes de que se acepte.
+  var cookies = document.getElementById('cookies');
+  var decidido = false;
+  function activarMedicion() {
+    // aquí va el script de analítica el día que lo haya
+  }
+  if (cookies) {
+    var GUARDADO = 'zerox-cookies';
+    var previo = null;
+    try { previo = localStorage.getItem(GUARDADO); } catch (e) { previo = null; }
+
+    var resolver = function (valor) {
+      try { localStorage.setItem(GUARDADO, valor); } catch (e) {}
+      decidido = true;
+      cookies.classList.remove('show');
+      setTimeout(function () { cookies.hidden = true; }, 350);
+      if (valor === 'si') { activarMedicion(); }
+      if (typeof alternar === 'function') { alternar(); }
+    };
+
+    if (previo === 'si' || previo === 'no') {
+      decidido = true;
+      cookies.hidden = true;
+      if (previo === 'si') { activarMedicion(); }
+    } else {
+      cookies.hidden = false;
+      requestAnimationFrame(function () { cookies.classList.add('show'); });
+    }
+    document.getElementById('cookies-si').addEventListener('click', function () { resolver('si'); });
+    document.getElementById('cookies-no').addEventListener('click', function () { resolver('no'); });
+  } else {
+    decidido = true;
+  }
+
   // barra fija inferior en móvil: aparece al 45% de scroll, no interrumpe la
   // lectura y no es un interstitial, que Google penaliza en móvil
   var sticky = document.getElementById('sticky-cta');
@@ -1221,7 +1285,8 @@
       var pasado = alto > 0 && (scrollY / alto) > 0.45;
       // se esconde al llegar al pie, donde ya está el formulario grande
       var enElPie = pie && pie.getBoundingClientRect().top < innerHeight;
-      sticky.classList.toggle('show', pasado && !enElPie);
+      // y no compite con el aviso de cookies, que ocupa la misma esquina
+      sticky.classList.toggle('show', pasado && !enElPie && decidido);
     };
     addEventListener('scroll', alternar, { passive: true });
     alternar();
