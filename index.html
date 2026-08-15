@@ -74,7 +74,11 @@
   nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; }
   /* como en la etiqueta: trazo ligero y letras abiertas. Antes iba en peso 600
      con tracking negativo, justo lo contrario de lo que hay impreso en el bote */
-  .logo { font-weight: 400; font-size: 1.22rem; letter-spacing: 0.26em; text-indent: 0.26em; color: var(--ink); flex-shrink: 0; }
+  /* lockup: isotipo + palabra. El isotipo va en versión compacta, que es la
+     que el sistema de marca define por debajo de 30px. */
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); flex-shrink: 0; }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 400; font-size: 1.22rem; letter-spacing: 0.26em; text-indent: 0.26em; }
   /* en móvil el logo va centrado en la barra, pase lo que pase alrededor */
   @media (max-width: 859px) {
     nav > .logo {
@@ -119,8 +123,10 @@
   }
   .navmenu-foot:hover { color: var(--ink); }
 
+  /* trazo fino y más aire entre líneas: la versión anterior, de 2px con 5 de
+     separación, se leía pesada al lado de un logotipo ligero */
   .nav-toggle {
-    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 7px;
     width: 38px; height: 38px; background: transparent; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
   }
   /* mismo tamaño que la hamburguesa: equilibra la barra a izquierda y derecha */
@@ -156,10 +162,15 @@
   @media (min-width: 860px) {
     .pills-row { justify-content: center; overflow-x: visible; padding: 1rem 1.6rem; }
   }
-  .nav-toggle span { display: block; width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-toggle span {
+    display: block; width: 24px; height: 1.5px; background: var(--ink); border-radius: 2px;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease, width 0.4s ease;
+  }
+  /* la de en medio es más corta: detalle que aligera sin restar reconocimiento */
+  .nav-toggle span:nth-child(2) { width: 16px; align-self: flex-start; margin-left: 7px; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; width: 24px; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
   @media (min-width: 860px) { .nav-toggle { display: none; } }
 
   /* cajón lateral: entra deslizando desde la izquierda */
@@ -173,12 +184,38 @@
     /* cerrado: sin sombra (su borde queda en x:0 y se colaría ~24px dentro de la
        página) y oculto, para que no lo alcancen ni el tabulador ni el lector */
     visibility: hidden;
-    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.35s;
+    transition: transform 0.52s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.52s;
   }
   .mobile-menu.open {
     transform: translateX(0); visibility: visible;
-    box-shadow: 8px 0 32px rgba(0,0,0,0.32);
-    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), visibility 0s;
+    box-shadow: 8px 0 40px rgba(0,0,0,0.28);
+    transition: transform 0.52s cubic-bezier(0.16,1,0.3,1), visibility 0s;
+  }
+  /* el contenido entra escalonado tras el panel: es lo que separa un cajón
+     que aparece de uno que se despliega */
+  .mobile-menu .mm-head,
+  .mobile-menu .mm-accordion,
+  .mobile-menu .mm-nav > a,
+  .mobile-menu .mm-cta {
+    opacity: 0; transform: translateX(-14px);
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .mobile-menu.open .mm-head,
+  .mobile-menu.open .mm-accordion,
+  .mobile-menu.open .mm-nav > a,
+  .mobile-menu.open .mm-cta { opacity: 1; transform: translateX(0); }
+  .mobile-menu.open .mm-head { transition-delay: 0.14s; }
+  .mobile-menu.open .mm-accordion { transition-delay: 0.20s; }
+  .mobile-menu.open .mm-nav > a:nth-of-type(1) { transition-delay: 0.26s; }
+  .mobile-menu.open .mm-nav > a:nth-of-type(2) { transition-delay: 0.31s; }
+  .mobile-menu.open .mm-nav > a:nth-of-type(3) { transition-delay: 0.36s; }
+  .mobile-menu.open .mm-nav > a:nth-of-type(4) { transition-delay: 0.41s; }
+  .mobile-menu.open .mm-cta { transition-delay: 0.47s; }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu .mm-head, .mobile-menu .mm-accordion,
+    .mobile-menu .mm-nav > a, .mobile-menu .mm-cta {
+      opacity: 1; transform: none; transition: none;
+    }
   }
   .mm-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
   .mm-logo { font-weight: 600; font-size: 1.2rem; letter-spacing: var(--tracking-lg); color: var(--ink); }
@@ -197,8 +234,9 @@
   @media (min-width: 860px) { .mobile-menu, .sheet-overlay { display: none; } }
 
   .sheet-overlay {
-    position: fixed; inset: 0; z-index: 1000; background: rgba(10,12,16,0.6);
-    opacity: 0; transition: opacity 0.3s ease;
+    position: fixed; inset: 0; z-index: 1000; background: rgba(10,12,16,0.5);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    opacity: 0; transition: opacity 0.45s ease;
   }
   .sheet-overlay.open { opacity: 1; }
 
@@ -728,11 +766,15 @@
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.45s ease, border-color 0.3s ease;
   }
-  .faq-ico svg { width: 19px; height: 19px; fill: none; stroke: var(--paper); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  /* la mitad de arriba va rellena y la de abajo al aire: así lee como cápsula
+     de verdad —tapa opaca y cuerpo translúcido— y no como una pastilla plana.
+     El color se hereda de currentColor, así relleno y trazo cambian juntos. */
+  .faq-ico svg { width: 19px; height: 19px; color: var(--paper); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .faq-ico .cap-fill { fill: currentColor; stroke: none; }
   /* la cápsula gira 90°: al ser simétrica, 180° no se notaría.
      El latón se lee sobre oscuro; el ámbar de los botones no. */
   .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--khaki); }
-  .faq-q[aria-expanded="true"] .faq-ico svg { stroke: var(--khaki-pop); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-pop); }
   .faq-head { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
   @media (min-width: 620px) { .faq-head { flex-direction: row; align-items: center; gap: 1rem; } }
   .faq-title { font-size: 1.02rem; font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
@@ -794,7 +836,18 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a class="logo" href="#">ZEROX</a>
+      <a class="logo" href="#">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="7">
+            <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+            <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+            <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+            <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+            <path d="M16 16 L84 84 M84 16 L16 84"/>
+          </g>
+        </svg>
+        <span class="logo-word">ZEROX</span>
+      </a>
 
       <div class="navmenu">
         <div class="navmenu-item">
@@ -954,7 +1007,7 @@
     <div class="section-head reveal">
       <div>
         <h2>Elige por dónde empezar</h2>
-        <p>Cada una resuelve algo concreto. No hace falta tomarlas todas.</p>
+        <p>La misma exigencia en las cuatro. Lo que cambia es para qué sirve cada una.</p>
       </div>
     </div>
     <div class="shop-grid reveal">
@@ -1164,7 +1217,7 @@
     <ul class="faq">
       <li class="faq-item">
         <button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Puedo tomarlo si estoy con medicación?</span>
             <span class="faq-meta">Seguridad</span>
@@ -1176,7 +1229,7 @@
       </li>
       <li class="faq-item">
         <button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Por qué solo cuatro fórmulas?</span>
             <span class="faq-meta">Catálogo</span>
@@ -1188,7 +1241,7 @@
       </li>
       <li class="faq-item">
         <button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Qué diferencia hay entre bisglicinato y óxido de magnesio?</span>
             <span class="faq-meta">Ingredientes</span>
@@ -1200,7 +1253,7 @@
       </li>
       <li class="faq-item">
         <button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Cómo sé que el bote lleva lo que dice?</span>
             <span class="faq-meta">Calidad</span>
@@ -1212,7 +1265,7 @@
       </li>
       <li class="faq-item">
         <button type="button" class="faq-q" id="faq-t5" aria-expanded="false" aria-controls="faq-p5">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Cuándo se puede comprar?</span>
             <span class="faq-meta">Lanzamiento</span>
