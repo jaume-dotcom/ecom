@@ -536,13 +536,21 @@
      de debajo. Sin JavaScript y sin contenido escondido: el gesto que las
      revela es el scroll, que la persona iba a hacer igualmente. */
   .stack { display: flex; flex-direction: column; gap: 1.1rem; }
+  /* superficie blanca, no --paper: --paper es el fondo de la página, así que
+     una de cada dos tarjetas era del mismo color que lo de detrás y el apilado
+     no se distinguía. Y la sombra hacia arriba es lo que hace que superponerse
+     se lea como profundidad y no como dos cajas pegadas. */
   .stack-card {
     position: sticky; top: 5rem;
-    background: var(--tint); color: var(--ink);
-    border: 1px solid var(--line);
+    background: #ffffff; color: var(--ink);
+    border: 1px solid rgba(35,39,46,0.10);
     border-radius: 28px; padding: 2.4rem 1.6rem;
+    box-shadow: 0 -18px 44px -20px rgba(35,39,46,0.45), 0 4px 16px rgba(35,39,46,0.07);
   }
-  .stack-card--alt { background: var(--paper); }
+  /* la última lleva el acento: es la ficha de confianza y merece destacar */
+  .stack-card--alt {
+    background: var(--khaki-pop); border-color: rgba(140,90,34,0.22);
+  }
   .stack-card:nth-child(1) { top: 5rem; }
   .stack-card:nth-child(2) { top: 6rem; }
   .stack-card:nth-child(3) { top: 7rem; }
@@ -986,7 +994,7 @@
 
   <div class="hero-center wrap">
     <h1>Cuatro fórmulas, sin letra pequeña.</h1>
-    <p>Qué lleva, cuánto lleva y por qué. Escrito para entenderlo de una vez, no para tener que fiarte.</p>
+    <p>Qué lleva, cuánto lleva y por qué.</p>
     <p class="hero-signup-label">Precio de lanzamiento para los primeros.</p>
     <form class="hero-signup" id="hero-form">
       <label class="hero-signup-field">
@@ -1104,7 +1112,7 @@
         <p class="spot-src">Descenso del consumo de verdura en España en los últimos cincuenta años. Fuente pendiente de referenciar.</p>
       </article>
 
-      <article class="stack-card stack-card--alt">
+      <article class="stack-card">
         <p class="spot-eyebrow"><span class="dot">&#9679;</span> El problema</p>
         <h2 class="spot-head">Dos botes con el mismo nombre pueden no parecerse en nada.</h2>
         <p class="stack-lead">Lo que decide si una fórmula sirve no es el nombre grande del frente, sino la cantidad de principio activo por dosis. Y esa cifra vive en la letra pequeña de la parte de atrás.</p>
