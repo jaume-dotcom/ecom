@@ -24,21 +24,36 @@
 <meta name="twitter:description" content="Cuatro fórmulas con la dosis que usaron los estudios que las avalan.">
 <meta name="twitter:image" content="https://jaume-dotcom.github.io/ecom/og.jpg">
 <link rel="canonical" href="https://jaume-dotcom.github.io/ecom/">
+
+<!-- Inter: humanista, altura de x muy alta y aperturas abiertas, que es lo que
+     mejor se lee a partir de los 55. Sustituye a la fuente del sistema, que
+     hacía que la marca se viera distinta en cada dispositivo. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
 <style>
   :root {
+    /* Neutros de Mineral Frío (Territorio C) con el ámbar del Territorio A como
+       único acento. La perla azulada que definía el frío tenía 0 usos en toda
+       la hoja, así que sustituirla no cambia nada ya producido: el packaging
+       blanco y gris sigue encajando y no hay que rehacer fotos.
+       El ámbar sí significa algo — es el vidrio de farmacia — y aporta la
+       calidez que pide el avatar sin volver la marca parda.
+       Base: Cristal #EEF0F4 · Grafito #23272E
+       Acento: Ámbar #8C5A22 · Latón #A4844A */
     --paper: #eef0f4;
     --tint: #e2e7ed;
     --ink: #23272e;
     --ink-soft: #454c55;
     --ink-faint: #8b9aa8;
-    --khaki: #aebbd3;
-    --khaki-pop: #d6deea;
-    --khaki-deep: #5a6e8c;
-    --olive: #3a4048;
-    --olive-soft: #6b7684;
+    --khaki: #a4844a;
+    --khaki-pop: #ecdcbe;
+    --khaki-deep: #8c5a22;
+    --olive: #6f4419;
+    --olive-soft: #6b5c46;
     --line: #dce1e7;
     --line-strong: #23272e;
-    --font: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font: "Inter", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --tracking-lg: -0.03em;
     --tracking-sm: -0.01em;
@@ -57,7 +72,9 @@
 
   /* nav */
   nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; }
-  .logo { font-weight: 600; font-size: 1.3rem; letter-spacing: var(--tracking-lg); color: var(--ink); flex-shrink: 0; }
+  /* como en la etiqueta: trazo ligero y letras abiertas. Antes iba en peso 600
+     con tracking negativo, justo lo contrario de lo que hay impreso en el bote */
+  .logo { font-weight: 400; font-size: 1.22rem; letter-spacing: 0.26em; text-indent: 0.26em; color: var(--ink); flex-shrink: 0; }
   /* en móvil el logo va centrado en la barra, pase lo que pase alrededor */
   @media (max-width: 859px) {
     nav > .logo {
@@ -216,7 +233,9 @@
     border-radius: 1000px; letter-spacing: var(--tracking-sm);
   }
   .btn:hover { background: var(--tint); }
-  .btn-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* el ámbar es el color de la acción: es el único sitio donde la marca se
+     permite color, y así el acento se lee como criterio y no como adorno */
+  .btn-solid { background: var(--khaki-deep); color: var(--paper); border-color: var(--khaki-deep); }
   .btn-solid:hover { background: var(--olive); border-color: var(--olive); }
 
   /* hero — full-bleed image with nav + text overlaid, matching Seed's real layout */
@@ -228,7 +247,7 @@
      sobre el desplegable de "Fórmulas" y lo tapa */
   .hero-nav { position: relative; z-index: 30; width: 100%; }
   .hero-nav nav { border-bottom: none; gap: 1.5rem; }
-  .hero-center { position: relative; z-index: 2; text-align: center; max-width: 42rem; margin: 0 auto; padding: 1.5rem 0 2.2rem; }
+  .hero-center { position: relative; z-index: 2; text-align: center; max-width: 42rem; margin: 0 auto; padding: 1.5rem 1.6rem 2.2rem; }
   .hero-center h1 { font-size: clamp(2.3rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.05; margin: 0 0 1.2rem; text-wrap: balance; }
   .hero-center p { font-size: 1.1rem; color: var(--ink-soft); margin: 0 auto 1.8rem; max-width: 46ch; }
   .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.8rem; }
@@ -290,20 +309,29 @@
       position: absolute; top: 1.15rem; left: 0; right: 0; z-index: 3;
       display: flex; flex-direction: column; gap: 0.15rem;
       margin: 0; padding: 0 1.6rem; pointer-events: none;
-      font-size: 0.8rem; line-height: 1.35; color: var(--ink-soft);
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+      font-size: 0.95rem; line-height: 1.4; color: var(--ink-soft);
+      text-shadow: 0 1px 2px rgba(255,255,255,0.85);
     }
     .hero-mobile-benefits .hb-name {
-      font-size: 1rem; font-weight: 600; color: var(--ink);
-      letter-spacing: var(--tracking-sm); margin-bottom: 0.15rem;
+      font-size: 1.2rem; font-weight: 600; color: var(--ink);
+      letter-spacing: var(--tracking-sm); margin-bottom: 0.3rem;
     }
-    /* compactar para subir los CTA al primer pliegue: quedaban 106px por
-       debajo y no había ninguna llamada a la acción en la primera pantalla */
-    .pills-row { padding-top: 0.6rem; padding-bottom: 0.6rem; }
-    nav { padding-top: 0.95rem; padding-bottom: 0.95rem; }
-    .hero-center { padding: 0.8rem 0 1.6rem; }
-    .hero-center h1 { font-size: 2rem; margin-bottom: 0.75rem; }
-    .hero-center p { font-size: 1rem; margin-bottom: 1.1rem; }
+    /* Escala pensada para el avatar principal: 55-75 años. La investigación
+       de cliente pide "etiqueta grande y legible" y descarta la letra pequeña,
+       así que nada por debajo de 15px en la primera pantalla. */
+    /* fuera en móvil: las cuatro fórmulas ya están en el menú y en la tira, y
+       con siete bloques la primera pantalla no daba para ver ningún botón */
+    .pills-row { display: none; }
+    nav { padding-top: 1rem; padding-bottom: 1rem; }
+    /* laterales explícitos: el atajo con 0 dejaba el texto a 7px del borde */
+    .hero-center { padding: 1.4rem 1.6rem 1.8rem; }
+    .hero-center h1 { font-size: 2.05rem; line-height: 1.12; margin-bottom: 0.85rem; }
+    .hero-center p { font-size: 1.06rem; line-height: 1.55; margin-bottom: 1.5rem; }
+    .hero-ctas { gap: 0.7rem; }
+    .hero-ctas .btn { font-size: 1rem; padding: 0.95rem 1.6rem; }
+    /* el par de botones en negro duro resultaba agresivo; el secundario baja
+       a un contorno fino y gris, que es la jerarquía real entre los dos */
+    .hero-ctas .btn:not(.btn-solid) { border-width: 1px; border-color: var(--ink-faint); }
   }
   @media (min-width: 860px) {
     .hero-carousel-viewport { border-radius: 24px; }
@@ -325,9 +353,11 @@
   /* section shells */
   section.band { padding: 4rem 0; }
   .band.tint { background: var(--tint); border-radius: 32px; }
-  .section-head { max-width: 60ch; margin-bottom: 2.2rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
-  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.5rem; text-wrap: balance; max-width: 20ch; }
-  .section-head p { color: var(--ink-soft); margin: 0; max-width: 46ch; }
+  /* centrado: la página alterna bloques centrados (hero, cierre) con estos
+     alineados a la izquierda, y esa mezcla es lo que la hacía ver desordenada */
+  .section-head { max-width: 60ch; margin: 0 auto 2.6rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; }
+  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; max-width: 22ch; }
+  .section-head p { color: var(--ink-soft); margin: 0 auto; max-width: 46ch; text-wrap: pretty; }
   .section-head .see-all { font-size: 0.9rem; font-weight: 500; border-bottom: 1.5px solid var(--ink); white-space: nowrap; }
 
   /* shop grid — Seed-style card: top block / media / bottom block, arrow-in-on-hover */
@@ -522,10 +552,34 @@
   /* se detiene al pasar el ratón, como el carrusel */
   .ticker:hover .ticker-track { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+  /* pack: libro + magnesio */
+  .pack {
+    display: grid; grid-template-columns: 1fr; gap: 1.8rem; align-items: center;
+    background: var(--tint); border-radius: 20px; padding: 1.8rem;
+  }
+  @media (min-width: 760px) { .pack { grid-template-columns: 420px 1fr; gap: 2.6rem; padding: 2.6rem; } }
+  .pack-cover {
+    width: 100%; height: auto; max-width: 420px; margin: 0 auto;
+    border-radius: 14px; display: block; mix-blend-mode: multiply;
+  }
+  .pack-body h3 { font-size: 1.5rem; font-weight: 500; margin: 0.3rem 0 1rem; letter-spacing: var(--tracking-lg); }
+  .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+  .pack-list li { font-size: 0.98rem; color: var(--ink-soft); padding-left: 1.4rem; position: relative; }
+  .pack-list li::before {
+    content: ""; position: absolute; left: 0; top: 0.55em;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--khaki-deep);
+  }
+  .pack-list b { color: var(--ink); font-weight: 600; }
+  .pack-price { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.3rem; flex-wrap: wrap; }
+  .pack-now { font-size: 2rem; font-weight: 600; letter-spacing: var(--tracking-lg); color: var(--ink); }
+  .pack-was { font-size: 0.92rem; color: var(--ink-faint); text-decoration: line-through; }
+  .pack-note { font-size: 0.8rem; color: var(--ink-faint); margin: 0.9rem 0 0; max-width: 46ch; }
   /* va aquí y no en el bloque móvil de arriba: la regla base de .ticker está
      más abajo en el archivo y ganaba por orden */
   @media (max-width: 859px) {
-    .ticker span { padding: 0.58rem 0; }
+    .ticker span { padding: 0.7rem 0; font-size: 0.9rem; }
+    .ticker span::after { margin: 0 1.4rem; }
   }
 </style>
 
@@ -555,6 +609,7 @@
           </div>
         </div>
         <a class="navmenu-link" href="#catalogo">Catálogo</a>
+        <a class="navmenu-link" href="#libro">El libro</a>
         <a class="navmenu-link" href="#criterio">Cómo elegimos</a>
       </div>
 
@@ -661,7 +716,7 @@
         <span>Dosis clínica real</span>
         <span>Sin relleno de marketing</span>
         <span>Forma quelada, alta absorción</span>
-        <span>Elegidas en el canal, cada semana</span>
+        <span>Análisis de terceros por lote</span>
         <span>Sin óxido de magnesio</span>
         <span>Fabricado en España &middot; GMP</span>
       </div>
@@ -669,7 +724,7 @@
         <span>Dosis clínica real</span>
         <span>Sin relleno de marketing</span>
         <span>Forma quelada, alta absorción</span>
-        <span>Elegidas en el canal, cada semana</span>
+        <span>Análisis de terceros por lote</span>
         <span>Sin óxido de magnesio</span>
         <span>Fabricado en España &middot; GMP</span>
       </div>
@@ -678,7 +733,7 @@
 
   <div class="hero-center wrap">
     <h1>Cuatro fórmulas con la dosis que usaron los estudios.</h1>
-    <p>Elegidas directamente de los temas que se tratan cada semana en el canal. Sin relleno de marketing.</p>
+    <p>Magnesio, vitamina D3 con K2, omega&ndash;3 y probiótico. Cantidades exactas en la etiqueta, con análisis por lote.</p>
     <div class="hero-ctas">
       <a class="btn btn-solid" href="#catalogo">Ver las fórmulas</a>
       <a class="btn" href="#criterio">Cómo elegimos</a>
@@ -691,8 +746,8 @@
   <section class="band" id="catalogo">
     <div class="section-head reveal">
       <div>
-        <h2>La salud, en serio, empieza por la dosis correcta.</h2>
-        <p>Ingredientes con respaldo clínico, en la cantidad exacta que se usó en los estudios que los avalan — no la que sale más barata de fabricar.</p>
+        <h2>Cuatro fórmulas, sin letra pequeña.</h2>
+        <p>Qué lleva, cuánto lleva y por qué. Escrito para entenderlo de una vez, no para tener que fiarte.</p>
       </div>
     </div>
     <div class="shop-grid reveal">
@@ -796,6 +851,35 @@
     </div>
   </section>
 
+  <section class="band" id="libro">
+    <div class="section-head reveal">
+      <div>
+        <h2>Aprende antes de suplementarte</h2>
+        <p>Si quieres entender el porqué de cada recomendación &mdash; qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta &mdash; el libro de Sento es el mejor punto de partida.</p>
+      </div>
+    </div>
+
+    <div class="pack reveal">
+      <img class="pack-cover" src="pack-magnesio-libro.png" width="1402" height="1122"
+           loading="lazy" decoding="async"
+           alt="Bote de Magnesio Bisglicinato de ZEROX junto al libro La gran guía de la suplementación, de Sento Segarra">
+      <div class="pack-body">
+        <p class="kno">Pack de lanzamiento</p>
+        <h3>Magnesio + el libro en digital</h3>
+        <ul class="pack-list">
+          <li><b>Magnesio Bisglicinato</b> &mdash; 90 cápsulas, 300&ndash;400&nbsp;mg por dosis</li>
+          <li><b>La gran guía de la suplementación</b>, de Sento Segarra, en formato ebook</li>
+        </ul>
+        <div class="pack-price">
+          <span class="pack-now">[precio pack] &euro;</span>
+          <span class="pack-was">por separado [suma] &euro;</span>
+        </div>
+        <a class="btn btn-solid" href="#footer-signup">Reserva el pack</a>
+        <p class="pack-note">Precios y disponibilidad por confirmar. La venta del ebook queda sujeta al acuerdo con el autor.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="closing reveal">
       <span class="loc">&#9679; Diseñado en España</span>
@@ -868,6 +952,7 @@
       </div>
     </div>
     <a href="#catalogo">Catálogo</a>
+    <a href="#libro">El libro de Sento</a>
     <a href="#criterio">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
   </nav>
