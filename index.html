@@ -666,11 +666,11 @@
      grid-template-rows en vez de max-height, que no necesita altura fija. */
   /* panel oscuro, con el mismo lenguaje que .closing: fondo --ink y esquinas
      de 32px. Los colores del interior se derivan del papel, no del texto base. */
-  .faq-panel {
-    background: var(--ink); color: var(--paper);
-    border-radius: 32px; padding: 3rem 1.6rem;
-  }
-  @media (min-width: 860px) { .faq-panel { padding: 4rem 3rem; } }
+  /* a sangre: la sección vive fuera de .wrap y lleva su propio .wrap dentro,
+     así el fondo llega a los bordes sin recurrir a 100vw, que desborda por
+     el ancho de la barra de scroll */
+  .faq-panel { background: var(--ink); color: var(--paper); padding: 4.5rem 0; }
+  @media (min-width: 860px) { .faq-panel { padding: 6rem 0; } }
   .faq-panel .section-head h2 { color: var(--paper); }
   .faq-panel .section-head p { color: rgba(238,240,244,0.62); }
   .faq { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; display: flex; flex-direction: column; }
@@ -1043,8 +1043,10 @@
     </div>
   </section>
 
-  <section class="band" id="faq">
-   <div class="faq-panel reveal">
+</div>
+
+<section class="faq-panel reveal" id="faq">
+  <div class="wrap">
     <div class="section-head">
       <div>
         <h2>Preguntas frecuentes</h2>
@@ -1113,8 +1115,10 @@
         </div>
       </li>
     </ul>
-   </div>
-  </section>
+  </div>
+</section>
+
+<div class="wrap">
 
   <section class="band">
     <div class="closing reveal">
