@@ -520,10 +520,17 @@
   .stack-card--alt {
     background: var(--khaki-pop); border-color: rgba(140,90,34,0.22);
   }
-  .stack-card:nth-child(1) { top: 5rem; }
-  .stack-card:nth-child(2) { top: 6rem; }
-  .stack-card:nth-child(3) { top: 7rem; }
-  .stack-card:nth-child(4) { top: 8rem; }
+  /* Todas con la misma altura mínima y apilando z-index. Sin esto la primera
+     tarjeta —158px más alta que la última— asomaba por debajo al salir del
+     bloque: cada tarjeta se pega más abajo que la anterior, así que solo la
+     tapa si es al menos igual de alta. */
+  .stack-card:nth-child(1) { top: 5rem;   z-index: 1; }
+  .stack-card:nth-child(2) { top: 6rem;   z-index: 2; }
+  .stack-card:nth-child(3) { top: 7rem;   z-index: 3; }
+  .stack-card:nth-child(4) { top: 8rem;   z-index: 4; }
+  /* la mínima la marca la tarjeta más alta: 47rem en móvil, 36 en escritorio */
+  .stack-card { min-height: 47rem; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 860px) { .stack-card { min-height: 36rem; } }
   @media (min-width: 860px) {
     .stack { gap: 1.4rem; }
     .stack-card { padding: 3.4rem 3rem; }
