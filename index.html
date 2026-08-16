@@ -887,8 +887,7 @@
   }
   .hero-copy {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-    /* 3.4rem de reserva para que la paginacion no pise el boton */
-    padding: 0 1.3rem 3.4rem; text-align: center; color: #fff;
+    padding: 0 1.3rem 2.1rem; text-align: center; color: #fff;
   }
   .hero-lockup {
     margin: 0 0 0.8rem; font-size: 0.95rem; font-weight: 400;
@@ -915,27 +914,19 @@
   /* solo la diapositiva activa es tabulable: las de al lado se ven con el peek */
   .hero-slide:not(.active) .hero-cta { pointer-events: none; }
 
-  /* la paginacion iba en tinta oscura sobre foto clara; ahora cae encima del
-     degradado y en oscuro no se veria */
-  .hero-carousel-pagination-number { color: #fff; }
-  .hero-carousel-pagination-item { color: #fff; }
-  .hero-carousel-pagination-track { background: rgba(255, 255, 255, 0.30); }
-  .hero-carousel-pagination-progress { background: #fff; }
-  .hero-carousel-pagination-item:focus-visible { outline-color: #fff; }
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
 
   @media (max-width: 859px) {
     /* sin proporcion fija: la tarjeta ocupa la pantalla menos la barra de
        aviso, la nav y un respiro, como en Loop */
     .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(100svh - 9.5rem), 42rem); }
-    .hero-copy { padding-bottom: 3.2rem; }
   }
 
   @media (min-width: 860px) {
     /* la caja 3:2 daba 822px de alto en un portatil de 800 y el CTA quedaba
        bajo el pliegue; con tope de altura la tarjeta entera cabe en pantalla */
     .hero-media-box { aspect-ratio: auto; height: clamp(28rem, calc(100svh - 12rem), 40rem); }
-    .hero-copy { padding: 0 2rem 4.2rem; }
+    .hero-copy { padding: 0 2rem 3rem; }
     .hero-copy > * { max-width: 42rem; margin-left: auto; margin-right: auto; }
     .hero-headline { font-size: clamp(2.7rem, 4.2vw, 3.8rem); }
     .hero-lede { font-size: 1.12rem; margin-bottom: 1.8rem; }
@@ -1086,28 +1077,6 @@
     <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
       <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <div class="hero-carousel-pagination" id="hero-carousel-dots" role="tablist" aria-label="Fórmulas destacadas">
-      <button type="button" class="hero-carousel-pagination-item active" data-slide-index="0" aria-label="Ir a la diapositiva 1: ZEROX" aria-current="true">
-        <span class="hero-carousel-pagination-number">01</span>
-        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
-      </button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="1" aria-label="Ir a la diapositiva 2: Magnesio Bisglicinato">
-        <span class="hero-carousel-pagination-number">02</span>
-        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
-      </button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="2" aria-label="Ir a la diapositiva 3: Vitamina D3 + K2">
-        <span class="hero-carousel-pagination-number">03</span>
-        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
-      </button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="3" aria-label="Ir a la diapositiva 4: Omega-3 EPA+DHA">
-        <span class="hero-carousel-pagination-number">04</span>
-        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
-      </button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="4" aria-label="Ir a la diapositiva 5: Probiótico Multicepa">
-        <span class="hero-carousel-pagination-number">05</span>
-        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
-      </button>
-    </div>
   </div>
 
   <div class="ticker" aria-label="Claves de la marca">
