@@ -137,31 +137,6 @@
   }
   .nav-icon:hover { opacity: 0.6; }
 
-  /* fila de pastillas de fórmula, bajo la barra de anuncio.
-     Resetea justify-content y padding: el <nav> global se los impone. */
-  .pills-row {
-    display: flex; justify-content: flex-start; align-items: center;
-    gap: 0.5rem; padding: 0.85rem 1.6rem;
-    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
-    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
-    /* sin esto el snap alinea la primera pastilla con el borde del contenedor
-       y se come el margen izquierdo al cargar */
-    scroll-padding-left: 1.6rem;
-  }
-  .pills-row::-webkit-scrollbar { display: none; }
-  .pill {
-    flex: 0 0 auto; scroll-snap-align: start;
-    padding: 0.5rem 1.05rem; border-radius: 1000px;
-    border: 1px solid var(--line); color: var(--ink);
-    font-size: 0.85rem; white-space: nowrap; letter-spacing: var(--tracking-sm);
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-  .pill:hover { background: var(--tint); border-color: var(--ink-faint); }
-  .pill-ghost { border-color: transparent; color: var(--ink-soft); }
-  .pill-ghost:hover { border-color: var(--line); }
-  @media (min-width: 860px) {
-    .pills-row { justify-content: center; overflow-x: visible; padding: 1rem 1.6rem; }
-  }
   .nav-toggle span {
     display: block; width: 24px; height: 1.5px; background: var(--ink); border-radius: 2px;
     transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease, width 0.4s ease;
@@ -429,9 +404,6 @@
     /* Escala pensada para el avatar principal: 55-75 años. La investigación
        de cliente pide "etiqueta grande y legible" y descarta la letra pequeña,
        así que nada por debajo de 15px en la primera pantalla. */
-    /* fuera en móvil: las cuatro fórmulas ya están en el menú y en la tira, y
-       con siete bloques la primera pantalla no daba para ver ningún botón */
-    .pills-row { display: none; }
     nav { padding-top: 1rem; padding-bottom: 1rem; }
     /* laterales explícitos: el atajo con 0 dejaba el texto a 7px del borde */
     .hero-center { padding: 1.4rem 1.6rem 1.8rem; }
@@ -911,14 +883,6 @@
     </nav>
   </div>
 
-
-  <nav class="pills-row" aria-label="Fórmulas">
-    <a class="pill" href="#catalogo">Magnesio</a>
-    <a class="pill" href="#catalogo">Vitamina D3 + K2</a>
-    <a class="pill" href="#catalogo">Omega&ndash;3</a>
-    <a class="pill" href="#catalogo">Probiótico</a>
-    <a class="pill pill-ghost" href="#criterio">Cómo elegimos</a>
-  </nav>
 
   <div class="hero-carousel wrap">
   <div class="hero-carousel-viewport">
