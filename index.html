@@ -314,7 +314,10 @@
     .shine:hover { transform: none; }
   }
   .hero-ctas { margin-top: 1.4rem; }
-  .hero-carousel { position: relative; z-index: 2; width: 100%; padding-bottom: 3rem; }
+  /* contenedor propio, no el .wrap genérico de 1280px: el hero pasa a sentirse
+     como una pieza independiente y centrada, con margen visible a los lados
+     en vez de ocupar el ancho de sección casi completo */
+  .hero-carousel { position: relative; z-index: 2; width: 100%; margin-top: 1.4rem; padding-bottom: 3rem; }
   .hero-carousel-viewport {
     position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: #e9ebef;
     touch-action: pan-y; user-select: none; -webkit-user-select: none; --hero-autoplay: 7s;
@@ -337,14 +340,16 @@
     margin: 1rem 0 0; padding: 0; font-size: 0.85rem; color: var(--ink-soft);
   }
   .hero-mobile-benefits.active { display: grid; }
+  /* visibles también en móvil ("flechas siempre accesibles"), algo más
+     pequeñas que en escritorio; sombra ligera, circulo blanco discreto */
   .hero-carousel-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 2.4rem; height: 2.4rem; border-radius: 50%;
-    background: rgba(255,255,255,0.9); border: 1px solid rgba(35,39,46,0.1); box-shadow: 0 4px 12px rgba(35,39,46,0.15);
-    display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 4; color: #23272e; padding: 0;
+    position: absolute; top: 50%; transform: translateY(-50%); width: 2.2rem; height: 2.2rem; border-radius: 50%;
+    background: rgba(255,255,255,0.92); border: 1px solid rgba(35,39,46,0.08); box-shadow: 0 2px 8px rgba(35,39,46,0.12);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 4; color: #23272e; padding: 0;
   }
-  .hero-carousel-prev { left: 1rem; }
-  .hero-carousel-next { right: 1rem; }
-  .hero-carousel-arrow svg { width: 1.2rem; height: 1.2rem; }
+  .hero-carousel-prev { left: 0.9rem; }
+  .hero-carousel-next { right: 0.9rem; }
+  .hero-carousel-arrow svg { width: 1.1rem; height: 1.1rem; }
 
   /* paginación numerada con progreso: el ancho de .hero-carousel-pagination-progress
      lo marca una animación CSS pura (heroCarouselProgress), no JS, para que la
@@ -382,8 +387,9 @@
     .hero-media-box { aspect-ratio: 1 / 1; }
     .hero-media-box img {
       height: 100%; object-fit: cover;
-      /* recortado a 4/5 solo cabe el 37% del ancho del original (2400x1109);
-         anclado a la izquierda el frasco entra entero, igual que en escritorio */
+      /* recortado a 1/1 solo cabe una fracción del ancho del original (2400x1109);
+         anclado a la izquierda el frasco entra entero. En escritorio la caja es
+         más ancha y va centrado (ver bloque de 860px) */
       object-position: left center;
     }
     /* el carrusel deja de reservar sitio bajo la foto: las claves van dentro */
@@ -401,6 +407,12 @@
       font-size: 1.2rem; font-weight: 600; color: var(--ink);
       letter-spacing: var(--tracking-sm); margin-bottom: 0.3rem;
     }
+    /* con más ancho de sobra, los dos beneficios pasan a dos columnas; por
+       debajo de 480px se quedan en una sola, uno bajo otro */
+    @media (min-width: 480px) {
+      .hero-mobile-benefits.active { display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem 1.2rem; }
+      .hero-mobile-benefits .hb-name { grid-column: 1 / -1; }
+    }
     /* Escala pensada para el avatar principal: 55-75 años. La investigación
        de cliente pide "etiqueta grande y legible" y descarta la letra pequeña,
        así que nada por debajo de 15px en la primera pantalla. */
@@ -416,26 +428,37 @@
     .hero-ctas .btn:not(.btn-solid) { border-width: 1px; border-color: var(--ink-faint); }
   }
   @media (min-width: 860px) {
+    /* pieza independiente y centrada, no pegada al ancho de sección: margen
+       visible a los lados en vez del .wrap genérico, con techo para que en
+       pantallas muy anchas no vuelva a sentirse panorámico */
+    .hero-carousel { width: calc(100% - 2rem); max-width: 1400px; margin: 2.2rem auto 0; }
     .hero-carousel-viewport { border-radius: 24px; }
-    .hero-media-box { aspect-ratio: 16 / 9; }
+    /* más presencia vertical que el 16:9 anterior, acercándose a la referencia
+       sin llegar a cuadrado; el producto sigue sin cortarse con object-fit:cover */
+    .hero-media-box { aspect-ratio: 3 / 2; }
     .hero-media-box img { height: 100%; object-fit: cover; object-position: left center; }
-    .hero-carousel-arrow { display: flex; }
+    .hero-carousel-arrow { width: 2.5rem; height: 2.5rem; left: 1.25rem; }
+    .hero-carousel-next { left: auto; right: 1.25rem; }
+    .hero-carousel-arrow svg { width: 1.2rem; height: 1.2rem; }
     .hero-benefit {
       position: absolute; width: 9rem; font-size: 0.82rem; color: #23272e; text-align: center; line-height: 1.3; z-index: 2;
-      opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease;
+      opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    /* entrada escalonada al activarse la diapositiva, en vez de aparecer todas a la vez */
-    .hero-slide.active .hb-top { transition-delay: 100ms; }
-    .hero-slide.active .hb-left { transition-delay: 180ms; }
-    .hero-slide.active .hb-right { transition-delay: 260ms; }
-    .hero-slide.active .hb-bottom-left { transition-delay: 340ms; }
-    .hero-slide.active .hb-bottom-right { transition-delay: 420ms; }
+    /* entrada escalonada al activarse la diapositiva: rápida y sin rebote,
+       solo un ligero fundido + desplazamiento, no un efecto vistoso */
+    .hero-slide.active .hb-top { transition-delay: 80ms; }
+    .hero-slide.active .hb-left { transition-delay: 140ms; }
+    .hero-slide.active .hb-right { transition-delay: 200ms; }
+    .hero-slide.active .hb-bottom-left { transition-delay: 260ms; }
+    .hero-slide.active .hb-bottom-right { transition-delay: 320ms; }
     .hero-slide.active .hero-benefit { opacity: 1; transform: translateY(0); }
-    .hb-top { top: 4%; left: 16%; width: 11rem; }
-    .hb-left { top: 28%; left: 1%; width: 7.5rem; text-align: right; }
-    .hb-right { top: 28%; right: 1%; width: 8.5rem; text-align: left; }
-    .hb-bottom-left { top: 74%; left: 4%; width: 7.5rem; text-align: right; }
-    .hb-bottom-right { top: 68%; right: 1%; width: 9rem; text-align: left; }
+    /* composición editorial: una etiqueta arriba centrada, dos a media altura,
+       dos abajo alineadas entre sí, todas con más aire respecto al borde */
+    .hb-top { top: 7%; left: 50%; margin-left: -6rem; width: 12rem; text-align: center; }
+    .hb-left { top: 45%; left: 4%; width: 8rem; text-align: right; }
+    .hb-right { top: 45%; right: 4%; width: 8.5rem; text-align: left; }
+    .hb-bottom-left { top: 80%; left: 6%; width: 8rem; text-align: right; }
+    .hb-bottom-right { top: 80%; right: 5%; width: 9rem; text-align: left; }
     .hero-mobile-benefits, .hero-mobile-benefits.active { display: none; }
   }
   @media (max-width: 859px) { .hero-benefit { display: none; } }
