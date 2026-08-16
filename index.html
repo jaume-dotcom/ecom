@@ -340,11 +340,23 @@
   }
   .hero-ctas { margin-top: 1.4rem; }
   .hero-carousel { position: relative; z-index: 2; width: 100%; padding-bottom: 3rem; }
-  .hero-carousel-viewport { position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: #e9ebef; }
-  .hero-carousel-track { display: flex; transition: transform 0.5s ease; }
+  .hero-carousel-viewport {
+    position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: #e9ebef;
+    touch-action: pan-y; user-select: none; -webkit-user-select: none; --hero-autoplay: 7s;
+  }
+  .hero-carousel-track { display: flex; transition: transform 0.7s cubic-bezier(.16,1,.3,1); }
   .hero-slide { position: relative; flex: 0 0 100%; width: 100%; }
   .hero-media-box { position: relative; width: 100%; }
-  .hero-media-box img { width: 100%; display: block; }
+  /* parallax ligero: la imagen va al 105% para tener margen de recorrido sin
+     dejar borde vacío; el desplazamiento lo marca la clase prev/active/next
+     que añade goToSlide(), y .hero-carousel-viewport recorta cualquier sobra */
+  .hero-media-box img {
+    width: 100%; display: block; -webkit-user-drag: none; user-drag: none;
+    transform: scale(1.05) translateX(0); transition: transform 0.9s cubic-bezier(.16,1,.3,1);
+  }
+  .hero-slide.prev .hero-media-box img { transform: scale(1.05) translateX(-2.5%); }
+  .hero-slide.active .hero-media-box img { transform: scale(1.05) translateX(0); }
+  .hero-slide.next .hero-media-box img { transform: scale(1.05) translateX(2.5%); }
   .hero-mobile-benefits {
     display: none; grid-template-columns: 1fr 1fr; gap: 0.6rem 1rem; list-style: none;
     margin: 1rem 0 0; padding: 0; font-size: 0.85rem; color: var(--ink-soft);
@@ -358,6 +370,35 @@
   .hero-carousel-prev { left: 1rem; }
   .hero-carousel-next { right: 1rem; }
   .hero-carousel-arrow svg { width: 1.2rem; height: 1.2rem; }
+
+  /* paginación numerada con progreso: el ancho de .hero-carousel-pagination-progress
+     lo marca una animación CSS pura (heroCarouselProgress), no JS, para que la
+     duración quede exacta y no se desincronice con CAROUSEL_MS */
+  .hero-carousel-pagination {
+    position: absolute; left: 50%; bottom: 0.9rem; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 0.9rem; z-index: 5;
+  }
+  .hero-carousel-pagination-item {
+    display: flex; align-items: center; gap: 0.4rem; background: none; border: none; padding: 0.3rem 0; cursor: pointer; color: #23272e;
+  }
+  .hero-carousel-pagination-number { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.03em; opacity: 0.45; transition: opacity 0.3s ease; }
+  .hero-carousel-pagination-item.active .hero-carousel-pagination-number { opacity: 1; }
+  .hero-carousel-pagination-track { position: relative; width: 1.5rem; height: 2px; background: rgba(35,39,46,0.18); border-radius: 2px; overflow: hidden; }
+  .hero-carousel-pagination-progress { position: absolute; inset: 0; width: 0%; background: #23272e; border-radius: 2px; }
+  .hero-carousel-pagination-item.active .hero-carousel-pagination-progress { animation: heroCarouselProgress var(--hero-autoplay) linear forwards; }
+  .hero-carousel.is-paused .hero-carousel-pagination-progress { animation-play-state: paused; }
+  @keyframes heroCarouselProgress { from { width: 0%; } to { width: 100%; } }
+  .hero-carousel-pagination-item:focus-visible { outline: 2px solid #23272e; outline-offset: 2px; }
+  @media (min-width: 860px) {
+    .hero-carousel-pagination { gap: 1.3rem; bottom: 1.3rem; }
+    .hero-carousel-pagination-track { width: 2.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media-box img { transition: none !important; transform: none !important; }
+    .hero-carousel-track { transition-duration: 0.01ms !important; }
+    .hero-carousel-pagination-item.active .hero-carousel-pagination-progress { animation: none !important; width: 0%; }
+    .hero-benefit { transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
   /* móvil: el hero manda. Sin proporción propia, la caja heredaba el 2,15:1 del
      archivo y quedaba en una franja de 150px. Va a sangre y en vertical. */
   @media (max-width: 859px) {
@@ -409,7 +450,15 @@
     .hero-carousel-arrow { display: flex; }
     .hero-benefit {
       position: absolute; width: 9rem; font-size: 0.82rem; color: #23272e; text-align: center; line-height: 1.3; z-index: 2;
+      opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease;
     }
+    /* entrada escalonada al activarse la diapositiva, en vez de aparecer todas a la vez */
+    .hero-slide.active .hb-top { transition-delay: 100ms; }
+    .hero-slide.active .hb-left { transition-delay: 180ms; }
+    .hero-slide.active .hb-right { transition-delay: 260ms; }
+    .hero-slide.active .hb-bottom-left { transition-delay: 340ms; }
+    .hero-slide.active .hb-bottom-right { transition-delay: 420ms; }
+    .hero-slide.active .hero-benefit { opacity: 1; transform: translateY(0); }
     .hb-top { top: 4%; left: 16%; width: 11rem; }
     .hb-left { top: 28%; left: 1%; width: 7.5rem; text-align: right; }
     .hb-right { top: 28%; right: 1%; width: 8.5rem; text-align: left; }
@@ -921,6 +970,24 @@
     <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
       <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
+    <div class="hero-carousel-pagination" id="hero-carousel-dots" role="tablist" aria-label="Fórmulas destacadas">
+      <button type="button" class="hero-carousel-pagination-item active" data-slide-index="0" aria-label="Ir a la fórmula 1: Magnesio Bisglicinato" aria-current="true">
+        <span class="hero-carousel-pagination-number">01</span>
+        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
+      </button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="1" aria-label="Ir a la fórmula 2: Vitamina D3 + K2">
+        <span class="hero-carousel-pagination-number">02</span>
+        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
+      </button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="2" aria-label="Ir a la fórmula 3: Omega-3">
+        <span class="hero-carousel-pagination-number">03</span>
+        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
+      </button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="3" aria-label="Ir a la fórmula 4: Probiótico Multicepa">
+        <span class="hero-carousel-pagination-number">04</span>
+        <span class="hero-carousel-pagination-track"><span class="hero-carousel-pagination-progress"></span></span>
+      </button>
+    </div>
   </div>
 <ul class="hero-mobile-benefits active" data-slide="0">
       <li class="hb-name">Magnesio Bisglicinato</li>
@@ -1423,24 +1490,51 @@
   if (carouselTrack) {
     var carouselSlides = Array.prototype.slice.call(carouselTrack.children);
     var carouselMobileLists = Array.prototype.slice.call(document.querySelectorAll('.hero-mobile-benefits'));
+    var carouselDots = Array.prototype.slice.call(document.querySelectorAll('.hero-carousel-pagination-item'));
     var carouselPrev = document.getElementById('hero-carousel-prev');
     var carouselNext = document.getElementById('hero-carousel-next');
     var carouselRoot = carouselTrack.closest('.hero-carousel') || carouselTrack;
+    var carouselViewport = carouselTrack.closest('.hero-carousel-viewport');
     var carouselIndex = 0;
     var carouselTimer = null;
     // 7s: cada slide lleva 5 etiquetas de beneficio (~20 palabras) y con 5s
     // cambiaba justo mientras se estaban leyendo
     var CAROUSEL_MS = 7000;
     var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var carouselPointerId = null;
+    var carouselPointerStartX = 0;
+    var carouselPointerDeltaX = 0;
+    var CAROUSEL_SWIPE_THRESHOLD = 50;
 
     function goToSlide(i) {
-      carouselIndex = (i + carouselSlides.length) % carouselSlides.length;
+      var total = carouselSlides.length;
+      carouselIndex = (i + total) % total;
+      var prevIndex = (carouselIndex - 1 + total) % total;
+      var nextIndex = (carouselIndex + 1) % total;
+
       carouselTrack.style.transform = 'translateX(-' + (carouselIndex * 100) + '%)';
+
+      // clases prev/active/next: las usa el parallax y la entrada escalonada de beneficios
+      carouselSlides.forEach(function (slide, si) {
+        slide.classList.remove('active', 'prev', 'next');
+        if (si === carouselIndex) slide.classList.add('active');
+        else if (si === prevIndex) slide.classList.add('prev');
+        else if (si === nextIndex) slide.classList.add('next');
+      });
+
       carouselMobileLists.forEach(function (list, li) { list.classList.toggle('active', li === carouselIndex); });
+
+      carouselDots.forEach(function (dot) { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
+      void carouselTrack.offsetWidth; // reflow: reinicia limpio la animación CSS de progreso cada vez
+      if (carouselDots[carouselIndex]) {
+        carouselDots[carouselIndex].classList.add('active');
+        carouselDots[carouselIndex].setAttribute('aria-current', 'true');
+      }
     }
 
     function startAutoplay() {
       stopAutoplay();
+      if (carouselRoot) carouselRoot.classList.remove('is-paused');
       // sin botón de pausa, quien pida menos movimiento no debe ver rotación
       if (sinMovimiento.matches) { return; }
       carouselTimer = setInterval(function () { goToSlide(carouselIndex + 1); }, CAROUSEL_MS);
@@ -1448,10 +1542,14 @@
 
     function stopAutoplay() {
       if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
+      if (carouselRoot) carouselRoot.classList.add('is-paused');
     }
 
     carouselPrev.addEventListener('click', function () { goToSlide(carouselIndex - 1); startAutoplay(); });
     carouselNext.addEventListener('click', function () { goToSlide(carouselIndex + 1); startAutoplay(); });
+    carouselDots.forEach(function (dot, di) {
+      dot.addEventListener('click', function () { goToSlide(di); startAutoplay(); });
+    });
 
     // sustituye al botón de pausa: se detiene al pasar el ratón o al entrar
     // con el teclado, y se reanuda al salir
@@ -1462,6 +1560,32 @@
     // si el sistema cambia la preferencia en caliente, obedecer sin recargar
     if (sinMovimiento.addEventListener) {
       sinMovimiento.addEventListener('change', function () { startAutoplay(); });
+    }
+
+    // swipe táctil: Pointer Events unifica ratón y dedo; touch-action:pan-y en
+    // el viewport deja pasar el scroll vertical de la página sin interferir
+    if (carouselViewport && window.PointerEvent) {
+      carouselViewport.addEventListener('pointerdown', function (ev) {
+        if (ev.pointerType === 'mouse' && ev.button !== 0) return;
+        carouselPointerId = ev.pointerId;
+        carouselPointerStartX = ev.clientX;
+        carouselPointerDeltaX = 0;
+      });
+      carouselViewport.addEventListener('pointermove', function (ev) {
+        if (carouselPointerId === null || ev.pointerId !== carouselPointerId) return;
+        carouselPointerDeltaX = ev.clientX - carouselPointerStartX;
+      });
+      var endCarouselSwipe = function (ev) {
+        if (carouselPointerId === null || ev.pointerId !== carouselPointerId) return;
+        var dx = carouselPointerDeltaX;
+        carouselPointerId = null;
+        carouselPointerDeltaX = 0;
+        if (Math.abs(dx) < CAROUSEL_SWIPE_THRESHOLD) return;
+        if (dx < 0) goToSlide(carouselIndex + 1); else goToSlide(carouselIndex - 1);
+        startAutoplay();
+      };
+      carouselViewport.addEventListener('pointerup', endCarouselSwipe);
+      carouselViewport.addEventListener('pointercancel', endCarouselSwipe);
     }
 
     startAutoplay();
