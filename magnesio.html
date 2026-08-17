@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magnesio Bisglicinato — ZEROX</title>
+<meta name="description" content="Magnesio bisglicinato, la forma que mejor se tolera. 360 mg por dosis diaria. Qué lleva, cuánto lleva y por qué.">
+<link rel="canonical" href="https://jaume-dotcom.github.io/ecom/magnesio.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     FICHA DE PRODUCTO — plantilla
+     Autónoma a propósito: no depende del index.html para poder
+     iterar sin tocar el fichero que comparte Jaume. Cuando las
+     cuatro fichas estén estables, este bloque y el del index se
+     extraen a un estilos.css único (ver nota al equipo).
+     Los tokens son copia literal de los del index.
+     ============================================================ */
+  :root {
+    --paper: #eef0f4;
+    --tint: #e2e7ed;
+    --ink: #23272e;
+    --ink-soft: #3a4149;
+    --ink-faint: #8b9aa8;
+    --khaki: #a4844a;
+    --khaki-pop: #ecdcbe;
+    --khaki-deep: #8c5a22;
+    --olive: #6f4419;
+    --line: #dce1e7;
+    --font: "Inter", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    --tracking-lg: -0.03em;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--font); font-weight: 400; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: var(--font); cursor: pointer; }
+  /* 640 y no 1280: una ficha se lee en columna, y en escritorio una
+     medida larga cansa más de lo que luce */
+  .wrap { max-width: 40rem; margin: 0 auto; padding: 0 1.15rem; }
+
+  /* ---------- barra de aviso + nav ---------- */
+  .topbar {
+    background: var(--ink); color: var(--paper);
+    font-size: 0.85rem; text-align: center; padding: 0.6rem 1rem;
+  }
+  nav {
+    position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 1.1rem 0;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 600; font-size: 1.28rem; letter-spacing: 0.2em; text-indent: 0.2em; }
+  nav > .logo {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  .nav-ico {
+    width: 2.75rem; height: 2.75rem; margin: 0 -0.7rem;
+    display: grid; place-items: center; color: var(--ink);
+  }
+  .nav-ico svg { width: 21px; height: 21px; }
+
+  /* ---------- cabecera de producto ---------- */
+  .ficha { padding: 0.5rem 0 2.5rem; }
+  .ficha-foto {
+    background: var(--tint); border-radius: 16px; overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+  .ficha-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .ficha-eyebrow {
+    margin: 1.6rem 0 0.5rem; font-size: 0.9rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--khaki-deep); font-weight: 500;
+  }
+  h1 {
+    margin: 0 0 0.7rem; font-size: 2.1rem; font-weight: 600;
+    line-height: 1.1; letter-spacing: var(--tracking-lg);
+  }
+  .ficha-lede { margin: 0 0 1.5rem; font-size: 1.1rem; color: var(--ink-soft); }
+  .ficha-precio {
+    display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.3rem;
+  }
+  .precio { font-size: 1.75rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .precio-nota { font-size: 0.95rem; color: var(--ink-soft); }
+  .ficha-envio { margin: 0 0 1.3rem; font-size: 0.95rem; color: var(--ink-soft); }
+  .btn-comprar {
+    display: block; width: 100%; padding: 1rem 1.5rem; border: 0;
+    border-radius: 999px; background: var(--ink); color: var(--paper);
+    font-size: 1.05rem; font-weight: 600; text-align: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn-comprar:hover { background: #000; transform: translateY(-1px); }
+
+  /* ---------- datos clave ---------- */
+  .datos {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden; margin: 2rem 0 0;
+  }
+  .dato { background: var(--paper); padding: 1.1rem 1rem; }
+  .dato dt { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.2rem; }
+  .dato dd { margin: 0; font-size: 1.1rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
+
+  /* ---------- secciones ---------- */
+  section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+  h2 {
+    margin: 0 0 1.2rem; font-size: 1.6rem; font-weight: 600;
+    letter-spacing: var(--tracking-lg); line-height: 1.15;
+  }
+  section > p { font-size: 1.05rem; color: var(--ink-soft); }
+
+  /* para qué sirve */
+  .usos { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.85rem; }
+  .usos li {
+    display: flex; gap: 0.7rem; align-items: flex-start;
+    font-size: 1.05rem; line-height: 1.45;
+  }
+  .usos svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--khaki-deep); }
+  .usos-nota {
+    margin: 1.3rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line);
+    font-size: 0.95rem; color: var(--ink-soft);
+  }
+
+  /* composición */
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  th, td { text-align: left; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--ink-soft); }
+  td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .tabla-nota { margin: 0.9rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+  .ingredientes {
+    margin: 1.5rem 0 0; padding: 1.1rem 1.2rem;
+    background: var(--tint); border-radius: 14px;
+    font-size: 1rem; color: var(--ink-soft);
+  }
+  .ingredientes strong { color: var(--ink); }
+
+  /* cómo tomarlo */
+  .pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.1rem; counter-reset: paso; }
+  .pasos li { display: flex; gap: 0.9rem; font-size: 1.05rem; }
+  .pasos li::before {
+    counter-increment: paso; content: counter(paso);
+    flex-shrink: 0; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    background: var(--khaki-pop); color: var(--olive);
+    display: grid; place-items: center;
+    font-size: 0.9rem; font-weight: 600; font-family: var(--font-mono);
+  }
+
+  /* preguntas */
+  .faq { border-top: 1px solid var(--line); }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; padding: 1.15rem 0; background: none; border: 0;
+    font-size: 1.05rem; font-weight: 500; color: var(--ink); text-align: left;
+  }
+  .faq-q svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.25s ease; }
+  .faq-q[aria-expanded="true"] svg { transform: rotate(45deg); }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+  .faq-q[aria-expanded="true"] + .faq-a { grid-template-rows: 1fr; }
+  .faq-a > div { overflow: hidden; }
+  .faq-a p { margin: 0 0 1.15rem; font-size: 1.05rem; color: var(--ink-soft); }
+
+  /* alta */
+  .alta { text-align: center; }
+  .alta form { display: grid; gap: 0.7rem; margin: 1.2rem 0 0; }
+  .alta input {
+    width: 100%; padding: 0.95rem 1.1rem; border: 1px solid var(--line);
+    border-radius: 999px; font: inherit; font-size: 1rem; background: #fff; color: var(--ink);
+  }
+  .alta button {
+    padding: 0.95rem 1.5rem; border: 0; border-radius: 999px;
+    background: var(--ink); color: var(--paper); font-size: 1rem; font-weight: 600;
+  }
+  .alta-ok { display: none; margin: 0.9rem 0 0; color: var(--olive); font-weight: 500; }
+  .alta-ok.on { display: block; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 2rem 0 2.5rem;
+    font-size: 0.95rem; color: var(--ink-soft); text-align: center;
+  }
+  footer a { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (min-width: 860px) {
+    .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .ficha-foto { position: sticky; top: 1.5rem; }
+    .wrap { max-width: 60rem; }
+    h1 { font-size: 2.4rem; }
+    .ficha-eyebrow { margin-top: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .faq-a, .faq-q svg, .btn-comprar { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Envío gratuito desde 39 € · Devolución en 30 días</div>
+
+<div class="wrap">
+  <nav>
+    <a class="nav-ico" href="index.html#catalogo" aria-label="Volver al catálogo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <span class="logo-word">ZEROX</span>
+    </a>
+    <a class="nav-ico" href="index.html#catalogo" aria-label="Ir al catálogo">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <div class="ficha">
+    <div class="ficha-foto">
+      <img src="ficha-magnesio.jpg" width="761" height="1024" alt="Bote de Magnesio Bisglicinato de ZEROX" fetchpriority="high" decoding="async">
+    </div>
+
+    <div>
+      <p class="ficha-eyebrow">Fórmula 01</p>
+      <h1>Magnesio Bisglicinato</h1>
+      <p class="ficha-lede">La forma que mejor se tolera. Sin óxido de magnesio, sin dosis a medias y con la etiqueta entera a la vista.</p>
+
+      <div class="ficha-precio">
+        <span class="precio">[precio] €</span>
+        <span class="precio-nota">90 cápsulas · 30 días</span>
+      </div>
+      <p class="ficha-envio">Envío gratuito desde 39 €. Devolución en 30 días.</p>
+
+      <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
+
+      <dl class="datos">
+        <div class="dato"><dt>Magnesio elemental</dt><dd>360 mg</dd></div>
+        <div class="dato"><dt>% VRN</dt><dd>96 %</dd></div>
+        <div class="dato"><dt>Forma</dt><dd>Bisglicinato</dd></div>
+        <div class="dato"><dt>Dosis diaria</dt><dd>3 cápsulas</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <section>
+    <h2>Para qué sirve</h2>
+    <ul class="usos">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a disminuir el cansancio y la fatiga</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal de los músculos</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal del sistema nervioso</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a la función psicológica normal</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al mantenimiento de los huesos y los dientes en condiciones normales</span></li>
+    </ul>
+    <p class="usos-nota">Son las declaraciones autorizadas por la Unión Europea para el magnesio. No decimos nada que no esté en esa lista, y por eso no vas a encontrar aquí promesas más grandes.</p>
+  </section>
+
+  <section>
+    <h2>Qué lleva</h2>
+    <table>
+      <thead>
+        <tr><th>Por dosis diaria (3 cápsulas)</th><th>Cantidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bisglicinato de magnesio</td><td>2.250 mg</td></tr>
+        <tr><td>Magnesio elemental</td><td>360 mg</td></tr>
+        <tr><td>% de los valores de referencia</td><td>96 %</td></tr>
+      </tbody>
+    </table>
+    <p class="tabla-nota">Los valores de referencia de nutrientes para el magnesio son de 375 mg al día.</p>
+    <div class="ingredientes">
+      <strong>Ingredientes:</strong> bisglicinato de magnesio. Cápsula vegetal (hidroxipropilmetilcelulosa).
+      <br><br>
+      Sin estearato de magnesio, sin dióxido de titanio, sin colorantes ni aromas.
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo tomarlo</h2>
+    <ol class="pasos">
+      <li><span>3 cápsulas al día, juntas o repartidas.</span></li>
+      <li><span>Con un vaso de agua, preferiblemente con una comida.</span></li>
+      <li><span>Muchas personas lo prefieren por la noche. No es obligatorio: lo importante es tomarlo todos los días.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Preguntas</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>¿Puedo tomarlo si estoy con medicación?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div><p>El magnesio puede interferir en la absorción de algunos medicamentos, entre ellos ciertos antibióticos y los que se usan para la tiroides. No es que no puedas tomarlo: normalmente basta con separarlos unas horas. Consúltalo con tu médico o tu farmacéutico antes de empezar, y enséñales esta etiqueta.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>¿Por qué bisglicinato y no otro?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Porque es el que menos molesta al estómago. El óxido de magnesio, que es el más habitual porque es el más barato, se absorbe peor y suele dar problemas intestinales. El bisglicinato va unido a un aminoácido, la glicina, y se tolera mucho mejor.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>¿Cuánto tarda en notarse?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div><p>Depende de cada persona y de si partías de niveles bajos. No podemos prometerte un plazo, y desconfía de quien lo haga. Lo que sí sabemos es que el magnesio actúa por acumulación: un bote de 30 días es el mínimo razonable para valorarlo.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false">
+          <span>¿Tiene gluten, lactosa o algo de origen animal?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><div><p>No. La cápsula es vegetal y la fórmula no lleva gluten, lactosa ni ingredientes de origen animal. Apto para dietas vegetarianas y veganas.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alta" id="alta">
+    <h2>Todavía no está a la venta</h2>
+    <p>Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento para los primeros.</p>
+    <form id="form-alta">
+      <input type="email" placeholder="Tu email" aria-label="Tu email" required>
+      <button type="submit">Avísame</button>
+    </form>
+    <p class="alta-ok" id="alta-ok">Apuntado. Serás de los primeros en saberlo.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>ZEROX · Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada. Mantener fuera del alcance de los niños.</p>
+    <p><a href="index.html">Volver al inicio</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // acordeón de preguntas
+  document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var abierto = q.getAttribute('aria-expanded') === 'true';
+      q.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+    });
+  });
+
+  // OJO: igual que en el index, esto todavía no envía el email a ninguna
+  // parte. Falta conectar el servicio antes de publicar.
+  var form = document.getElementById('form-alta');
+  var ok = document.getElementById('alta-ok');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      ok.classList.add('on');
+    });
+  }
+
+  var comprar = document.getElementById('btn-comprar');
+  if (comprar) {
+    comprar.addEventListener('click', function () {
+      document.getElementById('alta').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
