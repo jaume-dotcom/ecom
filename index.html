@@ -942,6 +942,42 @@
 
   .hero-alta-titulo { font-size: 1.35rem; font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.5rem; }
 
+
+  /* ===== TIPOGRAFIA, SOLO MOVIL =====
+     Todo va dentro del breakpoint a proposito: escritorio no se toca.
+     Objetivo: mas peso visual y mas contraste para la franja de 55-75. */
+  @media (max-width: 859px) {
+    /* el gris secundario subia 7,61 de contraste sobre --paper; a #3a4149
+       sube a 9,08 sin llegar al negro pleno, que cansa en parrafos largos.
+       Comprobado que ningun texto con este color cae sobre fondo oscuro. */
+    :root { --ink-soft: #3a4149; }
+
+    /* el nombre, en negrita y con el tracking mas cerrado: abierto a 0,26em
+       la negrita se desparrama y pierde la fuerza que gana en peso */
+    .logo-word { font-weight: 600; font-size: 1.28rem; letter-spacing: 0.2em; text-indent: 0.2em; }
+
+    /* hero */
+    .hero-lockup { font-weight: 500; color: rgba(255, 255, 255, 0.9); }
+    .hero-headline { font-size: 2.3rem; }
+    .hero-lede { font-size: 1.1rem; color: rgba(255, 255, 255, 0.95); }
+    .hero-cta { font-size: 1.05rem; font-weight: 600; }
+
+    /* bloque de alta */
+    /* .hero-center p (0,1,1) le ganaba y lo dejaba en 1,06rem */
+    .hero-center .hero-alta-titulo { font-size: 1.25rem; font-weight: 600; color: var(--ink); }
+    .hero-signup-label { color: var(--ink-soft); }
+
+    /* cabeceras de seccion */
+    .section-head h2 { font-size: 1.75rem; font-weight: 600; }
+    .section-head p { font-size: 1.1rem; }
+
+    /* fichas de producto: el nombre iba a peso de parrafo */
+    .p-card .p-top { font-weight: 600; font-size: 1.05rem; }
+
+    /* preguntas del FAQ */
+    .faq-q { font-size: 1.05rem; font-weight: 500; }
+  }
+
 </style>
 
 <div class="topbar">
