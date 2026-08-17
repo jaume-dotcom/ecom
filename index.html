@@ -981,6 +981,14 @@
     .hero-carousel-pagination-item.active::before { opacity: 1; transform: scale(1.35); }
     .hero-carousel-pagination-item:focus-visible { outline-color: #fff; }
 
+    /* bloque de alta: el boton se alinea con el campo en vez de quedar
+       suelto y centrado debajo */
+    .hero-signup-field { width: 100%; }
+    .shine { width: 100%; }
+    .shine > button { width: 100%; padding: 0.95rem 1.5rem; font-size: 1rem; }
+    .hero-signup-label { font-size: 1rem; line-height: 1.5; max-width: 32ch; margin-left: auto; margin-right: auto; }
+    .hero-signup-success { font-size: 1rem; }
+
     /* bloque de alta */
     /* .hero-center p (0,1,1) le ganaba y lo dejaba en 1,06rem */
     .hero-center .hero-alta-titulo { font-size: 1.25rem; font-weight: 600; color: var(--ink); }
@@ -1156,18 +1164,18 @@
   </div>
 
   <div class="hero-center wrap" id="alta">
-    <p class="hero-alta-titulo">Sé de los primeros en probarlas.</p>
-    <p class="hero-signup-label">Precio de lanzamiento para los primeros.</p>
+    <p class="hero-alta-titulo">Te avisamos el día que salga</p>
+    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista. Ni newsletter, ni ofertas, ni nada más.</p>
     <form class="hero-signup" id="hero-form">
       <label class="hero-signup-field">
         <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         <input type="email" placeholder="Tu email" aria-label="Tu email" required />
       </label>
       <span class="shine">
-        <button type="submit">Apuntarme</button>
+        <button type="submit">Avísame</button>
       </span>
     </form>
-    <p class="hero-signup-success" id="hero-success">Apuntado. Serás de los primeros en saberlo.</p>
+    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
   </div>
 </div>
 
