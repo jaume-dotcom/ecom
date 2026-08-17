@@ -927,6 +927,8 @@
   }
 
   @media (min-width: 860px) {
+    /* escritorio se queda como estaba: sin controles visibles */
+    .hero-carousel-pagination { display: none; }
     /* la caja 3:2 daba 822px de alto en un portatil de 800 y el CTA quedaba
        bajo el pliegue; con tope de altura la tarjeta entera cabe en pantalla */
     .hero-media-box { aspect-ratio: auto; height: clamp(28rem, calc(100svh - 12rem), 40rem); }
@@ -962,6 +964,22 @@
     .hero-headline { font-size: 2.3rem; }
     .hero-lede { font-size: 1.1rem; color: rgba(255, 255, 255, 0.95); }
     .hero-cta { font-size: 1.05rem; font-weight: 600; }
+    /* hueco bajo el CTA para los puntos, que van dentro de la tarjeta */
+    .hero-copy { padding-bottom: 4.2rem; }
+    /* puntos sobre el degradado: no gastan altura de pantalla, esos 34px de
+       abajo ya eran degradado vacio. Reusan las clases de la paginacion para
+       que el JS de Jaume los recoja sin ningun cambio. */
+    .hero-carousel-pagination { gap: 0; bottom: 1.9rem; }
+    .hero-carousel-pagination-item {
+      padding: 0; width: 2.5rem; height: 2.5rem; display: grid; place-items: center;
+    }
+    .hero-carousel-pagination-item::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: #fff; opacity: 0.42;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .hero-carousel-pagination-item.active::before { opacity: 1; transform: scale(1.25); }
+    .hero-carousel-pagination-item:focus-visible { outline-color: #fff; }
 
     /* bloque de alta */
     /* .hero-center p (0,1,1) le ganaba y lo dejaba en 1,06rem */
@@ -1111,6 +1129,13 @@
     </div>
   </div>
   </div>
+    <div class="hero-carousel-pagination" id="hero-carousel-dots" role="tablist" aria-label="Diapositivas">
+      <button type="button" class="hero-carousel-pagination-item active" data-slide-index="0" aria-label="Ir a la diapositiva 1: ZEROX" aria-current="true"></button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="1" aria-label="Ir a la diapositiva 2: Magnesio Bisglicinato"></button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="2" aria-label="Ir a la diapositiva 3: Vitamina D3 + K2"></button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="3" aria-label="Ir a la diapositiva 4: Omega-3 EPA+DHA"></button>
+      <button type="button" class="hero-carousel-pagination-item" data-slide-index="4" aria-label="Ir a la diapositiva 5: Probiotico Multicepa"></button>
+    </div>
   </div>
 
   <div class="ticker" aria-label="Claves de la marca">
