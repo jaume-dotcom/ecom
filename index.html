@@ -905,9 +905,9 @@
   }
   .hero-cta {
     display: block; width: 100%; box-sizing: border-box;
-    padding: 1.05rem 1.6rem; border-radius: 999px;
+    padding: 0.85rem 1.5rem; border-radius: 999px;
     background: var(--paper); color: var(--ink);
-    font-size: 1.05rem; font-weight: 500; text-decoration: none;
+    font-size: 1rem; font-weight: 500; text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
   .hero-cta:hover { background: #fff; transform: translateY(-1px); }
@@ -919,7 +919,10 @@
   @media (max-width: 859px) {
     /* sin proporcion fija: la tarjeta ocupa la pantalla menos la barra de
        aviso, la nav y un respiro, como en Loop */
-    .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(100svh - 9.5rem), 42rem); }
+    .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(100svh - 10.5rem), 42rem); }
+    /* deja de ir a sangre: margen a los lados y esquinas redondeadas */
+    .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .hero-media-box { border-radius: 14px; }
   }
 
   @media (min-width: 860px) {
@@ -1071,12 +1074,6 @@
     </div>
   </div>
   </div>
-    <button type="button" class="hero-carousel-arrow hero-carousel-prev" id="hero-carousel-prev" aria-label="Diapositiva anterior">
-      <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
-      <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
   </div>
 
   <div class="ticker" aria-label="Claves de la marca">
@@ -1624,8 +1621,9 @@
       if (carouselRoot) carouselRoot.classList.add('is-paused');
     }
 
-    carouselPrev.addEventListener('click', function () { goToSlide(carouselIndex - 1); startAutoplay(); });
-    carouselNext.addEventListener('click', function () { goToSlide(carouselIndex + 1); startAutoplay(); });
+    // las flechas ya no estan en el HTML; el guard deja el codigo listo por si vuelven
+    if (carouselPrev) { carouselPrev.addEventListener('click', function () { goToSlide(carouselIndex - 1); startAutoplay(); }); }
+    if (carouselNext) { carouselNext.addEventListener('click', function () { goToSlide(carouselIndex + 1); startAutoplay(); }); }
     carouselDots.forEach(function (dot, di) {
       dot.addEventListener('click', function () { goToSlide(di); startAutoplay(); });
     });
@@ -1649,6 +1647,8 @@
         carouselPointerId = ev.pointerId;
         carouselPointerStartX = ev.clientX;
         carouselPointerDeltaX = 0;
+        // pausa invisible: mientras el dedo esta apoyado, no rota
+        stopAutoplay();
       });
       carouselViewport.addEventListener('pointermove', function (ev) {
         if (carouselPointerId === null || ev.pointerId !== carouselPointerId) return;
@@ -1659,8 +1659,10 @@
         var dx = carouselPointerDeltaX;
         carouselPointerId = null;
         carouselPointerDeltaX = 0;
-        if (Math.abs(dx) < CAROUSEL_SWIPE_THRESHOLD) return;
-        if (dx < 0) goToSlide(carouselIndex + 1); else goToSlide(carouselIndex - 1);
+        if (Math.abs(dx) >= CAROUSEL_SWIPE_THRESHOLD) {
+          if (dx < 0) goToSlide(carouselIndex + 1); else goToSlide(carouselIndex - 1);
+        }
+        // se reanuda siempre, tambien tras un toque que no llego a deslizar
         startAutoplay();
       };
       carouselViewport.addEventListener('pointerup', endCarouselSwipe);
