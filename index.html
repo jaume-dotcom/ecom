@@ -920,8 +920,9 @@
     /* sin proporcion fija: la tarjeta ocupa la pantalla menos la barra de
        aviso, la nav y un respiro, como en Loop */
     .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(100svh - 10.5rem), 42rem); }
-    /* deja de ir a sangre: margen a los lados y esquinas redondeadas */
-    .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; }
+    /* deja de ir a sangre: margen igual por los cuatro lados. Arriba bajaba
+       de 22px a 12 y abajo el ticker arrancaba pegado a la tarjeta (0px) */
+    .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; margin-top: 0.75rem; padding-bottom: 1rem; }
     .hero-media-box { border-radius: 14px; }
   }
 
