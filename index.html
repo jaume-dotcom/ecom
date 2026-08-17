@@ -1115,6 +1115,36 @@
     .foot-anim { opacity: 1; filter: none; transform: none; transition: none; }
   }
 
+
+  /* ============ FAQ EN BLANCO ============
+     Se invierte el panel: antes era oscuro y quedaba pegado al pie, tambien
+     oscuro. Ahora blanco puro, que ademas lo separa del --paper del cuerpo.
+     Va al final del bloque porque las reglas base estan mas arriba. */
+  .faq-panel { background: #ffffff; color: var(--ink); }
+  .faq-panel .section-head h2 { color: var(--ink); }
+  .faq-panel .section-head p { color: var(--ink-soft); }
+  .faq-item { border-bottom: 1px solid rgba(35, 39, 46, 0.12); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { color: var(--ink); }
+  .faq-ico {
+    border: 1px solid rgba(35, 39, 46, 0.2);
+    background: rgba(35, 39, 46, 0.04);
+  }
+  .faq-ico svg { color: var(--ink); }
+  /* sobre claro el laton se pierde; aqui manda el ambar oscuro */
+  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--khaki-deep); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-deep); }
+  .faq-meta { color: var(--ink-soft); border: 1px solid rgba(35, 39, 46, 0.2); }
+  .faq-a p { color: var(--ink-soft); }
+
+  /* ============ PIE EN EL AZUL DE MARCA ============ */
+  :root { --foot-ink: #23272e; }
+  .foot-panel {
+    background:
+      radial-gradient(38% 150px at 50% 0%, rgba(236, 220, 190, 0.17), transparent),
+      var(--foot-ink);
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
