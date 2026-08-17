@@ -1020,15 +1020,31 @@
      justo encima ya es oscuro, asi que el panel va en --tint y el remate
      redondeado se lee contra el. */
 
+  /* casi negro, no --ink: detras del panel queda papel, y ese salto es el
+     que hace legible el remate redondeado. Mismo sistema que la tarjeta del
+     hero, invertido. */
+  :root { --foot-ink: #14161a; --foot-mute: rgba(238, 240, 244, 0.62); }
   footer#footer-signup { border-top: 0; padding: 0 0.75rem 0; background: none; }
+
+  /* el formulario estaba pensado para fondo claro */
+  .foot-panel .foot-form input {
+    background: rgba(238, 240, 244, 0.06);
+    border-color: rgba(238, 240, 244, 0.28);
+    color: var(--paper);
+  }
+  .foot-panel .foot-form input::placeholder { color: rgba(238, 240, 244, 0.5); }
+  .foot-panel .foot-form button { background: var(--paper); color: var(--ink); }
+  .foot-panel .foot-form button:hover { background: #fff; }
+  .foot-panel .foot-success { color: var(--khaki-pop); }
 
   .foot-panel {
     position: relative;
     max-width: 1280px; margin: 0 auto;
     padding: 2.6rem 1.4rem 1.6rem;
     background:
-      radial-gradient(35% 140px at 50% 0%, rgba(164, 132, 74, 0.16), transparent),
-      var(--tint);
+      radial-gradient(38% 150px at 50% 0%, rgba(236, 220, 190, 0.13), transparent),
+      var(--foot-ink);
+    color: var(--paper);
     border-radius: 2rem 2rem 0 0;
     overflow: hidden;
   }
@@ -1036,35 +1052,41 @@
   .foot-hair {
     position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 33%; height: 1px;
-    background: rgba(35, 39, 46, 0.35);
+    background: rgba(238, 240, 244, 0.45);
     filter: blur(1px);
     border-radius: 999px;
   }
 
   .foot-grid { display: grid; gap: 2.4rem; }
   .foot-brand .logo { margin-bottom: 0.9rem; }
-  .foot-claim { margin: 0 0 1.1rem; color: var(--ink-soft); font-size: 1rem; }
-  .foot-copy { margin: 1.2rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+  .foot-panel .logo { color: var(--paper); }
+  /* .foot-brand p (0,1,1) del pie viejo le ganaba a .foot-claim (0,1,0) y
+     dejaba estos dos en gris oscuro sobre casi negro: contraste 1,75 */
+  .foot-panel .foot-claim,
+  .foot-panel .foot-copy { color: var(--foot-mute); font-size: 1rem; }
+  .foot-panel .foot-bottom { font-size: 0.9rem; }
+  .foot-claim { margin: 0 0 1.1rem; color: var(--foot-mute); font-size: 1rem; }
+  .foot-copy { margin: 1.2rem 0 0; color: var(--foot-mute); font-size: 0.95rem; }
 
   .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 1.4rem; }
   .foot-col h4 {
     margin: 0 0 0.9rem; font-size: 0.8rem; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink);
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--paper);
   }
   .foot-col ul {
     list-style: none; margin: 0; padding: 0;
     display: flex; flex-direction: column; gap: 0.6rem;
-    font-size: 0.95rem; color: var(--ink-soft);
+    font-size: 0.95rem; color: var(--foot-mute);
   }
   .foot-col a { transition: color 0.25s ease; }
-  .foot-col a:hover { color: var(--khaki-deep); }
+  .foot-col a:hover { color: var(--paper); }
 
   .foot-bottom {
     max-width: 1280px; margin: 0 auto;
-    border-top: 1px solid rgba(35, 39, 46, 0.12);
+    border-top: 1px solid rgba(238, 240, 244, 0.14);
     margin-top: 2rem; padding-top: 1.3rem;
     display: grid; gap: 0.5rem;
-    font-size: 0.85rem; color: var(--ink-soft);
+    font-size: 0.85rem; color: var(--foot-mute);
   }
 
   /* entrada escalonada con desenfoque, como el whileInView del original.
