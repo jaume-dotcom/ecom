@@ -354,16 +354,15 @@
     margin: 1rem 0 0; padding: 0; font-size: 0.85rem; color: var(--ink-soft);
   }
   .hero-mobile-benefits.active { display: grid; }
-  /* visibles también en móvil ("flechas siempre accesibles"), algo más
-     pequeñas que en escritorio; sombra ligera, circulo blanco discreto */
+  /* círculo blanco grande con flecha recta, como en la referencia de Loop */
   .hero-carousel-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 2.2rem; height: 2.2rem; border-radius: 50%;
-    background: rgba(255,255,255,0.92); border: 1px solid rgba(35,39,46,0.08); box-shadow: 0 2px 8px rgba(35,39,46,0.12);
+    position: absolute; top: 50%; transform: translateY(-50%); width: 3.5rem; height: 3.5rem; border-radius: 50%;
+    background: #fff; border: none; box-shadow: 0 4px 18px rgba(35,39,46,0.16);
     display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 4; color: #23272e; padding: 0;
   }
-  .hero-carousel-prev { left: 0.9rem; }
-  .hero-carousel-next { right: 0.9rem; }
-  .hero-carousel-arrow svg { width: 1.1rem; height: 1.1rem; }
+  .hero-carousel-prev { left: 1rem; }
+  .hero-carousel-next { right: 1rem; }
+  .hero-carousel-arrow svg { width: 1.4rem; height: 1.4rem; }
 
   /* paginación numerada con progreso: el ancho de .hero-carousel-pagination-progress
      lo marca una animación CSS pura (heroCarouselProgress), no JS, para que la
@@ -460,9 +459,8 @@
        sin llegar a cuadrado; el producto sigue sin cortarse con object-fit:cover */
     .hero-media-box { border-radius: 24px; aspect-ratio: 3 / 2; }
     .hero-media-box img { height: 100%; object-fit: cover; object-position: left center; }
-    .hero-carousel-arrow { width: 2.5rem; height: 2.5rem; left: 1.25rem; }
-    .hero-carousel-next { left: auto; right: 1.25rem; }
-    .hero-carousel-arrow svg { width: 1.2rem; height: 1.2rem; }
+    .hero-carousel-arrow { left: 1.5rem; }
+    .hero-carousel-next { left: auto; right: 1.5rem; }
     .hero-benefit {
       position: absolute; width: 9rem; font-size: 0.82rem; color: #23272e; text-align: center; line-height: 1.3; z-index: 2;
       opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease;
@@ -1277,6 +1275,12 @@
     </div>
   </div>
   </div>
+    <button type="button" class="hero-carousel-arrow hero-carousel-prev" id="hero-carousel-prev" aria-label="Diapositiva anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 18l6-6-6-6"/></svg>
+    </button>
     <div class="hero-carousel-pagination" id="hero-carousel-dots" role="tablist" aria-label="Diapositivas">
       <button type="button" class="hero-carousel-pagination-item active" data-slide-index="0" aria-label="Ir a la diapositiva 1: ZEROX" aria-current="true"></button>
       <button type="button" class="hero-carousel-pagination-item" data-slide-index="1" aria-label="Ir a la diapositiva 2: Magnesio Bisglicinato"></button>
