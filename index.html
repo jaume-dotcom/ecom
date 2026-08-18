@@ -912,6 +912,36 @@
   /* solo la diapositiva activa es tabulable: las de al lado se ven con el peek */
   .hero-slide:not(.active) .hero-cta { pointer-events: none; }
 
+  /* diapositiva del magnesio (ángulo descanso): composición editorial a la
+     izquierda en vez del bloque centrado inferior que usa el resto. Solo
+     afecta a .hero-slide-left, reutilizando .hero-lockup/.hero-headline/
+     .hero-lede/.hero-cta tal cual, sin tocar las reglas base compartidas */
+  .hero-slide-left .hero-media-box img { object-position: right center; }
+  .hero-slide-left .hero-shade {
+    background: linear-gradient(to right,
+      rgba(20, 16, 14, 0.55) 0%,
+      rgba(20, 16, 14, 0.32) 32%,
+      rgba(20, 16, 14, 0.08) 55%,
+      rgba(20, 16, 14, 0) 68%);
+  }
+  .hero-slide-left .hero-copy {
+    left: 0; right: auto; bottom: auto; top: 50%; transform: translateY(-50%);
+    /* padding-left mayor que el resto de diapositivas: las flechas están
+       centradas en la misma vertical y con el inset normal (1.3rem) el
+       círculo izquierdo pisaba el arranque del subtítulo */
+    width: min(80%, 30rem); padding-left: 5.5rem; text-align: left;
+  }
+  .hero-slide-left .hero-copy > * { max-width: none; margin-left: 0; margin-right: 0; text-align: left; }
+  .hero-slide-left .hero-lockup { margin-bottom: 1.75rem; }
+  .hero-slide-left .hero-headline { font-weight: 400; letter-spacing: -0.01em; font-size: 1.75rem; }
+  .hero-slide-left .hero-lede { margin-top: 1.75rem; margin-bottom: 2rem; max-width: 34ch; }
+  .hero-slide-left .hero-cta { display: inline-block; width: auto; }
+  @media (min-width: 860px) {
+    .hero-slide-left .hero-copy { width: min(46%, 40rem); padding-left: 6rem; }
+    .hero-slide-left .hero-headline { font-size: clamp(2.6rem, 4.2vw, 3.6rem); line-height: 1.02; }
+    .hero-slide-left .hero-lede { max-width: 32rem; }
+  }
+
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
 
   @media (max-width: 859px) {
@@ -1229,13 +1259,14 @@
         </div>
       </div>
     </div>
-    <div class="hero-slide">
+    <div class="hero-slide hero-slide-left">
       <div class="hero-media-box">
-        <img src="hero-magnesio.jpg" width="572" height="1050" alt="Bote de magnesio bisglicinato de ZEROX en una mesilla de noche al anochecer" decoding="async">
+        <img src="hero-magnesio-noche.jpg" width="1774" height="887" alt="Mujer durmiendo con antifaz, luz cálida de noche" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
-          <h2 class="hero-headline">Para los días<br>que pesan</h2>
-          <p class="hero-lede">Bisglicinato, la forma que mejor se tolera. Contribuye a disminuir el cansancio y la fatiga.</p>
+          <p class="hero-lockup">MAGNESIO BISGLICINATO</p>
+          <h2 class="hero-headline">El descanso<br>empieza antes<br>de dormir</h2>
+          <p class="hero-lede">Bisglicinato, la forma que mejor se tolera. Contribuye a reducir el cansancio y la fatiga.</p>
           <a class="hero-cta" href="#catalogo">Ver Magnesio ZEROX</a>
         </div>
       </div>
