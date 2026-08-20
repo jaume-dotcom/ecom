@@ -1415,7 +1415,7 @@
         </div>
         <a class="navmenu-link" href="#catalogo">Catálogo</a>
         <a class="navmenu-link" href="#libro">El libro</a>
-        <a class="navmenu-link" href="#criterio">Cómo elegimos</a>
+        <a class="navmenu-link" href="#contexto">Cómo elegimos</a>
       </div>
 
       <div class="nav-cta">
@@ -1706,71 +1706,6 @@
 
 <div class="wrap">
 
-  <!-- conserva el id #criterio: los cuatro enlaces de "Cómo elegimos" apuntaban
-       a la sección eliminada, y su contenido vive ahora en estas tarjetas -->
-  <section class="band tint" id="criterio">
-    <div class="stack">
-
-      <article class="stack-card" id="stack-dato">
-        <p class="spot-eyebrow"><span class="dot">&#9679;</span> <span id="spot-label"></span></p>
-        <h2 class="spot-head">Comemos distinto que hace cincuenta años.</h2>
-        <div class="spot-note">
-          <div class="spot-stat"><span class="arrow">&#8595;</span><span class="count" id="spot-count">0</span><span class="unit">&nbsp;% de consumo de verdura en España</span></div>
-        </div>
-        <div class="spot-cols">
-          <div class="spot-col">
-            <h3>CAMBIÓ LA MESA</h3>
-            <p>Se cocina menos, se compra con prisa y una parte de la compra viene ya preparada. No es culpa de nadie: es cómo se vive ahora.</p>
-          </div>
-          <div class="spot-col">
-            <h3>NO CAMBIÓ EL ORDEN</h3>
-            <p>La comida sigue siendo lo primero. Un suplemento no la sustituye &mdash; y si se toma, que al menos lleve la cantidad que se estudió.</p>
-          </div>
-        </div>
-        <p class="spot-src">Descenso del consumo de verdura en España en los últimos cincuenta años. Fuente pendiente de referenciar.</p>
-      </article>
-
-      <article class="stack-card">
-        <p class="spot-eyebrow"><span class="dot">&#9679;</span> El problema</p>
-        <h2 class="spot-head">Dos botes con el mismo nombre pueden no parecerse en nada.</h2>
-        <p class="stack-lead">Lo que decide si una fórmula sirve no es el nombre grande del frente, sino la cantidad de principio activo por dosis. Y esa cifra vive en la letra pequeña de la parte de atrás.</p>
-        <div class="spot-cols">
-          <div class="spot-col">
-            <h3>LA CIFRA QUE MIRAR</h3>
-            <p>El elemental, no el peso de la sal. Un bote puede anunciar 1.500&nbsp;mg y llevar mucho menos de lo que crees.</p>
-          </div>
-          <div class="spot-col">
-            <h3>LA FORMA IMPORTA</h3>
-            <p>Del mismo mineral hay versiones baratas de fabricar y versiones que se toleran mejor. No cuestan lo mismo.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="stack-card">
-        <p class="spot-eyebrow"><span class="dot">&#9679;</span> Lo que hacemos</p>
-        <h2 class="spot-head">Todo lo que hay dentro, publicado.</h2>
-        <ul class="stack-list">
-          <li>Cada cantidad, en la etiqueta y en la web</li>
-          <li>Análisis de un laboratorio externo, lote a lote</li>
-          <li>Sin mezclas patentadas que escondan proporciones</li>
-          <li>Fabricación en España, en instalaciones con GMP</li>
-        </ul>
-      </article>
-
-      <article class="stack-card stack-card--alt">
-        <p class="spot-eyebrow"><span class="dot">&#9679;</span> Lo que no hacemos</p>
-        <h2 class="spot-head">Y lo que no vas a encontrar aquí.</h2>
-        <ul class="stack-list stack-list--no">
-          <li>No decimos que sustituya a una dieta equilibrada</li>
-          <li>No prometemos efectos que no estén autorizados</li>
-          <li>No entra una fórmula si no podemos ponerla en dosis de estudio</li>
-          <li>No hay cuentas atrás ni ofertas que caducan esta noche</li>
-        </ul>
-      </article>
-
-    </div>
-  </section>
-
   <!-- ====================================================================
        BLOQUE DE CONTEXTO — versión de Jaume, montada sobre las tarjetas
        apiladas. Va SEPARADA del bloque #criterio a propósito: los dos
@@ -1994,7 +1929,7 @@
         <div class="foot-col reveal foot-anim">
           <h4>La marca</h4>
           <ul>
-            <li><a href="#criterio">Cómo elegimos</a></li>
+            <li><a href="#contexto">Cómo elegimos</a></li>
             <li><a href="#libro">El libro</a></li>
             <li><a href="#faq">Preguntas</a></li>
           </ul>
@@ -2065,7 +2000,7 @@
     </div>
     <a href="#catalogo">Catálogo</a>
     <a href="#libro">El libro de Sento</a>
-    <a href="#criterio">Cómo elegimos</a>
+    <a href="#contexto">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
   </nav>
   <a class="btn btn-solid mm-cta" href="#footer-signup">Acceso anticipado</a>
@@ -2082,44 +2017,6 @@
     items.forEach(function (el) { io.observe(el); });
   } else {
     items.forEach(function (el) { el.classList.add('in'); });
-  }
-
-  // letter-by-letter reveal for the spotlight eyebrow label
-  var spotLabel = document.getElementById('spot-label');
-  var labelText = 'CONTEXTO';
-  spotLabel.innerHTML = labelText.split('').map(function (ch, i) {
-    return '<span class="spot-letter" style="transition-delay:' + (i * 0.05) + 's">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
-  }).join('');
-
-  var spotSection = document.getElementById('stack-dato');
-  var spotCount = document.getElementById('spot-count');
-  var spotAnimated = false;
-  if (spotSection && 'IntersectionObserver' in window) {
-    var spotIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting && !spotAnimated) {
-          spotAnimated = true;
-          spotSection.querySelectorAll('.spot-letter').forEach(function (el) { el.classList.add('in'); });
-          var spotFigureEl = spotSection.querySelector('.spot-figure');
-          if (spotFigureEl) spotFigureEl.classList.add('in');
-          var start = null, duration = 1100, target = 40;
-          function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            spotCount.textContent = Math.round(progress * target);
-            if (progress < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-          spotIO.unobserve(spotSection);
-        }
-      });
-    }, { threshold: 0.3 });
-    spotIO.observe(spotSection);
-  } else if (spotSection) {
-    spotSection.querySelectorAll('.spot-letter').forEach(function (el) { el.classList.add('in'); });
-    var spotFigureFallback = spotSection.querySelector('.spot-figure');
-    if (spotFigureFallback) spotFigureFallback.classList.add('in');
-    spotCount.textContent = '20';
   }
 
   // seccion "por que ahora": frase protagonista palabra a palabra
