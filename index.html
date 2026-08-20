@@ -1145,6 +1145,87 @@
       var(--foot-ink);
   }
 
+
+  /* ============ BLOQUE DE CONTEXTO (versión de Jaume) ============
+     Reutiliza .stack y .stack-card, así hereda el apilado con scroll.
+     Orden dentro de la tarjeta: rótulo + titular arriba, imagen en medio,
+     texto debajo. Así el titular de las cinco cae siempre a la misma
+     altura y quien va bajando no tiene que buscarlo cada vez. */
+
+  .arg-card { text-align: left; gap: 0; }
+  .arg-card > * { max-width: 34rem; margin-left: auto; margin-right: auto; width: 100%; }
+
+  .arg-eyebrow {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin: 0 0 0.9rem; font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  /* el número es lo que resuelve la pega del apilado: dice cuántas van
+     y por cuál se va sin tener que contarlas */
+  .arg-num {
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+    color: var(--khaki-deep); letter-spacing: 0.02em;
+  }
+  .arg-num::after { content: " —"; color: var(--ink-faint); }
+
+  .arg-head {
+    margin: 0 0 1.3rem; font-size: clamp(1.6rem, 5.6vw, 2.1rem);
+    font-weight: 600; line-height: 1.18; letter-spacing: var(--tracking-lg);
+    text-wrap: balance;
+  }
+  .arg-head--xl { font-size: clamp(1.85rem, 6.6vw, 2.6rem); }
+  .arg-head-soft { color: var(--ink-faint); font-weight: 500; }
+
+  /* 4:3 y con tope: la tarjeta tiene alto fijo y si la foto crece se come
+     el texto de abajo */
+  .arg-fig {
+    margin: 0 auto 1.4rem; border-radius: 14px; overflow: hidden;
+    background: var(--tint);
+    aspect-ratio: 4 / 3; max-height: 17rem;
+  }
+  .arg-fig img { width: 100%; height: 100%; object-fit: cover; }
+
+  .arg-body p { margin: 0 0 0.85rem; font-size: 1.05rem; line-height: 1.55; color: var(--ink-soft); }
+  .arg-body p:last-child { margin-bottom: 0; }
+  .arg-remate { color: var(--ink) !important; font-weight: 600; }
+
+  .arg-mas { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+  .arg-mas li {
+    font-size: 1.15rem; font-weight: 500; color: var(--ink);
+    padding: 0.3rem 0 0.3rem 1.1rem; position: relative;
+  }
+  .arg-mas li::before {
+    content: ""; position: absolute; left: 0; top: 1.05em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
+  }
+
+  /* intro y cierre: sin foto, centradas y con más aire */
+  .arg-card--intro, .arg-card--cierre { text-align: center; }
+  .arg-kicker {
+    margin: 0 0 1.6rem; font-family: var(--font-mono);
+    font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--khaki-deep);
+  }
+  .arg-sub { margin: 0 0 0.5rem; font-size: 1.05rem; color: var(--ink-soft); }
+  .arg-pregunta {
+    margin: 0 0 2rem; font-size: clamp(1.35rem, 5vw, 1.7rem);
+    font-weight: 600; letter-spacing: var(--tracking-lg); text-wrap: balance;
+  }
+  .arg-pie { margin: 0; font-size: 1rem; color: var(--ink-faint); }
+  .arg-cierre-soft {
+    margin: 0; font-size: clamp(1.5rem, 5.4vw, 2rem);
+    font-weight: 500; color: var(--olive-soft); letter-spacing: var(--tracking-lg);
+    text-wrap: balance;
+  }
+
+  /* cinco tarjetas en vez de cuatro */
+  .arg-card:nth-child(5) { top: 9rem; z-index: 5; }
+
+  @media (min-width: 860px) {
+    .arg-fig { max-height: 20rem; }
+    .arg-body p { font-size: 1.1rem; }
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
@@ -1460,6 +1541,74 @@
           <li>No entra una fórmula si no podemos ponerla en dosis de estudio</li>
           <li>No hay cuentas atrás ni ofertas que caducan esta noche</li>
         </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       BLOQUE DE CONTEXTO — versión de Jaume, montada sobre las tarjetas
+       apiladas. Va SEPARADA del bloque #criterio a propósito: los dos
+       conviven hasta que decidáis con cuál os quedáis. No fusionar ni
+       borrar nada sin decirlo.
+       Faltan tres fotos: arg-alimentacion.jpg, arg-sol.jpg, arg-ritmo.jpg
+       ==================================================================== -->
+  <section class="band" id="contexto">
+    <div class="stack">
+
+      <article class="stack-card arg-card arg-card--intro">
+        <p class="arg-kicker">30 años observando. 10 años explicando.</p>
+        <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
+        <p class="arg-sub">Debería empezar con una pregunta:</p>
+        <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
+        <p class="arg-pie">Porque el contexto ha cambiado.</p>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
+        <h2 class="arg-head">Nuestra alimentación ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="arg-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
+          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
+          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
+        <h2 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h2>
+        <figure class="arg-fig">
+          <img src="arg-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
+          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
+        <h2 class="arg-head">Nuestro ritmo de vida ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="arg-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <ul class="arg-mas">
+            <li>Más trabajo.</li>
+            <li>Más estímulos.</li>
+            <li>Más pantallas.</li>
+            <li>Más cosas que hacer.</li>
+          </ul>
+          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card arg-card--cierre stack-card--alt">
+        <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
+        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
       </article>
 
     </div>
