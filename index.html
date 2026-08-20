@@ -1428,6 +1428,15 @@
   }
   .arg-card--cierre .arg-cierre-soft { color: rgba(238, 240, 244, 0.62); }
 
+  .arg-card--cierre {
+    background-image:
+      linear-gradient(rgba(35, 39, 46, 0.50), rgba(35, 39, 46, 0.50)),
+      url("arg-cierre.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
@@ -1692,6 +1701,76 @@
     </div>
   </section>
 </div>
+<div class="wrap">
+  <!-- ====================================================================
+       BLOQUE DE CONTEXTO — version en tarjetas apiladas. Convive con
+       #porque-ahora, que dice lo mismo en scroll editorial, hasta que se
+       decida con cual quedarse. No fusionar ni borrar sin decirlo.
+       ==================================================================== -->
+  <section class="band" id="contexto">
+    <div class="stack">
+
+      <article class="stack-card arg-card arg-card--intro">
+        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
+        <p class="arg-kicker">30 años observando. 10 años explicando.</p>
+        <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
+        <p class="arg-sub">Debería empezar con una pregunta:</p>
+        <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
+        <p class="arg-pie">Porque el contexto ha cambiado.</p>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
+        <h2 class="arg-head">Nuestra alimentación ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
+          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
+          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
+        <h2 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h2>
+        <figure class="arg-fig">
+          <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
+          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
+        <h2 class="arg-head">Nuestro ritmo de vida ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <ul class="arg-mas">
+            <li>Más trabajo.</li>
+            <li>Más estímulos.</li>
+            <li>Más pantallas.</li>
+            <li>Más cosas que hacer.</li>
+          </ul>
+          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card arg-card--cierre">
+        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
+        <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
+        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
+      </article>
+
+    </div>
+  </section>
+</div>
+
 
 <section class="ctx" id="porque-ahora">
   <div class="wrap">
@@ -1771,75 +1850,6 @@
 
 <div class="wrap">
 
-  <!-- ====================================================================
-       BLOQUE DE CONTEXTO — versión de Jaume, montada sobre las tarjetas
-       apiladas. Va SEPARADA del bloque #criterio a propósito: los dos
-       conviven hasta que decidáis con cuál os quedáis. No fusionar ni
-       borrar nada sin decirlo.
-       Faltan tres fotos: arg-alimentacion.jpg, arg-sol.jpg, arg-ritmo.jpg
-       ==================================================================== -->
-  <section class="band" id="contexto">
-    <div class="stack">
-
-      <article class="stack-card arg-card arg-card--intro">
-        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
-        <p class="arg-kicker">30 años observando. 10 años explicando.</p>
-        <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
-        <p class="arg-sub">Debería empezar con una pregunta:</p>
-        <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
-        <p class="arg-pie">Porque el contexto ha cambiado.</p>
-      </article>
-
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
-        <h2 class="arg-head">Nuestra alimentación ha cambiado.</h2>
-        <figure class="arg-fig">
-          <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
-          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
-          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
-        <h2 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h2>
-        <figure class="arg-fig">
-          <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
-          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
-        <h2 class="arg-head">Nuestro ritmo de vida ha cambiado.</h2>
-        <figure class="arg-fig">
-          <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <ul class="arg-mas">
-            <li>Más trabajo.</li>
-            <li>Más estímulos.</li>
-            <li>Más pantallas.</li>
-            <li>Más cosas que hacer.</li>
-          </ul>
-          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card arg-card--cierre">
-        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
-        <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
-        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
-      </article>
-
-    </div>
-  </section>
 
 
 
