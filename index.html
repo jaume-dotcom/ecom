@@ -1362,6 +1362,40 @@
   .ctx-statement.in .ctx-word { opacity: 1; transform: none; }
   .ctx-statement p.ctx-soft { color: var(--ink-faint); margin-top: 0.2rem; }
 
+
+  /* ============ BLOQUE DE VENTA (pack magnesio + libro) ============
+     Se diferencia de los bloques de contexto por superficie y estructura,
+     no por estridencia: panel crema embutido con esquinas redondeadas,
+     igual patron que la tarjeta del hero y el pie. El crema es el unico
+     acento calido de la marca, y el salto de frio a calido ya dice por si
+     solo que aqui se cambia de registro. */
+  #libro {
+    background: #f6efe3;
+    border-radius: 2rem;
+    margin: 0 -0.85rem;
+    padding: 3rem 1.5rem 3.2rem;
+  }
+  #libro .section-head { margin-bottom: 1.8rem; }
+  .libro-kicker {
+    margin: 0 0 0.7rem; font-family: var(--font-mono);
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--khaki-deep);
+  }
+  #libro .pack { background: #fff; }
+
+  /* era la letra mas pequena de toda la pagina, justo donde se pide el
+     dinero y a un publico de 55-75 */
+  #libro .pack-lead { font-size: 1.05rem; }
+  #libro .pack-list b { font-size: 1.05rem; }
+  #libro .pack-list span { font-size: 0.98rem; }
+  #libro .pack-note { font-size: 0.95rem; color: var(--ink-soft); }
+  #libro .pack-was, #libro .pack-save { font-size: 0.98rem; }
+  #libro .btn-solid { font-size: 1.05rem; padding: 0.95rem 1.6rem; }
+
+  @media (min-width: 860px) {
+    #libro { border-radius: 3rem; margin: 0 -0.4rem; padding: 4.5rem 3rem; }
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
@@ -1465,7 +1499,7 @@
     </div>
     <div class="hero-slide">
       <div class="hero-media-box">
-        <img src="hero-d3k2.jpg" width="572" height="1050" alt="Bote de vitamina D3 + K2 de ZEROX sobre la mesa de una terraza" decoding="async">
+        <img src="hero-d3k2.jpg" width="571" height="1048" alt="Bote de vitamina D3 + K2 de ZEROX sobre la mesa de una terraza" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
           <h2 class="hero-headline">Lo que el invierno<br>no te da</h2>
@@ -1779,8 +1813,9 @@
   <section class="band" id="libro">
     <div class="section-head reveal">
       <div>
-        <h2>Aprende antes de suplementarte</h2>
-        <p>Si quieres entender el porqué de cada recomendación &mdash; qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta &mdash; el libro de Sento es el mejor punto de partida.</p>
+        <p class="libro-kicker">Pack de lanzamiento</p>
+        <h2>Magnesio&nbsp;+&nbsp;libro</h2>
+        <p>La fórmula y el criterio para entenderla. El libro explica qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta.</p>
       </div>
     </div>
 
@@ -1789,9 +1824,6 @@
            loading="lazy" decoding="async"
            alt="Bote de Magnesio Bisglicinato de ZEROX junto al libro La gran guía de la suplementación, de Sento Segarra">
       <div class="pack-body">
-        <p class="kno">Pack de lanzamiento</p>
-        <h3>Magnesio + libro</h3>
-        <p class="pack-lead">Las dos cosas que hacen falta para empezar: la fórmula y el criterio para entenderla.</p>
         <ul class="pack-list">
           <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 300&ndash;400&nbsp;mg por dosis</span></li>
           <li><b>La gran guía de la suplementación</b><span>Sento Segarra &middot; tapa dura</span></li>
