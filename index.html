@@ -1437,6 +1437,39 @@
     background-repeat: no-repeat;
   }
 
+
+  /* ===== ALTURA DE LAS TARJETAS APILADAS =====
+     Median 752px y se anclaban entre 80 y 144, asi que terminaban hasta 84px
+     por debajo del borde de la pantalla. Con el contenido centrado, las
+     ultimas lineas caian fuera y no habia forma de verlas: en un elemento
+     sticky no se puede hacer scroll dentro.
+     Ahora la tarjeta nunca pasa del alto util, el contenido se alinea arriba
+     y la foto es la pieza elastica: si falta sitio encoge ella, nunca el
+     texto. */
+  #contexto .stack-card:nth-child(1) { top: 4rem; }
+  #contexto .stack-card:nth-child(2) { top: 4.5rem; }
+  #contexto .stack-card:nth-child(3) { top: 5rem; }
+  #contexto .stack-card:nth-child(4) { top: 5.5rem; }
+  #contexto .stack-card:nth-child(5) { top: 6rem; }
+
+  #contexto .stack-card {
+    min-height: 0;
+    height: calc(100svh - 7.5rem);
+    justify-content: flex-start;
+    padding-top: 1.9rem; padding-bottom: 1.9rem;
+  }
+  /* apertura y cierre no llevan foto: su contenido si va centrado */
+  #contexto .arg-card--intro, #contexto .arg-card--cierre { justify-content: center; }
+
+  .arg-fig {
+    flex: 1 1 auto; min-height: 5rem; max-height: 17rem;
+    aspect-ratio: auto; margin-bottom: 1.1rem;
+  }
+
+  @media (min-width: 860px) {
+    #contexto .stack-card { height: calc(100svh - 9rem); }
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
