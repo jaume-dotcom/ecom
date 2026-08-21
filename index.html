@@ -1476,10 +1476,9 @@
      tarjeta del hero, el bloque de venta y el pie. No se usa el amarillo de
      la referencia: es el color de marca de Be Levels y aqui cantaria. */
   #asesoria {
-    background: var(--tint);
-    border-radius: 2rem;
-    margin: 0 -0.85rem;
-    padding: 2.8rem 1.5rem 3rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 3rem 0.5rem 3.2rem;
     text-align: center;
   }
   .ayuda { max-width: 34rem; margin: 0 auto; }
@@ -1492,22 +1491,12 @@
   .ayuda-sub { margin: 0 0 1.8rem; font-size: 1.05rem; color: var(--ink-soft); }
 
   .ayuda-botones { display: grid; gap: 0.7rem; }
-  .ayuda-btn {
-    display: block; padding: 1rem 1.5rem; border-radius: 999px;
-    border: 1.5px solid var(--ink); background: #fff; color: var(--ink);
-    font-size: 1.05rem; font-weight: 500;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .ayuda-btn:hover { background: var(--paper); transform: translateY(-1px); }
-  /* el principal en crema con tinta: 11 de contraste, frente al 3,3 que daria
-     el laton con texto blanco */
-  .ayuda-btn--pri {
-    background: var(--khaki-pop); border-color: var(--khaki-pop); font-weight: 600;
-  }
-  .ayuda-btn--pri:hover { background: #f6efe3; border-color: #f6efe3; }
+  /* solo el tamano: el color lo ponen .btn y .btn-solid, que son los de
+     toda la pagina. El ambar es el color de la accion en esta marca */
+  .ayuda-btn { display: block; padding: 1rem 1.5rem; font-size: 1.05rem; }
 
   @media (min-width: 860px) {
-    #asesoria { border-radius: 3rem; margin: 0 -0.4rem; padding: 4rem 3rem; }
+    #asesoria { padding: 4.5rem 3rem; }
     .ayuda-titulo { font-size: 1.9rem; }
     .ayuda-botones { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
   }
@@ -1786,8 +1775,8 @@
       <p class="ayuda-titulo"><span class="ayuda-punto" aria-hidden="true">&#9679;</span> Te asesoramos</p>
       <p class="ayuda-sub">¿No sabes por cuál empezar? No hace falta que lo adivines.</p>
       <div class="ayuda-botones">
-        <a class="ayuda-btn ayuda-btn--pri" href="#contexto">Descubre qué te conviene</a>
-        <a class="ayuda-btn" href="#footer-signup">Pregúntanos lo que quieras</a>
+        <a class="btn btn-solid ayuda-btn" href="#contexto">Descubre qué te conviene</a>
+        <a class="btn ayuda-btn" href="#footer-signup">Pregúntanos lo que quieras</a>
       </div>
     </div>
   </section>
