@@ -188,6 +188,55 @@
   }
   footer a { text-decoration: underline; text-underline-offset: 3px; }
 
+  /* ---------- modos de compra ---------- */
+  .modos { border: 0; margin: 0 0 1.3rem; padding: 0; display: grid; gap: 0.7rem; }
+  .modos-legend {
+    padding: 0; margin: 0 0 0.9rem; font-size: 1.05rem; font-weight: 600;
+    letter-spacing: var(--tracking-lg);
+  }
+  .modo {
+    display: flex; gap: 0.85rem; align-items: flex-start;
+    padding: 1.1rem 1.2rem; border: 1.5px solid var(--line);
+    border-radius: 16px; background: #fff; cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .modo:has(input:checked) { border-color: var(--ink); background: #fff; }
+  .modo input { position: absolute; opacity: 0; width: 0; height: 0; }
+  /* circulo dibujado a mano: el radio nativo no se puede agrandar y con 60+
+     anos una diana de 13px es un ejercicio de punteria */
+  .modo-marca {
+    flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px;
+    border: 2px solid var(--ink-faint); border-radius: 50%;
+    display: grid; place-items: center; transition: border-color 0.2s ease;
+  }
+  .modo:has(input:checked) .modo-marca { border-color: var(--ink); }
+  .modo:has(input:checked) .modo-marca::after {
+    content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--ink);
+  }
+  .modo input:focus-visible + .modo-marca { outline: 2px solid var(--khaki-deep); outline-offset: 3px; }
+
+  .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
+  .modo-fila { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; }
+  .modo-nombre { font-size: 1.05rem; font-weight: 600; }
+  .modo-precio b { font-size: 1.2rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .modo-precio small { font-size: 0.9rem; color: var(--ink-soft); }
+  .modo-desc { font-size: 0.98rem; color: var(--ink-soft); }
+  .modo-ahorro {
+    justify-self: start; margin-top: 0.15rem;
+    font-size: 0.9rem; font-weight: 600; color: var(--olive);
+    background: var(--khaki-pop); border-radius: 999px; padding: 0.2rem 0.7rem;
+  }
+  .modo-plus { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
+  .modo-plus li {
+    position: relative; padding-left: 1.1rem;
+    font-size: 0.95rem; color: var(--ink-soft); line-height: 1.45;
+  }
+  .modo-plus li::before {
+    content: ""; position: absolute; left: 0; top: 0.62em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
+  }
+  @media (prefers-reduced-motion: reduce) { .modo { transition: none; } }
+
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
     .ficha-foto { position: sticky; top: 1.5rem; }
@@ -243,11 +292,43 @@
       <h1>Magnesio Bisglicinato</h1>
       <p class="ficha-lede">La forma que mejor se tolera. Sin óxido de magnesio, sin dosis a medias y con la etiqueta entera a la vista.</p>
 
-      <div class="ficha-precio">
-        <span class="precio">[precio] €</span>
-        <span class="precio-nota">90 cápsulas · 30 días</span>
-      </div>
+      <p class="ficha-formato">90 cápsulas &middot; 30 días de tratamiento</p>
       <p class="ficha-envio">Envío gratuito desde 39 €. Devolución en 30 días.</p>
+
+      <fieldset class="modos">
+        <legend class="modos-legend">Cómo lo quieres</legend>
+
+        <label class="modo modo--sub">
+          <input type="radio" name="modo-compra" value="suscripcion">
+          <span class="modo-marca" aria-hidden="true"></span>
+          <span class="modo-cuerpo">
+            <span class="modo-fila">
+              <span class="modo-nombre">Suscripción mensual</span>
+              <span class="modo-precio"><b>[precio sub]&nbsp;&euro;</b><small>/mes</small></span>
+            </span>
+            <span class="modo-desc">Un bote cada 30 días, sin tener que acordarte.</span>
+            <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
+            <ul class="modo-plus">
+              <li>Cancelas cuando quieras, desde tu cuenta y en un clic</li>
+              <li>Sin permanencia ni penalización</li>
+              <li>Te avisamos por email antes de cada cobro</li>
+              <li>Envío gratuito siempre</li>
+            </ul>
+          </span>
+        </label>
+
+        <label class="modo">
+          <input type="radio" name="modo-compra" value="unica" checked>
+          <span class="modo-marca" aria-hidden="true"></span>
+          <span class="modo-cuerpo">
+            <span class="modo-fila">
+              <span class="modo-nombre">Compra única</span>
+              <span class="modo-precio"><b>[precio]&nbsp;&euro;</b></span>
+            </span>
+            <span class="modo-desc">Un bote, y ya está. Sin compromiso de nada.</span>
+          </span>
+        </label>
+      </fieldset>
 
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
 
@@ -375,6 +456,21 @@
       ok.classList.add('on');
     });
   }
+
+  // el boton dice siempre lo que se ha elegido: con una suscripcion, que el
+  // usuario sepa exactamente que esta contratando antes de pulsar no es un
+  // detalle de UX, lo exige la norma de contratos de duracion indeterminada
+  var modos = document.querySelectorAll('input[name="modo-compra"]');
+  var comprarBtn = document.getElementById('btn-comprar');
+  function pintarModo() {
+    var sel = document.querySelector('input[name="modo-compra"]:checked');
+    if (!sel || !comprarBtn) { return; }
+    comprarBtn.textContent = sel.value === 'suscripcion'
+      ? 'Suscribirme · [precio sub] € al mes'
+      : 'Añadir a la cesta · [precio] €';
+  }
+  modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
+  pintarModo();
 
   var comprar = document.getElementById('btn-comprar');
   if (comprar) {
