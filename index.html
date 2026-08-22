@@ -1429,7 +1429,7 @@
 
   #contexto .stack-card {
     min-height: 0;
-    height: calc(100svh - 7.5rem);
+    height: calc(100svh - 9.5rem);
     justify-content: flex-start;
     padding-top: 1.9rem; padding-bottom: 1.9rem;
   }
@@ -1438,6 +1438,26 @@
      arriba. Con relleno extra abajo, el centro optico sube */
   #contexto .arg-card--intro, #contexto .arg-card--cierre { justify-content: center; }
   #contexto .arg-card--intro { padding-bottom: 6rem; }
+
+  /* cuantas quedan. Misma gramatica de puntos que el carrusel del hero, que
+     ya se ha visto mas arriba, asi no hay nada nuevo que aprender */
+  .stack-progreso {
+    position: sticky; bottom: 1.15rem; z-index: 10;
+    width: max-content; margin: 0 auto; padding: 0.5rem 0.8rem;
+    display: flex; gap: 0.42rem; list-style: none;
+    border-radius: 999px; border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.88);
+  }
+  @supports (backdrop-filter: blur(10px)) {
+    .stack-progreso { background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(10px) saturate(1.4); }
+  }
+  .stack-progreso li {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(35, 39, 46, 0.2);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .stack-progreso li.act { background: var(--khaki-deep); transform: scale(1.4); }
+  @media (prefers-reduced-motion: reduce) { .stack-progreso li { transition: none; } }
 
   .arg-fig {
     flex: 1 1 auto; min-height: 5rem; max-height: 17rem;
@@ -2098,6 +2118,8 @@
         </span>
       </article>
 
+      <ul class="stack-progreso" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ul>
+
     </div>
   </section>
 </div>
@@ -2113,7 +2135,7 @@
     <div class="section-head reveal">
       <div>
         <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Pack de lanzamiento</p>
-        <h2>Magnesio&nbsp;+&nbsp;libro</h2>
+        <h2>Magnesio <span class="h2-soft">+ libro</span></h2>
         <p>La fórmula y el criterio para entenderla. El libro explica qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta.</p>
       </div>
     </div>
@@ -2605,8 +2627,11 @@
   var pila = Array.prototype.slice.call(document.querySelectorAll('#contexto .stack-card'));
   if (pila.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var pilaPide = false;
+    var puntos = document.querySelectorAll('#contexto .stack-progreso li');
+    var marcado = -1;
     var pintarPila = function () {
       pilaPide = false;
+      var actual = -1;
       for (var i = 0; i < pila.length - 1; i++) {
         var r = pila[i].getBoundingClientRect();
         var rs = pila[i + 1].getBoundingClientRect();
@@ -2614,7 +2639,16 @@
         // cuando sus bordes superiores coinciden, la tapa entera
         var restante = (rs.top - r.top) / r.height;
         var p = 1 - Math.max(0, Math.min(1, restante));
-        pila[i].style.setProperty('--tapada', p.toFixed(3));
+        var q = Math.max(0, (p - 0.2) / 0.8);
+        pila[i].style.setProperty('--tapada', q.toFixed(3));
+        if (p < 0.98 && actual < 0) { actual = i; }
+      }
+      if (actual < 0) { actual = pila.length - 1; }
+      if (puntos.length && actual !== marcado) {
+        marcado = actual;
+        for (var j = 0; j < puntos.length; j++) {
+          puntos[j].classList.toggle('act', j <= actual);
+        }
       }
     };
     window.addEventListener('scroll', function () {
