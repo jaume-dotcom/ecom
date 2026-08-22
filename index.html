@@ -1417,16 +1417,30 @@
     margin: 0 auto 2.2rem; color: var(--khaki);
   }
 
-  .arg-card--intro .arg-kicker { color: rgba(236, 220, 190, 0.8); font-size: 0.88rem; letter-spacing: 0.12em; }
-  .arg-card--intro .arg-sub { color: rgba(238, 240, 244, 0.66); }
+  .arg-card--intro .arg-kicker { color: rgba(236, 220, 190, 0.96); font-size: 0.88rem; letter-spacing: 0.12em; }
+  .arg-card--intro .arg-sub { color: rgba(238, 240, 244, 0.95); }
   .arg-card--intro .arg-pregunta { color: var(--khaki-pop); }
   .arg-card--intro .arg-pie {
-    color: rgba(238, 240, 244, 0.62); font-size: 0.95rem;
+    color: rgba(238, 240, 244, 0.95); font-size: 0.95rem;
     margin-top: 2.2rem; padding-top: 1.4rem;
     border-top: 1px solid rgba(238, 240, 244, 0.14);
     display: inline-block;
   }
-  .arg-card--cierre .arg-cierre-soft { color: rgba(238, 240, 244, 0.62); }
+    /* sobre la foto el fondo sube a rgb(77,70,64) en el peor punto; al 62% de
+     opacidad esta linea se quedaba en 4,26 de contraste */
+  .arg-card--cierre .arg-cierre-soft { color: rgba(238, 240, 244, 0.93); }
+
+  /* la estanteria desenfocada: lo que la frase descarta, borroso detras.
+     Hace pareja con la del cierre, que es una persona. Velo al 50% de salida,
+     se ajusta despues de medir el contraste sobre las zonas mas claras. */
+  .arg-card--intro {
+    background-image:
+      linear-gradient(rgba(35, 39, 46, 0.58), rgba(35, 39, 46, 0.58)),
+      url("arg-intro.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
   .arg-card--cierre {
     background-image:
@@ -1501,6 +1515,41 @@
     .ayuda-botones { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
   }
   @media (prefers-reduced-motion: reduce) { .ayuda-btn { transition: none; } }
+
+
+  /* ===== BLOQUE DE ALTA: caja y boton ===== */
+  /* el boton es display:flex, y ahi text-align:center no hace nada — el texto
+     se coloca como item de flex al inicio. Por eso salia pegado a la izquierda */
+  .hero-signup button { justify-content: center; align-items: center; }
+
+  @media (max-width: 859px) {
+    /* la caja iguala la altura del boton: 12px de padding contra 15,2 dejaban
+       el campo mas bajo y la pareja descuadrada */
+    .hero-signup-field {
+      /* el aro luminoso del boton anade 3px arriba y abajo, asi que igualar
+         solo el padding dejaba la caja 3px mas baja */
+      min-height: 3.5rem;
+      padding: 0.95rem 1.2rem;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hero-signup-field:focus-within {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px rgba(35, 39, 46, 0.08);
+    }
+    .hero-signup-field input { font-size: 1rem; }
+    .hero-signup-field input::placeholder { color: var(--ink-faint); }
+    .hero-signup-icon { color: var(--ink-faint); }
+
+    .shine > button { padding-top: 0.95rem; padding-bottom: 0.95rem; font-size: 1.05rem; }
+
+    /* el bloque entero, mas centrado y con la medida corta */
+    #alta { max-width: 26rem; margin-left: auto; margin-right: auto; }
+    .hero-signup { gap: 0.7rem; }
+    .hero-alta-titulo { margin-bottom: 0.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-signup-field { transition: none; } }
 
 </style>
 <noscript><style>
