@@ -99,6 +99,38 @@
   }
   .btn-comprar:hover { background: #000; transform: translateY(-1px); }
 
+  /* ---------- galeria de producto ---------- */
+  .galeria-viewport {
+    overflow: hidden; border-radius: 16px; background: var(--tint);
+    touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  }
+  .galeria-track { display: flex; transition: transform 0.45s cubic-bezier(.16,1,.3,1); }
+  .galeria-slide { flex: 0 0 100%; aspect-ratio: 4 / 5; }
+  .galeria-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+  .galeria-minis {
+    display: flex; gap: 0.55rem; margin-top: 0.6rem;
+    overflow-x: auto; scroll-behavior: smooth;
+    scrollbar-width: none; padding-bottom: 2px;
+  }
+  .galeria-minis::-webkit-scrollbar { display: none; }
+  /* 64px: por debajo de eso no se distingue que hay en cada una, y con el
+     dedo se falla */
+  .mini {
+    flex: 0 0 auto; width: 64px; height: 64px; padding: 0;
+    border: 2px solid transparent; border-radius: 10px; overflow: hidden;
+    background: var(--tint); cursor: pointer;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+    opacity: 0.55;
+  }
+  .mini img { width: 100%; height: 100%; object-fit: cover; }
+  .mini.is-on { border-color: var(--ink); opacity: 1; }
+  .mini:focus-visible { outline: 2px solid var(--khaki-deep); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    .galeria-track { transition: none; }
+    .galeria-minis { scroll-behavior: auto; }
+  }
+
   /* ---------- datos clave ---------- */
   .datos {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
@@ -152,6 +184,15 @@
     display: grid; place-items: center;
     font-size: 0.9rem; font-weight: 600; font-family: var(--font-mono);
   }
+
+  /* el acordeon de informacion reutiliza el componente del FAQ, pero sin la
+     sangria de 4,4rem: aqui van tablas y listas que necesitan todo el ancho */
+  /* el padding no colapsa con la fila a 0fr: cerrado dejaba 25,6px a la
+     vista. El aire va en el ultimo hijo, que si desaparece al plegarse */
+  .info .faq-a > div { padding: 0; }
+  .info .faq-a > div > *:last-child { margin-bottom: 1.6rem; }
+  .info .faq-a p { padding: 0; }
+  .info .faq-a > div > *:first-child { margin-top: 0; }
 
   /* ---------- preguntas: mismo formato que la landing ---------- */
   .faq { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; display: flex; flex-direction: column; }
@@ -290,7 +331,7 @@
 
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-    .ficha-foto { position: sticky; top: 1.5rem; }
+    .galeria { position: sticky; top: 1.5rem; }
     .wrap { max-width: 60rem; }
     h1 { font-size: 2.4rem; }
     .ficha-eyebrow { margin-top: 0; }
@@ -334,8 +375,19 @@
 <main class="wrap">
 
   <div class="ficha">
-    <div class="ficha-foto">
-      <img src="ficha-magnesio.jpg" width="761" height="1024" alt="Bote de Magnesio Bisglicinato de ZEROX" fetchpriority="high" decoding="async">
+    <div class="galeria">
+      <div class="galeria-viewport" id="gal-viewport">
+        <div class="galeria-track" id="gal-track">
+          <div class="galeria-slide"><img src="ficha-magnesio.jpg" width="761" height="1024" alt="Bote de Magnesio Bisglicinato de ZEROX sobre piedra" fetchpriority="high" decoding="async"></div>
+          <div class="galeria-slide"><img src="hero-magnesio.jpg" width="572" height="1050" alt="El bote en una mesilla de noche, al final del día" loading="lazy" decoding="async"></div>
+          <div class="galeria-slide"><img src="pack-magnesio-libro.png" width="1402" height="1122" alt="El bote junto al libro de Sento Segarra, en el pack de lanzamiento" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+      <div class="galeria-minis" id="gal-minis" role="tablist" aria-label="Imágenes del producto">
+        <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+        <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+        <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.png" alt="" loading="lazy" decoding="async"></button>
+      </div>
     </div>
 
     <div>
@@ -392,46 +444,71 @@
     </div>
   </div>
 
-  <section>
-    <h2>Para qué sirve</h2>
-    <ul class="usos">
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a disminuir el cansancio y la fatiga</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal de los músculos</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal del sistema nervioso</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a la función psicológica normal</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al mantenimiento de los huesos y los dientes en condiciones normales</span></li>
+  <section class="info">
+    <ul class="faq">
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="info-t1" aria-expanded="true" aria-controls="info-p1">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">Para qué sirve</span></span>
+        </button>
+        <div class="faq-a open" id="info-p1" role="region" aria-labelledby="info-t1">
+          <div>
+      <ul class="usos">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a disminuir el cansancio y la fatiga</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal de los músculos</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al funcionamiento normal del sistema nervioso</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye a la función psicológica normal</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Contribuye al mantenimiento de los huesos y los dientes en condiciones normales</span></li>
+      </ul>
+      <p class="usos-nota">Son las declaraciones autorizadas por la Unión Europea para el magnesio. No decimos nada que no esté en esa lista, y por eso no vas a encontrar aquí promesas más grandes.</p>
+          </div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="info-t2" aria-expanded="false" aria-controls="info-p2">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">Qué lleva</span></span>
+        </button>
+        <div class="faq-a" id="info-p2" role="region" aria-labelledby="info-t2">
+          <div>
+      <table>
+        <thead>
+          <tr><th>Por dosis diaria (3 cápsulas)</th><th>Cantidad</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Bisglicinato de magnesio</td><td>2.250 mg</td></tr>
+          <tr><td>Magnesio elemental</td><td>360 mg</td></tr>
+          <tr><td>% de los valores de referencia</td><td>96 %</td></tr>
+        </tbody>
+      </table>
+      <p class="tabla-nota">Los valores de referencia de nutrientes para el magnesio son de 375 mg al día.</p>
+      <div class="ingredientes">
+        <strong>Ingredientes:</strong> bisglicinato de magnesio. Cápsula vegetal (hidroxipropilmetilcelulosa).
+        <br><br>
+        Sin estearato de magnesio, sin dióxido de titanio, sin colorantes ni aromas.
+      </div>
+          </div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="info-t3" aria-expanded="false" aria-controls="info-p3">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">Cómo tomarlo</span></span>
+        </button>
+        <div class="faq-a" id="info-p3" role="region" aria-labelledby="info-t3">
+          <div>
+      <ol class="pasos">
+        <li><span>3 cápsulas al día, juntas o repartidas.</span></li>
+        <li><span>Con un vaso de agua, preferiblemente con una comida.</span></li>
+        <li><span>Muchas personas lo prefieren por la noche. No es obligatorio: lo importante es tomarlo todos los días.</span></li>
+      </ol>
+          </div>
+        </div>
+      </li>
     </ul>
-    <p class="usos-nota">Son las declaraciones autorizadas por la Unión Europea para el magnesio. No decimos nada que no esté en esa lista, y por eso no vas a encontrar aquí promesas más grandes.</p>
   </section>
 
-  <section>
-    <h2>Qué lleva</h2>
-    <table>
-      <thead>
-        <tr><th>Por dosis diaria (3 cápsulas)</th><th>Cantidad</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Bisglicinato de magnesio</td><td>2.250 mg</td></tr>
-        <tr><td>Magnesio elemental</td><td>360 mg</td></tr>
-        <tr><td>% de los valores de referencia</td><td>96 %</td></tr>
-      </tbody>
-    </table>
-    <p class="tabla-nota">Los valores de referencia de nutrientes para el magnesio son de 375 mg al día.</p>
-    <div class="ingredientes">
-      <strong>Ingredientes:</strong> bisglicinato de magnesio. Cápsula vegetal (hidroxipropilmetilcelulosa).
-      <br><br>
-      Sin estearato de magnesio, sin dióxido de titanio, sin colorantes ni aromas.
-    </div>
-  </section>
 
-  <section>
-    <h2>Cómo tomarlo</h2>
-    <ol class="pasos">
-      <li><span>3 cápsulas al día, juntas o repartidas.</span></li>
-      <li><span>Con un vaso de agua, preferiblemente con una comida.</span></li>
-      <li><span>Muchas personas lo prefieren por la noche. No es obligatorio: lo importante es tomarlo todos los días.</span></li>
-    </ol>
-  </section>
 
   <section>
     <h2>Preguntas</h2>
@@ -508,6 +585,49 @@
 
 <script>
 (function () {
+  // galeria: miniaturas + deslizar. Las miniaturas se desplazan solas para que
+  // la activa quede siempre a la vista, tambien cuando se avanza deslizando
+  var galTrack = document.getElementById('gal-track');
+  if (galTrack) {
+    var galSlides = Array.prototype.slice.call(galTrack.children);
+    var galMinis = Array.prototype.slice.call(document.querySelectorAll('.mini'));
+    var galVp = document.getElementById('gal-viewport');
+    var galIndex = 0;
+
+    function galIr(i) {
+      galIndex = Math.max(0, Math.min(i, galSlides.length - 1));
+      galTrack.style.transform = 'translateX(-' + (galIndex * 100) + '%)';
+      galMinis.forEach(function (m, n) {
+        var on = n === galIndex;
+        m.classList.toggle('is-on', on);
+        if (on) { m.setAttribute('aria-current', 'true'); } else { m.removeAttribute('aria-current'); }
+        if (on && m.scrollIntoView) { m.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+      });
+    }
+    galMinis.forEach(function (m) {
+      m.addEventListener('click', function () { galIr(parseInt(m.dataset.i, 10)); });
+    });
+
+    if (window.PointerEvent) {
+      var galX = null, galDx = 0;
+      galVp.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) { return; }
+        galX = e.clientX; galDx = 0;
+      });
+      galVp.addEventListener('pointermove', function (e) {
+        if (galX === null) { return; }
+        galDx = e.clientX - galX;
+      });
+      var galFin = function () {
+        if (galX === null) { return; }
+        if (Math.abs(galDx) > 45) { galIr(galIndex + (galDx < 0 ? 1 : -1)); }
+        galX = null; galDx = 0;
+      };
+      galVp.addEventListener('pointerup', galFin);
+      galVp.addEventListener('pointercancel', galFin);
+    }
+  }
+
   // acordeón de preguntas
   document.querySelectorAll('.faq-q').forEach(function (b) {
     b.addEventListener('click', function () {
