@@ -1235,6 +1235,19 @@
   .arg-body p:last-child { margin-bottom: 0; }
   .arg-remate { color: var(--ink) !important; font-weight: 600; }
 
+  /* rotulo y titular centrados; el texto de lectura, a la izquierda.
+     Con parrafos de tres lineas el borde izquierdo recto le da al ojo un
+     punto fijo al que volver en cada salto — centrado hay que buscarlo. */
+  .arg-eyebrow { justify-content: center; }
+  .arg-head { text-align: center; }
+  .arg-body, .arg-body p, .arg-mas { text-align: left; }
+  /* el remate cierra el bloque, y centrado lo separa de los parrafos */
+  /* .arg-body p (0,2,0) le ganaba a .arg-remate (0,1,0) */
+  .arg-body p.arg-remate {
+    text-align: center; margin-top: 1.1rem; padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
   .arg-mas { list-style: none; margin: 0 0 0.9rem; padding: 0; }
   .arg-mas li {
     font-size: 1.15rem; font-weight: 500; color: var(--ink);
