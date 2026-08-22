@@ -145,6 +145,135 @@
   .dato dt { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.2rem; }
   .dato dd { margin: 0; font-size: 1.1rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
 
+  /* ---------- sellos: los atributos, fuera del acordeon ----------
+     La informacion ya estaba, pero enterrada dentro de una FAQ desplegable.
+     Aqui se escanea sin leer, que es como mira el perfil al que vendemos. */
+  .sellos {
+    list-style: none; margin: 1.6rem 0 0; padding: 1rem 0 0;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
+    gap: 0.9rem 0.4rem;
+  }
+  .sellos li {
+    display: grid; justify-items: center; gap: 0.35rem; text-align: center;
+    font-size: 0.72rem; line-height: 1.25; color: var(--ink-soft);
+  }
+  .sellos svg { width: 22px; height: 22px; color: var(--khaki-deep); }
+
+  /* ---------- comparativa de formas ----------
+     Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
+     ajena es un problema que no hace falta buscarse. */
+  .formas { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+  .forma {
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.1rem 1.15rem; background: #fff;
+  }
+  .forma--nuestra { border-color: var(--khaki-deep); border-width: 2px; }
+  .forma-alto {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 0.6rem; margin: 0 0 0.5rem;
+  }
+  .forma-nombre {
+    margin: 0; font-size: 1.12rem; font-weight: 700;
+    letter-spacing: var(--tracking-lg);
+  }
+  .forma-sello {
+    flex: 0 0 auto; font-size: 0.68rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #fff; background: var(--khaki-deep);
+    border-radius: 999px; padding: 0.22rem 0.55rem;
+  }
+  .forma p { margin: 0; font-size: 0.97rem; line-height: 1.5; color: var(--ink-soft); }
+  .forma-dato {
+    margin: 0.6rem 0 0; padding-top: 0.6rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem; color: var(--ink); font-weight: 600;
+  }
+  .formas-nota {
+    margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--ink-soft);
+  }
+
+  /* ---------- para quien es y para quien no ----------
+     La segunda mitad no la tiene ninguna competidora. Decir a quien NO le
+     hace falta es lo que hace creible el resto de la pagina. */
+  .quien-cols { display: grid; gap: 1.4rem; }
+  .quien-col h3 {
+    margin: 0 0 0.8rem; font-size: 1.02rem; font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .quien-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .quien-col li {
+    position: relative; padding-left: 1.55rem;
+    font-size: 0.98rem; line-height: 1.5; color: var(--ink-soft);
+  }
+  /* tick y cruz dibujados en CSS, igual que en la portada */
+  .quien-si li::before {
+    content: ""; position: absolute; left: 0; top: 0.42em;
+    width: 10px; height: 5px;
+    border-left: 2px solid var(--khaki-deep);
+    border-bottom: 2px solid var(--khaki-deep);
+    transform: rotate(-45deg);
+  }
+  .quien-no li::before, .quien-no li::after {
+    content: ""; position: absolute; left: 0; top: 0.68em;
+    width: 10px; height: 1.6px; border-radius: 1px;
+    background: var(--ink-soft);
+  }
+  .quien-no li::before { transform: rotate(45deg); }
+  .quien-no li::after { transform: rotate(-45deg); }
+
+  /* ---------- calidad ---------- */
+  .calidad { list-style: none; margin: 0 0 1.2rem; padding: 0; display: grid; gap: 0.9rem; }
+  .calidad li {
+    position: relative; padding-left: 1.55rem;
+    font-size: 0.98rem; line-height: 1.5; color: var(--ink-soft);
+  }
+  .calidad li::before {
+    content: ""; position: absolute; left: 0; top: 0.42em;
+    width: 10px; height: 5px;
+    border-left: 2px solid var(--khaki-deep);
+    border-bottom: 2px solid var(--khaki-deep);
+    transform: rotate(-45deg);
+  }
+  .calidad-espera {
+    margin: 0; padding: 0.9rem 1rem; border-radius: 12px;
+    background: var(--tint); font-size: 0.92rem; line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- referencias ---------- */
+  .refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .refs li { font-size: 0.95rem; line-height: 1.5; color: var(--ink-soft); }
+  .refs b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.15rem; }
+  .refs a { color: var(--khaki-deep); }
+
+  /* ---------- las otras formulas ---------- */
+  .otras { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+  .otra {
+    display: flex; align-items: center; gap: 0.9rem;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: #fff; padding: 0.7rem; color: inherit; text-decoration: none;
+  }
+  .otra img {
+    flex: 0 0 auto; width: 4.6rem; height: 4.6rem;
+    object-fit: cover; border-radius: 10px; display: block;
+  }
+  .otra-cuerpo { min-width: 0; flex: 1 1 auto; }
+  .otra-nombre {
+    margin: 0; font-size: 0.97rem; font-weight: 600;
+    letter-spacing: var(--tracking-lg);
+  }
+  .otra-desc {
+    margin: 0.2rem 0 0; font-size: 0.85rem; line-height: 1.35;
+    color: var(--ink-soft);
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .otra-precio {
+    flex: 0 0 auto; font-size: 0.97rem; font-weight: 700;
+    color: var(--khaki-deep);
+  }
+
   /* ---------- secciones ---------- */
   section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
   h2 {
@@ -450,8 +579,82 @@
         <div class="dato"><dt>Forma</dt><dd>Bisglicinato</dd></div>
         <div class="dato"><dt>Dosis diaria</dt><dd>3 cápsulas</dd></div>
       </dl>
+
+      <ul class="sellos">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-8 6-14 16-15 0 10-6 15-13 15H4z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>Cápsula vegetal</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 12c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 12c3 0 5-2 5-5-3 0-5 2-5 5z"/><path d="M4 4l16 16"/></svg>Sin gluten</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s5 6 5 9.5A5 5 0 0 1 7 12.5C7 9 12 3 12 3z"/><path d="M4 4l16 16"/></svg>Sin lactosa</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Hecho en España</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.5L5.5 18A2 2 0 0 0 7.3 21h9.4a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M8 15h8"/></svg>Análisis por lote</li>
+      </ul>
     </div>
   </div>
+
+  <!-- ================================================================
+       COMPARATIVA DE FORMAS. Va alto a proposito: es el argumento de la
+       marca, y hasta ahora vivia enterrado en un parrafo de la FAQ.
+       Se comparan formas quimicas, NUNCA marcas con nombre.
+       ================================================================ -->
+  <section id="formas">
+    <h2>No todo el magnesio es lo mismo</h2>
+    <p>En la etiqueta pone «magnesio», pero la sal que hay dentro cambia lo que notas y lo que cuesta fabricarlo.</p>
+
+    <ul class="formas">
+      <li class="forma forma--nuestra">
+        <div class="forma-alto">
+          <p class="forma-nombre">Bisglicinato</p>
+          <span class="forma-sello">El nuestro</span>
+        </div>
+        <p>El magnesio va unido a glicina, un aminoácido. Es de las formas que menos molestan al estómago, que es la razón por la que la elegimos.</p>
+        <p class="forma-dato">360&nbsp;mg de magnesio elemental por dosis</p>
+      </li>
+
+      <li class="forma">
+        <div class="forma-alto">
+          <p class="forma-nombre">Citrato</p>
+        </div>
+        <p>Unido a ácido cítrico. Una opción razonable y bastante común. A dosis altas puede tener efecto laxante.</p>
+      </li>
+
+      <li class="forma">
+        <div class="forma-alto">
+          <p class="forma-nombre">Óxido</p>
+          <span class="forma-sello" style="background: var(--ink-faint)">El más común</span>
+        </div>
+        <p>La sal más barata de producir, y por eso la que más aparece en los botes de supermercado. De hecho se usa como laxante por vía oral.</p>
+      </li>
+    </ul>
+    <p class="formas-nota">Comparamos formas químicas, no marcas.</p>
+  </section>
+
+  <!-- ================================================================
+       PARA QUIEN ES Y PARA QUIEN NO. La segunda mitad no la tiene
+       ninguna competidora, y es la que hace creible la primera.
+       ================================================================ -->
+  <section id="para-quien">
+    <h2>¿Te hace falta?</h2>
+
+    <div class="quien-cols">
+      <div class="quien-col">
+        <h3>Puede encajarte si</h3>
+        <ul class="quien-si">
+          <li>Tu alimentación no llega con facilidad a los 375&nbsp;mg diarios de referencia.</li>
+          <li>Has probado óxido de magnesio y te ha sentado mal.</li>
+          <li>Quieres saber exactamente cuánto tomas y en qué forma.</li>
+        </ul>
+      </div>
+
+      <div class="quien-col">
+        <h3>Probablemente no</h3>
+        <ul class="quien-no">
+          <li>Si comes variado y no tienes ningún motivo para pensar que te falta.</li>
+          <li>Si ya tomas un multivitamínico: mira cuánto magnesio lleva antes de sumar otro.</li>
+          <li>Si buscas un efecto concreto y rápido. Esto no funciona así, y quien te diga lo contrario te está vendiendo algo.</li>
+          <li>Si estás con medicación, sin consultarlo antes.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <section class="info">
     <ul class="faq">
@@ -519,6 +722,49 @@
 
 
 
+  <!-- ================================================================
+       CALIDAD. La portada promete "analisis de un laboratorio externo,
+       lote a lote" y en la ficha no habia ni rastro. Aqui es donde toca
+       poder comprobarlo.
+       OJO: no hay ningun analisis todavia porque no hay ningun lote. El
+       aviso del final dice justo eso, y se sustituye por el enlace real
+       en cuanto exista el primero. No poner un PDF de ejemplo.
+       ================================================================ -->
+  <section id="calidad">
+    <h2>Cómo se comprueba</h2>
+
+    <ul class="calidad">
+      <li>Cada lote se analiza en un laboratorio externo, independiente de quien fabrica.</li>
+      <li>Publicamos el análisis con su número de lote, para que puedas contrastarlo con el número que tienes impreso en tu bote.</li>
+      <li>Se fabrica en España, en instalaciones con certificación GMP.</li>
+    </ul>
+
+    <p class="calidad-espera">Todavía no hay ningún análisis publicado, porque todavía no hay ningún lote fabricado. El primero se publicará aquí, entero, el día que exista.</p>
+  </section>
+
+  <!-- ================================================================
+       REFERENCIAS. Las dos que hay son normativas y verificables.
+       PENDIENTE: las referencias clinicas del libro de Sento van aqui.
+       No inventar citas: en una web de suplementos una referencia
+       fabricada es exactamente el problema que la marca dice resolver.
+       ================================================================ -->
+  <section id="referencias">
+    <h2>De dónde sale esto</h2>
+
+    <ul class="refs">
+      <li>
+        <b>Las cinco frases de «para qué sirve»</b>
+        No son nuestras. Son las únicas autorizadas para el magnesio en la Unión Europea, y están copiadas literalmente del
+        <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32012R0432" target="_blank" rel="noopener">Reglamento (UE) 432/2012</a>.
+      </li>
+      <li>
+        <b>Los 375 mg de referencia</b>
+        Es el valor de referencia de nutrientes para el magnesio, fijado en el anexo XIII del
+        <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32011R1169" target="_blank" rel="noopener">Reglamento (UE) 1169/2011</a>.
+      </li>
+    </ul>
+  </section>
+
   <section>
     <h2>Preguntas</h2>
     <ul class="faq">
@@ -569,6 +815,63 @@
         <div class="faq-a" id="faq-p4" role="region" aria-labelledby="faq-t4">
           <div><p>No. La cápsula es vegetal y la fórmula no lleva gluten, lactosa ni ingredientes de origen animal. Apto para dietas vegetarianas y veganas.</p></div>
         </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================================================================
+       HUECO DE RESEÑAS. Se queda comentado a proposito: no hay clientes
+       porque no se ha vendido nada, y una ficha que anuncia que no tiene
+       resenas resta mas de lo que suma antes de lanzar.
+       Se descomenta cuando existan resenas reales. El sitio es este, para
+       no tener que recolocar la pagina entera mas adelante.
+
+  <section id="resenas">
+    <h2>Lo que dice quien lo toma</h2>
+  </section>
+
+       ================================================================ -->
+
+  <!-- ================================================================
+       LAS OTRAS FORMULAS. Los enlaces apuntan al catalogo de la portada
+       porque las otras tres fichas todavia no existen. En cuanto exista
+       d3k2.html, omega3.html y probiotico.html, cambiar los href.
+       Las fotos son las del hero de cada una.
+       ================================================================ -->
+  <section id="otras">
+    <h2>Las otras tres</h2>
+    <p>La misma exigencia en las cuatro. Si esta no es la que te hace falta, quizá lo sea otra.</p>
+
+    <ul class="otras">
+      <li>
+        <a class="otra" href="index.html#catalogo">
+          <img src="hero-d3k2.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Vitamina D3 + K2 de ZEROX">
+          <span class="otra-cuerpo">
+            <span class="otra-nombre">Vitamina D3 + K2</span>
+            <span class="otra-desc">2.000&ndash;4.000&nbsp;UI con K2 en MK&ndash;7.</span>
+          </span>
+          <span class="otra-precio">18,90&nbsp;&euro;</span>
+        </a>
+      </li>
+      <li>
+        <a class="otra" href="index.html#catalogo">
+          <img src="hero-omega3.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Omega-3 EPA+DHA de ZEROX">
+          <span class="otra-cuerpo">
+            <span class="otra-nombre">Omega&ndash;3 EPA+DHA</span>
+            <span class="otra-desc">EPA y DHA marinos, 1.000&ndash;2.000&nbsp;mg.</span>
+          </span>
+          <span class="otra-precio">27,90&nbsp;&euro;</span>
+        </a>
+      </li>
+      <li>
+        <a class="otra" href="index.html#catalogo">
+          <img src="hero-probiotico.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Probiótico Multicepa de ZEROX">
+          <span class="otra-cuerpo">
+            <span class="otra-nombre">Probiótico Multicepa</span>
+            <span class="otra-desc">Varias cepas vivas, 10&ndash;20 mil millones.</span>
+          </span>
+          <span class="otra-precio">24,90&nbsp;&euro;</span>
+        </a>
       </li>
     </ul>
   </section>
