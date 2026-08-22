@@ -90,6 +90,10 @@
   }
   .precio { font-size: 1.75rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
   .precio-nota { font-size: 0.95rem; color: var(--ink-soft); }
+  .ficha-orientativo {
+    margin: 0.4rem 0 1.2rem; font-size: 0.95rem; color: var(--ink-soft);
+    padding-left: 0.8rem; border-left: 2px solid var(--khaki);
+  }
   .ficha-envio { margin: 0 0 1.3rem; font-size: 0.95rem; color: var(--ink-soft); }
   .btn-comprar {
     display: block; width: 100%; padding: 1rem 1.5rem; border: 0;
@@ -396,6 +400,7 @@
       <p class="ficha-lede">La forma que mejor se tolera. Sin óxido de magnesio, sin dosis a medias y con la etiqueta entera a la vista.</p>
 
       <p class="ficha-formato">90 cápsulas &middot; 30 días de tratamiento</p>
+      <p class="ficha-orientativo">Precios orientativos: la web es una vista previa y todavía no está a la venta.</p>
       <p class="ficha-envio">Envío gratuito desde 39 €. Devolución en 30 días.</p>
 
       <!-- PRECIOS ORIENTATIVOS. Los corchetes se quedan hasta cerrar
@@ -411,9 +416,9 @@
           <span class="modo-cuerpo">
             <span class="modo-fila">
               <span class="modo-nombre">Suscripción · 2 botes</span>
-              <span class="modo-precio"><b>[precio sub]&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
+              <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
             </span>
-            <span class="modo-desc">Dos botes cada 60 días: dos meses de tratamiento seguido, sin tener que acordarte.</span>
+            <span class="modo-desc">Dos botes cada 60 días, a 19,45&nbsp;&euro; el bote: dos meses de tratamiento seguido, sin tener que acordarte.</span>
             <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
             <ul class="modo-plus">
               <li>Cancelas cuando quieras, desde tu cuenta y en un clic</li>
@@ -430,7 +435,7 @@
           <span class="modo-cuerpo">
             <span class="modo-fila">
               <span class="modo-nombre">Compra única</span>
-              <span class="modo-precio"><b>[precio]&nbsp;&euro;</b></span>
+              <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
             <span class="modo-desc">Un bote, y ya está. Sin compromiso de nada.</span>
           </span>
@@ -663,8 +668,8 @@
     var sel = document.querySelector('input[name="modo-compra"]:checked');
     if (!sel || !comprarBtn) { return; }
     comprarBtn.textContent = sel.value === 'suscripcion'
-      ? 'Suscribirme · [precio sub] € cada 2 meses'
-      : 'Añadir a la cesta · [precio] €';
+      ? 'Suscribirme · 38,90 € cada 2 meses'
+      : 'Añadir a la cesta · 22,90 €';
   }
   modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
   pintarModo();
