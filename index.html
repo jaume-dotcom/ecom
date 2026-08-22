@@ -994,22 +994,50 @@
      leerse como publicidad y pierde justo lo que lo hace funcionar. */
   .firma {
     margin: 0 auto; max-width: 32rem; padding: 0;
-    display: grid; gap: 1.4rem; justify-items: center; text-align: center;
+    display: grid; gap: 1.2rem; justify-items: center; text-align: center;
+  }
+  /* la pareja va centrada como bloque, pero por dentro alineada a la izquierda:
+     un nombre centrado bajo una foto cuadrada se lee a poster */
+  .firma-cabeza {
+    display: flex; align-items: center; gap: 1rem;
+    text-align: left; width: 100%; max-width: 22rem;
   }
   .firma-foto {
-    width: 100%; max-width: 15rem; height: auto;
-    border-radius: 14px; display: block;
+    flex: 0 0 auto; width: 8.5rem; height: auto;
+    border-radius: 12px; display: block;
     background: var(--tint);
   }
+  .firma-quien { min-width: 0; }
   .firma-nombre {
-    margin: 0; font-size: 1.35rem; font-weight: 700;
+    margin: 0; font-size: 1.3rem; font-weight: 700;
     letter-spacing: var(--tracking-lg); color: var(--ink);
   }
   .firma-rol {
-    margin: 0.3rem 0 1.3rem; font-size: 0.95rem; color: var(--ink-soft);
-    letter-spacing: 0.02em;
+    margin: 0.35rem 0 0; font-size: 0.92rem; line-height: 1.4;
+    color: var(--ink-soft); letter-spacing: 0.02em;
   }
   .firma-rol i { font-style: italic; }
+  /* las cifras cargan con la autoridad que antes estaba en un parrafo entero.
+     Se comprueban en un vistazo y ocupan una linea */
+  .firma-datos {
+    list-style: none; margin: 0 0 1.5rem; padding: 1rem 0;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    width: 100%;
+  }
+  .firma-datos li {
+    display: grid; gap: 0.15rem; padding: 0 0.35rem;
+    border-left: 1px solid var(--line);
+  }
+  .firma-datos li:first-child { border-left: 0; }
+  .firma-datos b {
+    font-size: 1.3rem; font-weight: 700; color: var(--khaki-deep);
+    letter-spacing: 0.01em; line-height: 1.15;
+  }
+  .firma-datos span {
+    font-size: 0.78rem; line-height: 1.3; color: var(--ink-soft);
+  }
+
   .firma blockquote { margin: 0; }
   .firma blockquote p {
     margin: 0 0 0.9rem; font-size: 1.05rem; line-height: 1.6; color: var(--ink);
@@ -2009,15 +2037,23 @@
     </div>
 
     <figure class="firma reveal">
-      <img class="firma-foto" src="sento-retrato.jpg" width="600" height="750"
-           loading="lazy" decoding="async"
-           alt="Retrato de Sento Segarra, farmacéutico y autor de La gran guía de la suplementación">
+      <div class="firma-cabeza">
+        <img class="firma-foto" src="sento-retrato.jpg" width="600" height="750"
+             loading="lazy" decoding="async"
+             alt="Retrato de Sento Segarra, farmacéutico y autor de La gran guía de la suplementación">
+        <div class="firma-quien">
+          <p class="firma-nombre">Sento Segarra</p>
+          <p class="firma-rol">Farmacéutico &middot; Autor de <i>La gran guía de la suplementación</i></p>
+        </div>
+      </div>
       <figcaption>
-        <p class="firma-nombre">Sento Segarra</p>
-        <p class="firma-rol">Farmacéutico &middot; Autor de <i>La gran guía de la suplementación</i></p>
+        <ul class="firma-datos">
+          <li><b>+30</b><span>años de mostrador</span></li>
+          <li><b>2,9 M</b><span>suscriptores en YouTube</span></li>
+          <li><b>60</b><span>suplementos analizados</span></li>
+        </ul>
         <blockquote>
           <p>Llevo más de treinta años detrás de un mostrador de farmacia, escuchando siempre las mismas dudas: ¿esto sirve de algo?, ¿cuál merece la pena?</p>
-          <p>En 2023 dejé la farmacia para dedicarme a explicarlo. Escribí un libro con sesenta suplementos analizados uno a uno, con criterio de farmacéutico: qué dosis tiene sentido y qué no.</p>
           <p>ZEROX es lo que viene después. Cuatro fórmulas, con la cantidad que pondría si fuera para mí, y esa cantidad en la etiqueta.</p>
         </blockquote>
         <p class="firma-rubrica" aria-hidden="true">Sento</p>
