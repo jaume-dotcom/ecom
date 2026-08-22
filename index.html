@@ -1589,15 +1589,24 @@
   }
   .crit-lista { list-style: none; display: grid; gap: 0.5rem; }
   .crit-lista li { position: relative; padding-left: 1.3rem; }
+  /* tick dibujado con dos bordes girados 45 grados: no depende de ninguna
+     fuente de iconos y hereda el color */
   .crit-lista li::before {
-    content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 6px; height: 6px; border-radius: 50%; background: var(--khaki-pop);
+    content: ""; position: absolute; left: 0; top: 0.58em;
+    width: 10px; height: 5px; border-radius: 0; background: none;
+    border-left: 2px solid var(--khaki-pop);
+    border-bottom: 2px solid var(--khaki-pop);
+    transform: rotate(-45deg);
   }
-  .crit-lista--no li::before {
-    background: none; width: 9px; height: 1.5px; top: 0.75em;
-    border-radius: 0; box-shadow: 0 0 0 0 transparent;
-    background-color: rgba(238, 240, 244, 0.5);
+  /* la cruz son dos barras: el ::before hace de aspa y el ::after de la otra */
+  .crit-lista--no li::before,
+  .crit-lista--no li::after {
+    content: ""; position: absolute; left: 0; top: 0.72em;
+    width: 10px; height: 1.6px; border: 0; border-radius: 1px;
+    background: rgba(238, 240, 244, 0.55);
   }
+  .crit-lista--no li::before { transform: rotate(45deg); }
+  .crit-lista--no li::after { transform: rotate(-45deg); }
 
   .closing-cierre {
     margin: 0 0 1.1rem; font-size: 1.15rem; font-weight: 600;
