@@ -30,7 +30,7 @@
      hacía que la marca se viera distinta en cada dispositivo. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
 <style>
   :root {
     /* Neutros de Mineral Frío (Territorio C) con el ámbar del Territorio A como
@@ -1238,7 +1238,22 @@
   /* titulos a dos pesos: la primera parte en el peso del titulo y la
      segunda mas ligera y en gris. Sin meter una segunda tipografia: una
      familia nueva es una peticion mas al cargar y una decision de marca */
-  .h2-soft { font-weight: 400; color: var(--ink-soft); }
+  /* la primera mitad en versalita apretada y la segunda en serif cursiva.
+     Es el unico sitio donde entra una segunda familia: solo el estilo
+     italico, un fichero pequeno, y siempre con serif del sistema de reserva */
+  .section-head h2 { text-transform: uppercase; letter-spacing: 0.01em; }
+  .h2-soft {
+    font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+    font-style: italic; font-weight: 400; text-transform: none;
+    letter-spacing: 0; color: var(--ink);
+    font-size: 1.12em; line-height: 1;
+  }
+  .sec-kicker {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    margin: 0 0 0.7rem; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .sec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--khaki-deep); flex-shrink: 0; }
 
   /* ---- fichas de producto: todo centrado ---- */
   .p-info { text-align: center; }
@@ -1313,11 +1328,7 @@
     padding: 3rem 1.5rem 3.2rem;
   }
   #libro .section-head { margin-bottom: 1.8rem; }
-  .libro-kicker {
-    margin: 0 0 0.7rem; font-family: var(--font-mono);
-    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--khaki-deep);
-  }
+
   #libro .pack { background: #fff; }
 
   /* era la letra mas pequena de toda la pagina, justo donde se pide el
@@ -1366,6 +1377,19 @@
     /* sobre la foto el fondo sube a rgb(77,70,64) en el peor punto; al 62% de
      opacidad esta linea se quedaba en 4,26 de contraste */
   .arg-card--cierre .arg-cierre-soft { color: rgba(238, 240, 244, 0.93); }
+  /* invita a seguir bajando: es la ultima tarjeta de la pila y sin senal
+     parece el final de la pagina */
+  .arg-sigue {
+    display: block; margin: 2.4rem auto 0; width: 26px; height: 26px;
+    color: rgba(238, 240, 244, 0.7);
+    animation: argBaja 2.2s ease-in-out infinite;
+  }
+  .arg-sigue svg { width: 100%; height: 100%; }
+  @keyframes argBaja {
+    0%, 100% { transform: translateY(0); opacity: 0.55; }
+    50%      { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .arg-sigue { animation: none; opacity: 0.8; } }
 
   /* la estanteria desenfocada: lo que la frase descarta, borroso detras.
      Hace pareja con la del cierre, que es una persona. Velo al 50% de salida,
@@ -1674,6 +1698,7 @@
   <section class="band" id="catalogo">
     <div class="section-head reveal">
       <div>
+        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>El catálogo</p>
         <h2>Elige <span class="h2-soft">por dónde empezar</span></h2>
         <p>La misma exigencia en las cuatro. Empieza por la que más falta te haga.</p>
       </div>
@@ -1833,6 +1858,9 @@
         <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
         <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
         <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
+        <span class="arg-sigue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
+        </span>
       </article>
 
     </div>
@@ -1849,7 +1877,7 @@
   <section class="band" id="libro">
     <div class="section-head reveal">
       <div>
-        <p class="libro-kicker">Pack de lanzamiento</p>
+        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Pack de lanzamiento</p>
         <h2>Magnesio&nbsp;+&nbsp;libro</h2>
         <p>La fórmula y el criterio para entenderla. El libro explica qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta.</p>
       </div>
@@ -1888,6 +1916,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
+        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>FAQ</p>
         <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
         <p>Lo que más nos preguntáis, respondido sin rodeos.</p>
       </div>
