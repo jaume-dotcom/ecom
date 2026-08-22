@@ -1512,6 +1512,74 @@
   }
   @media (prefers-reduced-motion: reduce) { .hero-signup-field { transition: none; } }
 
+
+  /* ============ BLOQUE DE CRITERIO ============
+     Recupera el contenido del #criterio que se borro: la dosis, lo que se
+     publica y lo que no se hace. Eran los argumentos de confianza, y los dos
+     bloques de contexto que quedaron hablan de otra cosa. */
+  .sec-kicker--claro { color: var(--khaki-pop); justify-content: flex-start; }
+  .closing-lede {
+    margin: 0 0 1.8rem; font-size: 1.05rem; line-height: 1.55;
+    color: rgba(238, 240, 244, 0.82); max-width: 42ch;
+  }
+  .crit { list-style: none; margin: 0 0 1.8rem; padding: 0; width: 100%; }
+  .crit-item { border-top: 1px solid rgba(238, 240, 244, 0.16); }
+  .crit-item:last-child { border-bottom: 1px solid rgba(238, 240, 244, 0.16); }
+  .crit-q {
+    width: 100%; display: flex; align-items: center; gap: 1rem;
+    padding: 1.15rem 0; background: none; border: 0; cursor: pointer;
+    color: var(--paper); text-align: left; font: inherit;
+  }
+  .crit-num {
+    flex-shrink: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%;
+    border: 1px solid rgba(238, 240, 244, 0.3);
+    display: grid; place-items: center;
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+    color: var(--khaki-pop);
+  }
+  .crit-title {
+    flex: 1; font-size: 1.05rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  /* el mas se dibuja con dos barras: una gira y desaparece al abrirse */
+  .crit-mas { position: relative; flex-shrink: 0; width: 16px; height: 16px; }
+  .crit-mas::before, .crit-mas::after {
+    content: ""; position: absolute; inset: 50% 0 auto 0;
+    height: 1.5px; background: var(--paper); border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .crit-mas::after { transform: rotate(90deg); }
+  .crit-q[aria-expanded="true"] .crit-mas::after { transform: rotate(0deg); opacity: 0; }
+  .crit-q[aria-expanded="true"] .crit-num { border-color: var(--khaki-pop); }
+
+  .crit-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .crit-a.open { grid-template-rows: 1fr; }
+  .crit-a > div { overflow: hidden; }
+  .crit-a p, .crit-lista {
+    margin: 0; padding: 0 0 1.3rem 3.3rem;
+    font-size: 1rem; line-height: 1.55; color: rgba(238, 240, 244, 0.82);
+  }
+  .crit-lista { list-style: none; display: grid; gap: 0.5rem; }
+  .crit-lista li { position: relative; padding-left: 1.3rem; }
+  .crit-lista li::before {
+    content: ""; position: absolute; left: 0; top: 0.62em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--khaki-pop);
+  }
+  .crit-lista--no li::before {
+    background: none; width: 9px; height: 1.5px; top: 0.75em;
+    border-radius: 0; box-shadow: 0 0 0 0 transparent;
+    background-color: rgba(238, 240, 244, 0.5);
+  }
+
+  .closing-cierre {
+    margin: 0 0 1.1rem; font-size: 1.15rem; font-weight: 600;
+    color: var(--paper); letter-spacing: var(--tracking-lg);
+  }
+  .closing .loc { margin-top: 1.2rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .crit-a, .crit-mas::before, .crit-mas::after { transition: none; }
+  }
+
 </style>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
@@ -1564,7 +1632,7 @@
         </div>
         <a class="navmenu-link" href="#catalogo">Catálogo</a>
         <a class="navmenu-link" href="#libro">El libro</a>
-        <a class="navmenu-link" href="#contexto">Cómo elegimos</a>
+        <a class="navmenu-link" href="#criterio">Cómo elegimos</a>
       </div>
 
       <div class="nav-cta">
@@ -1788,7 +1856,7 @@
       <p class="ayuda-titulo"><span class="ayuda-punto" aria-hidden="true">&#9679;</span> Te asesoramos</p>
       <p class="ayuda-sub">¿No sabes por cuál empezar? No hace falta que lo adivines.</p>
       <div class="ayuda-botones">
-        <a class="btn btn-solid ayuda-btn" href="#contexto">Descubre qué te conviene</a>
+        <a class="btn btn-solid ayuda-btn" href="#criterio">Descubre qué te conviene</a>
         <a class="btn ayuda-btn" href="#footer-signup">Pregúntanos lo que quieras</a>
       </div>
     </div>
@@ -1903,11 +1971,62 @@
     </div>
   </section>
 
-  <section class="band">
+  <section class="band" id="criterio">
     <div class="closing reveal">
-      <span class="loc">&#9679; Fabricado en España</span>
-      <h2>Cuando esté listo, <span class="h2-soft">te avisamos. Nada más.</span></h2>
+      <p class="sec-kicker sec-kicker--claro"><span class="sec-dot" aria-hidden="true"></span>Nuestro criterio</p>
+      <h2>Cómo <span class="h2-soft">elegimos</span></h2>
+      <p class="closing-lede">Cuatro fórmulas y ninguna más. Entran solo si podemos publicar la cantidad exacta, la forma y de dónde sale.</p>
+
+      <ul class="crit">
+        <li class="crit-item">
+          <button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
+            <span class="crit-num">01</span>
+            <span class="crit-title">La dosis</span>
+            <span class="crit-mas" aria-hidden="true"></span>
+          </button>
+          <div class="crit-a" id="crit-p1" role="region" aria-labelledby="crit-t1">
+            <div><p>Dos botes con el mismo nombre pueden no parecerse en nada. Lo que cuenta es el mineral elemental por dosis, no el peso de la sal, y esa cifra vive en la letra pequeña de la parte de atrás. Aquí va delante.</p></div>
+          </div>
+        </li>
+        <li class="crit-item">
+          <button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
+            <span class="crit-num">02</span>
+            <span class="crit-title">Lo que publicamos</span>
+            <span class="crit-mas" aria-hidden="true"></span>
+          </button>
+          <div class="crit-a" id="crit-p2" role="region" aria-labelledby="crit-t2">
+            <div>
+              <ul class="crit-lista">
+                <li>Cada cantidad, en la etiqueta y en la web</li>
+                <li>Análisis de un laboratorio externo, lote a lote</li>
+                <li>Sin mezclas patentadas que escondan proporciones</li>
+                <li>Fabricación en España, en instalaciones con GMP</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="crit-item">
+          <button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
+            <span class="crit-num">03</span>
+            <span class="crit-title">Lo que no hacemos</span>
+            <span class="crit-mas" aria-hidden="true"></span>
+          </button>
+          <div class="crit-a" id="crit-p3" role="region" aria-labelledby="crit-t3">
+            <div>
+              <ul class="crit-lista crit-lista--no">
+                <li>No decimos que sustituya a una dieta equilibrada</li>
+                <li>No prometemos efectos que no estén autorizados</li>
+                <li>No entra una fórmula si no podemos ponerla en dosis de estudio</li>
+                <li>No hay cuentas atrás ni ofertas que caducan esta noche</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="closing-cierre">Cuando esté listo, te avisamos. Nada más.</p>
       <a class="btn btn-solid" href="#footer-signup">Únete al acceso anticipado</a>
+      <span class="loc">&#9679; Fabricado en España</span>
     </div>
   </section>
 </div>
@@ -2026,7 +2145,7 @@
         <div class="foot-col reveal foot-anim">
           <h4>La marca</h4>
           <ul>
-            <li><a href="#contexto">Cómo elegimos</a></li>
+            <li><a href="#criterio">Cómo elegimos</a></li>
             <li><a href="#libro">El libro</a></li>
             <li><a href="#faq">Preguntas</a></li>
           </ul>
@@ -2097,7 +2216,7 @@
     </div>
     <a href="#catalogo">Catálogo</a>
     <a href="#libro">El libro de Sento</a>
-    <a href="#contexto">Cómo elegimos</a>
+    <a href="#criterio">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
   </nav>
   <a class="btn btn-solid mm-cta" href="#footer-signup">Acceso anticipado</a>
@@ -2374,6 +2493,15 @@
   // FAQ: cada pregunta se abre y cierra por su cuenta. El componente original
   // cerraba las demás al abrir una; aquí no, porque comparar dos respuestas es
   // habitual y cerrar lo que el usuario no ha tocado desorienta.
+  document.querySelectorAll('.crit-q').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      var abierto = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+      if (panel) { panel.classList.toggle('open', !abierto); }
+    });
+  });
+
   document.querySelectorAll('.faq-q').forEach(function (b) {
     b.addEventListener('click', function () {
       var panel = document.getElementById(b.getAttribute('aria-controls'));
