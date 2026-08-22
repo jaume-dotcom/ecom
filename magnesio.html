@@ -153,20 +153,71 @@
     font-size: 0.9rem; font-weight: 600; font-family: var(--font-mono);
   }
 
-  /* preguntas */
-  .faq { border-top: 1px solid var(--line); }
-  .faq-item { border-bottom: 1px solid var(--line); }
+  /* ---------- preguntas: mismo formato que la landing ---------- */
+  .faq { list-style: none; margin: 0 auto; padding: 0; max-width: 46rem; display: flex; flex-direction: column; }
+  /* sin tarjeta: solo una línea de separación, para que la lista se integre
+     con el panel en vez de flotar sobre él */
+  .faq-item { border-bottom: 1px solid rgba(238,240,244,0.12); }
+  .faq-item:last-child { border-bottom: none; }
   .faq-q {
-    width: 100%; display: flex; justify-content: space-between; align-items: center;
-    gap: 1rem; padding: 1.15rem 0; background: none; border: 0;
-    font-size: 1.05rem; font-weight: 500; color: var(--ink); text-align: left;
+    display: flex; align-items: flex-start; gap: 1rem; width: 100%;
+    padding: 1.3rem 1.4rem; background: none; border: none; cursor: pointer;
+    text-align: left; font: inherit; color: var(--paper);
   }
-  .faq-q svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.25s ease; }
-  .faq-q[aria-expanded="true"] svg { transform: rotate(45deg); }
-  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
-  .faq-q[aria-expanded="true"] + .faq-a { grid-template-rows: 1fr; }
+  .faq-ico {
+    flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid rgba(238,240,244,0.22); background: rgba(238,240,244,0.06);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.45s ease, border-color 0.3s ease;
+  }
+  /* la mitad de arriba va rellena y la de abajo al aire: así lee como cápsula
+     de verdad —tapa opaca y cuerpo translúcido— y no como una pastilla plana.
+     El color se hereda de currentColor, así relleno y trazo cambian juntos. */
+  .faq-ico svg { width: 19px; height: 19px; color: var(--paper); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .faq-ico .cap-fill { fill: currentColor; stroke: none; }
+  /* la cápsula gira 90°: al ser simétrica, 180° no se notaría.
+     El latón se lee sobre oscuro; el ámbar de los botones no. */
+  .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--khaki); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-pop); }
+  .faq-head { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
+  @media (min-width: 620px) { .faq-head { flex-direction: row; align-items: center; gap: 1rem; } }
+  .faq-title { font-size: 1.02rem; font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
+  .faq-meta {
+    align-self: flex-start; flex-shrink: 0; font-size: 0.72rem; color: rgba(238,240,244,0.66);
+    border: 1px solid rgba(238,240,244,0.2); border-radius: 1000px; padding: 0.25rem 0.7rem;
+  }
+  @media (min-width: 620px) { .faq-meta { margin-left: auto; } }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16,1,0.3,1); }
+  .faq-a.open { grid-template-rows: 1fr; }
   .faq-a > div { overflow: hidden; }
-  .faq-a p { margin: 0 0 1.15rem; font-size: 1.05rem; color: var(--ink-soft); }
+  .faq-a p { margin: 0; padding: 0 1.4rem 1.4rem 4.4rem; font-size: 0.95rem; line-height: 1.6; color: rgba(238,240,244,0.74); max-width: 62ch; }
+  @media (prefers-reduced-motion: reduce) { .faq-a, .faq-ico { transition: none; } }
+  .faq-a p { color: var(--ink-soft); }
+
+
+  /* al pasar Jaume el cuerpo a blanco puro, este panel blanco se quedo sin
+     borde visible: mismo color que el fondo. Se separa con una linea en vez
+     de tocarle la paleta */
+  .faq-panel {
+    background: #ffffff; color: var(--ink);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .faq-panel .section-head h2 { color: var(--ink); }
+  .faq-panel .section-head p { color: var(--ink-soft); }
+  .faq-item { border-bottom: 1px solid rgba(35, 39, 46, 0.12); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { color: var(--ink); }
+  .faq-ico {
+    border: 1px solid rgba(35, 39, 46, 0.2);
+    background: rgba(35, 39, 46, 0.04);
+  }
+  .faq-ico svg { color: var(--ink); }
+  /* sobre claro el laton se pierde; aqui manda el ambar oscuro */
+  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--khaki-deep); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-deep); }
+  .faq-meta { color: var(--ink-soft); border: 1px solid rgba(35, 39, 46, 0.2); }
+  .faq-a p { color: var(--ink-soft); }
+
 
   /* alta */
   .alta { text-align: center; }
@@ -384,36 +435,56 @@
 
   <section>
     <h2>Preguntas</h2>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>¿Puedo tomarlo si estoy con medicación?</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    <ul class="faq">
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head">
+            <span class="faq-title">¿Puedo tomarlo si estoy con medicación?</span>
+            <span class="faq-meta">Seguridad</span>
+          </span>
         </button>
-        <div class="faq-a"><div><p>El magnesio puede interferir en la absorción de algunos medicamentos, entre ellos ciertos antibióticos y los que se usan para la tiroides. No es que no puedas tomarlo: normalmente basta con separarlos unas horas. Consúltalo con tu médico o tu farmacéutico antes de empezar, y enséñales esta etiqueta.</p></div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>¿Por qué bisglicinato y no otro?</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <div class="faq-a" id="faq-p1" role="region" aria-labelledby="faq-t1">
+          <div><p>El magnesio puede interferir en la absorción de algunos medicamentos, entre ellos ciertos antibióticos y los que se usan para la tiroides. No es que no puedas tomarlo: normalmente basta con separarlos unas horas. Consúltalo con tu médico o tu farmacéutico antes de empezar, y enséñales esta etiqueta.</p></div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head">
+            <span class="faq-title">¿Por qué bisglicinato y no otro?</span>
+            <span class="faq-meta">Formulación</span>
+          </span>
         </button>
-        <div class="faq-a"><div><p>Porque es el que menos molesta al estómago. El óxido de magnesio, que es el más habitual porque es el más barato, se absorbe peor y suele dar problemas intestinales. El bisglicinato va unido a un aminoácido, la glicina, y se tolera mucho mejor.</p></div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>¿Cuánto tarda en notarse?</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <div class="faq-a" id="faq-p2" role="region" aria-labelledby="faq-t2">
+          <div><p>Porque es el que menos molesta al estómago. El óxido de magnesio, que es el más habitual porque es el más barato, se absorbe peor y suele dar problemas intestinales. El bisglicinato va unido a un aminoácido, la glicina, y se tolera mucho mejor.</p></div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head">
+            <span class="faq-title">¿Cuánto tarda en notarse?</span>
+            <span class="faq-meta">Uso</span>
+          </span>
         </button>
-        <div class="faq-a"><div><p>Depende de cada persona y de si partías de niveles bajos. No podemos prometerte un plazo, y desconfía de quien lo haga. Lo que sí sabemos es que el magnesio actúa por acumulación: un bote de 30 días es el mínimo razonable para valorarlo.</p></div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" type="button" aria-expanded="false">
-          <span>¿Tiene gluten, lactosa o algo de origen animal?</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <div class="faq-a" id="faq-p3" role="region" aria-labelledby="faq-t3">
+          <div><p>Depende de cada persona y de si partías de niveles bajos. No podemos prometerte un plazo, y desconfía de quien lo haga. Lo que sí sabemos es que el magnesio actúa por acumulación: un bote de 30 días es el mínimo razonable para valorarlo.</p></div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head">
+            <span class="faq-title">¿Tiene gluten, lactosa o algo de origen animal?</span>
+            <span class="faq-meta">Alérgenos</span>
+          </span>
         </button>
-        <div class="faq-a"><div><p>No. La cápsula es vegetal y la fórmula no lleva gluten, lactosa ni ingredientes de origen animal. Apto para dietas vegetarianas y veganas.</p></div></div>
-      </div>
-    </div>
+        <div class="faq-a" id="faq-p4" role="region" aria-labelledby="faq-t4">
+          <div><p>No. La cápsula es vegetal y la fórmula no lleva gluten, lactosa ni ingredientes de origen animal. Apto para dietas vegetarianas y veganas.</p></div>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section class="alta" id="alta">
@@ -438,10 +509,12 @@
 <script>
 (function () {
   // acordeón de preguntas
-  document.querySelectorAll('.faq-q').forEach(function (q) {
-    q.addEventListener('click', function () {
-      var abierto = q.getAttribute('aria-expanded') === 'true';
-      q.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+  document.querySelectorAll('.faq-q').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var panel = document.getElementById(b.getAttribute('aria-controls'));
+      var abierto = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+      if (panel) { panel.classList.toggle('open', !abierto); }
     });
   });
 
