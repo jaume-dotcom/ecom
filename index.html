@@ -258,7 +258,21 @@
   }
   /* z-index por encima de .hero-center (2): si no, el h1 del hero se pinta
      sobre el desplegable de "Fórmulas" y lo tapa */
-  .hero-nav { position: relative; z-index: 30; width: 100%; }
+  /* fuera de .hero-full a proposito: ese contenedor tiene overflow:hidden por
+     las esquinas redondeadas, y eso lo convierte en el contexto de scroll de
+     cualquier sticky que lleve dentro — la barra se habria quedado pegada solo
+     dentro del hero y se habria ido con el. */
+  .hero-nav {
+    position: sticky; top: 0; z-index: 60; width: 100%;
+    background: var(--paper);
+    transition: box-shadow 0.25s ease, background 0.25s ease;
+  }
+  @supports (backdrop-filter: blur(12px)) {
+    .hero-nav { background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px) saturate(1.4); }
+  }
+  /* el filete solo aparece al despegarse: arriba del todo sobra */
+  .hero-nav.is-stuck { box-shadow: 0 1px 0 var(--line), 0 6px 20px -12px rgba(35, 39, 46, 0.28); }
+  @media (prefers-reduced-motion: reduce) { .hero-nav { transition: none; } }
   .hero-nav nav { border-bottom: none; gap: 1.5rem; }
   .hero-center { position: relative; z-index: 2; text-align: center; max-width: 42rem; margin: 0 auto; padding: 1.5rem 1.6rem 2.2rem; }
   .hero-center h1 { font-size: clamp(2.3rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.05; margin: 0 0 1.2rem; text-wrap: balance; }
@@ -1463,7 +1477,6 @@
   </div>
 </div>
 
-<div class="hero-full">
   <div class="hero-nav wrap">
     <nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
@@ -1518,6 +1531,8 @@
 
     </nav>
   </div>
+
+<div class="hero-full">
 
 
   <div class="hero-carousel wrap">
@@ -2226,6 +2241,14 @@
     updatePeekForSpace();
     repositionTrack();
     startAutoplay();
+  }
+
+  // la barra gana filete y sombra solo cuando se ha despegado del borde
+  var barra = document.querySelector('.hero-nav');
+  if (barra) {
+    var marcarBarra = function () { barra.classList.toggle('is-stuck', window.scrollY > 4); };
+    window.addEventListener('scroll', marcarBarra, { passive: true });
+    marcarBarra();
   }
 
   var navToggle = document.getElementById('nav-toggle');
