@@ -398,6 +398,10 @@
       <p class="ficha-formato">90 cápsulas &middot; 30 días de tratamiento</p>
       <p class="ficha-envio">Envío gratuito desde 39 €. Devolución en 30 días.</p>
 
+      <!-- PRECIOS ORIENTATIVOS. Los corchetes se quedan hasta cerrar
+           costes con proveedor. El descuento del 15% se sostiene porque el
+           envio se reparte entre dos botes; con envio gratis por unidad no
+           salia. -->
       <fieldset class="modos">
         <legend class="modos-legend">Cómo lo quieres</legend>
 
@@ -406,16 +410,16 @@
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
             <span class="modo-fila">
-              <span class="modo-nombre">Suscripción mensual</span>
-              <span class="modo-precio"><b>[precio sub]&nbsp;&euro;</b><small>/mes</small></span>
+              <span class="modo-nombre">Suscripción · 2 botes</span>
+              <span class="modo-precio"><b>[precio sub]&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
             </span>
-            <span class="modo-desc">Un bote cada 30 días, sin tener que acordarte.</span>
+            <span class="modo-desc">Dos botes cada 60 días: dos meses de tratamiento seguido, sin tener que acordarte.</span>
             <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
             <ul class="modo-plus">
               <li>Cancelas cuando quieras, desde tu cuenta y en un clic</li>
               <li>Sin permanencia ni penalización</li>
               <li>Te avisamos por email antes de cada cobro</li>
-              <li>Envío gratuito siempre</li>
+              <li>Envío gratuito: al ir de dos en dos, sale a cuenta enviarlo</li>
             </ul>
           </span>
         </label>
@@ -659,7 +663,7 @@
     var sel = document.querySelector('input[name="modo-compra"]:checked');
     if (!sel || !comprarBtn) { return; }
     comprarBtn.textContent = sel.value === 'suscripcion'
-      ? 'Suscribirme · [precio sub] € al mes'
+      ? 'Suscribirme · [precio sub] € cada 2 meses'
       : 'Añadir a la cesta · [precio] €';
   }
   modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
