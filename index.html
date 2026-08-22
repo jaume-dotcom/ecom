@@ -1643,8 +1643,11 @@
     letter-spacing: 0.2em; text-indent: 0.2em;
   }
   /* el rotulo en dos lineas, una idea por linea */
+  /* es la credencial del bloque: le toca mas peso que a un rotulo cualquiera */
   .arg-card--intro .arg-kicker {
-    display: grid; gap: 0.2rem; margin-bottom: 1.5rem; line-height: 1.4;
+    display: grid; gap: 0.25rem; margin-bottom: 1.6rem; line-height: 1.35;
+    font-size: 1.02rem; font-weight: 600; letter-spacing: 0.1em;
+    color: rgba(236, 220, 190, 0.98);
   }
 
   /* lo que va de la pregunta hacia abajo entra despues, para que primero se
@@ -1683,7 +1686,7 @@
   .pack-media img { width: 100%; height: auto; display: block; }
   #libro .pack-body { padding: 1.5rem 1.4rem 1.6rem; text-align: left; }
 
-  .pack-pills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.3rem; padding: 0; }
+  .pack-pills { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.45rem; margin: 0 0 1.3rem; padding: 0; }
   .pack-pill {
     font-size: 0.92rem; font-weight: 500; padding: 0.35rem 0.8rem;
     border-radius: 999px; background: var(--tint); color: var(--ink-soft);
@@ -1694,8 +1697,13 @@
 
   #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.9rem; }
   #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
+  /* centrado con el alto del item, no anclado a la primera linea */
   #libro .pack-list li::before {
-    content: ""; position: absolute; left: 0; top: 0.42em;
+    /* el li lleva 0,85rem de padding y el titulo 0,79em de media interlinea:
+       ahi esta el centro optico de la primera linea. Los 3px descuentan la
+       mitad del propio tick */
+    content: ""; position: absolute; left: 0;
+    top: calc(0.85rem + 0.79em - 3px);
     width: 11px; height: 6px; border-left: 2px solid var(--khaki-deep);
     border-bottom: 2px solid var(--khaki-deep); transform: rotate(-45deg);
   }
@@ -2116,7 +2124,7 @@
         </ul>
 
         <ul class="pack-list">
-          <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 30 días de tratamiento</span></li>
+          <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 30 días</span></li>
           <li><b>La gran guía de la suplementación</b><span>Sento Segarra &middot; tapa dura</span></li>
         </ul>
 
