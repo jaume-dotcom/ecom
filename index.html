@@ -1235,6 +1235,19 @@
   .arg-body p:last-child { margin-bottom: 0; }
   .arg-remate { color: var(--ink) !important; font-weight: 600; }
 
+  /* titulos a dos pesos: la primera parte en el peso del titulo y la
+     segunda mas ligera y en gris. Sin meter una segunda tipografia: una
+     familia nueva es una peticion mas al cargar y una decision de marca */
+  .h2-soft { font-weight: 400; color: var(--ink-soft); }
+
+  /* ---- fichas de producto: todo centrado ---- */
+  .p-info { text-align: center; }
+  .p-bens { display: inline-block; text-align: left; }
+  .p-bottom { align-items: center; }
+  /* el boton dice la accion y el precio va encima: un boton con un precio
+     dentro no deja claro si lleva a la ficha o si compra */
+  .p-buy { align-self: center; }
+
   /* rotulo y titular centrados; el texto de lectura, a la izquierda.
      Con parrafos de tres lineas el borde izquierdo recto le da al ojo un
      punto fijo al que volver en cada salto — centrado hay que buscarlo. */
@@ -1661,7 +1674,7 @@
   <section class="band" id="catalogo">
     <div class="section-head reveal">
       <div>
-        <h2>Elige por dónde empezar</h2>
+        <h2>Elige <span class="h2-soft">por dónde empezar</span></h2>
         <p>La misma exigencia en las cuatro. Empieza por la que más falta te haga.</p>
       </div>
     </div>
@@ -1865,7 +1878,7 @@
   <section class="band">
     <div class="closing reveal">
       <span class="loc">&#9679; Fabricado en España</span>
-      <h2>Cuando esté listo, te avisamos. Nada más.</h2>
+      <h2>Cuando esté listo, <span class="h2-soft">te avisamos. Nada más.</span></h2>
       <a class="btn btn-solid" href="#footer-signup">Únete al acceso anticipado</a>
     </div>
   </section>
@@ -1875,7 +1888,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Preguntas frecuentes</h2>
+        <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
         <p>Lo que más nos preguntáis, respondido sin rodeos.</p>
       </div>
     </div>
