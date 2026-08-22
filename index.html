@@ -1517,9 +1517,22 @@
      Recupera el contenido del #criterio que se borro: la dosis, lo que se
      publica y lo que no se hace. Eran los argumentos de confianza, y los dos
      bloques de contexto que quedaron hablan de otra cosa. */
-  .sec-kicker--claro { color: var(--khaki-pop); justify-content: flex-start; }
+  .sec-kicker--claro { color: var(--khaki-pop); }
+
+  /* el bloque va centrado; las filas del acordeon no, que son de ancho
+     completo y llevan icono a un lado y el mas al otro */
+  /* --ink es negro puro desde el cambio de paleta, y es la unica superficie
+     de la web en negro absoluto: el pie va en #23272e. Se iguala, que ademas
+     sobre blanco el negro puro corta demasiado */
+  .closing { align-items: center; text-align: center; background: #23272e; }
+  /* 3rem de relleno dejaban 228px utiles en una pantalla de 375, con el
+     padding del .wrap ya contado por fuera */
+  @media (max-width: 859px) {
+    .closing { padding: 3rem 1.4rem 2.6rem; }
+  }
+  .closing .loc { align-self: center; }
   .closing-lede {
-    margin: 0 0 1.8rem; font-size: 1.05rem; line-height: 1.55;
+    margin: 0 auto 1.8rem; font-size: 1.05rem; line-height: 1.55;
     color: rgba(238, 240, 244, 0.82); max-width: 42ch;
   }
   .crit { list-style: none; margin: 0 0 1.8rem; padding: 0; width: 100%; }
@@ -1530,13 +1543,20 @@
     padding: 1.15rem 0; background: none; border: 0; cursor: pointer;
     color: var(--paper); text-align: left; font: inherit;
   }
-  .crit-num {
+  .crit-ico {
     flex-shrink: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%;
     border: 1px solid rgba(238, 240, 244, 0.3);
     display: grid; place-items: center;
-    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
-    color: var(--khaki-pop);
+    transition: transform 0.4s ease, border-color 0.3s ease;
   }
+  .crit-ico svg {
+    width: 17px; height: 17px; color: rgba(238, 240, 244, 0.85);
+    fill: none; stroke: currentColor; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .crit-ico .cap-fill { fill: currentColor; stroke: none; }
+  .crit-q[aria-expanded="true"] .crit-ico { transform: rotate(90deg); border-color: var(--khaki-pop); }
+  .crit-q[aria-expanded="true"] .crit-ico svg { color: var(--khaki-pop); }
   .crit-title {
     flex: 1; font-size: 1.05rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.06em;
@@ -1550,13 +1570,16 @@
   }
   .crit-mas::after { transform: rotate(90deg); }
   .crit-q[aria-expanded="true"] .crit-mas::after { transform: rotate(0deg); opacity: 0; }
-  .crit-q[aria-expanded="true"] .crit-num { border-color: var(--khaki-pop); }
+  
 
   .crit-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s cubic-bezier(0.16,1,0.3,1); }
   .crit-a.open { grid-template-rows: 1fr; }
   .crit-a > div { overflow: hidden; }
+  /* sin sangria: la caja abierta aprovecha el ancho entero, que era espacio
+     muerto a la izquierda */
   .crit-a p, .crit-lista {
-    margin: 0; padding: 0 0 1.3rem 3.3rem;
+    margin: 0; padding: 0 0 1.3rem;
+    text-align: left;
     font-size: 1rem; line-height: 1.55; color: rgba(238, 240, 244, 0.82);
   }
   .crit-lista { list-style: none; display: grid; gap: 0.5rem; }
@@ -2003,7 +2026,7 @@
       <ul class="crit">
         <li class="crit-item">
           <button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
-            <span class="crit-num">01</span>
+            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">La dosis</span>
             <span class="crit-mas" aria-hidden="true"></span>
           </button>
@@ -2013,7 +2036,7 @@
         </li>
         <li class="crit-item">
           <button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
-            <span class="crit-num">02</span>
+            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que publicamos</span>
             <span class="crit-mas" aria-hidden="true"></span>
           </button>
@@ -2030,7 +2053,7 @@
         </li>
         <li class="crit-item">
           <button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
-            <span class="crit-num">03</span>
+            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que no hacemos</span>
             <span class="crit-mas" aria-hidden="true"></span>
           </button>
