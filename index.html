@@ -43,7 +43,7 @@
        Acento: Ámbar #8C5A22 · Latón #A4844A */
     --paper: #ffffff;
     --tint: #e2e7ed;
-    --ink: #000000;
+    --ink: #23272e;
     --ink-soft: #454c55;
     --ink-faint: #8b9aa8;
     --khaki: #a4844a;
@@ -1651,7 +1651,7 @@
      lea el titular. El retraso arranca cuando la tarjeta se ve, no al cargar */
   .arg-tarde {
     opacity: 0; transform: translateY(10px);
-    transition: opacity 0.9s ease 2.2s, transform 0.9s ease 2.2s;
+    transition: opacity 0.5s ease 1.1s, transform 0.5s ease 1.1s;
   }
   .arg-tarde.visto { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
@@ -1689,7 +1689,8 @@
     border-radius: 999px; background: var(--tint); color: var(--ink-soft);
   }
   /* el ahorro es lo primero que tiene que saltar */
-  .pack-pill--fuerte { background: var(--khaki-deep); color: #fff; font-weight: 600; }
+  /* el ahorro es el dato que decide: va mas grande que las otras dos */
+  .pack-pill--fuerte { background: var(--khaki-deep); color: #fff; font-weight: 600; font-size: 1.05rem; padding: 0.45rem 1rem; }
 
   #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.9rem; }
   #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
@@ -1701,10 +1702,10 @@
   #libro .pack-list b { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
   #libro .pack-list span { font-size: 0.98rem; color: var(--ink-soft); }
 
-  #libro .pack-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 1.1rem; }
+  #libro .pack-price { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-bottom: 1.1rem; }
   #libro .pack-now { font-size: 2.2rem; font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: 1.05rem; color: var(--ink-faint); text-decoration: line-through; }
-  #libro .pack-save { font-size: 0.95rem; color: var(--ink-soft); flex-basis: 100%; }
+  #libro .pack-save { font-size: 0.95rem; color: var(--ink-soft); flex-basis: 100%; text-align: center; }
 
   /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
      parte de esa decision */
@@ -2109,7 +2110,7 @@
 
       <div class="pack-body">
         <ul class="pack-pills">
-          <li class="pack-pill pack-pill--fuerte">Ahorras 5,90&nbsp;&euro;</li>
+          <li class="pack-pill pack-pill--fuerte">Ahorras 7,90&nbsp;&euro;</li>
           <li class="pack-pill">Envío gratis</li>
           <li class="pack-pill">Devolución en 30 días</li>
         </ul>
@@ -2121,7 +2122,7 @@
 
         <div class="pack-price">
           <span class="pack-now">39,90&nbsp;&euro;</span>
-          <span class="pack-was">45,80&nbsp;&euro;</span>
+          <span class="pack-was">47,80&nbsp;&euro;</span>
           <span class="pack-save">comprado por separado</span>
         </div>
 
