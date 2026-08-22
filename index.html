@@ -1434,7 +1434,10 @@
     padding-top: 1.9rem; padding-bottom: 1.9rem;
   }
   /* apertura y cierre no llevan foto: su contenido si va centrado */
+  /* el contenido ocupa 411 de 692, y centrado dejaba unos 140px muertos
+     arriba. Con relleno extra abajo, el centro optico sube */
   #contexto .arg-card--intro, #contexto .arg-card--cierre { justify-content: center; }
+  #contexto .arg-card--intro { padding-bottom: 6rem; }
 
   .arg-fig {
     flex: 1 1 auto; min-height: 5rem; max-height: 17rem;
@@ -1525,6 +1528,8 @@
      de la web en negro absoluto: el pie va en #23272e. Se iguala, que ademas
      sobre blanco el negro puro corta demasiado */
   .closing { align-items: center; text-align: center; background: #23272e; }
+  /* .h2-soft usa --ink, que sobre este panel es negro sobre casi negro */
+  .closing .h2-soft { color: var(--paper); }
   /* 3rem de relleno dejaban 228px utiles en una pantalla de 375, con el
      padding del .wrap ya contado por fuera */
   @media (max-width: 859px) {
@@ -1624,6 +1629,42 @@
   @media (prefers-reduced-motion: reduce) {
     #contexto .stack-card { transform: none; transition: none; }
     #contexto .stack-card::after { opacity: 0; transition: none; }
+  }
+
+
+  /* ===== TARJETA DE APERTURA: lockup, rotulo y entrada en dos tiempos ===== */
+  .arg-lockup {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin: 0 auto 1.4rem; color: var(--paper);
+  }
+  .arg-lockup .arg-mark { margin: 0; width: 1.5rem; height: 1.5rem; }
+  .arg-lockup-word {
+    font-weight: 600; font-size: 1.15rem;
+    letter-spacing: 0.2em; text-indent: 0.2em;
+  }
+  /* el rotulo en dos lineas, una idea por linea */
+  .arg-card--intro .arg-kicker {
+    display: grid; gap: 0.2rem; margin-bottom: 1.5rem; line-height: 1.4;
+  }
+
+  /* lo que va de la pregunta hacia abajo entra despues, para que primero se
+     lea el titular. El retraso arranca cuando la tarjeta se ve, no al cargar */
+  .arg-tarde {
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.9s ease 2.2s, transform 0.9s ease 2.2s;
+  }
+  .arg-card--intro.in .arg-tarde { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .arg-tarde { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ===== CABECERAS DE SECCION: mas aire entre las tres piezas ===== */
+  .section-head { gap: 0; }
+  .section-head .sec-kicker { margin-bottom: 1.1rem; }
+  .section-head h2 { margin-bottom: 1rem; }
+  @media (min-width: 860px) {
+    .section-head .sec-kicker { margin-bottom: 1.4rem; }
+    .section-head h2 { margin-bottom: 1.2rem; }
   }
 
 </style>
@@ -1918,12 +1959,14 @@
     <div class="stack">
 
       <article class="stack-card arg-card arg-card--intro">
-        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
-        <p class="arg-kicker">30 años observando. 10 años explicando.</p>
+        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg><span class="arg-lockup-word">ZEROX</span></span>
+        <p class="arg-kicker"><span>30 años observando</span><span>10 años divulgando</span></p>
         <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
-        <p class="arg-sub">Debería empezar con una pregunta:</p>
-        <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
-        <p class="arg-pie">Porque el contexto ha cambiado.</p>
+        <div class="arg-tarde">
+          <p class="arg-sub">Debería empezar con una pregunta:</p>
+          <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
+          <p class="arg-pie">Porque el contexto ha cambiado.</p>
+        </div>
       </article>
 
       <article class="stack-card arg-card">
