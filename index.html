@@ -1634,7 +1634,7 @@
 
   /* ===== TARJETA DE APERTURA: lockup, rotulo y entrada en dos tiempos ===== */
   .arg-lockup {
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: flex; align-items: center; justify-content: center;
     margin: 0 auto 1.4rem; color: var(--paper);
   }
   .arg-lockup .arg-mark { margin: 0; width: 1.5rem; height: 1.5rem; }
@@ -1653,7 +1653,7 @@
     opacity: 0; transform: translateY(10px);
     transition: opacity 0.9s ease 2.2s, transform 0.9s ease 2.2s;
   }
-  .arg-card--intro.in .arg-tarde { opacity: 1; transform: none; }
+  .arg-tarde.visto { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .arg-tarde { opacity: 1; transform: none; transition: none; }
   }
@@ -1666,6 +1666,66 @@
     .section-head .sec-kicker { margin-bottom: 1.4rem; }
     .section-head h2 { margin-bottom: 1.2rem; }
   }
+
+
+  /* ============ PACK: se lee como oferta, no como ficha ============
+     Lo que lo hace oferta y no producto: las pastillas de ventaja arriba, el
+     ahorro delante del precio y el precio dentro del boton. El tachado es
+     legal aqui porque no es un precio anterior del pack, es la suma de los
+     dos productos por separado, y va etiquetado como tal. */
+  #libro { background: none; border-radius: 0; margin: 0; padding: 3rem 0 3.4rem; }
+  #libro .pack {
+    background: #fff; border: 1.5px solid var(--line); border-radius: 22px;
+    overflow: hidden; max-width: 34rem; margin: 0 auto;
+    box-shadow: 0 24px 60px -34px rgba(35, 39, 46, 0.4);
+  }
+  .pack-media { background: var(--tint); }
+  .pack-media img { width: 100%; height: auto; display: block; }
+  #libro .pack-body { padding: 1.5rem 1.4rem 1.6rem; text-align: left; }
+
+  .pack-pills { list-style: none; display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.3rem; padding: 0; }
+  .pack-pill {
+    font-size: 0.92rem; font-weight: 500; padding: 0.35rem 0.8rem;
+    border-radius: 999px; background: var(--tint); color: var(--ink-soft);
+  }
+  /* el ahorro es lo primero que tiene que saltar */
+  .pack-pill--fuerte { background: var(--khaki-deep); color: #fff; font-weight: 600; }
+
+  #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.9rem; }
+  #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
+  #libro .pack-list li::before {
+    content: ""; position: absolute; left: 0; top: 0.42em;
+    width: 11px; height: 6px; border-left: 2px solid var(--khaki-deep);
+    border-bottom: 2px solid var(--khaki-deep); transform: rotate(-45deg);
+  }
+  #libro .pack-list b { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+  #libro .pack-list span { font-size: 0.98rem; color: var(--ink-soft); }
+
+  #libro .pack-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 1.1rem; }
+  #libro .pack-now { font-size: 2.2rem; font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
+  #libro .pack-was { font-size: 1.05rem; color: var(--ink-faint); text-decoration: line-through; }
+  #libro .pack-save { font-size: 0.95rem; color: var(--ink-soft); flex-basis: 100%; }
+
+  /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
+     parte de esa decision */
+  .pack-cta {
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+    width: 100%; padding: 1.05rem 1.4rem; border-radius: 999px;
+    background: var(--ink); color: var(--paper);
+    font-size: 1.05rem; font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .pack-cta:hover { background: var(--khaki-deep); transform: translateY(-1px); }
+  .pack-cta-precio { opacity: 0.75; font-weight: 500; }
+  #libro .pack-note { margin: 0.9rem 0 0; font-size: 0.92rem; color: var(--ink-soft); text-align: center; }
+
+  @media (min-width: 860px) {
+    #libro { padding: 4.5rem 0 5rem; }
+    #libro .pack { max-width: 52rem; display: grid; grid-template-columns: 1fr 1fr; }
+    .pack-media { display: flex; align-items: center; }
+    #libro .pack-body { padding: 2.4rem 2.2rem; align-self: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pack-cta { transition: none; } }
 
 </style>
 <noscript><style>
@@ -1959,7 +2019,7 @@
     <div class="stack">
 
       <article class="stack-card arg-card arg-card--intro">
-        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg><span class="arg-lockup-word">ZEROX</span></span>
+        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg></span>
         <p class="arg-kicker"><span>30 años observando</span><span>10 años divulgando</span></p>
         <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
         <div class="arg-tarde">
@@ -2041,21 +2101,35 @@
     </div>
 
     <div class="pack reveal">
-      <img class="pack-cover" src="pack-magnesio-libro.jpg" width="1402" height="1122"
-           loading="lazy" decoding="async"
-           alt="Bote de Magnesio Bisglicinato de ZEROX junto al libro La gran guía de la suplementación, de Sento Segarra">
+      <div class="pack-media">
+        <img src="pack-magnesio-libro.jpg" width="1402" height="1122"
+             loading="lazy" decoding="async"
+             alt="Bote de Magnesio Bisglicinato de ZEROX junto al libro La gran guía de la suplementación, de Sento Segarra">
+      </div>
+
       <div class="pack-body">
+        <ul class="pack-pills">
+          <li class="pack-pill pack-pill--fuerte">Ahorras 5,90&nbsp;&euro;</li>
+          <li class="pack-pill">Envío gratis</li>
+          <li class="pack-pill">Devolución en 30 días</li>
+        </ul>
+
         <ul class="pack-list">
-          <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 300&ndash;400&nbsp;mg por dosis</span></li>
+          <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 30 días de tratamiento</span></li>
           <li><b>La gran guía de la suplementación</b><span>Sento Segarra &middot; tapa dura</span></li>
         </ul>
+
         <div class="pack-price">
           <span class="pack-now">39,90&nbsp;&euro;</span>
           <span class="pack-was">45,80&nbsp;&euro;</span>
-          <span class="pack-save">por separado</span>
+          <span class="pack-save">comprado por separado</span>
         </div>
-        <a class="btn btn-solid" href="#footer-signup">Reserva el pack</a>
-        <p class="pack-note">Precios y disponibilidad por confirmar.</p>
+
+        <a class="pack-cta" href="#footer-signup">
+          <span>Reserva el pack</span>
+          <span class="pack-cta-precio">39,90&nbsp;&euro;</span>
+        </a>
+        <p class="pack-note">Precios orientativos. Todavía no está a la venta.</p>
       </div>
     </div>
   </section>
@@ -2530,6 +2604,23 @@
     }, { passive: true });
     window.addEventListener('resize', pintarPila, { passive: true });
     pintarPila();
+  }
+
+  // el bloque tardio de la tarjeta de apertura: observador propio, porque esa
+  // tarjeta no lleva la clase .reveal y nunca recibia el .in del observador
+  // general. El retraso lo pone el CSS y arranca al entrar en pantalla.
+  var tarde = document.querySelector('.arg-tarde');
+  if (tarde) {
+    if ('IntersectionObserver' in window) {
+      var tardeIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visto'); tardeIO.unobserve(e.target); }
+        });
+      }, { threshold: 0.2 });
+      tardeIO.observe(tarde);
+    } else {
+      tarde.classList.add('visto');
+    }
   }
 
   var barra = document.querySelector('.hero-nav');
