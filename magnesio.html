@@ -34,6 +34,28 @@
     --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --tracking-lg: -0.03em;
 
+    /* ===== ESCALA DE TEXTO =====
+       Habia 40 tamanos declarados y 29 llegaban a pintarse, muchos
+       separados por un 2 o 3 por ciento: no se ven, pero impiden que nada
+       case. Los escalones son los que la web ya usaba de verdad.
+       Fuera quedan los clamp() y los em, relativos a proposito, y el punto
+       separador del ticker, que es un glifo y no texto. */
+    --t-3xs: 0.72rem;
+    --t-2xs: 0.8rem;
+    --t-xs: 0.85rem;
+    --t-sm: 0.9rem;
+    --t-md: 0.95rem;
+    --t-base: 1rem;
+    --t-lg: 1.05rem;
+    --t-xl: 1.15rem;
+    --t-2xl: 1.3rem;
+    --t-3xl: 1.6rem;
+    --t-4xl: 1.75rem;
+    --t-5xl: 1.9rem;
+    --t-6xl: 2.05rem;
+    --t-7xl: 2.2rem;
+    --t-8xl: 2.4rem;
+
     /* ===== BOTONES ===== mismos tokens que la portada.
          primario   marron solido, la accion principal del bloque
          secundario contorno, para navegar
@@ -62,7 +84,7 @@
   /* ---------- barra de aviso + nav ---------- */
   .topbar {
     background: var(--ink); color: var(--paper);
-    font-size: 0.85rem; text-align: center; padding: 0.6rem 1rem;
+    font-size: var(--t-xs); text-align: center; padding: 0.6rem 1rem;
   }
   nav {
     position: relative; display: flex; align-items: center;
@@ -70,7 +92,7 @@
   }
   .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
   .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
-  .logo-word { font-weight: 600; font-size: 1.28rem; letter-spacing: 0.2em; text-indent: 0.2em; }
+  .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
   nav > .logo {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   }
@@ -88,24 +110,24 @@
   }
   .ficha-foto img { width: 100%; height: 100%; object-fit: cover; }
   .ficha-eyebrow {
-    margin: 1.6rem 0 0.5rem; font-size: 0.9rem; letter-spacing: 0.16em;
+    margin: 1.6rem 0 0.5rem; font-size: var(--t-sm); letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--khaki-deep); font-weight: 500;
   }
   h1 {
-    margin: 0 0 0.7rem; font-size: 2.1rem; font-weight: 600;
+    margin: 0 0 0.7rem; font-size: var(--t-6xl); font-weight: 600;
     line-height: 1.1; letter-spacing: var(--tracking-lg);
   }
-  .ficha-lede { margin: 0 0 1.5rem; font-size: 1.1rem; color: var(--ink-soft); }
+  .ficha-lede { margin: 0 0 1.5rem; font-size: var(--t-xl); color: var(--ink-soft); }
   .ficha-precio {
     display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.3rem;
   }
-  .precio { font-size: 1.75rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
-  .precio-nota { font-size: 0.95rem; color: var(--ink-soft); }
+  .precio { font-size: var(--t-4xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .precio-nota { font-size: var(--t-md); color: var(--ink-soft); }
   .ficha-orientativo {
-    margin: 0.4rem 0 1.2rem; font-size: 0.95rem; color: var(--ink-soft);
+    margin: 0.4rem 0 1.2rem; font-size: var(--t-md); color: var(--ink-soft);
     padding-left: 0.8rem; border-left: 2px solid var(--khaki);
   }
-  .ficha-envio { margin: 0 0 1.3rem; font-size: 0.95rem; color: var(--ink-soft); }
+  .ficha-envio { margin: 0 0 1.3rem; font-size: var(--t-md); color: var(--ink-soft); }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
     border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
@@ -140,11 +162,11 @@
   }
   .gal-titular {
     margin: 0 0 0.4rem; color: #fff; font-weight: 600;
-    font-size: 1.55rem; line-height: 1.1; letter-spacing: var(--tracking-lg);
+    font-size: var(--t-3xl); line-height: 1.1; letter-spacing: var(--tracking-lg);
   }
   .gal-lede {
     margin: 0; color: rgba(255, 255, 255, 0.93);
-    font-size: 0.92rem; line-height: 1.4;
+    font-size: var(--t-sm); line-height: 1.4;
   }
 
   .galeria-minis {
@@ -177,8 +199,8 @@
     border-radius: 14px; overflow: hidden; margin: 2rem 0 0;
   }
   .dato { background: var(--paper); padding: 1.1rem 1rem; }
-  .dato dt { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.2rem; }
-  .dato dd { margin: 0; font-size: 1.1rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .dato dt { font-size: var(--t-xs); color: var(--ink-soft); margin-bottom: 0.2rem; }
+  .dato dd { margin: 0; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
 
   /* ---------- sellos: los atributos, fuera del acordeon ----------
      La informacion ya estaba, pero enterrada dentro de una FAQ desplegable.
@@ -191,7 +213,7 @@
   }
   .sellos li {
     display: grid; justify-items: center; gap: 0.35rem; text-align: center;
-    font-size: 0.72rem; line-height: 1.25; color: var(--ink-soft);
+    font-size: var(--t-3xs); line-height: 1.25; color: var(--ink-soft);
   }
   .sellos svg { width: 22px; height: 22px; color: var(--khaki-deep); }
 
@@ -209,23 +231,23 @@
     gap: 0.6rem; margin: 0 0 0.5rem;
   }
   .forma-nombre {
-    margin: 0; font-size: 1.12rem; font-weight: 700;
+    margin: 0; font-size: var(--t-xl); font-weight: 700;
     letter-spacing: var(--tracking-lg);
   }
   .forma-sello {
-    flex: 0 0 auto; font-size: 0.68rem; font-weight: 600;
+    flex: 0 0 auto; font-size: var(--t-3xs); font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.08em;
     color: #fff; background: var(--khaki-deep);
     border-radius: 999px; padding: 0.22rem 0.55rem;
   }
-  .forma p { margin: 0; font-size: 0.97rem; line-height: 1.5; color: var(--ink-soft); }
+  .forma p { margin: 0; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
   .forma-dato {
     margin: 0.6rem 0 0; padding-top: 0.6rem;
     border-top: 1px solid var(--line);
-    font-size: 0.9rem; color: var(--ink); font-weight: 600;
+    font-size: var(--t-sm); color: var(--ink); font-weight: 600;
   }
   .formas-nota {
-    margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--ink-soft);
+    margin: 0.9rem 0 0; font-size: var(--t-xs); color: var(--ink-soft);
   }
 
   /* ---------- para quien es y para quien no ----------
@@ -233,13 +255,13 @@
      hace falta es lo que hace creible el resto de la pagina. */
   .quien-cols { display: grid; gap: 1.4rem; }
   .quien-col h3 {
-    margin: 0 0 0.8rem; font-size: 1.02rem; font-weight: 700;
+    margin: 0 0 0.8rem; font-size: var(--t-base); font-weight: 700;
     letter-spacing: 0.01em;
   }
   .quien-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
   .quien-col li {
     position: relative; padding-left: 1.55rem;
-    font-size: 0.98rem; line-height: 1.5; color: var(--ink-soft);
+    font-size: var(--t-base); line-height: 1.5; color: var(--ink-soft);
   }
   /* tick y cruz dibujados en CSS, igual que en la portada */
   .quien-si li::before {
@@ -261,7 +283,7 @@
   .calidad { list-style: none; margin: 0 0 1.2rem; padding: 0; display: grid; gap: 0.9rem; }
   .calidad li {
     position: relative; padding-left: 1.55rem;
-    font-size: 0.98rem; line-height: 1.5; color: var(--ink-soft);
+    font-size: var(--t-base); line-height: 1.5; color: var(--ink-soft);
   }
   .calidad li::before {
     content: ""; position: absolute; left: 0; top: 0.42em;
@@ -272,13 +294,13 @@
   }
   .calidad-espera {
     margin: 0; padding: 0.9rem 1rem; border-radius: 12px;
-    background: var(--tint); font-size: 0.92rem; line-height: 1.5;
+    background: var(--tint); font-size: var(--t-sm); line-height: 1.5;
     color: var(--ink-soft);
   }
 
   /* ---------- referencias ---------- */
   .refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
-  .refs li { font-size: 0.95rem; line-height: 1.5; color: var(--ink-soft); }
+  .refs li { font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
   .refs b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.15rem; }
   .refs a { color: var(--khaki-deep); }
 
@@ -295,17 +317,17 @@
   }
   .otra-cuerpo { min-width: 0; flex: 1 1 auto; }
   .otra-nombre {
-    margin: 0; font-size: 0.97rem; font-weight: 600;
+    margin: 0; font-size: var(--t-md); font-weight: 600;
     letter-spacing: var(--tracking-lg);
   }
   .otra-desc {
-    margin: 0.2rem 0 0; font-size: 0.85rem; line-height: 1.35;
+    margin: 0.2rem 0 0; font-size: var(--t-xs); line-height: 1.35;
     color: var(--ink-soft);
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
     overflow: hidden;
   }
   .otra-precio {
-    flex: 0 0 auto; font-size: 0.97rem; font-weight: 700;
+    flex: 0 0 auto; font-size: var(--t-md); font-weight: 700;
     color: var(--khaki-deep);
   }
 
@@ -320,45 +342,45 @@
   /* ---------- secciones ---------- */
   section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
   h2 {
-    margin: 0 0 1.2rem; font-size: 1.6rem; font-weight: 600;
+    margin: 0 0 1.2rem; font-size: var(--t-3xl); font-weight: 600;
     letter-spacing: var(--tracking-lg); line-height: 1.15;
   }
-  section > p { font-size: 1.05rem; color: var(--ink-soft); }
+  section > p { font-size: var(--t-lg); color: var(--ink-soft); }
 
   /* para qué sirve */
   .usos { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.85rem; }
   .usos li {
     display: flex; gap: 0.7rem; align-items: flex-start;
-    font-size: 1.05rem; line-height: 1.45;
+    font-size: var(--t-lg); line-height: 1.45;
   }
   .usos svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--khaki-deep); }
   .usos-nota {
     margin: 1.3rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line);
-    font-size: 0.95rem; color: var(--ink-soft);
+    font-size: var(--t-md); color: var(--ink-soft);
   }
 
   /* composición */
-  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  table { width: 100%; border-collapse: collapse; font-size: var(--t-base); }
   th, td { text-align: left; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
-  th { font-weight: 600; font-size: 0.9rem; color: var(--ink-soft); }
+  th { font-weight: 600; font-size: var(--t-sm); color: var(--ink-soft); }
   td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-  .tabla-nota { margin: 0.9rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+  .tabla-nota { margin: 0.9rem 0 0; font-size: var(--t-md); color: var(--ink-soft); }
   .ingredientes {
     margin: 1.5rem 0 0; padding: 1.1rem 1.2rem;
     background: var(--tint); border-radius: 14px;
-    font-size: 1rem; color: var(--ink-soft);
+    font-size: var(--t-base); color: var(--ink-soft);
   }
   .ingredientes strong { color: var(--ink); }
 
   /* cómo tomarlo */
   .pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.1rem; counter-reset: paso; }
-  .pasos li { display: flex; gap: 0.9rem; font-size: 1.05rem; }
+  .pasos li { display: flex; gap: 0.9rem; font-size: var(--t-lg); }
   .pasos li::before {
     counter-increment: paso; content: counter(paso);
     flex-shrink: 0; width: 1.9rem; height: 1.9rem; border-radius: 50%;
     background: var(--khaki-pop); color: var(--olive);
     display: grid; place-items: center;
-    font-size: 0.9rem; font-weight: 600; font-family: var(--font-mono);
+    font-size: var(--t-sm); font-weight: 600; font-family: var(--font-mono);
   }
 
   /* el acordeon de informacion reutiliza el componente del FAQ, pero sin la
@@ -398,16 +420,16 @@
   .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-pop); }
   .faq-head { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
   @media (min-width: 620px) { .faq-head { flex-direction: row; align-items: center; gap: 1rem; } }
-  .faq-title { font-size: 1.02rem; font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
+  .faq-title { font-size: var(--t-base); font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
   .faq-meta {
-    align-self: flex-start; flex-shrink: 0; font-size: 0.72rem; color: rgba(238,240,244,0.66);
+    align-self: flex-start; flex-shrink: 0; font-size: var(--t-3xs); color: rgba(238,240,244,0.66);
     border: 1px solid rgba(238,240,244,0.2); border-radius: 1000px; padding: 0.25rem 0.7rem;
   }
   @media (min-width: 620px) { .faq-meta { margin-left: auto; } }
   .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.16,1,0.3,1); }
   .faq-a.open { grid-template-rows: 1fr; }
   .faq-a > div { overflow: hidden; }
-  .faq-a p { margin: 0; padding: 0 1.4rem 1.4rem 4.4rem; font-size: 0.95rem; line-height: 1.6; color: rgba(238,240,244,0.74); max-width: 62ch; }
+  .faq-a p { margin: 0; padding: 0 1.4rem 1.4rem 4.4rem; font-size: var(--t-md); line-height: 1.6; color: rgba(238,240,244,0.74); max-width: 62ch; }
   @media (prefers-reduced-motion: reduce) { .faq-a, .faq-ico { transition: none; } }
   .faq-a p { color: var(--ink-soft); }
 
@@ -441,7 +463,7 @@
   .alta form { display: grid; gap: 0.7rem; margin: 1.2rem 0 0; }
   .alta input {
     width: 100%; padding: 0.95rem 1.1rem; border: 1px solid var(--line);
-    border-radius: 999px; font: inherit; font-size: 1rem; background: #fff; color: var(--ink);
+    border-radius: 999px; font: inherit; font-size: var(--t-base); background: #fff; color: var(--ink);
   }
   .alta button {
     padding: var(--btn-relleno); border: 0; border-radius: var(--btn-radio);
@@ -453,14 +475,14 @@
 
   footer {
     border-top: 1px solid var(--line); padding: 2rem 0 2.5rem;
-    font-size: 0.95rem; color: var(--ink-soft); text-align: center;
+    font-size: var(--t-md); color: var(--ink-soft); text-align: center;
   }
   footer a { text-decoration: underline; text-underline-offset: 3px; }
 
   /* ---------- modos de compra ---------- */
   .modos { border: 0; margin: 0 0 1.3rem; padding: 0; display: grid; gap: 0.7rem; }
   .modos-legend {
-    padding: 0; margin: 0 0 0.9rem; font-size: 1.05rem; font-weight: 600;
+    padding: 0; margin: 0 0 0.9rem; font-size: var(--t-lg); font-weight: 600;
     letter-spacing: var(--tracking-lg);
   }
   .modo {
@@ -486,19 +508,19 @@
 
   .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
   .modo-fila { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; }
-  .modo-nombre { font-size: 1.05rem; font-weight: 600; }
-  .modo-precio b { font-size: 1.2rem; font-weight: 600; letter-spacing: var(--tracking-lg); }
-  .modo-precio small { font-size: 0.9rem; color: var(--ink-soft); }
-  .modo-desc { font-size: 0.98rem; color: var(--ink-soft); }
+  .modo-nombre { font-size: var(--t-lg); font-weight: 600; }
+  .modo-precio b { font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .modo-precio small { font-size: var(--t-sm); color: var(--ink-soft); }
+  .modo-desc { font-size: var(--t-base); color: var(--ink-soft); }
   .modo-ahorro {
     justify-self: start; margin-top: 0.15rem;
-    font-size: 0.9rem; font-weight: 600; color: var(--olive);
+    font-size: var(--t-sm); font-weight: 600; color: var(--olive);
     background: var(--khaki-pop); border-radius: 999px; padding: 0.2rem 0.7rem;
   }
   .modo-plus { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
   .modo-plus li {
     position: relative; padding-left: 1.1rem;
-    font-size: 0.95rem; color: var(--ink-soft); line-height: 1.45;
+    font-size: var(--t-md); color: var(--ink-soft); line-height: 1.45;
   }
   .modo-plus li::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
@@ -510,7 +532,7 @@
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
     .galeria { position: sticky; top: 1.5rem; }
     .wrap { max-width: 60rem; }
-    h1 { font-size: 2.4rem; }
+    h1 { font-size: var(--t-8xl); }
     .ficha-eyebrow { margin-top: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
