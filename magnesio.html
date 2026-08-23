@@ -109,8 +109,32 @@
     touch-action: pan-y; user-select: none; -webkit-user-select: none;
   }
   .galeria-track { display: flex; transition: transform 0.45s cubic-bezier(.16,1,.3,1); }
-  .galeria-slide { flex: 0 0 100%; aspect-ratio: 4 / 5; }
+  .galeria-slide { flex: 0 0 100%; aspect-ratio: 4 / 5; position: relative; }
   .galeria-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* El copy que llevaba esta foto cuando era diapositiva del hero de la
+     portada. Se queda con su imagen, que es de lo que habla, pero sin boton:
+     aqui ya estas en la ficha y el CTA de comprar esta justo al lado. */
+  .gal-velo {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top,
+      rgba(18, 20, 24, 0.78) 0%,
+      rgba(18, 20, 24, 0.55) 28%,
+      rgba(18, 20, 24, 0.12) 55%,
+      transparent 75%);
+  }
+  .gal-copy {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1.3rem 1.2rem 1.4rem; text-align: center; pointer-events: none;
+  }
+  .gal-titular {
+    margin: 0 0 0.4rem; color: #fff; font-weight: 600;
+    font-size: 1.55rem; line-height: 1.1; letter-spacing: var(--tracking-lg);
+  }
+  .gal-lede {
+    margin: 0; color: rgba(255, 255, 255, 0.93);
+    font-size: 0.92rem; line-height: 1.4;
+  }
 
   .galeria-minis {
     display: flex; gap: 0.55rem; margin-top: 0.6rem;
@@ -520,7 +544,14 @@
       <div class="galeria-viewport" id="gal-viewport">
         <div class="galeria-track" id="gal-track">
           <div class="galeria-slide"><img src="ficha-magnesio.jpg" width="761" height="1024" alt="Bote de Magnesio Bisglicinato de ZEROX sobre piedra" fetchpriority="high" decoding="async"></div>
-          <div class="galeria-slide"><img src="hero-magnesio.jpg" width="572" height="1050" alt="El bote en una mesilla de noche, al final del día" loading="lazy" decoding="async"></div>
+          <div class="galeria-slide">
+            <img src="hero-magnesio.jpg" width="572" height="1050" alt="El bote en una mesilla de noche, al final del día" loading="lazy" decoding="async">
+            <div class="gal-velo" aria-hidden="true"></div>
+            <div class="gal-copy">
+              <p class="gal-titular">Para los días<br>que pesan</p>
+              <p class="gal-lede">Contribuye a disminuir el cansancio y la fatiga.</p>
+            </div>
+          </div>
           <div class="galeria-slide"><img src="pack-magnesio-libro.jpg" width="1402" height="1122" alt="El bote junto al libro de Sento Segarra, en el pack de lanzamiento" loading="lazy" decoding="async"></div>
         </div>
       </div>

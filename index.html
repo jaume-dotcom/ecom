@@ -331,7 +331,7 @@
   /* contenedor propio, no el .wrap genérico de 1280px: el hero pasa a sentirse
      como una pieza independiente y centrada, con margen visible a los lados
      en vez de ocupar el ancho de sección casi completo */
-  .hero-carousel { position: relative; z-index: 2; width: 100%; margin-top: 1.4rem; padding-bottom: 3rem; }
+  .hero-carousel { position: relative; z-index: 2; width: 100%; margin-top: 1.4rem; padding-bottom: 1.2rem; }
   /* el viewport es solo la "ventana" que recorta; no lleva radio ni fondo
      propios porque ahora cada .hero-media-box es su propia tarjeta. En móvil
      no sangra (--hero-peek/--hero-gap a 0): mismo comportamiento de siempre */
@@ -1579,7 +1579,11 @@
     border-bottom: 1px solid var(--line);
     padding: 3rem 0.5rem 3.2rem;
     text-align: center;
-    background-image: url("asesoria-lupa.jpg");
+    /* la propia foto del hero, desenfocada y con el velo horneado dentro del
+       archivo. La lupa que habia antes hablaba de inspeccionar, y este bloque
+       pregunta por cual empezar: son los cuatro botes los que contestan.
+       Ademas es producto real, no una imagen generada que no se le parece. */
+    background-image: url("asesoria-fondo.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1944,79 +1948,37 @@
 
 
   <div class="hero-carousel wrap">
-  <div class="hero-carousel-viewport">
-    <div class="hero-carousel-track" id="hero-carousel-track">
-    <div class="hero-slide active">
-      <div class="hero-media-box">
-        <img src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
-        <div class="hero-shade"></div>
-        <div class="hero-copy">
-          <h1 class="hero-headline">Cuatro fórmulas,<br>sin letra pequeña</h1>
-          <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
-          <a class="hero-cta" href="#alta">Reserva tu acceso</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide hero-slide-left">
-      <div class="hero-media-box">
-        <img src="hero-magnesio.jpg" width="558" height="1024" alt="Mujer de unos cincuenta años sentada en el borde de la cama al final del día, quitándose las zapatillas, con el bote de magnesio de ZEROX en la mesilla" decoding="async">
-        <div class="hero-shade"></div>
-        <div class="hero-copy">
-          <p class="hero-headline">Para los días<br>que pesan</p>
-          <p class="hero-lede">Contribuye a disminuir el cansancio y la fatiga.</p>
-          <a class="hero-cta" href="#catalogo">Ver Magnesio ZEROX</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <div class="hero-media-box">
-        <img src="hero-d3k2.jpg" width="558" height="1024" alt="Bote de vitamina D3 + K2 de ZEROX sobre la mesa de una terraza" decoding="async">
-        <div class="hero-shade"></div>
-        <div class="hero-copy">
-          <p class="hero-headline">Lo que el invierno<br>no te da</p>
-          <p class="hero-lede">Contribuye al mantenimiento de los huesos en condiciones normales.</p>
-          <a class="hero-cta" href="#catalogo">Ver Vitamina D3+K2 ZEROX</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <div class="hero-media-box">
-        <img src="hero-omega3.jpg" width="558" height="1024" alt="Hombre de unos sesenta y cinco años en su cocina, con el bote de omega-3 de ZEROX en la encimera" decoding="async">
-        <div class="hero-shade"></div>
-        <div class="hero-copy">
-          <p class="hero-headline">Para el corazón,<br>la dosis importa</p>
-          <p class="hero-lede">EPA y DHA contribuyen al funcionamiento normal del corazón.</p>
-          <a class="hero-cta" href="#catalogo">Ver Omega-3 ZEROX</a>
-        </div>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <div class="hero-media-box">
-        <img src="hero-probiotico.jpg" width="558" height="1024" alt="Tres personas conversando alrededor de una mesa; en primer plano una mano sostiene el bote de probiótico multicepa de ZEROX" decoding="async">
-        <div class="hero-shade"></div>
-        <div class="hero-copy">
-          <p class="hero-headline">Las cepas, con<br>nombre y apellido</p>
-          <p class="hero-lede">Cada cepa identificada en la etiqueta, con sus UFC.</p>
-          <a class="hero-cta" href="#catalogo">Ver Probiótico ZEROX</a>
-        </div>
+    <div class="hero-media-box">
+      <img src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <h1 class="hero-headline">Cuatro fórmulas,<br>sin letra pequeña</h1>
+        <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
+        <a class="hero-cta" href="#alta">Reserva tu acceso</a>
       </div>
     </div>
   </div>
-  </div>
-    <button type="button" class="hero-carousel-arrow hero-carousel-prev" id="hero-carousel-prev" aria-label="Diapositiva anterior">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
-    </button>
-    <button type="button" class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Siguiente diapositiva">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 18l6-6-6-6"/></svg>
-    </button>
-    <div class="hero-carousel-pagination" id="hero-carousel-dots" role="tablist" aria-label="Diapositivas">
-      <button type="button" class="hero-carousel-pagination-item active" data-slide-index="0" aria-label="Ir a la diapositiva 1: ZEROX" aria-current="true"></button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="1" aria-label="Ir a la diapositiva 2: Magnesio Bisglicinato"></button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="2" aria-label="Ir a la diapositiva 3: Vitamina D3 + K2"></button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="3" aria-label="Ir a la diapositiva 4: Omega-3 EPA+DHA"></button>
-      <button type="button" class="hero-carousel-pagination-item" data-slide-index="4" aria-label="Ir a la diapositiva 5: Probiotico Multicepa"></button>
-    </div>
-  </div>
+
+  <!-- Las otras cuatro diapositivas se han quitado: eran fotos de ambiente
+       que no enseñaban el producto, y en movil casi nadie pasaba de la
+       primera. Su copy NO se tira, que es bueno y es de producto. El del
+       magnesio ya esta en magnesio.html; estos tres esperan a que existan
+       sus fichas:
+
+       d3k2.html       "Lo que el invierno no te da"
+                       Contribuye al mantenimiento de los huesos en
+                       condiciones normales.
+                       foto: hero-d3k2.jpg
+
+       omega3.html     "Para el corazon, la dosis importa"
+                       EPA y DHA contribuyen al funcionamiento normal del
+                       corazon.
+                       foto: hero-omega3.jpg
+
+       probiotico.html "Las cepas, con nombre y apellido"
+                       Cada cepa identificada en la etiqueta, con sus UFC.
+                       foto: hero-probiotico.jpg
+       -->
 
   <div class="ticker" aria-label="Claves de la marca">
     <div class="ticker-track">
@@ -2090,7 +2052,6 @@
         </ul>
         <blockquote class="firma-cita">
           <p>&laquo;Llevo más de 30 años detrás de un mostrador de farmacia escuchando las mismas dudas: ¿sirven los suplementos de verdad? ¿cuáles valen la pena?&raquo;</p>
-          <footer class="firma-fuente">En la presentación de su libro</footer>
         </blockquote>
         <p class="firma-remate">ZEROX es lo que viene después. Cuatro fórmulas, con la cantidad que pondría si fuera para mí, y esa cantidad en la etiqueta.</p>
         <p class="firma-rubrica" aria-hidden="true">Sento</p>
@@ -2633,161 +2594,6 @@
     });
   }
 
-  // panel móvil (hamburguesa) + acordeón interior
-  var carouselTrack = document.getElementById('hero-carousel-track');
-  if (carouselTrack) {
-    var carouselSlides = Array.prototype.slice.call(carouselTrack.children);
-    var carouselMobileLists = Array.prototype.slice.call(document.querySelectorAll('.hero-mobile-benefits'));
-    var carouselDots = Array.prototype.slice.call(document.querySelectorAll('.hero-carousel-pagination-item'));
-    var carouselPrev = document.getElementById('hero-carousel-prev');
-    var carouselNext = document.getElementById('hero-carousel-next');
-    var carouselRoot = carouselTrack.closest('.hero-carousel') || carouselTrack;
-    var carouselViewport = carouselTrack.closest('.hero-carousel-viewport');
-    var carouselIndex = 0;
-    var carouselTimer = null;
-    // 7s: cada slide lleva 5 etiquetas de beneficio (~20 palabras) y con 5s
-    // cambiaba justo mientras se estaban leyendo
-    var CAROUSEL_MS = 7000;
-    var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var carouselPointerId = null;
-    var carouselPointerStartX = 0;
-    var carouselPointerDeltaX = 0;
-    var CAROUSEL_SWIPE_THRESHOLD = 50;
-
-    // el peek fijo (60px) más el gap (16px) no siempre caben en el margen real
-    // que deja .hero-carousel alrededor del slide activo (ese margen no se toca,
-    // sigue siendo exactamente el mismo de antes). Si no cabe entero, se recorta
-    // el peek -y si hace falta el gap- al hueco real, en vez de salirse de la
-    // ventana del navegador o forzar scroll horizontal.
-    var HERO_PEEK_MAX = 60;
-    var HERO_GAP_MAX = 16;
-    function updatePeekForSpace() {
-      if (!carouselViewport || !carouselRoot) return;
-      if (window.innerWidth < 860) {
-        carouselViewport.style.removeProperty('--hero-peek');
-        carouselViewport.style.removeProperty('--hero-gap');
-        return;
-      }
-      var available = Math.max(0, (window.innerWidth - carouselRoot.getBoundingClientRect().width) / 2);
-      var peek = Math.min(HERO_PEEK_MAX, available);
-      var gap = Math.min(HERO_GAP_MAX, available - peek);
-      carouselViewport.style.setProperty('--hero-peek', peek + 'px');
-      carouselViewport.style.setProperty('--hero-gap', gap + 'px');
-    }
-
-    // desplazamiento en px real, no en %: con el peek lateral el slide activo
-    // ya no mide el 100% del viewport, así que el offset se mide y no se supone
-    function repositionTrack() {
-      if (!carouselSlides[0]) return;
-      var slideWidth = carouselSlides[0].getBoundingClientRect().width;
-      var gap = parseFloat(getComputedStyle(carouselTrack).columnGap) || 0;
-      var viewportWidth = carouselViewport ? carouselViewport.getBoundingClientRect().width : slideWidth;
-      var centerOffset = (viewportWidth - slideWidth) / 2;
-      var step = slideWidth + gap;
-      carouselTrack.style.transform = 'translateX(' + (centerOffset - carouselIndex * step) + 'px)';
-    }
-
-    function goToSlide(i) {
-      var total = carouselSlides.length;
-      carouselIndex = (i + total) % total;
-      var prevIndex = (carouselIndex - 1 + total) % total;
-      var nextIndex = (carouselIndex + 1) % total;
-
-      repositionTrack();
-
-      // clases prev/active/next: las usa el parallax y la entrada escalonada de beneficios
-      carouselSlides.forEach(function (slide, si) {
-        slide.classList.remove('active', 'prev', 'next');
-        if (si === carouselIndex) slide.classList.add('active');
-        else if (si === prevIndex) slide.classList.add('prev');
-        else if (si === nextIndex) slide.classList.add('next');
-      });
-
-      carouselMobileLists.forEach(function (list, li) { list.classList.toggle('active', li === carouselIndex); });
-
-      carouselDots.forEach(function (dot) { dot.classList.remove('active'); dot.removeAttribute('aria-current'); });
-      void carouselTrack.offsetWidth; // reflow: reinicia limpio la animación CSS de progreso cada vez
-      if (carouselDots[carouselIndex]) {
-        carouselDots[carouselIndex].classList.add('active');
-        carouselDots[carouselIndex].setAttribute('aria-current', 'true');
-      }
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-      if (carouselRoot) carouselRoot.classList.remove('is-paused');
-      // sin botón de pausa, quien pida menos movimiento no debe ver rotación
-      if (sinMovimiento.matches) { return; }
-      carouselTimer = setInterval(function () { goToSlide(carouselIndex + 1); }, CAROUSEL_MS);
-    }
-
-    function stopAutoplay() {
-      if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
-      if (carouselRoot) carouselRoot.classList.add('is-paused');
-    }
-
-    // las flechas ya no estan en el HTML; el guard deja el codigo listo por si vuelven
-    if (carouselPrev) { carouselPrev.addEventListener('click', function () { goToSlide(carouselIndex - 1); startAutoplay(); }); }
-    if (carouselNext) { carouselNext.addEventListener('click', function () { goToSlide(carouselIndex + 1); startAutoplay(); }); }
-    carouselDots.forEach(function (dot, di) {
-      dot.addEventListener('click', function () { goToSlide(di); startAutoplay(); });
-    });
-
-    // sustituye al botón de pausa: se detiene al pasar el ratón o al entrar
-    // con el teclado, y se reanuda al salir
-    carouselRoot.addEventListener('mouseenter', stopAutoplay);
-    carouselRoot.addEventListener('mouseleave', startAutoplay);
-    carouselRoot.addEventListener('focusin', stopAutoplay);
-    carouselRoot.addEventListener('focusout', startAutoplay);
-    // si el sistema cambia la preferencia en caliente, obedecer sin recargar
-    if (sinMovimiento.addEventListener) {
-      sinMovimiento.addEventListener('change', function () { startAutoplay(); });
-    }
-
-    // swipe táctil: Pointer Events unifica ratón y dedo; touch-action:pan-y en
-    // el viewport deja pasar el scroll vertical de la página sin interferir
-    if (carouselViewport && window.PointerEvent) {
-      carouselViewport.addEventListener('pointerdown', function (ev) {
-        if (ev.pointerType === 'mouse' && ev.button !== 0) return;
-        carouselPointerId = ev.pointerId;
-        carouselPointerStartX = ev.clientX;
-        carouselPointerDeltaX = 0;
-        // pausa invisible: mientras el dedo esta apoyado, no rota
-        stopAutoplay();
-      });
-      carouselViewport.addEventListener('pointermove', function (ev) {
-        if (carouselPointerId === null || ev.pointerId !== carouselPointerId) return;
-        carouselPointerDeltaX = ev.clientX - carouselPointerStartX;
-      });
-      var endCarouselSwipe = function (ev) {
-        if (carouselPointerId === null || ev.pointerId !== carouselPointerId) return;
-        var dx = carouselPointerDeltaX;
-        carouselPointerId = null;
-        carouselPointerDeltaX = 0;
-        if (Math.abs(dx) >= CAROUSEL_SWIPE_THRESHOLD) {
-          if (dx < 0) goToSlide(carouselIndex + 1); else goToSlide(carouselIndex - 1);
-        }
-        // se reanuda siempre, tambien tras un toque que no llego a deslizar
-        startAutoplay();
-      };
-      carouselViewport.addEventListener('pointerup', endCarouselSwipe);
-      carouselViewport.addEventListener('pointercancel', endCarouselSwipe);
-    }
-
-    // el ancho del slide/peek cambia con el viewport (incluido el salto de
-    // breakpoint que activa/desactiva el peek), así que hay que recolocar
-    var carouselResizeTimer = null;
-    window.addEventListener('resize', function () {
-      clearTimeout(carouselResizeTimer);
-      carouselResizeTimer = setTimeout(function () { updatePeekForSpace(); repositionTrack(); }, 150);
-    });
-
-    // coloca el slide 0 centrado desde el primer pintado: sin esto el track
-    // se quedaba en translateX inicial (0), descuadrado respecto al peek
-    updatePeekForSpace();
-    repositionTrack();
-    startAutoplay();
-  }
 
   // Puntos del catalogo. Sustituyen a la barra de scroll del sistema, que se
   // ve distinta en cada navegador y no dice cuantas tarjetas quedan.
