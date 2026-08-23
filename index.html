@@ -514,11 +514,31 @@
   .shop-grid {
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 1.1rem;
     overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x proximity;
+    /* la barra del sistema se sustituye por los puntos de abajo */
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .shop-grid::-webkit-scrollbar { display: none; }
+
+  /* puntos del catalogo: el activo es una capsula alargada y los demas
+     circulos. Es el patron que se ve mejor de un vistazo que una barra */
+  .shop-puntos {
+    list-style: none; margin: 1.1rem 0 0; padding: 0;
+    display: flex; justify-content: center; align-items: center; gap: 0.4rem;
+  }
+  .shop-puntos button {
+    display: block; width: 6px; height: 6px; padding: 0;
+    border: 0; border-radius: 999px; background: rgba(35, 39, 46, 0.22);
+    transition: width 0.3s ease, background 0.3s ease;
+  }
+  .shop-puntos button.act { width: 20px; background: var(--ink); }
+  @media (prefers-reduced-motion: reduce) {
+    .shop-puntos button { transition: none; }
   }
   .shop-grid .p-card { scroll-snap-align: start; }
   @media (min-width: 640px) { .shop-grid { grid-auto-columns: 46%; } }
   @media (min-width: 980px) {
     .shop-grid { grid-auto-flow: unset; grid-template-columns: repeat(4, 1fr); overflow-x: visible; }
+    .shop-puntos { display: none; }
   }
   .p-card {
     border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column;
@@ -2064,9 +2084,8 @@
   <section class="band" id="catalogo">
     <div class="section-head reveal">
       <div>
-        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>El catálogo</p>
         <h2>Elige <span class="h2-soft">por dónde empezar</span></h2>
-        <p>La misma exigencia en las cuatro. Empieza por la que más falta te haga.</p>
+        <p>La misma exigencia en las cuatro.</p>
       </div>
     </div>
     <div class="shop-grid reveal">
@@ -2143,6 +2162,13 @@
         </div>
       </div>
     </div>
+
+    <ul class="shop-puntos reveal" id="shop-puntos">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir a la fórmula 1 de 4"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir a la fórmula 2 de 4"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir a la fórmula 3 de 4"></button></li>
+      <li><button type="button" data-i="3" aria-label="Ir a la fórmula 4 de 4"></button></li>
+    </ul>
   </section>
 
   <!-- bloque de ayuda. OJO: los dos destinos son provisionales.
@@ -2732,6 +2758,44 @@
     updatePeekForSpace();
     repositionTrack();
     startAutoplay();
+  }
+
+  // Puntos del catalogo. Sustituyen a la barra de scroll del sistema, que se
+  // ve distinta en cada navegador y no dice cuantas tarjetas quedan.
+  var tira = document.querySelector('.shop-grid');
+  var puntosShop = document.querySelectorAll('#shop-puntos button');
+  if (tira && puntosShop.length) {
+    var marcadoShop = -1;
+    var pintarShop = function () {
+      var card = tira.querySelector('.p-card');
+      if (!card) { return; }
+      // el paso es el ancho de tarjeta mas el hueco, que es lo que avanza
+      // el scroll al pasar de una a la siguiente
+      var hueco = parseFloat(getComputedStyle(tira).columnGap) || 0;
+      var paso = card.getBoundingClientRect().width + hueco;
+      var i = paso > 0 ? Math.round(tira.scrollLeft / paso) : 0;
+      if (i < 0) { i = 0; }
+      if (i > puntosShop.length - 1) { i = puntosShop.length - 1; }
+      if (i === marcadoShop) { return; }
+      marcadoShop = i;
+      for (var j = 0; j < puntosShop.length; j++) {
+        puntosShop[j].classList.toggle('act', j === i);
+      }
+    };
+    var pideShop = false;
+    tira.addEventListener('scroll', function () {
+      if (!pideShop) { pideShop = true; requestAnimationFrame(function () { pideShop = false; pintarShop(); }); }
+    }, { passive: true });
+    window.addEventListener('resize', pintarShop, { passive: true });
+    puntosShop.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var card = tira.querySelectorAll('.p-card')[+b.dataset.i];
+        if (!card) { return; }
+        var hueco = parseFloat(getComputedStyle(tira).columnGap) || 0;
+        tira.scrollTo({ left: (card.getBoundingClientRect().width + hueco) * (+b.dataset.i), behavior: 'smooth' });
+      });
+    });
+    pintarShop();
   }
 
   // la barra gana filete y sombra solo cuando se ha despegado del borde
