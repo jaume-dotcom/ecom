@@ -56,6 +56,22 @@
     --font: "Inter", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --tracking-lg: -0.03em;
+
+    /* ===== BOTONES =====
+       Tres papeles, no cinco colores. Habia cinco fondos distintos para la
+       misma clase de accion: blanco, marron, casi negro, crema y contorno.
+         primario   marron solido. La accion principal del bloque
+         secundario contorno. Navegar, preguntar, lo de al lado
+         claro      fondo claro. SOLO donde el marron no separa: encima de
+                    una foto oscura o encima del panel oscuro del pie
+       Y un solo juego de medidas, con variante compacta para barras y
+       tarjetas. */
+    --btn-radio: 999px;
+    --btn-peso: 600;
+    --btn-txt: 1.05rem;
+    --btn-relleno: 1rem 1.5rem;
+    --btn-txt-sm: 0.9rem;
+    --btn-relleno-sm: 0.62rem 1.15rem;
     --tracking-sm: -0.01em;
   }
   * { box-sizing: border-box; }
@@ -241,9 +257,10 @@
   .nav-cta { display: flex; align-items: center; gap: 0.7rem; }
   @media (max-width: 859px) { .nav-cta { display: none; } }
   .btn {
-    display: inline-block; padding: 0.75rem 1.35rem; font-size: 0.9rem; font-weight: 500;
-    border: 1.5px solid var(--line-strong); background: transparent; color: var(--ink);
-    border-radius: 1000px; letter-spacing: var(--tracking-sm);
+    display: inline-block; padding: var(--btn-relleno-sm);
+    font-size: var(--btn-txt-sm); font-weight: var(--btn-peso);
+    border: 1px solid var(--ink); background: transparent; color: var(--ink);
+    border-radius: var(--btn-radio); letter-spacing: var(--tracking-sm);
   }
   .btn:hover { background: var(--tint); }
   /* el ámbar es el color de la acción: es el único sitio donde la marca se
@@ -290,8 +307,11 @@
   }
   .hero-signup-field input::placeholder { color: var(--ink-faint); }
   .hero-signup button {
-    display: flex; align-items: center; gap: 0.5rem; padding: 0.78rem 1.4rem; background: var(--ink); color: var(--paper);
-    border: none; border-radius: 1000px; font-weight: 500; font-size: 0.95rem; cursor: pointer; font-family: var(--font);
+    display: flex; align-items: center; gap: 0.5rem; padding: var(--btn-relleno-sm);
+    background: var(--khaki-deep); color: var(--paper);
+    border: none; border-radius: var(--btn-radio);
+    font-weight: var(--btn-peso); font-size: var(--btn-txt-sm);
+    cursor: pointer; font-family: var(--font);
   }
   .hero-signup button:hover { background: var(--olive); }
   .hero-signup-arrow { width: 1rem; height: 1rem; }
@@ -454,7 +474,6 @@
     .hero-ctas .btn { font-size: 1rem; padding: 0.95rem 1.6rem; }
     /* el par de botones en negro duro resultaba agresivo; el secundario baja
        a un contorno fino y gris, que es la jerarquía real entre los dos */
-    .hero-ctas .btn:not(.btn-solid) { border-width: 1px; border-color: var(--ink-faint); }
   }
   @media (min-width: 860px) {
     /* pieza independiente y centrada, no pegada al ancho de sección: margen
@@ -579,10 +598,13 @@
   .p-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; }
   .p-price { font-size: 1.15rem; font-weight: 600; color: var(--ink); margin: 0; letter-spacing: var(--tracking-lg); }
   .p-buy {
-    align-self: flex-start; display: inline-flex; align-items: center; font-size: 0.85rem; font-weight: 500;
-    padding: 0.6rem 1.1rem; background: var(--ink); color: var(--paper); border: none; border-radius: 1000px;
+    align-self: flex-start; display: inline-flex; align-items: center;
+    font-size: var(--btn-txt-sm); font-weight: var(--btn-peso);
+    padding: var(--btn-relleno-sm);
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink); border-radius: var(--btn-radio);
   }
-  .p-buy:hover { background: var(--olive); }
+  .p-buy:hover { background: var(--ink); color: var(--paper); }
   .p-arrow { display: inline-block; opacity: 0; width: 0; margin-left: 0; overflow: hidden; transition: opacity 0.25s ease, width 0.25s ease, margin-left 0.25s ease; }
   .p-card:hover .p-arrow { opacity: 1; width: 1em; margin-left: 0.45em; }
 
@@ -725,7 +747,7 @@
   .foot-form input {
     flex: 1; padding: 0.7rem 1rem; border: 1.5px solid var(--line-strong); background: var(--paper); color: var(--ink); font-size: 0.9rem; border-radius: 1000px;
   }
-  .foot-form button { padding: 0.7rem 1.2rem; background: var(--ink); color: var(--paper); border: none; font-weight: 500; font-size: 0.9rem; border-radius: 1000px; }
+  .foot-form button { padding: var(--btn-relleno-sm); background: var(--ink); color: var(--paper); border: none; font-weight: var(--btn-peso); font-size: var(--btn-txt-sm); border-radius: var(--btn-radio); }
   .foot-success { font-size: 0.85rem; color: var(--olive-soft); margin-top: 0.6rem; display: none; }
   .foot-success.show { display: block; }
   .foot-cols { display: flex; flex-wrap: wrap; gap: 3rem; }
@@ -797,7 +819,7 @@
   .cookies-text { margin: 0; font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft); }
   .cookies-text a { text-decoration: underline; color: var(--ink); }
   .cookies-btns { display: flex; gap: 0.6rem; }
-  .cookies-btns .btn { flex: 1; text-align: center; padding: 0.7rem 1rem; font-size: 0.92rem; cursor: pointer; }
+  .cookies-btns .btn { flex: 1; text-align: center; padding: var(--btn-relleno-sm); font-size: var(--btn-txt-sm); cursor: pointer; }
   @media (min-width: 620px) { .cookies { left: auto; right: 1.5rem; bottom: 1.5rem; } }
   @media (prefers-reduced-motion: reduce) { .cookies { transition: none; } }
 
@@ -939,9 +961,9 @@
   }
   .hero-cta {
     display: block; width: 100%; box-sizing: border-box;
-    padding: 0.85rem 1.5rem; border-radius: 999px;
+    padding: var(--btn-relleno); border-radius: var(--btn-radio);
     background: var(--paper); color: var(--ink);
-    font-size: 1rem; font-weight: 500; text-decoration: none;
+    font-size: var(--btn-txt); font-weight: var(--btn-peso); text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
   .hero-cta:hover { background: #fff; transform: translateY(-1px); }
@@ -1100,12 +1122,12 @@
     .hero-lede { font-size: 1.1rem; color: rgba(255, 255, 255, 0.95); }
     /* cada boton se ajusta a su texto en vez de ocupar el ancho entero */
     .hero-cta {
-      font-size: 1rem; font-weight: 600;
-      padding: 0.78rem 2rem;
+      font-size: var(--btn-txt); font-weight: var(--btn-peso);
+      padding: var(--btn-relleno);
       display: inline-block; width: auto; max-width: 100%;
     }
-    /* hueco bajo el CTA para los puntos, que van dentro de la tarjeta */
-    .hero-copy { padding-bottom: 3.9rem; }
+    /* ya no hay puntos dentro de la tarjeta: el hero es una sola imagen */
+    .hero-copy { padding-bottom: 1.8rem; }
     /* puntos sobre el degradado: no gastan altura de pantalla, esos 34px de
        abajo ya eran degradado vacio. Reusan las clases de la paginacion para
        que el JS de Jaume los recoja sin ningun cambio. */
@@ -1858,11 +1880,11 @@
   .pack-cta {
     display: flex; align-items: center; justify-content: center; gap: 0.7rem;
     width: 100%; padding: 1.05rem 1.4rem; border-radius: 999px;
-    background: var(--ink); color: var(--paper);
-    font-size: 1.05rem; font-weight: 600;
+    background: var(--khaki-deep); color: var(--paper);
+    font-size: var(--btn-txt); font-weight: var(--btn-peso);
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .pack-cta:hover { background: var(--khaki-deep); transform: translateY(-1px); }
+  .pack-cta:hover { background: var(--olive); transform: translateY(-1px); }
   .pack-cta-precio { opacity: 0.75; font-weight: 500; }
   #libro .pack-note { margin: 0.9rem 0 0; font-size: 0.92rem; color: var(--ink-soft); text-align: center; }
 

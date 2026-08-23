@@ -33,6 +33,17 @@
     --font: "Inter", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --tracking-lg: -0.03em;
+
+    /* ===== BOTONES ===== mismos tokens que la portada.
+         primario   marron solido, la accion principal del bloque
+         secundario contorno, para navegar
+         claro      fondo claro, solo sobre foto o sobre panel oscuro */
+    --btn-radio: 999px;
+    --btn-peso: 600;
+    --btn-txt: 1.05rem;
+    --btn-relleno: 1rem 1.5rem;
+    --btn-txt-sm: 0.9rem;
+    --btn-relleno-sm: 0.62rem 1.15rem;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -96,12 +107,12 @@
   }
   .ficha-envio { margin: 0 0 1.3rem; font-size: 0.95rem; color: var(--ink-soft); }
   .btn-comprar {
-    display: block; width: 100%; padding: 1rem 1.5rem; border: 0;
-    border-radius: 999px; background: var(--ink); color: var(--paper);
-    font-size: 1.05rem; font-weight: 600; text-align: center;
+    display: block; width: 100%; padding: var(--btn-relleno); border: 0;
+    border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
+    font-size: var(--btn-txt); font-weight: var(--btn-peso); text-align: center;
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .btn-comprar:hover { background: #000; transform: translateY(-1px); }
+  .btn-comprar:hover { background: var(--olive); transform: translateY(-1px); }
 
   /* ---------- galeria de producto ---------- */
   .galeria-viewport {
@@ -433,8 +444,9 @@
     border-radius: 999px; font: inherit; font-size: 1rem; background: #fff; color: var(--ink);
   }
   .alta button {
-    padding: 0.95rem 1.5rem; border: 0; border-radius: 999px;
-    background: var(--ink); color: var(--paper); font-size: 1rem; font-weight: 600;
+    padding: var(--btn-relleno); border: 0; border-radius: var(--btn-radio);
+    background: var(--khaki-deep); color: var(--paper);
+    font-size: var(--btn-txt); font-weight: var(--btn-peso);
   }
   .alta-ok { display: none; margin: 0.9rem 0 0; color: var(--olive); font-weight: 500; }
   .alta-ok.on { display: block; }
