@@ -274,6 +274,14 @@
     color: var(--khaki-deep);
   }
 
+  /* el encabezado que envuelve cada boton de acordeon no pinta nada: todo el
+     estilo lo sigue poniendo el propio boton. Va envuelto porque es lo que
+     recomienda la practica de ARIA y hace el acordeon navegable por titular */
+  .acc-h {
+    margin: 0; font-size: inherit; font-weight: inherit;
+    letter-spacing: inherit; line-height: inherit;
+  }
+
   /* ---------- secciones ---------- */
   section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
   h2 {
@@ -602,7 +610,7 @@
     <ul class="formas">
       <li class="forma forma--nuestra">
         <div class="forma-alto">
-          <p class="forma-nombre">Bisglicinato</p>
+          <h3 class="forma-nombre">Bisglicinato</h3>
           <span class="forma-sello">El nuestro</span>
         </div>
         <p>El magnesio va unido a glicina, un aminoácido. Es de las formas que menos molestan al estómago, que es la razón por la que la elegimos.</p>
@@ -611,14 +619,14 @@
 
       <li class="forma">
         <div class="forma-alto">
-          <p class="forma-nombre">Citrato</p>
+          <h3 class="forma-nombre">Citrato</h3>
         </div>
         <p>Unido a ácido cítrico. Una opción razonable y bastante común. A dosis altas puede tener efecto laxante.</p>
       </li>
 
       <li class="forma">
         <div class="forma-alto">
-          <p class="forma-nombre">Óxido</p>
+          <h3 class="forma-nombre">Óxido</h3>
           <span class="forma-sello" style="background: var(--ink-faint)">El más común</span>
         </div>
         <p>La sal más barata de producir, y por eso la que más aparece en los botes de supermercado. De hecho se usa como laxante por vía oral.</p>
@@ -657,12 +665,13 @@
   </section>
 
   <section class="info">
+    <h2>La etiqueta, entera</h2>
     <ul class="faq">
       <li class="faq-item">
-        <button type="button" class="faq-q" id="info-t1" aria-expanded="true" aria-controls="info-p1">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="info-t1" aria-expanded="true" aria-controls="info-p1">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head"><span class="faq-title">Para qué sirve</span></span>
-        </button>
+        </button></h3>
         <div class="faq-a open" id="info-p1" role="region" aria-labelledby="info-t1">
           <div>
       <ul class="usos">
@@ -677,10 +686,10 @@
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="info-t2" aria-expanded="false" aria-controls="info-p2">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="info-t2" aria-expanded="false" aria-controls="info-p2">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head"><span class="faq-title">Qué lleva</span></span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="info-p2" role="region" aria-labelledby="info-t2">
           <div>
       <table>
@@ -703,10 +712,10 @@
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="info-t3" aria-expanded="false" aria-controls="info-p3">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="info-t3" aria-expanded="false" aria-controls="info-p3">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head"><span class="faq-title">Cómo tomarlo</span></span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="info-p3" role="region" aria-labelledby="info-t3">
           <div>
       <ol class="pasos">
@@ -769,49 +778,49 @@
     <h2>Preguntas</h2>
     <ul class="faq">
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Puedo tomarlo si estoy con medicación?</span>
             <span class="faq-meta">Seguridad</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p1" role="region" aria-labelledby="faq-t1">
           <div><p>El magnesio puede interferir en la absorción de algunos medicamentos, entre ellos ciertos antibióticos y los que se usan para la tiroides. No es que no puedas tomarlo: normalmente basta con separarlos unas horas. Consúltalo con tu médico o tu farmacéutico antes de empezar, y enséñales esta etiqueta.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Por qué bisglicinato y no otro?</span>
             <span class="faq-meta">Formulación</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p2" role="region" aria-labelledby="faq-t2">
           <div><p>Porque es el que menos molesta al estómago. El óxido de magnesio, que es el más habitual porque es el más barato, se absorbe peor y suele dar problemas intestinales. El bisglicinato va unido a un aminoácido, la glicina, y se tolera mucho mejor.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Cuánto tarda en notarse?</span>
             <span class="faq-meta">Uso</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p3" role="region" aria-labelledby="faq-t3">
           <div><p>Depende de cada persona y de si partías de niveles bajos. No podemos prometerte un plazo, y desconfía de quien lo haga. Lo que sí sabemos es que el magnesio actúa por acumulación: un bote de 30 días es el mínimo razonable para valorarlo.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Tiene gluten, lactosa o algo de origen animal?</span>
             <span class="faq-meta">Alérgenos</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p4" role="region" aria-labelledby="faq-t4">
           <div><p>No. La cápsula es vegetal y la fórmula no lleva gluten, lactosa ni ingredientes de origen animal. Apto para dietas vegetarianas y veganas.</p></div>
         </div>

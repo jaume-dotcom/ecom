@@ -729,7 +729,7 @@
   .foot-success { font-size: 0.85rem; color: var(--olive-soft); margin-top: 0.6rem; display: none; }
   .foot-success.show { display: block; }
   .foot-cols { display: flex; flex-wrap: wrap; gap: 3rem; }
-  .foot-col h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 0.9rem; }
+  .foot-col h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 0.9rem; }
   .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.9rem; }
   .foot-col a:hover { color: var(--khaki-deep); }
   .foot-bottom { border-top: 1px solid var(--line); padding-top: 1.4rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: 0.78rem; color: var(--ink-faint); }
@@ -1058,11 +1058,21 @@
     font-size: 0.78rem; line-height: 1.3; color: var(--ink-soft);
   }
 
-  .firma blockquote { margin: 0; }
-  .firma blockquote p {
-    margin: 0 0 0.9rem; font-size: 1.05rem; line-height: 1.6; color: var(--ink);
+  /* la cita literal se distingue del resto: las comillas latinas son las que
+     tocan en español, y con ellas la cursiva sobra. Cursiva Y comillas a la
+     vez es marcar dos veces lo mismo. */
+  .firma-cita { margin: 0; }
+  .firma-cita p {
+    margin: 0; font-size: 1.08rem; line-height: 1.6; color: var(--ink);
   }
-  .firma blockquote p:last-child { margin-bottom: 0; }
+  .firma-fuente {
+    margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--ink-soft);
+  }
+  .firma-remate {
+    margin: 1.3rem 0 0; padding-top: 1.3rem;
+    border-top: 1px solid var(--line);
+    font-size: 1.02rem; line-height: 1.6; color: var(--ink-soft);
+  }
   /* la rubrica cierra el gesto: es el mismo serif en cursiva de los titulares */
   .firma-rubrica {
     margin: 1.3rem 0 0;
@@ -1194,7 +1204,7 @@
   .foot-copy { margin: 1.2rem 0 0; color: var(--foot-mute); font-size: 0.95rem; }
 
   .foot-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 1.4rem; }
-  .foot-col h4 {
+  .foot-col h3 {
     margin: 0 0 0.9rem; font-size: 0.8rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.1em; color: var(--paper);
   }
@@ -1327,6 +1337,12 @@
      Es el unico sitio donde entra una segunda familia: solo el estilo
      italico, un fichero pequeno, y siempre con serif del sistema de reserva */
   .section-head h2 { text-transform: uppercase; letter-spacing: 0.01em; }
+  /* el encabezado que envuelve cada boton de acordeon no pinta nada */
+  .acc-h {
+    margin: 0; font-size: inherit; font-weight: inherit;
+    letter-spacing: inherit; line-height: inherit;
+  }
+
   .h2-soft {
     font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
     font-style: italic; font-weight: 400; text-transform: none;
@@ -1946,7 +1962,7 @@
         <img src="hero-magnesio.jpg" width="558" height="1024" alt="Mujer de unos cincuenta años sentada en el borde de la cama al final del día, quitándose las zapatillas, con el bote de magnesio de ZEROX en la mesilla" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
-          <h2 class="hero-headline">Para los días<br>que pesan</h2>
+          <p class="hero-headline">Para los días<br>que pesan</p>
           <p class="hero-lede">Contribuye a disminuir el cansancio y la fatiga.</p>
           <a class="hero-cta" href="#catalogo">Ver Magnesio ZEROX</a>
         </div>
@@ -1957,7 +1973,7 @@
         <img src="hero-d3k2.jpg" width="558" height="1024" alt="Bote de vitamina D3 + K2 de ZEROX sobre la mesa de una terraza" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
-          <h2 class="hero-headline">Lo que el invierno<br>no te da</h2>
+          <p class="hero-headline">Lo que el invierno<br>no te da</p>
           <p class="hero-lede">Contribuye al mantenimiento de los huesos en condiciones normales.</p>
           <a class="hero-cta" href="#catalogo">Ver Vitamina D3+K2 ZEROX</a>
         </div>
@@ -1968,7 +1984,7 @@
         <img src="hero-omega3.jpg" width="558" height="1024" alt="Hombre de unos sesenta y cinco años en su cocina, con el bote de omega-3 de ZEROX en la encimera" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
-          <h2 class="hero-headline">Para el corazón,<br>la dosis importa</h2>
+          <p class="hero-headline">Para el corazón,<br>la dosis importa</p>
           <p class="hero-lede">EPA y DHA contribuyen al funcionamiento normal del corazón.</p>
           <a class="hero-cta" href="#catalogo">Ver Omega-3 ZEROX</a>
         </div>
@@ -1979,7 +1995,7 @@
         <img src="hero-probiotico.jpg" width="558" height="1024" alt="Tres personas conversando alrededor de una mesa; en primer plano una mano sostiene el bote de probiótico multicepa de ZEROX" decoding="async">
         <div class="hero-shade"></div>
         <div class="hero-copy">
-          <h2 class="hero-headline">Las cepas, con<br>nombre y apellido</h2>
+          <p class="hero-headline">Las cepas, con<br>nombre y apellido</p>
           <p class="hero-lede">Cada cepa identificada en la etiqueta, con sus UFC.</p>
           <a class="hero-cta" href="#catalogo">Ver Probiótico ZEROX</a>
         </div>
@@ -2051,8 +2067,8 @@
   <section class="band" id="quien">
     <div class="section-head reveal">
       <div>
-        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Quién está detrás</p>
-        <h2>El criterio <span class="h2-soft">tiene un nombre</span></h2>
+        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>El criterio</p>
+        <h2>&iquest;Quién <span class="h2-soft">pone la dosis?</span></h2>
       </div>
     </div>
 
@@ -2062,20 +2078,21 @@
              loading="lazy" decoding="async"
              alt="Retrato de Sento Segarra, farmacéutico y autor de La gran guía de la suplementación">
         <div class="firma-quien">
-          <p class="firma-nombre">Sento Segarra</p>
+          <h3 class="firma-nombre">Sento Segarra</h3>
           <p class="firma-rol">Farmacéutico &middot; Autor de <i>La gran guía de la suplementación</i></p>
         </div>
       </div>
       <figcaption>
         <ul class="firma-datos">
-          <li><b>+30</b><span>años de mostrador</span></li>
+          <li><b>+30</b><span>años de farmacia</span></li>
           <li><b>2,9 M</b><span>suscriptores en YouTube</span></li>
           <li><b>60</b><span>suplementos analizados</span></li>
         </ul>
-        <blockquote>
-          <p>Llevo más de treinta años detrás de un mostrador de farmacia, escuchando siempre las mismas dudas: ¿esto sirve de algo?, ¿cuál merece la pena?</p>
-          <p>ZEROX es lo que viene después. Cuatro fórmulas, con la cantidad que pondría si fuera para mí, y esa cantidad en la etiqueta.</p>
+        <blockquote class="firma-cita">
+          <p>&laquo;Llevo más de 30 años detrás de un mostrador de farmacia escuchando las mismas dudas: ¿sirven los suplementos de verdad? ¿cuáles valen la pena?&raquo;</p>
+          <footer class="firma-fuente">En la presentación de su libro</footer>
         </blockquote>
+        <p class="firma-remate">ZEROX es lo que viene después. Cuatro fórmulas, con la cantidad que pondría si fuera para mí, y esa cantidad en la etiqueta.</p>
         <p class="firma-rubrica" aria-hidden="true">Sento</p>
       </figcaption>
     </figure>
@@ -2093,7 +2110,7 @@
         <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
         <div class="p-info">
           <div class="p-top">
-            <p class="p-name">Magnesio Bisglicinato</p>
+            <h3 class="p-name">Magnesio Bisglicinato</h3>
             <p class="p-desc">Quelado con glicina, 300&ndash;400&nbsp;mg por dosis. Sin óxido.</p>
             <ul class="p-bens">
               <li>Menos cansancio y fatiga</li>
@@ -2111,7 +2128,7 @@
         <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
         <div class="p-info">
           <div class="p-top">
-            <p class="p-name">Vitamina D3 + K2</p>
+            <h3 class="p-name">Vitamina D3 + K2</h3>
             <p class="p-desc">2.000&ndash;4.000&nbsp;UI de D3 con K2 en forma MK&ndash;7.</p>
             <ul class="p-bens">
               <li>Huesos y dientes en condiciones normales</li>
@@ -2129,7 +2146,7 @@
         <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
         <div class="p-info">
           <div class="p-top">
-            <p class="p-name">Omega&ndash;3 EPA+DHA</p>
+            <h3 class="p-name">Omega&ndash;3 EPA+DHA</h3>
             <p class="p-desc">EPA y DHA de origen marino, 1.000&ndash;2.000&nbsp;mg por dosis.</p>
             <ul class="p-bens">
               <li>Funcionamiento normal del corazón</li>
@@ -2147,7 +2164,7 @@
         <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
         <div class="p-info">
           <div class="p-top">
-            <p class="p-name">Probiótico Multicepa</p>
+            <h3 class="p-name">Probiótico Multicepa</h3>
             <p class="p-desc">Varias cepas vivas, 10&ndash;20 mil millones de UFC por dosis.</p>
             <ul class="p-bens">
               <li>Cápsula gastrorresistente</li>
@@ -2177,8 +2194,8 @@
        a secciones que si estan. -->
   <section class="band" id="asesoria">
     <div class="ayuda reveal">
-      <p class="ayuda-titulo"><span class="ayuda-punto" aria-hidden="true">&#9679;</span> Te asesoramos</p>
-      <p class="ayuda-sub">¿No sabes por cuál empezar? No hace falta que lo adivines.</p>
+      <h2 class="ayuda-titulo"><span class="ayuda-punto" aria-hidden="true">&#9679;</span> &iquest;No sabes por cuál empezar?</h2>
+      <p class="ayuda-sub">No hace falta que lo adivines.</p>
       <div class="ayuda-botones">
         <a class="btn btn-solid ayuda-btn" href="#criterio">Descubre qué te conviene</a>
         <a class="btn ayuda-btn" href="#footer-signup">Pregúntanos lo que quieras</a>
@@ -2208,7 +2225,7 @@
 
       <article class="stack-card arg-card">
         <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
-        <h2 class="arg-head">Nuestra alimentación ha cambiado.</h2>
+        <h3 class="arg-head">Nuestra alimentación ha cambiado.</h3>
         <figure class="arg-fig">
           <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
         </figure>
@@ -2221,7 +2238,7 @@
 
       <article class="stack-card arg-card">
         <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
-        <h2 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h2>
+        <h3 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h3>
         <figure class="arg-fig">
           <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
         </figure>
@@ -2233,7 +2250,7 @@
 
       <article class="stack-card arg-card">
         <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
-        <h2 class="arg-head">Nuestro ritmo de vida ha cambiado.</h2>
+        <h3 class="arg-head">Nuestro ritmo de vida ha cambiado.</h3>
         <figure class="arg-fig">
           <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
         </figure>
@@ -2250,7 +2267,7 @@
 
       <article class="stack-card arg-card arg-card--cierre">
         <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
-        <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
+        <h3 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h3>
         <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
         <span class="arg-sigue" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
@@ -2321,21 +2338,21 @@
 
       <ul class="crit">
         <li class="crit-item">
-          <button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
+          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">La dosis</span>
             <span class="crit-mas" aria-hidden="true"></span>
-          </button>
+          </button></h3>
           <div class="crit-a" id="crit-p1" role="region" aria-labelledby="crit-t1">
             <div><p>Dos botes con el mismo nombre pueden no parecerse en nada. Lo que cuenta es el mineral elemental por dosis, no el peso de la sal, y esa cifra vive en la letra pequeña de la parte de atrás. Aquí va delante.</p></div>
           </div>
         </li>
         <li class="crit-item">
-          <button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
+          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que publicamos</span>
             <span class="crit-mas" aria-hidden="true"></span>
-          </button>
+          </button></h3>
           <div class="crit-a" id="crit-p2" role="region" aria-labelledby="crit-t2">
             <div>
               <ul class="crit-lista">
@@ -2348,11 +2365,11 @@
           </div>
         </li>
         <li class="crit-item">
-          <button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
+          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que no hacemos</span>
             <span class="crit-mas" aria-hidden="true"></span>
-          </button>
+          </button></h3>
           <div class="crit-a" id="crit-p3" role="region" aria-labelledby="crit-t3">
             <div>
               <ul class="crit-lista crit-lista--no">
@@ -2384,61 +2401,61 @@
     </div>
     <ul class="faq">
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Puedo tomarlo si estoy con medicación?</span>
             <span class="faq-meta">Seguridad</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p1" role="region" aria-labelledby="faq-t1">
           <div><p>Consúltalo antes con tu médico o tu farmacéutico, sobre todo si tomas anticoagulantes, tratamiento tiroideo o antibióticos. Ellos tienen tu historial; nosotros no. En la etiqueta publicamos cada cantidad exacta para que puedas enseñársela.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Por qué solo cuatro fórmulas?</span>
             <span class="faq-meta">Catálogo</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p2" role="region" aria-labelledby="faq-t2">
           <div><p>Porque son las que pasan el filtro. Para que una fórmula entre al catálogo tiene que haber estudios que la respalden y tenemos que poder ponerla en la cantidad que usaron esos estudios. Cuando otra lo cumpla, entrará.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Qué diferencia hay entre bisglicinato y óxido de magnesio?</span>
             <span class="faq-meta">Ingredientes</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p3" role="region" aria-labelledby="faq-t3">
           <div><p>El óxido es la forma más barata de fabricar y la que peor se tolera en el estómago. El bisglicinato va unido a un aminoácido, la glicina, y es más amable con la digestión. Por eso el nuestro no lleva óxido, y lo decimos en el bote.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Cómo sé que el bote lleva lo que dice?</span>
             <span class="faq-meta">Calidad</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p4" role="region" aria-labelledby="faq-t4">
           <div><p>Cada lote se analiza en un laboratorio externo y el resultado se publica. La fabricación es en España, en instalaciones con certificación GMP. Si un análisis no cuadra, el lote no sale.</p></div>
         </div>
       </li>
       <li class="faq-item">
-        <button type="button" class="faq-q" id="faq-t5" aria-expanded="false" aria-controls="faq-p5">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t5" aria-expanded="false" aria-controls="faq-p5">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
             <span class="faq-title">¿Cuándo se puede comprar?</span>
             <span class="faq-meta">Lanzamiento</span>
           </span>
-        </button>
+        </button></h3>
         <div class="faq-a" id="faq-p5" role="region" aria-labelledby="faq-t5">
           <div><p>Todavía no está a la venta. Quien deje su email entra en el acceso anticipado y tendrá el precio de lanzamiento. Avisaremos con tiempo, y solo para eso.</p></div>
         </div>
@@ -2476,7 +2493,7 @@
 
       <div class="foot-cols">
         <div class="foot-col reveal foot-anim">
-          <h4>Fórmulas</h4>
+          <h3>Fórmulas</h3>
           <ul>
             <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
             <li><a href="#catalogo">Vitamina D3 + K2</a></li>
@@ -2485,7 +2502,7 @@
           </ul>
         </div>
         <div class="foot-col reveal foot-anim">
-          <h4>La marca</h4>
+          <h3>La marca</h3>
           <ul>
             <li><a href="#criterio">Cómo elegimos</a></li>
             <li><a href="#libro">El libro</a></li>
@@ -2493,7 +2510,7 @@
           </ul>
         </div>
         <div class="foot-col reveal foot-anim">
-          <h4>Ayuda</h4>
+          <h3>Ayuda</h3>
           <ul>
             <li><a href="#alta">Acceso anticipado</a></li>
             <li><a href="#faq">Envíos y devoluciones</a></li>
@@ -2501,7 +2518,7 @@
           </ul>
         </div>
         <div class="foot-col reveal foot-anim">
-          <h4>Legal</h4>
+          <h3>Legal</h3>
           <ul>
             <li><a href="#">Aviso legal</a></li>
             <li><a href="#">Privacidad</a></li>
