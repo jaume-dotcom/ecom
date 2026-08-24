@@ -726,6 +726,42 @@
     pintarShop();
   }
 
+  // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
+  // texto final y se reconstruye en cada cuadro respetando el signo de
+  // delante, la coma decimal y la unidad de detras: si no, "+2,9 M" acaba
+  // siendo un numero pelado.
+  var cifras = document.querySelectorAll('.firma-datos b');
+  if (cifras.length && 'IntersectionObserver' in window &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var contar = function (el) {
+      var texto = el.textContent.trim();
+      var m = texto.match(/^([^0-9]*)([0-9]+(?:[.,][0-9]+)?)(.*)$/);
+      if (!m) { return; }
+      var antes = m[1], destino = parseFloat(m[2].replace(',', '.')), despues = m[3];
+      var decimales = /[.,]/.test(m[2]) ? 1 : 0;
+      var DURACION = 2400;
+      var t0 = null;
+      var paso = function (ahora) {
+        if (t0 === null) { t0 = ahora; }
+        var k = Math.min(1, (ahora - t0) / DURACION);
+        // frenada larga: sube deprisa al principio y llega muy despacio
+        var suave = 1 - Math.pow(1 - k, 4);
+        el.textContent = antes + (destino * suave).toFixed(decimales).replace('.', ',') + despues;
+        if (k < 1) { requestAnimationFrame(paso); }
+        else { el.textContent = texto; }
+      };
+      requestAnimationFrame(paso);
+    };
+    var obsCifras = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) { return; }
+        obsCifras.unobserve(e.target);
+        contar(e.target);
+      });
+    }, { threshold: 0.6 });
+    cifras.forEach(function (el) { obsCifras.observe(el); });
+  }
+
   // Video del hero. Medido fotograma a fotograma: el bote se retira entre el
   // segundo 2 y el 4. El texto entra cuando ya se ha ido y se queda puesto
   // hasta bien pasado el final: el video no lleva loop propio, termina, el
