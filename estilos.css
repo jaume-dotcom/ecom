@@ -615,7 +615,7 @@
 
 
   .p-info { padding: 1.3rem 1.4rem 1.4rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
-  .p-top { display: flex; flex-direction: column; gap: 0.4rem; }
+  .p-top { display: flex; flex-direction: column; gap: 0.55rem; }
   .p-tag {
     align-self: flex-start; font-size: var(--t-3xs); font-weight: 500; letter-spacing: normal;
     background: var(--khaki-pop); color: var(--ink); padding: 0.3rem 0.65rem; border-radius: 1000px;
@@ -625,7 +625,11 @@
   /* beneficios en lista de comprobación. Los del probiótico son de
      composición, no de efecto: en la UE no hay alegaciones autorizadas
      para probióticos. */
-  .p-bens { list-style: none; margin: 0.9rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+  .p-bens {
+    list-style: none; margin: 1rem 0 0; padding: 0.95rem 0 0;
+    border-top: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 0.55rem;
+  }
   .p-bens li {
     position: relative; padding-left: 1.5rem; font-size: var(--t-xs);
     line-height: 1.35; color: var(--ink);
@@ -637,7 +641,8 @@
     transform: rotate(-45deg);
   }
 
-  .p-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+  .p-bottom {
+    margin-top: 0.3rem; margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; }
   .p-price { font-size: var(--t-xl); font-weight: 600; color: var(--ink); margin: 0; letter-spacing: var(--tracking-lg); }
   .p-buy {
     align-self: flex-start; display: inline-flex; align-items: center;
@@ -1239,7 +1244,11 @@
     .section-head p { font-size: var(--t-xl); }
 
     /* fichas de producto: el nombre iba a peso de parrafo */
-    .p-card .p-top { font-weight: 600; font-size: var(--t-lg); }
+    /* cada pieza con su peso: si se engorda el grupo, la descripcion sale
+       tan marcada como el nombre y no hay jerarquia */
+    .p-card .p-name { font-size: var(--t-xl); font-weight: 600; }
+    .p-card .p-desc { font-size: var(--t-sm); font-weight: 400; }
+    .p-card .p-price { font-size: var(--t-2xl); font-weight: 700; }
 
     /* preguntas del FAQ */
     .faq-q { font-size: var(--t-lg); font-weight: 500; }
