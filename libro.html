@@ -2,8 +2,8 @@
 <html lang="es">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ZEROX — Suplementación con la dosis correcta</title>
-<meta name="description" content="Cuatro fórmulas con la dosis que usaron los estudios que las avalan. Magnesio bisglicinato, vitamina D3 + K2, omega-3 EPA+DHA y probiótico multicepa. Sin relleno de marketing.">
+<title>La gran guía de la suplementación — ZEROX</title>
+<meta name="description" content="Por qué la suplementación no debería empezar con un producto. El libro de Sento Segarra, farmacéutico, con sesenta suplementos analizados uno a uno.">
 
 <!-- favicon: el punto de mira en versión compacta, la pensada para 16px -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="ZEROX">
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://jaume-dotcom.github.io/ecom/">
-<meta property="og:title" content="ZEROX — Suplementación con la dosis correcta">
-<meta property="og:description" content="Cuatro fórmulas con la dosis que usaron los estudios que las avalan. Sin relleno de marketing.">
+<meta property="og:title" content="La gran guía de la suplementación — ZEROX">
+<meta property="og:description" content="Sesenta suplementos analizados uno a uno, con criterio de farmacéutico.">
 <meta property="og:image" content="https://jaume-dotcom.github.io/ecom/og.jpg">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1109">
 <meta property="og:image:alt" content="Bote de Magnesio Bisglicinato de ZEROX sostenido en una mano">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ZEROX — Suplementación con la dosis correcta">
-<meta name="twitter:description" content="Cuatro fórmulas con la dosis que usaron los estudios que las avalan.">
+<meta name="twitter:title" content="La gran guía de la suplementación — ZEROX">
+<meta name="twitter:description" content="Sesenta suplementos analizados uno a uno, con criterio de farmacéutico.">
 <meta name="twitter:image" content="https://jaume-dotcom.github.io/ecom/og.jpg">
 <link rel="canonical" href="https://jaume-dotcom.github.io/ecom/">
 
@@ -1050,6 +1050,17 @@
   .hero-alta-titulo { font-size: var(--t-2xl); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.5rem; }
 
 
+  /* ============ CABECERA DE PAGINA INTERIOR ============
+     Sustituye al hero de la portada: aqui no hay que vender de golpe, hay
+     que decir de que va la pagina. */
+  .cabecera { padding: 2.4rem 0 1.6rem; text-align: center; max-width: 34rem; margin: 0 auto; }
+  .cabecera h1 {
+    margin: 0 0 0.9rem; font-size: var(--t-6xl); line-height: 1.1;
+    letter-spacing: var(--tracking-lg); font-weight: 700; text-transform: uppercase;
+  }
+  .cabecera .h2-soft { text-transform: none; }
+  .cabecera-lede { margin: 0; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); }
+
   /* ============ QUIEN FIRMA ============
      Va en la hoja base y no dentro del breakpoint: el bloque es nuevo, asi que
      en escritorio no hay maqueta previa que respetar. Una sola columna con
@@ -1624,17 +1635,6 @@
   }
 
 
-  /* ============ PUENTE AL LIBRO ============
-     Lo que queda de las cinco tarjetas que se fueron a libro.html: dos
-     frases y un enlace. Corto a proposito, que es justo lo que se buscaba. */
-  .puente { max-width: 34rem; margin: 0 auto; text-align: center; }
-  .puente h2 {
-    margin: 0 0 0.8rem; font-size: var(--t-3xl); line-height: 1.15;
-    letter-spacing: var(--tracking-lg); font-weight: 700; text-transform: uppercase;
-  }
-  .puente .h2-soft { text-transform: none; }
-  .puente-lede { margin: 0 0 1.6rem; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); }
-
   /* ============ BLOQUE DE ASESORIA ============
      Panel en tint, embutido y redondeado a los mismos 12px del borde que la
      tarjeta del hero, el bloque de venta y el pie. No se usa el amarillo de
@@ -2002,17 +2002,17 @@
           </button>
           <div class="navmenu-panel" id="formulas-panel">
             <div class="navmenu-grid">
-              <a href="#catalogo"><p class="nm-title">Magnesio Bisglicinato</p><p class="nm-desc">300&ndash;400&nbsp;mg por dosis</p></a>
-              <a href="#catalogo"><p class="nm-title">Vitamina D3 + K2</p><p class="nm-desc">2.000&ndash;4.000&nbsp;UI + MK&ndash;7</p></a>
-              <a href="#catalogo"><p class="nm-title">Omega&ndash;3 EPA+DHA</p><p class="nm-desc">1.000&ndash;2.000&nbsp;mg por dosis</p></a>
-              <a href="#catalogo"><p class="nm-title">Probiótico Multicepa</p><p class="nm-desc">10&ndash;20 mil M. UFC</p></a>
+              <a href="index.html#catalogo"><p class="nm-title">Magnesio Bisglicinato</p><p class="nm-desc">300&ndash;400&nbsp;mg por dosis</p></a>
+              <a href="index.html#catalogo"><p class="nm-title">Vitamina D3 + K2</p><p class="nm-desc">2.000&ndash;4.000&nbsp;UI + MK&ndash;7</p></a>
+              <a href="index.html#catalogo"><p class="nm-title">Omega&ndash;3 EPA+DHA</p><p class="nm-desc">1.000&ndash;2.000&nbsp;mg por dosis</p></a>
+              <a href="index.html#catalogo"><p class="nm-title">Probiótico Multicepa</p><p class="nm-desc">10&ndash;20 mil M. UFC</p></a>
             </div>
-            <a class="navmenu-foot" href="#catalogo">Ver las cuatro fórmulas &rarr;</a>
+            <a class="navmenu-foot" href="index.html#catalogo">Ver las cuatro fórmulas &rarr;</a>
           </div>
         </div>
-        <a class="navmenu-link" href="#catalogo">Catálogo</a>
-        <a class="navmenu-link" href="libro.html">El libro</a>
-        <a class="navmenu-link" href="#criterio">Cómo elegimos</a>
+        <a class="navmenu-link" href="index.html#catalogo">Catálogo</a>
+        <a class="navmenu-link" href="#libro">El libro</a>
+        <a class="navmenu-link" href="index.html#criterio">Cómo elegimos</a>
       </div>
 
       <div class="nav-cta">
@@ -2020,7 +2020,7 @@
         <a class="btn btn-solid" href="#footer-signup">Acceso anticipado</a>
       </div>
 
-      <a class="nav-icon" href="#catalogo" aria-label="Ir al catálogo">
+      <a class="nav-icon" href="index.html#catalogo" aria-label="Ir al catálogo">
         <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true">
           <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
           <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -2030,58 +2030,16 @@
     </nav>
   </div>
 
+<div class="wrap">
+  <header class="cabecera">
+    <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Educación</p>
+    <h1>Por qué la suplementación <span class="h2-soft">no empieza con un producto</span></h1>
+    <p class="cabecera-lede">Antes de elegir un bote hay una pregunta que casi nadie hace. Esta página es el razonamiento entero, y el libro donde está desarrollado.</p>
+  </header>
+</div>
+
 <div class="hero-full">
 
-
-  <div class="hero-carousel wrap">
-    <div class="hero-media-box">
-      <img src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
-      <div class="hero-shade"></div>
-      <div class="hero-copy">
-        <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
-        <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
-        <a class="hero-cta" href="#alta">Reserva tu acceso</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Las otras cuatro diapositivas se han quitado: eran fotos de ambiente
-       que no enseñaban el producto, y en movil casi nadie pasaba de la
-       primera. Su copy NO se tira, que es bueno y es de producto. El del
-       magnesio ya esta en magnesio.html; estos tres esperan a que existan
-       sus fichas:
-
-       d3k2.html       "Lo que el invierno no te da"
-                       Contribuye al mantenimiento de los huesos en
-                       condiciones normales.
-                       foto: hero-d3k2.jpg
-
-       omega3.html     "Para el corazon, la dosis importa"
-                       EPA y DHA contribuyen al funcionamiento normal del
-                       corazon.
-                       foto: hero-omega3.jpg
-
-       probiotico.html "Las cepas, con nombre y apellido"
-                       Cada cepa identificada en la etiqueta, con sus UFC.
-                       foto: hero-probiotico.jpg
-       -->
-
-  <div class="ticker" aria-label="Claves de la marca">
-    <div class="ticker-track">
-      <div class="ticker-run">
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.2c0 4.4-2.9 7.4-7 8.8-4.1-1.4-7-4.4-7-8.8V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Fabricado en España &middot; GMP</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5"/><path d="M10 3v6.4l-4.6 8A2 2 0 0 0 7.2 20.5h9.6a2 2 0 0 0 1.8-3.1L14 9.4V3"/><path d="M8 15h8"/></svg>Análisis de terceros por lote</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5v15"/><path d="M5 8.5h14"/><path d="M5 8.5l-2.6 5.2a2.9 2.9 0 0 0 5.2 0L5 8.5z"/><path d="M19 8.5l-2.6 5.2a2.9 2.9 0 0 0 5.2 0L19 8.5z"/><path d="M9 19.5h6"/></svg>Dosis clínica real</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg>Cápsulas vegetales</span>
-      </div>
-      <div class="ticker-run" aria-hidden="true">
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.2c0 4.4-2.9 7.4-7 8.8-4.1-1.4-7-4.4-7-8.8V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>Fabricado en España &middot; GMP</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5"/><path d="M10 3v6.4l-4.6 8A2 2 0 0 0 7.2 20.5h9.6a2 2 0 0 0 1.8-3.1L14 9.4V3"/><path d="M8 15h8"/></svg>Análisis de terceros por lote</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5v15"/><path d="M5 8.5h14"/><path d="M5 8.5l-2.6 5.2a2.9 2.9 0 0 0 5.2 0L5 8.5z"/><path d="M19 8.5l-2.6 5.2a2.9 2.9 0 0 0 5.2 0L19 8.5z"/><path d="M9 19.5h6"/></svg>Dosis clínica real</span>
-        <span><svg class="tk-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg>Cápsulas vegetales</span>
-      </div>
-    </div>
-  </div>
 
   <div class="hero-center wrap" id="alta">
     <p class="hero-alta-titulo">&iquest;Te avisamos el día que salga?</p>
@@ -2147,109 +2105,6 @@
     </figure>
   </section>
 
-  <section class="band" id="catalogo">
-    <div class="section-head reveal">
-      <div>
-        <h2>Elige <span class="h2-soft">por dónde empezar</span></h2>
-        <p>La misma exigencia en las cuatro.</p>
-      </div>
-    </div>
-    <div class="shop-grid reveal">
-      <div class="p-card">
-        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
-        <div class="p-info">
-          <div class="p-top">
-            <h3 class="p-name">Magnesio Bisglicinato</h3>
-            <p class="p-desc">Quelado con glicina, 300&ndash;400&nbsp;mg por dosis. Sin óxido.</p>
-            <ul class="p-bens">
-              <li>Menos cansancio y fatiga</li>
-              <li>Función muscular normal</li>
-              <li>Función normal del sistema nervioso</li>
-            </ul>
-          </div>
-          <div class="p-bottom">
-            <p class="p-price">22,90&nbsp;&euro;</p>
-            <a class="p-buy" href="magnesio.html">Ver ficha<span class="p-arrow">&rarr;</span></a>
-          </div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
-        <div class="p-info">
-          <div class="p-top">
-            <h3 class="p-name">Vitamina D3 + K2</h3>
-            <p class="p-desc">2.000&ndash;4.000&nbsp;UI de D3 con K2 en forma MK&ndash;7.</p>
-            <ul class="p-bens">
-              <li>Huesos y dientes en condiciones normales</li>
-              <li>Funcionamiento normal del sistema inmunitario</li>
-              <li>Absorción normal del calcio</li>
-            </ul>
-          </div>
-          <div class="p-bottom">
-            <p class="p-price">18,90&nbsp;&euro;</p>
-            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
-          </div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
-        <div class="p-info">
-          <div class="p-top">
-            <h3 class="p-name">Omega&ndash;3 EPA+DHA</h3>
-            <p class="p-desc">EPA y DHA de origen marino, 1.000&ndash;2.000&nbsp;mg por dosis.</p>
-            <ul class="p-bens">
-              <li>Funcionamiento normal del corazón</li>
-              <li>Función cerebral normal</li>
-              <li>Visión en condiciones normales</li>
-            </ul>
-          </div>
-          <div class="p-bottom">
-            <p class="p-price">27,90&nbsp;&euro;</p>
-            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
-          </div>
-        </div>
-      </div>
-      <div class="p-card">
-        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
-        <div class="p-info">
-          <div class="p-top">
-            <h3 class="p-name">Probiótico Multicepa</h3>
-            <p class="p-desc">Varias cepas vivas, 10&ndash;20 mil millones de UFC por dosis.</p>
-            <ul class="p-bens">
-              <li>Cápsula gastrorresistente</li>
-              <li>Cepas seleccionadas por resistencia</li>
-              <li>Sin azúcares ni edulcorantes</li>
-            </ul>
-          </div>
-          <div class="p-bottom">
-            <p class="p-price">24,90&nbsp;&euro;</p>
-            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <ul class="shop-puntos reveal" id="shop-puntos">
-      <li><button type="button" class="act" data-i="0" aria-label="Ir a la fórmula 1 de 4"></button></li>
-      <li><button type="button" data-i="1" aria-label="Ir a la fórmula 2 de 4"></button></li>
-      <li><button type="button" data-i="2" aria-label="Ir a la fórmula 3 de 4"></button></li>
-      <li><button type="button" data-i="3" aria-label="Ir a la fórmula 4 de 4"></button></li>
-    </ul>
-  </section>
-
-  <!-- bloque de ayuda. OJO: los dos destinos son provisionales.
-       El primero deberia ir a un cuestionario que recomiende formula, y el
-       segundo a una persona de verdad atendiendo. Hasta que existan, apuntan
-       a secciones que si estan. -->
-  <section class="band" id="asesoria">
-    <div class="ayuda reveal">
-      <h2 class="ayuda-titulo">&iquest;No sabes por cuál empezar?</h2>
-      <p class="ayuda-sub">No hace falta que lo adivines.</p>
-      <div class="ayuda-botones">
-        <a class="btn btn-solid ayuda-btn" href="#criterio">Cómo elegir la tuya</a>
-      </div>
-    </div>
-  </section>
 </div>
 <div class="wrap">
   <!-- ====================================================================
@@ -2257,18 +2112,83 @@
        #porque-ahora, que dice lo mismo en scroll editorial, hasta que se
        decida con cual quedarse. No fusionar ni borrar sin decirlo.
        ==================================================================== -->
-  <!-- Puente al razonamiento largo. Las cinco tarjetas de contexto vivian
-       aqui y estan ahora en libro.html: educaban sobre la categoria, no
-       sobre el producto, y eran cinco pantallas en mitad del camino de
-       compra. Quien quiera el razonamiento entero lo tiene a un clic. -->
-  <section class="band" id="puente">
-    <div class="puente reveal">
-      <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Educación</p>
-      <h2>Antes del bote, <span class="h2-soft">una pregunta</span></h2>
-      <p class="puente-lede">Qué necesita realmente tu cuerpo. El razonamiento entero, y el libro donde está desarrollado, tienen su propia página.</p>
-      <a class="btn btn-solid" href="libro.html">Leer el razonamiento</a>
+  <section class="band" id="contexto">
+    <div class="stack">
+
+      <article class="stack-card arg-card arg-card--intro">
+        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg></span>
+        <p class="arg-kicker"><span>30 años observando</span><span>10 años divulgando</span></p>
+        <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
+        <div class="arg-tarde">
+          <p class="arg-sub">Debería empezar con una pregunta:</p>
+          <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
+          <p class="arg-pie">Porque el contexto ha cambiado.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
+        <h3 class="arg-head">Nuestra alimentación ha cambiado.</h3>
+        <figure class="arg-fig">
+          <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
+          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
+          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
+        <h3 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h3>
+        <figure class="arg-fig">
+          <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
+          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
+        <h3 class="arg-head">Nuestro ritmo de vida ha cambiado.</h3>
+        <figure class="arg-fig">
+          <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <ul class="arg-mas">
+            <li>Más trabajo.</li>
+            <li>Más estímulos.</li>
+            <li>Más pantallas.</li>
+            <li>Más cosas que hacer.</li>
+          </ul>
+          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card arg-card--cierre">
+        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
+        <h3 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h3>
+        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
+        <span class="arg-sigue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
+        </span>
+      </article>
+
+      <ul class="stack-progreso" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ul>
+
     </div>
   </section>
+</div>
+
+
+
+<div class="wrap">
+
+
+
 
   <section class="band" id="libro">
     <div class="section-head reveal">
@@ -2313,160 +2233,7 @@
     </div>
   </section>
 
-  <section class="band" id="criterio">
-    <div class="closing reveal">
-      <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="5">
-          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
-          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
-          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
-          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
-          <path d="M16 16 L84 84 M84 16 L16 84"/>
-        </g>
-      </svg>
-      <p class="sec-kicker sec-kicker--claro"><span class="sec-dot" aria-hidden="true"></span>Nuestro criterio</p>
-      <h2>Cómo <span class="h2-soft">elegimos</span></h2>
-      <p class="closing-lede">Cuatro fórmulas y ninguna más. Entran solo si podemos publicar la cantidad exacta, la forma y de dónde sale.</p>
-
-      <ul class="crit">
-        <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
-            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-            <span class="crit-title">La dosis</span>
-            <span class="crit-mas" aria-hidden="true"></span>
-          </button></h3>
-          <div class="crit-a" id="crit-p1" role="region" aria-labelledby="crit-t1">
-            <div><p>Dos botes con el mismo nombre pueden no parecerse en nada. Lo que cuenta es el mineral elemental por dosis, no el peso de la sal, y esa cifra vive en la letra pequeña de la parte de atrás. Aquí va delante.</p></div>
-          </div>
-        </li>
-        <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
-            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-            <span class="crit-title">Lo que publicamos</span>
-            <span class="crit-mas" aria-hidden="true"></span>
-          </button></h3>
-          <div class="crit-a" id="crit-p2" role="region" aria-labelledby="crit-t2">
-            <div>
-              <ul class="crit-lista">
-                <li>Cada cantidad, en la etiqueta y en la web</li>
-                <li>Análisis de un laboratorio externo, lote a lote</li>
-                <li>Sin mezclas patentadas que escondan proporciones</li>
-                <li>Fabricación en España, en instalaciones con GMP</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
-            <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-            <span class="crit-title">Lo que no hacemos</span>
-            <span class="crit-mas" aria-hidden="true"></span>
-          </button></h3>
-          <div class="crit-a" id="crit-p3" role="region" aria-labelledby="crit-t3">
-            <div>
-              <ul class="crit-lista crit-lista--no">
-                <li>No decimos que sustituya a una dieta equilibrada</li>
-                <li>No prometemos efectos que no estén autorizados</li>
-                <li>No entra una fórmula si no podemos ponerla en dosis de estudio</li>
-                <li>No hay cuentas atrás ni ofertas que caducan esta noche</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <p class="closing-cierre">Cuando esté listo, te avisamos.</p>
-      <a class="btn btn-solid" href="#footer-signup">Únete al acceso anticipado</a>
-      <span class="loc">&#9679; Fabricado en España</span>
-    </div>
-  </section>
 </div>
-
-<section class="faq-panel reveal" id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>FAQ</p>
-        <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
-        <p>Lo que más nos preguntáis, respondido sin rodeos.</p>
-      </div>
-    </div>
-    <ul class="faq">
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t0" aria-expanded="false" aria-controls="faq-p0">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">&iquest;Qué es ZEROX y de dónde sale el nombre?</span>
-            <span class="faq-meta">La marca</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p0" role="region" aria-labelledby="faq-t0">
-          <div><p>Cero incógnitas: esa es la idea entera, y de ahí sale el nombre. El cero es lo que no vas a encontrar, que son dosis a medias, mezclas patentadas que esconden las proporciones y promesas que nadie ha autorizado. Lo que queda es una etiqueta que dice qué lleva, cuánto lleva y por qué. Cuatro fórmulas, elegidas por un farmacéutico con treinta años de farmacia, y ninguna entra si no podemos ponerla en la dosis que usaron los estudios.</p></div>
-        </div>
-      </li>
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">¿Puedo tomarlo si estoy con medicación?</span>
-            <span class="faq-meta">Seguridad</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p1" role="region" aria-labelledby="faq-t1">
-          <div><p>Consúltalo antes con tu médico o tu farmacéutico, sobre todo si tomas anticoagulantes, tratamiento tiroideo o antibióticos. Ellos tienen tu historial; nosotros no. En la etiqueta publicamos cada cantidad exacta para que puedas enseñársela.</p></div>
-        </div>
-      </li>
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t2" aria-expanded="false" aria-controls="faq-p2">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">¿Por qué solo cuatro fórmulas?</span>
-            <span class="faq-meta">Catálogo</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p2" role="region" aria-labelledby="faq-t2">
-          <div><p>Porque son las que pasan el filtro. Para que una fórmula entre al catálogo tiene que haber estudios que la respalden y tenemos que poder ponerla en la cantidad que usaron esos estudios. Cuando otra lo cumpla, entrará.</p></div>
-        </div>
-      </li>
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t3" aria-expanded="false" aria-controls="faq-p3">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">¿Qué diferencia hay entre bisglicinato y óxido de magnesio?</span>
-            <span class="faq-meta">Ingredientes</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p3" role="region" aria-labelledby="faq-t3">
-          <div><p>El óxido es la forma más barata de fabricar y la que peor se tolera en el estómago. El bisglicinato va unido a un aminoácido, la glicina, y es más amable con la digestión. Por eso el nuestro no lleva óxido, y lo decimos en el bote.</p></div>
-        </div>
-      </li>
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t4" aria-expanded="false" aria-controls="faq-p4">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">¿Cómo sé que el bote lleva lo que dice?</span>
-            <span class="faq-meta">Calidad</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p4" role="region" aria-labelledby="faq-t4">
-          <div><p>Cada lote se analiza en un laboratorio externo y el resultado se publica. La fabricación es en España, en instalaciones con certificación GMP. Si un análisis no cuadra, el lote no sale.</p></div>
-        </div>
-      </li>
-      <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t5" aria-expanded="false" aria-controls="faq-p5">
-          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head">
-            <span class="faq-title">¿Cuándo se puede comprar?</span>
-            <span class="faq-meta">Lanzamiento</span>
-          </span>
-        </button></h3>
-        <div class="faq-a" id="faq-p5" role="region" aria-labelledby="faq-t5">
-          <div><p>Todavía no está a la venta. Quien deje su email entra en el acceso anticipado y tendrá el precio de lanzamiento. Avisaremos con tiempo, y solo para eso.</p></div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
 
 <footer id="footer-signup">
   <div class="foot-panel">
@@ -2500,24 +2267,24 @@
           <h3>Fórmulas</h3>
           <ul>
             <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
-            <li><a href="#catalogo">Vitamina D3 + K2</a></li>
-            <li><a href="#catalogo">Omega&ndash;3 EPA+DHA</a></li>
-            <li><a href="#catalogo">Probiótico Multicepa</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
           </ul>
         </div>
         <div class="foot-col reveal foot-anim">
           <h3>La marca</h3>
           <ul>
-            <li><a href="#criterio">Cómo elegimos</a></li>
-            <li><a href="libro.html">El libro</a></li>
-            <li><a href="#faq">Preguntas</a></li>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="#libro">El libro</a></li>
+            <li><a href="index.html#faq">Preguntas</a></li>
           </ul>
         </div>
         <div class="foot-col reveal foot-anim">
           <h3>Ayuda</h3>
           <ul>
             <li><a href="#alta">Acceso anticipado</a></li>
-            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="index.html#faq">Envíos y devoluciones</a></li>
             <li><a href="#footer-signup">Contacto</a></li>
           </ul>
         </div>
@@ -2570,17 +2337,17 @@
       </button>
       <div class="mm-acc-panel" id="mm-acc-panel">
         <div class="mm-acc-inner">
-          <a href="#catalogo">Magnesio Bisglicinato</a>
-          <a href="#catalogo">Vitamina D3 + K2</a>
-          <a href="#catalogo">Omega&ndash;3 EPA+DHA</a>
-          <a href="#catalogo">Probiótico Multicepa</a>
+          <a href="index.html#catalogo">Magnesio Bisglicinato</a>
+          <a href="index.html#catalogo">Vitamina D3 + K2</a>
+          <a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a>
+          <a href="index.html#catalogo">Probiótico Multicepa</a>
         </div>
       </div>
     </div>
-    <a href="#catalogo">Catálogo</a>
+    <a href="index.html#catalogo">Catálogo</a>
     <a href="#quien">Quién está detrás</a>
-    <a href="libro.html">El libro de Sento</a>
-    <a href="#criterio">Cómo elegimos</a>
+    <a href="#libro">El libro de Sento</a>
+    <a href="index.html#criterio">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
   </nav>
   <a class="btn btn-solid mm-cta" href="#footer-signup">Acceso anticipado</a>
