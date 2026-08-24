@@ -1091,7 +1091,7 @@
     .hero-cta { transition: none; }
   }
 
-  .hero-alta-titulo { font-size: var(--t-2xl); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.5rem; }
+  .hero-alta-titulo { font-size: var(--t-4xl); font-weight: 600; letter-spacing: var(--tracking-lg); margin: 0 0 0.6rem; }
 
 
   /* ============ QUIEN FIRMA ============
@@ -1235,7 +1235,7 @@
 
     /* bloque de alta */
     /* .hero-center p (0,1,1) le ganaba y lo dejaba en 1,06rem */
-    .hero-center .hero-alta-titulo { font-size: var(--t-2xl); font-weight: 600; color: var(--ink); }
+    .hero-center .hero-alta-titulo { font-size: var(--t-4xl); font-weight: 600; color: var(--ink); }
     .hero-signup-label { color: var(--ink-soft); }
 
     /* cabeceras de seccion */
