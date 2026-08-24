@@ -12,7 +12,7 @@
        Base: blanco puro #FFFFFF · negro puro #000000
        Acento: Ámbar #8C5A22 · Latón #A4844A */
     --paper: #ffffff;
-    --tint: #e2e7ed;
+    --tint: #ebe5dc;
     --ink: #23272e;
     --ink-soft: #454c55;
     --ink-faint: #8b9aa8;
@@ -959,11 +959,6 @@
   .hero-shade {
     position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
-      linear-gradient(to bottom,
-        rgba(22, 19, 15, 0.62) 0%,
-        rgba(22, 19, 15, 0.58) 34%,
-        rgba(22, 19, 15, 0.34) 52%,
-        rgba(22, 19, 15, 0) 68%),
       linear-gradient(to top,
         rgba(22, 19, 15, 0.92) 0%,
         rgba(22, 19, 15, 0.72) 20%,
