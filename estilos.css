@@ -1641,7 +1641,19 @@
   /* ============ RESEÑAS ============
      Misma mecanica que el catalogo: tira que se desliza con la siguiente
      tarjeta asomando, y los mismos puntos debajo. Asi no hay que aprender
-     un gesto nuevo a mitad de pagina. */
+     un gesto nuevo a mitad de pagina.
+     Panel en el azul de marca, a sangre como el resto de bandas, con las
+     tarjetas en blanco encima. */
+  #resenas {
+    background: var(--ink);
+    margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 3rem 1.6rem 2.6rem;
+  }
+  #resenas .section-head h2 { color: var(--paper); }
+  #resenas .section-head .h2-soft { color: var(--paper); }
+  /* los puntos van sobre oscuro: se invierten */
+  #resenas .shop-puntos li button { background: rgba(238, 240, 244, 0.28); }
+  #resenas .shop-puntos li button.act { background: var(--khaki-pop); }
   .resenas {
     list-style: none; margin: 0; padding-bottom: 0.5rem;
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;
@@ -1653,7 +1665,7 @@
     scroll-snap-align: start;
     display: grid; align-content: start; gap: 0.7rem;
     padding: 1.3rem 1.2rem;
-    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    background: var(--paper); border: 0; border-radius: 16px;
   }
   .resena-estrellas { color: var(--khaki-deep); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
   .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
