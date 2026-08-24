@@ -372,13 +372,37 @@
   }
   /* el video va encima del poster y solo se muestra cuando tiene fotogramas:
      asi no hay parpadeo ni hueco mientras carga */
+  /* el video ES la imagen del hero. La foto queda debajo y solo se ve si el
+     video no puede reproducirse o si hay movimiento reducido */
   .hero-video {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; display: block;
-    opacity: 0; transition: opacity 0.6s ease;
   }
-  .hero-video.visible { opacity: 1; }
+  .hero-poster { display: block; }
   @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+
+  /* El titular se coloca sobre el hueco que deja el bote al retirarse, que
+     esta a media altura y algo a la izquierda del centro. Aparece cuando el
+     bote ya se ha ido y se retira antes de que el video vuelva a empezar. */
+  .hero-texto {
+    position: absolute; left: 0; right: 0; top: 34%;
+    padding: 2.2rem 1.4rem; text-align: center;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    pointer-events: none;
+  }
+  .hero-texto::before {
+    content: ""; position: absolute; inset: 4% 6%;
+    z-index: -1; pointer-events: none;
+    background: rgba(18, 20, 24, 0.7);
+    border-radius: 30px;
+    filter: blur(18px);
+  }
+  .hero-texto.visible { opacity: 1; transform: none; }
+  /* sin JS o sin movimiento, el texto se queda puesto */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-texto { position: static; opacity: 1; transform: none; transition: none; padding: 0; }
+  }
 
   .hero-media-box {
     position: relative; width: 100%; overflow: hidden; border-radius: 20px; background: #e9ebef;
@@ -946,6 +970,7 @@
       rgba(22, 19, 15, 0.10) 72%,
       rgba(22, 19, 15, 0) 90%);
   }
+  /* ya solo contiene el boton: el titular vive en .hero-texto, encima */
   .hero-copy {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
     padding: 0 1.3rem 2.1rem; text-align: center; color: #fff;

@@ -106,18 +106,18 @@
 
   <div class="hero-carousel wrap">
     <div class="hero-media-box">
-      <!-- La foto se queda de poster: es lo que se pinta al instante y lo que
-           ve quien tenga el movimiento reducido. El video NO trae src: se lo
-           pone el JS despues de window.load, para que no compita con nada
-           critico. Y NO lleva loop: el ultimo fotograma no coincide con el
-           primero y el salto se veria cada ocho segundos. -->
-      <img class="hero-poster" src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
-      <video class="hero-video" id="hero-video" data-src="hero-zerox.mp4"
-             width="720" height="1280" muted playsinline preload="none" aria-hidden="true"></video>
+      <!-- El video es la imagen: su primer fotograma es lo primero que se
+           pinta, asi no hay una foto distinta asomando antes. La foto se
+           mantiene solo para quien tenga el movimiento reducido. -->
+      <img class="hero-poster" src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async">
+      <video class="hero-video" id="hero-video" src="hero-zerox.mp4"
+             width="720" height="1280" muted loop playsinline preload="auto" aria-hidden="true"></video>
       <div class="hero-shade"></div>
-      <div class="hero-copy">
+      <div class="hero-texto" id="hero-texto">
         <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
         <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
+      </div>
+      <div class="hero-copy">
         <a class="hero-cta" href="#alta">Reserva tu acceso</a>
       </div>
     </div>
@@ -324,7 +324,7 @@
       <div>
         <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Pack de lanzamiento</p>
         <h2>Magnesio <span class="h2-soft">+ libro</span></h2>
-        <p>La fórmula y el criterio para entenderla. El libro explica qué suplementos merecen la pena, cuáles no y cómo leer una etiqueta.</p>
+        <p>La fórmula y el criterio para entenderla.</p>
       </div>
     </div>
 
@@ -723,66 +723,25 @@
     pintarShop();
   }
 
-  // Video del hero. Se carga DESPUES de window.load y solo entonces: la foto
-  // de poster ya esta pintada, asi que el video no compite con nada critico.
-  // Sin loop a proposito: el ultimo fotograma no coincide con el primero y el
-  // salto se veria cada ocho segundos. Se reproduce una vez y se queda quieto.
+  // Video del hero y su titular. Medido fotograma a fotograma: el bote se
+  // retira entre el segundo 2 y el 4, y el hueco se queda hasta el final. El
+  // texto entra cuando ya se ha ido y sale antes de que el video reinicie,
+  // asi el corte del bucle cae con el texto fuera y se lee como un reinicio.
   var heroVideo = document.getElementById('hero-video');
-  if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var arrancarVideo = function () {
-      heroVideo.src = heroVideo.dataset.src;
-      // con preload="none" el navegador no descarga nada por su cuenta: hay
-      // que pedirselo. Sin este load() el canplay de abajo no llegaba nunca
-      heroVideo.load();
-      // solo se hace visible cuando ya hay imagen que mostrar
-      heroVideo.addEventListener('loadeddata', function () {
-        heroVideo.classList.add('visible');
-        var intento = heroVideo.play();
-        // si el navegador rechaza el autoplay, se queda el poster y ya
-        if (intento && intento.catch) { intento.catch(function () {}); }
-      }, { once: true });
-    };
-    if (document.readyState === 'complete') { arrancarVideo(); }
-    else { window.addEventListener('load', arrancarVideo, { once: true }); }
-  }
-
-  // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
-  // texto final tal cual y se reconstruye en cada cuadro respetando el signo
-  // de delante, la coma decimal y la unidad de detras, que si no "+2,9 M" se
-  // convierte en un numero pelado.
-  var cifras = document.querySelectorAll('.firma-datos b');
-  if (cifras.length) {
-    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var contar = function (el) {
-      var texto = el.textContent.trim();
-      var m = texto.match(/^([^0-9]*)([0-9]+(?:[.,][0-9]+)?)(.*)$/);
-      if (!m) { return; }
-      var antes = m[1], destino = parseFloat(m[2].replace(',', '.')), despues = m[3];
-      var decimales = (m[2].indexOf(',') >= 0 || m[2].indexOf('.') >= 0) ? 1 : 0;
-      var DURACION = 1100;
-      var t0 = null;
-      var paso = function (ahora) {
-        if (t0 === null) { t0 = ahora; }
-        var k = Math.min(1, (ahora - t0) / DURACION);
-        // frenada suave al final: sube rapido y llega despacio
-        var suave = 1 - Math.pow(1 - k, 3);
-        var v = (destino * suave).toFixed(decimales).replace('.', ',');
-        el.textContent = antes + v + despues;
-        if (k < 1) { requestAnimationFrame(paso); }
-        else { el.textContent = texto; }
-      };
-      requestAnimationFrame(paso);
-    };
-    if (!quieto && 'IntersectionObserver' in window) {
-      var obsCifras = new IntersectionObserver(function (entradas) {
-        entradas.forEach(function (e) {
-          if (!e.isIntersecting) { return; }
-          obsCifras.unobserve(e.target);
-          contar(e.target);
-        });
-      }, { threshold: 0.6 });
-      cifras.forEach(function (el) { obsCifras.observe(el); });
+  var heroTexto = document.getElementById('hero-texto');
+  if (heroVideo && heroTexto && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ENTRA = 4.0, SALE = 7.3;
+    heroVideo.addEventListener('timeupdate', function () {
+      var t = heroVideo.currentTime;
+      heroTexto.classList.toggle('visible', t >= ENTRA && t < SALE);
+    });
+    var intento = heroVideo.play();
+    // si el navegador rechaza el autoplay, se deja el texto puesto y quieto
+    if (intento && intento.catch) {
+      intento.catch(function () { heroTexto.classList.add('visible'); });
     }
+  } else if (heroTexto) {
+    heroTexto.classList.add('visible');
   }
 
   // la barra gana filete y sombra solo cuando se ha despegado del borde
