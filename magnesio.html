@@ -349,7 +349,7 @@
     overflow: hidden; color: inherit; text-decoration: none;
   }
   .otra-foto { display: block; aspect-ratio: 1 / 1; background: var(--tint); }
-  .otra-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .otra-foto img, .otra-foto video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .otra-cuerpo { display: grid; gap: 0.3rem; padding: 0.9rem 1rem 1.1rem; text-align: center; }
   .otra-nombre { font-size: var(--t-lg); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .otra-desc { font-size: var(--t-xs); line-height: 1.4; color: var(--ink-soft); }
@@ -360,10 +360,19 @@
   }
 
   /* ---------- secciones ---------- */
-  section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+  section { padding: 3.2rem 0; border-top: 0; }
   h2 {
-    margin: 0 0 1.2rem; font-size: var(--t-4xl); font-weight: 600;
+    margin: 0 auto 0.7rem; max-width: 22ch;
+    font-size: var(--t-4xl); font-weight: 600;
     letter-spacing: var(--tracking-lg); line-height: 1.15;
+    text-align: center; text-wrap: balance;
+  }
+  /* la entradilla de cada seccion, centrada y con la misma medida que en la
+     portada: 46 caracteres es donde el ojo deja de perder el renglon */
+  section > h2 + p {
+    margin: 0 auto 2.6rem; max-width: 46ch;
+    font-size: var(--t-lg); color: var(--ink-soft);
+    text-align: center; text-wrap: pretty;
   }
   section > p { font-size: var(--t-lg); color: var(--ink-soft); }
 
@@ -532,10 +541,35 @@
   .modo-precio b { font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .modo-precio small { font-size: var(--t-sm); color: var(--ink-soft); }
   .modo-desc { font-size: var(--t-base); color: var(--ink-soft); }
+  /* la opcion que mas conviene: filete de marca y etiqueta, pero SIN venir
+     premarcada. Premarcar la cara lo prohibe el articulo 22 de la directiva
+     de derechos del consumidor, asi que la que viene marcada es la unica que
+     no compromete a nada */
+  .modo--destacado { border-color: var(--khaki-deep); border-width: 2px; }
+  .modo-etiqueta {
+    display: inline-block; margin-left: 0.4rem; vertical-align: 2px;
+    font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: #fff; background: var(--khaki-deep);
+    border-radius: 999px; padding: 0.15rem 0.45rem; white-space: nowrap;
+  }
+  /* las condiciones de la suscripcion salen de dentro de cada opcion: cuatro
+     linetas por opcion hacian el selector ilegible. Van una vez, debajo */
+  .modos-nota {
+    margin: 0.9rem 0 0; font-size: var(--t-xs); line-height: 1.5;
+    color: var(--ink-soft); text-align: center;
+  }
+  .modos-nota a { color: var(--khaki-deep); text-decoration: underline; text-underline-offset: 3px; }
+
   .modo-ahorro {
     justify-self: start; margin-top: 0.15rem;
     font-size: var(--t-sm); font-weight: 600; color: var(--olive);
     background: var(--khaki-pop); border-radius: 999px; padding: 0.2rem 0.7rem;
+  }
+  .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+  .faq-lista li { position: relative; padding-left: 1.1rem; }
+  .faq-lista li::before {
+    content: ""; position: absolute; left: 0; top: 0.62em;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki-deep);
   }
   .modo-plus { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
   .modo-plus li {
@@ -655,22 +689,29 @@
       <fieldset class="modos">
         <legend class="modos-legend">Cómo lo quieres</legend>
 
-        <label class="modo modo--sub">
-          <input type="radio" name="modo-compra" value="suscripcion">
+        <label class="modo modo--destacado">
+          <input type="radio" name="modo-compra" value="trimestral">
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
             <span class="modo-fila">
-              <span class="modo-nombre">Suscripción · 2 botes</span>
+              <span class="modo-nombre">Cada 3 meses <span class="modo-etiqueta">La mejor relación</span></span>
+              <span class="modo-precio"><b>54,90&nbsp;&euro;</b><small>&nbsp;cada 3 meses</small></span>
+            </span>
+            <span class="modo-desc">Tres botes, a 18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
+            <span class="modo-ahorro">Ahorras un 20&nbsp;%</span>
+          </span>
+        </label>
+
+        <label class="modo">
+          <input type="radio" name="modo-compra" value="bimestral">
+          <span class="modo-marca" aria-hidden="true"></span>
+          <span class="modo-cuerpo">
+            <span class="modo-fila">
+              <span class="modo-nombre">Cada 2 meses</span>
               <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
             </span>
-            <span class="modo-desc">Dos botes cada 60 días, a 19,45&nbsp;&euro; el bote: dos meses de tratamiento seguido, sin tener que acordarte.</span>
+            <span class="modo-desc">Dos botes, a 19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
             <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
-            <ul class="modo-plus">
-              <li>Cancelas cuando quieras, desde tu cuenta y en un clic</li>
-              <li>Sin permanencia ni penalización</li>
-              <li>Te avisamos por email antes de cada cobro</li>
-              <li>Envío gratuito: al ir de dos en dos, sale a cuenta enviarlo</li>
-            </ul>
           </span>
         </label>
 
@@ -682,9 +723,11 @@
               <span class="modo-nombre">Compra única</span>
               <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-desc">Un bote, y ya está. Sin compromiso de nada.</span>
+            <span class="modo-desc">Un bote, a 22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
           </span>
         </label>
+
+        <p class="modos-nota">Las suscripciones se cancelan desde tu cuenta en un clic, sin permanencia. Te avisamos por email antes de cada cobro. <a href="#faq-sub">Cómo funciona</a></p>
       </fieldset>
 
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
@@ -908,6 +951,26 @@
     <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
     <ul class="faq">
       <li class="faq-item">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="faq-sub" aria-expanded="false" aria-controls="faq-psub">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head">
+            <span class="faq-title">&iquest;Cómo funciona la suscripción?</span>
+            <span class="faq-meta">Suscripción</span>
+          </span>
+        </button></h3>
+        <div class="faq-a" id="faq-psub" role="region" aria-labelledby="faq-sub">
+          <div>
+            <p>Recibes los botes cada dos o cada tres meses, según lo que elijas, y el cobro se hace el mismo día del envío.</p>
+            <ul class="faq-lista">
+              <li>Cancelas cuando quieras, desde tu cuenta y en un clic. Sin llamadas ni formularios.</li>
+              <li>Sin permanencia ni penalización por cancelar.</li>
+              <li>Te avisamos por email antes de cada cobro, con tiempo para pararlo.</li>
+              <li>Envío gratuito: al ir de dos en dos o de tres en tres, sale a cuenta enviarlo.</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
           <span class="faq-head">
@@ -984,7 +1047,7 @@
     <ul class="otras">
       <li class="otra">
         <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><img src="hero-d3k2.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Vitamina D3 + K2 de ZEROX"></span>
+          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Vitamina D3 + K2 de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Vitamina D3 + K2</span>
             <span class="otra-desc">2.000&ndash;4.000&nbsp;UI con K2 en MK&ndash;7.</span>
@@ -994,7 +1057,7 @@
       </li>
       <li class="otra">
         <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><img src="hero-omega3.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Omega&ndash;3 EPA+DHA de ZEROX"></span>
+          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Omega&ndash;3 EPA+DHA de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Omega&ndash;3 EPA+DHA</span>
             <span class="otra-desc">EPA y DHA marinos, 1.000&ndash;2.000&nbsp;mg.</span>
@@ -1004,7 +1067,7 @@
       </li>
       <li class="otra">
         <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><img src="hero-probiotico.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Probiótico Multicepa de ZEROX"></span>
+          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Probiótico Multicepa de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Probiótico Multicepa</span>
             <span class="otra-desc">Varias cepas vivas, 10&ndash;20 mil millones.</span>
@@ -1109,9 +1172,12 @@
   function pintarModo() {
     var sel = document.querySelector('input[name="modo-compra"]:checked');
     if (!sel || !comprarBtn) { return; }
-    comprarBtn.textContent = sel.value === 'suscripcion'
-      ? 'Suscribirme · 38,90 € cada 2 meses'
-      : 'Añadir a la cesta · 22,90 €';
+    var textos = {
+      trimestral: 'Suscribirme · 54,90 € cada 3 meses',
+      bimestral:  'Suscribirme · 38,90 € cada 2 meses',
+      unica:      'Añadir a la cesta · 22,90 €'
+    };
+    comprarBtn.textContent = textos[sel.value] || textos.unica;
   }
   modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
   pintarModo();
