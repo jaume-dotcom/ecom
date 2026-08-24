@@ -1087,11 +1087,12 @@
   .firma-marco {
     flex: 0 0 auto; width: 8.5rem; aspect-ratio: 1 / 1;
     border-radius: 50%; overflow: hidden;
-    display: grid; justify-items: center; align-items: end;
+    display: grid; justify-items: center; align-items: start;
     background: var(--tint);
   }
   .firma-foto {
-    width: 86%; height: 86%; display: block; align-self: end;
+    width: 118%; height: 118%; max-width: none; display: block;
+    align-self: start; margin-top: 12%;
     object-fit: cover; object-position: 50% 0%;
     /* blanco y negro: el granate del pijama es un rojo que no esta en la
        paleta, y en color empuja el retrato hacia "bata clinica" */
