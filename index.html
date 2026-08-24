@@ -111,13 +111,11 @@
            mantiene solo para quien tenga el movimiento reducido. -->
       <img class="hero-poster" src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async">
       <video class="hero-video" id="hero-video" src="hero-zerox.mp4"
-             width="720" height="1280" muted loop playsinline preload="auto" aria-hidden="true"></video>
+             width="720" height="1280" muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="hero-shade"></div>
       <div class="hero-texto" id="hero-texto">
         <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
         <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
-      </div>
-      <div class="hero-copy">
         <a class="hero-cta" href="#alta">Reserva tu acceso</a>
       </div>
     </div>
@@ -723,20 +721,32 @@
     pintarShop();
   }
 
-  // Video del hero y su titular. Medido fotograma a fotograma: el bote se
-  // retira entre el segundo 2 y el 4, y el hueco se queda hasta el final. El
-  // texto entra cuando ya se ha ido y sale antes de que el video reinicie,
-  // asi el corte del bucle cae con el texto fuera y se lee como un reinicio.
+  // Video del hero. Medido fotograma a fotograma: el bote se retira entre el
+  // segundo 2 y el 4. El texto entra cuando ya se ha ido y se queda puesto
+  // hasta bien pasado el final: el video no lleva loop propio, termina, el
+  // texto aguanta cinco segundos mas y solo entonces vuelve a empezar. Asi da
+  // tiempo a leerlo, que en bucle seco duraba tres segundos.
   var heroVideo = document.getElementById('hero-video');
   var heroTexto = document.getElementById('hero-texto');
   if (heroVideo && heroTexto && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var ENTRA = 4.0, SALE = 7.3;
+    var ENTRA = 3.8, PAUSA = 5000, SALIDA = 500;
     heroVideo.addEventListener('timeupdate', function () {
-      var t = heroVideo.currentTime;
-      heroTexto.classList.toggle('visible', t >= ENTRA && t < SALE);
+      if (heroVideo.currentTime >= ENTRA) { heroTexto.classList.add('visible'); }
+    });
+    heroVideo.addEventListener('ended', function () {
+      // el ultimo fotograma se queda congelado con el texto encima
+      setTimeout(function () {
+        heroTexto.classList.remove('visible');
+        // se espera a que el texto termine de irse antes de rebobinar, para
+        // que el corte del video no se vea con el titular todavia puesto
+        setTimeout(function () {
+          heroVideo.currentTime = 0;
+          var otra = heroVideo.play();
+          if (otra && otra.catch) { otra.catch(function () {}); }
+        }, SALIDA);
+      }, PAUSA);
     });
     var intento = heroVideo.play();
-    // si el navegador rechaza el autoplay, se deja el texto puesto y quieto
     if (intento && intento.catch) {
       intento.catch(function () { heroTexto.classList.add('visible'); });
     }
