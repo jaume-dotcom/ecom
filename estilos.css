@@ -378,8 +378,21 @@
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; display: block;
   }
-  .hero-poster { display: block; }
-  @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+  /* la foto solo se pone si el video no va a verse. Como fondo y no como
+     <img>, el navegador ni la descarga mientras la regla no aplique */
+  .hero-media-box.sin-video,
+  .hero-media-box.sin-video .hero-shade { }
+  .hero-media-box.sin-video {
+    background-image: url("hero-zerox.jpg");
+    background-size: cover; background-position: center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; }
+    .hero-media-box {
+      background-image: url("hero-zerox.jpg");
+      background-size: cover; background-position: center;
+    }
+  }
 
   /* El titular se coloca sobre el hueco que deja el bote al retirarse, que
      esta a media altura y algo a la izquierda del centro. Aparece cuando el
@@ -1627,19 +1640,30 @@
      tarjeta del hero, el bloque de venta y el pie. No se usa el amarillo de
      la referencia: es el color de marca de Be Levels y aqui cantaria. */
   #asesoria {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    border-top: 0;
+    border-bottom: 0;
+    position: relative; overflow: hidden;
     /* de borde a borde, igual que el pack y el criterio: las bandas de color
        solo se leen como seccion si llegan al borde de la pantalla */
     margin-left: -1.6rem; margin-right: -1.6rem;
     padding: 3rem 2.1rem 3.2rem;
     text-align: center;
-    /* fondo liso. La foto desenfocada, con el velo que hacia falta para que
-       el texto negro se leyera, no llegaba a decir "cuatro formulas": decia
-       "hay algo borroso detras". Ni foto ni fondo limpio. */
-    background: var(--tint);
+    /* el mismo panel oscuro que el bloque de criterio, con su misma marca de
+       agua. Los dos son bloques de "te explicamos", asi que se leen como
+       pareja y no como dos cosas distintas */
+    background: #23272e;
   }
-  .ayuda { max-width: 34rem; margin: 0 auto; }
+  .ayuda { max-width: 34rem; margin: 0 auto; position: relative; z-index: 1; }
+  #asesoria .closing-marca { z-index: 0; }
+  #asesoria .ayuda-titulo { color: var(--paper); }
+  #asesoria .ayuda-titulo .h2-soft { color: var(--paper); }
+  #asesoria .ayuda-sub { color: rgba(238, 240, 244, 0.82); }
+  /* sobre oscuro el marron no separa del fondo: el mismo boton claro que usa
+     el criterio */
+  #asesoria .btn-solid {
+    background: var(--khaki-pop); color: var(--ink); border-color: var(--khaki-pop);
+  }
+  #asesoria .btn-solid:hover { background: var(--paper); border-color: var(--paper); }
   .ayuda-titulo {
     margin: 0 0 0.6rem; font-size: var(--t-3xl); font-weight: 600;
     letter-spacing: var(--tracking-lg);
@@ -1885,7 +1909,7 @@
      legal aqui porque no es un precio anterior del pack, es la suma de los
      dos productos por separado, y va etiquetado como tal. */
   #libro {
-    background: var(--tint); border-radius: 0;
+    background: var(--paper); border-radius: 0;
     /* de borde a borde, como el criterio: se cancela el relleno del .wrap */
     margin-left: -1.6rem; margin-right: -1.6rem;
     padding: 3rem 1.6rem 3.4rem;
