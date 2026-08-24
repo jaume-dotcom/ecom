@@ -20,54 +20,10 @@
      extraen a un estilos.css único (ver nota al equipo).
      Los tokens son copia literal de los del index.
      ============================================================ */
-  :root {
-    --paper: #eef0f4;
-    --tint: #e2e7ed;
-    --ink: #23272e;
-    --ink-soft: #3a4149;
-    --ink-faint: #8b9aa8;
-    --khaki: #a4844a;
-    --khaki-pop: #ecdcbe;
-    --khaki-deep: #8c5a22;
-    --olive: #6f4419;
-    --line: #dce1e7;
-    --font: "Inter", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
-    --tracking-lg: -0.03em;
-
-    /* ===== ESCALA DE TEXTO =====
-       Habia 40 tamanos declarados y 29 llegaban a pintarse, muchos
-       separados por un 2 o 3 por ciento: no se ven, pero impiden que nada
-       case. Los escalones son los que la web ya usaba de verdad.
-       Fuera quedan los clamp() y los em, relativos a proposito, y el punto
-       separador del ticker, que es un glifo y no texto. */
-    --t-3xs: 0.72rem;
-    --t-2xs: 0.8rem;
-    --t-xs: 0.85rem;
-    --t-sm: 0.9rem;
-    --t-md: 0.95rem;
-    --t-base: 1rem;
-    --t-lg: 1.05rem;
-    --t-xl: 1.15rem;
-    --t-2xl: 1.3rem;
-    --t-3xl: 1.6rem;
-    --t-4xl: 1.75rem;
-    --t-5xl: 1.9rem;
-    --t-6xl: 2.05rem;
-    --t-7xl: 2.2rem;
-    --t-8xl: 2.4rem;
-
-    /* ===== BOTONES ===== mismos tokens que la portada.
-         primario   marron solido, la accion principal del bloque
-         secundario contorno, para navegar
-         claro      fondo claro, solo sobre foto o sobre panel oscuro */
-    --btn-radio: 999px;
-    --btn-peso: 600;
-    --btn-txt: 1.05rem;
-    --btn-relleno: 1rem 1.5rem;
-    --btn-txt-sm: 0.9rem;
-    --btn-relleno-sm: 0.62rem 1.15rem;
-  }
+  /* La paleta y la escala salen de estilos.css. Aqui NO se redeclaran:
+     este archivo tenia su propio :root y, al ir despues de la hoja comun,
+     la pisaba entera. Tres tokens iban distintos y la ficha llevaba meses
+     con otra paleta que la portada sin que se viera el motivo. */
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
@@ -110,6 +66,13 @@
     aspect-ratio: 4 / 5;
   }
   .ficha-foto img { width: 100%; height: 100%; object-fit: cover; }
+  /* la columna de compra se alinea con el resto de la pagina: centrada, como
+     los titulares de las secciones y como en la portada */
+  .ficha > div:last-child { text-align: center; }
+  .ficha h1 { text-align: center; }
+  .ficha-eyebrow { justify-content: center; }
+  .datos { justify-items: center; }
+  .modo { text-align: left; }
   .ficha-eyebrow {
     margin: 1.6rem 0 0.5rem; font-size: var(--t-sm); letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--khaki-deep); font-weight: 500;
@@ -653,9 +616,12 @@
     <div>
       <p class="ficha-eyebrow">Fórmula 01</p>
       <h1>Magnesio Bisglicinato</h1>
-      <p class="ficha-lede">La forma que mejor se tolera. Sin óxido de magnesio, sin dosis a medias y con la etiqueta entera a la vista.</p>
-
-      <p class="ficha-formato">90 cápsulas &middot; 30 días de tratamiento</p>
+      <!-- PENDIENTE: la entradilla que habia aqui —"La forma que mejor se
+           tolera. Sin oxido de magnesio, sin dosis a medias y con la etiqueta
+           entera a la vista"— tiene que ir quemada en uno de los creativos de
+           la galeria, no como una linea de texto mas encima del precio.
+           El formato, 90 capsulas y 30 dias, sigue en la tabla de "Que lleva"
+           y en la descripcion de cada opcion de compra. -->
       <p class="ficha-orientativo">Precios orientativos: la web es una vista previa y todavía no está a la venta.</p>
       <p class="ficha-envio">Envío gratuito desde 27,95 €. Devolución en 30 días.</p>
 
