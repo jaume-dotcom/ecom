@@ -474,9 +474,9 @@
       </ul>
 
       <ul class="cierre-cifras">
-        <li><b>100&nbsp;%</b><span>de la dosis, en la etiqueta</span></li>
-        <li><b>0&nbsp;%</b><span>mezclas patentadas</span></li>
-        <li><b>0&nbsp;%</b><span>incógnitas</span></li>
+        <li><b data-desde="0">100&nbsp;%</b><span>dosis en la etiqueta</span></li>
+        <li><b data-desde="100">0&nbsp;%</b><span>mezclas patentadas</span></li>
+        <li><b data-desde="100">0&nbsp;%</b><span>incógnitas</span></li>
       </ul>
       <span class="loc">&#9679; Fabricado y empaquetado en España</span>
     </div>
@@ -813,6 +813,39 @@
       });
     }, { threshold: 0.6 });
     cifras.forEach(function (el) { obsCifras.observe(el); });
+  }
+
+  // Cifras del cierre del criterio. La de 100 sube desde cero; las de 0 BAJAN
+  // desde 100, que es lo que hace legible el gesto: contar de cero a cero se
+  // ve como un fallo, y bajar hasta cero se lee como "esto lo hemos quitado".
+  var cierreCifras = document.querySelectorAll('.cierre-cifras b');
+  if (cierreCifras.length && 'IntersectionObserver' in window &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var contarCierre = function (el) {
+      var texto = el.textContent.trim();
+      var m = texto.match(/^([0-9]+)(.*)$/);
+      if (!m) { return; }
+      var hasta = parseFloat(m[1]), cola = m[2];
+      var desde = parseFloat(el.dataset.desde || '0');
+      var DURACION = 1800, t0 = null;
+      var paso = function (ahora) {
+        if (t0 === null) { t0 = ahora; }
+        var k = Math.min(1, (ahora - t0) / DURACION);
+        var suave = 1 - Math.pow(1 - k, 4);
+        el.textContent = Math.round(desde + (hasta - desde) * suave) + cola;
+        if (k < 1) { requestAnimationFrame(paso); }
+        else { el.textContent = texto; }
+      };
+      requestAnimationFrame(paso);
+    };
+    var obsCierre = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) { return; }
+        obsCierre.unobserve(e.target);
+        contarCierre(e.target);
+      });
+    }, { threshold: 0.6 });
+    cierreCifras.forEach(function (el) { obsCierre.observe(el); });
   }
 
   // Video del hero. Medido fotograma a fotograma: el bote se retira entre el
