@@ -1677,7 +1677,14 @@
     .hero-signup-field input::placeholder { color: var(--ink-faint); }
     .hero-signup-icon { color: var(--ink-faint); }
 
-    .shine > button { padding-top: 0.95rem; padding-bottom: 0.95rem; font-size: var(--t-lg); }
+    .shine { width: max-content; max-width: 100%; align-self: center; }
+    .shine > button {
+      width: auto;
+      /* no baja del relleno estandar compacto: con el se quedaba en 37px
+         de alto y el minimo para tocar con el dedo son 44 */
+      padding: 0.9rem 1.5rem;
+      font-size: var(--btn-txt-sm);
+    }
 
     /* el bloque entero, mas centrado y con la medida corta */
     #alta { max-width: 26rem; margin-left: auto; margin-right: auto; }
@@ -1698,7 +1705,17 @@
   /* --ink es negro puro desde el cambio de paleta, y es la unica superficie
      de la web en negro absoluto: el pie va en #23272e. Se iguala, que ademas
      sobre blanco el negro puro corta demasiado */
-  .closing { align-items: center; text-align: center; background: #23272e; }
+  .closing { align-items: center; text-align: center; background: #23272e; position: relative; overflow: hidden; }
+  /* marca de agua: propia, gratis y sin peticiones. Se queda muy por debajo
+     del texto en contraste — a 0,05 de opacidad el trazo apenas separa 1,04
+     del fondo, asi que ningun texto de encima pierde legibilidad */
+  .closing-marca {
+    position: absolute; pointer-events: none; z-index: 0;
+    top: -8%; right: -30%; width: 105%; height: auto;
+    color: var(--khaki-pop); opacity: 0.05;
+  }
+  /* todo el contenido por encima de la marca */
+  .closing > *:not(.closing-marca) { position: relative; z-index: 1; }
   /* .h2-soft usa --ink, que sobre este panel es negro sobre casi negro */
   .closing .h2-soft { color: var(--paper); }
   /* 3rem de relleno dejaban 228px utiles en una pantalla de 375, con el
@@ -2340,6 +2357,15 @@
 
   <section class="band" id="criterio">
     <div class="closing reveal">
+      <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="5">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
       <p class="sec-kicker sec-kicker--claro"><span class="sec-dot" aria-hidden="true"></span>Nuestro criterio</p>
       <h2>Cómo <span class="h2-soft">elegimos</span></h2>
       <p class="closing-lede">Cuatro fórmulas y ninguna más. Entran solo si podemos publicar la cantidad exacta, la forma y de dónde sale.</p>
