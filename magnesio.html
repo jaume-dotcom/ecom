@@ -224,7 +224,32 @@
   .formas { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
   .forma {
     border: 1px solid var(--line); border-radius: 14px;
-    padding: 1.1rem 1.15rem; background: #fff;
+    background: #fff; overflow: hidden;
+  }
+  /* la fila: titulo a la izquierda, sello y signo a la derecha */
+  .forma-q {
+    display: flex; align-items: center; gap: 0.7rem; width: 100%;
+    padding: 1rem 1.1rem; background: none; border: 0; cursor: pointer;
+    text-align: left; font: inherit; color: var(--ink);
+  }
+  .forma-q .faq-head { flex: 1 1 auto; min-width: 0; }
+  .forma-q .faq-title {
+    font-size: var(--t-lg); font-weight: 700; letter-spacing: var(--tracking-lg);
+  }
+  /* el signo +, del mismo tipo que el resto de acordeones de la web */
+  .forma-mas { position: relative; flex-shrink: 0; width: 14px; height: 14px; }
+  .forma-mas::before, .forma-mas::after {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 14px; height: 2px; background: var(--ink-soft); border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .forma-mas::after { transform: rotate(90deg); }
+  .forma-q[aria-expanded="true"] .forma-mas::after { transform: rotate(0deg); opacity: 0; }
+  .forma .faq-a > div { padding: 0; }
+  .forma .faq-a p { margin: 0 0 0.6rem; padding: 0 1.1rem; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
+  .forma .faq-a > div > *:last-child { margin-bottom: 1.1rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .forma-mas::before, .forma-mas::after { transition: none; }
   }
   .forma--nuestra { border-color: var(--khaki-deep); border-width: 2px; }
   .forma-alto {
@@ -239,13 +264,14 @@
     flex: 0 0 auto; font-size: var(--t-3xs); font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.08em;
     color: #fff; background: var(--khaki-deep);
-    border-radius: 999px; padding: 0.22rem 0.55rem;
+    border-radius: 999px; padding: 0.22rem 0.55rem; white-space: nowrap;
   }
+  .forma-sello--gris { background: var(--ink-faint); }
   .forma p { margin: 0; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
-  .forma-dato {
-    margin: 0.6rem 0 0; padding-top: 0.6rem;
+  .forma .faq-a .forma-dato {
+    margin: 0.7rem 0 0; padding-top: 0.7rem;
     border-top: 1px solid var(--line);
-    font-size: var(--t-sm); color: var(--ink); font-weight: 600;
+    font-size: var(--t-md); color: var(--ink); font-weight: 600;
   }
   .formas-nota {
     margin: 0.9rem 0 0; font-size: var(--t-xs); color: var(--ink-soft);
@@ -305,45 +331,38 @@
   .refs b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.15rem; }
   .refs a { color: var(--khaki-deep); }
 
-  /* ---------- las otras formulas ---------- */
-  .otras { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
-  .otra {
-    display: flex; align-items: center; gap: 0.9rem;
-    border: 1px solid var(--line); border-radius: 14px;
-    background: #fff; padding: 0.7rem; color: inherit; text-decoration: none;
+  /* ---------- tambien te puede interesar ----------
+     Misma composicion que el catalogo de la portada: tarjeta vertical con la
+     foto arriba, en una tira que se desliza con la siguiente asomando. En
+     horizontal las fotos salian diminutas y no se parecia a nada del resto. */
+  .otras {
+    list-style: none; margin: 0; padding-bottom: 0.5rem;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 66%; gap: 0.9rem;
+    overflow-x: auto; scroll-snap-type: x proximity;
+    scrollbar-width: none; -ms-overflow-style: none;
   }
-  .otra img {
-    flex: 0 0 auto; width: 4.6rem; height: 4.6rem;
-    object-fit: cover; border-radius: 10px; display: block;
+  .otras::-webkit-scrollbar { display: none; }
+  .otra { scroll-snap-align: start; }
+  .otra-enlace {
+    display: grid; height: 100%;
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    overflow: hidden; color: inherit; text-decoration: none;
   }
-  .otra-cuerpo { min-width: 0; flex: 1 1 auto; }
-  .otra-nombre {
-    margin: 0; font-size: var(--t-md); font-weight: 600;
-    letter-spacing: var(--tracking-lg);
-  }
-  .otra-desc {
-    margin: 0.2rem 0 0; font-size: var(--t-xs); line-height: 1.35;
-    color: var(--ink-soft);
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-  .otra-precio {
-    flex: 0 0 auto; font-size: var(--t-md); font-weight: 700;
-    color: var(--khaki-deep);
-  }
-
-  /* el encabezado que envuelve cada boton de acordeon no pinta nada: todo el
-     estilo lo sigue poniendo el propio boton. Va envuelto porque es lo que
-     recomienda la practica de ARIA y hace el acordeon navegable por titular */
-  .acc-h {
-    margin: 0; font-size: inherit; font-weight: inherit;
-    letter-spacing: inherit; line-height: inherit;
+  .otra-foto { display: block; aspect-ratio: 1 / 1; background: var(--tint); }
+  .otra-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .otra-cuerpo { display: grid; gap: 0.3rem; padding: 0.9rem 1rem 1.1rem; text-align: center; }
+  .otra-nombre { font-size: var(--t-lg); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .otra-desc { font-size: var(--t-xs); line-height: 1.4; color: var(--ink-soft); }
+  .otra-precio { margin-top: 0.35rem; font-size: var(--t-xl); font-weight: 700; color: var(--ink); }
+  @media (min-width: 640px) { .otras { grid-auto-columns: 40%; } }
+  @media (min-width: 980px) {
+    .otras { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
   }
 
   /* ---------- secciones ---------- */
   section { padding: 2.5rem 0; border-top: 1px solid var(--line); }
   h2 {
-    margin: 0 0 1.2rem; font-size: var(--t-3xl); font-weight: 600;
+    margin: 0 0 1.2rem; font-size: var(--t-4xl); font-weight: 600;
     letter-spacing: var(--tracking-lg); line-height: 1.15;
   }
   section > p { font-size: var(--t-lg); color: var(--ink-soft); }
@@ -693,32 +712,54 @@
        Se comparan formas quimicas, NUNCA marcas con nombre.
        ================================================================ -->
   <section id="formas">
-    <h2>No todo el magnesio es lo mismo</h2>
+    <h2>No todo el magnesio <span class="h2-soft">es lo mismo</span></h2>
     <p>En la etiqueta pone «magnesio», pero la sal que hay dentro cambia lo que notas y lo que cuesta fabricarlo.</p>
 
     <ul class="formas">
       <li class="forma forma--nuestra">
-        <div class="forma-alto">
-          <h3 class="forma-nombre">Bisglicinato</h3>
+        <h3 class="acc-h"><button type="button" class="faq-q forma-q" id="fq-bis" aria-expanded="true" aria-controls="fp-bis">
+          <span class="faq-head">
+            <span class="faq-title">Bisglicinato</span>
+          </span>
           <span class="forma-sello">El nuestro</span>
+          <span class="forma-mas" aria-hidden="true"></span>
+        </button></h3>
+        <div class="faq-a open" id="fp-bis" role="region" aria-labelledby="fq-bis">
+          <div>
+            <p>El magnesio va unido a glicina, un aminoácido. Es de las formas que menos molestan al estómago, que es la razón por la que la elegimos.</p>
+            <p class="forma-dato">360&nbsp;mg de magnesio elemental por dosis</p>
+          </div>
         </div>
-        <p>El magnesio va unido a glicina, un aminoácido. Es de las formas que menos molestan al estómago, que es la razón por la que la elegimos.</p>
-        <p class="forma-dato">360&nbsp;mg de magnesio elemental por dosis</p>
       </li>
 
       <li class="forma">
-        <div class="forma-alto">
-          <h3 class="forma-nombre">Citrato</h3>
+        <h3 class="acc-h"><button type="button" class="faq-q forma-q" id="fq-cit" aria-expanded="false" aria-controls="fp-cit">
+          <span class="faq-head">
+            <span class="faq-title">Citrato</span>
+          </span>
+          
+          <span class="forma-mas" aria-hidden="true"></span>
+        </button></h3>
+        <div class="faq-a" id="fp-cit" role="region" aria-labelledby="fq-cit">
+          <div>
+            <p>Unido a ácido cítrico. Una opción razonable y bastante común. A dosis altas puede tener efecto laxante.</p>
+          </div>
         </div>
-        <p>Unido a ácido cítrico. Una opción razonable y bastante común. A dosis altas puede tener efecto laxante.</p>
       </li>
 
-      <li class="forma">
-        <div class="forma-alto">
-          <h3 class="forma-nombre">Óxido</h3>
-          <span class="forma-sello" style="background: var(--ink-faint)">El más común</span>
+      <li class="forma forma--comun">
+        <h3 class="acc-h"><button type="button" class="faq-q forma-q" id="fq-oxi" aria-expanded="false" aria-controls="fp-oxi">
+          <span class="faq-head">
+            <span class="faq-title">Óxido</span>
+          </span>
+          <span class="forma-sello forma-sello--gris">El más común</span>
+          <span class="forma-mas" aria-hidden="true"></span>
+        </button></h3>
+        <div class="faq-a" id="fp-oxi" role="region" aria-labelledby="fq-oxi">
+          <div>
+            <p>La sal más barata de producir, y por eso la que más aparece en los botes de supermercado. De hecho se usa como laxante por vía oral.</p>
+          </div>
         </div>
-        <p>La sal más barata de producir, y por eso la que más aparece en los botes de supermercado. De hecho se usa como laxante por vía oral.</p>
       </li>
     </ul>
     <p class="formas-nota">Comparamos formas químicas, no marcas.</p>
@@ -729,7 +770,7 @@
        ninguna competidora, y es la que hace creible la primera.
        ================================================================ -->
   <section id="para-quien">
-    <h2>¿Te hace falta?</h2>
+    <h2>¿Te hace <span class="h2-soft">falta?</span></h2>
 
     <div class="quien-cols">
       <div class="quien-col">
@@ -754,7 +795,7 @@
   </section>
 
   <section class="info">
-    <h2>La etiqueta, entera</h2>
+    <h2>La etiqueta, <span class="h2-soft">entera</span></h2>
     <ul class="faq">
       <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="info-t1" aria-expanded="true" aria-controls="info-p1">
@@ -829,7 +870,7 @@
        en cuanto exista el primero. No poner un PDF de ejemplo.
        ================================================================ -->
   <section id="calidad">
-    <h2>Cómo se comprueba</h2>
+    <h2>Cómo <span class="h2-soft">se comprueba</span></h2>
 
     <ul class="calidad">
       <li>Cada lote se analiza en un laboratorio externo, independiente de quien fabrica.</li>
@@ -847,7 +888,7 @@
        fabricada es exactamente el problema que la marca dice resolver.
        ================================================================ -->
   <section id="referencias">
-    <h2>De dónde sale esto</h2>
+    <h2>De dónde <span class="h2-soft">sale esto</span></h2>
 
     <ul class="refs">
       <li>
@@ -864,7 +905,7 @@
   </section>
 
   <section>
-    <h2>Preguntas</h2>
+    <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
     <ul class="faq">
       <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t1" aria-expanded="false" aria-controls="faq-p1">
@@ -937,45 +978,45 @@
        Las fotos son las del hero de cada una.
        ================================================================ -->
   <section id="otras">
-    <h2>Las otras tres</h2>
+    <h2>También <span class="h2-soft">te puede interesar</span></h2>
     <p>La misma exigencia en las cuatro. Si esta no es la que te hace falta, quizá lo sea otra.</p>
 
     <ul class="otras">
-      <li>
-        <a class="otra" href="index.html#catalogo">
-          <img src="hero-d3k2.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Vitamina D3 + K2 de ZEROX">
+      <li class="otra">
+        <a class="otra-enlace" href="index.html#catalogo">
+          <span class="otra-foto"><img src="hero-d3k2.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Vitamina D3 + K2 de ZEROX"></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Vitamina D3 + K2</span>
             <span class="otra-desc">2.000&ndash;4.000&nbsp;UI con K2 en MK&ndash;7.</span>
+            <span class="otra-precio">18,90&nbsp;&euro;</span>
           </span>
-          <span class="otra-precio">18,90&nbsp;&euro;</span>
         </a>
       </li>
-      <li>
-        <a class="otra" href="index.html#catalogo">
-          <img src="hero-omega3.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Omega-3 EPA+DHA de ZEROX">
+      <li class="otra">
+        <a class="otra-enlace" href="index.html#catalogo">
+          <span class="otra-foto"><img src="hero-omega3.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Omega&ndash;3 EPA+DHA de ZEROX"></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Omega&ndash;3 EPA+DHA</span>
             <span class="otra-desc">EPA y DHA marinos, 1.000&ndash;2.000&nbsp;mg.</span>
+            <span class="otra-precio">27,90&nbsp;&euro;</span>
           </span>
-          <span class="otra-precio">27,90&nbsp;&euro;</span>
         </a>
       </li>
-      <li>
-        <a class="otra" href="index.html#catalogo">
-          <img src="hero-probiotico.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Probiótico Multicepa de ZEROX">
+      <li class="otra">
+        <a class="otra-enlace" href="index.html#catalogo">
+          <span class="otra-foto"><img src="hero-probiotico.jpg" width="558" height="1024" loading="lazy" decoding="async" alt="Probiótico Multicepa de ZEROX"></span>
           <span class="otra-cuerpo">
             <span class="otra-nombre">Probiótico Multicepa</span>
             <span class="otra-desc">Varias cepas vivas, 10&ndash;20 mil millones.</span>
+            <span class="otra-precio">24,90&nbsp;&euro;</span>
           </span>
-          <span class="otra-precio">24,90&nbsp;&euro;</span>
         </a>
       </li>
     </ul>
   </section>
 
   <section class="alta" id="alta">
-    <h2>Todavía no está a la venta</h2>
+    <h2>Todavía <span class="h2-soft">no está a la venta</span></h2>
     <p>Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento para los primeros.</p>
     <form id="form-alta">
       <input type="email" placeholder="Tu email" aria-label="Tu email" required>
