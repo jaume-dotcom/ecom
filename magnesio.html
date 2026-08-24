@@ -87,11 +87,6 @@
   }
   .precio { font-size: var(--t-4xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .precio-nota { font-size: var(--t-md); color: var(--ink-soft); }
-  .ficha-orientativo {
-    margin: 0.4rem 0 1.2rem; font-size: var(--t-md); color: var(--ink-soft);
-    padding-left: 0.8rem; border-left: 2px solid var(--khaki);
-  }
-  .ficha-envio { margin: 0 0 1.3rem; font-size: var(--t-md); color: var(--ink-soft); }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
     border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
@@ -166,20 +161,24 @@
   .dato dt { font-size: var(--t-xs); color: var(--ink-soft); margin-bottom: 0.2rem; }
   .dato dd { margin: 0; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
 
-  /* ---------- sellos: los atributos, fuera del acordeon ----------
-     La informacion ya estaba, pero enterrada dentro de una FAQ desplegable.
-     Aqui se escanea sin leer, que es como mira el perfil al que vendemos. */
-  .sellos {
-    list-style: none; margin: 1.6rem 0 0; padding: 1rem 0 0;
-    border-top: 1px solid var(--line);
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
-    gap: 0.9rem 0.4rem;
+  /* ---------- tira de atributos ----------
+     Mismo componente que la tira de la portada (.ticker, en estilos.css).
+     Aqui solo se le quita el fondo oscuro: va dentro de la ficha, en blanco.
+     El bloque local carga despues de la hoja compartida, asi que estas
+     reglas ganan aunque empaten en especificidad. */
+  .ticker--sellos {
+    margin: 1.6rem 0 0; border-top: 1px solid var(--line);
+    background: transparent; color: var(--ink-soft);
   }
-  .sellos li {
-    display: grid; justify-items: center; gap: 0.35rem; text-align: center;
-    font-size: var(--t-3xs); line-height: 1.25; color: var(--ink-soft);
+  /* 24s para las cinco frases: da los mismos ~34 px/s que la portada */
+  .ticker--sellos .ticker-track { animation-duration: 24s; }
+  .ticker--sellos span {
+    padding: 0.95rem 0; font-size: var(--t-2xs); letter-spacing: normal;
   }
-  .sellos svg { width: 22px; height: 22px; color: var(--khaki-deep); }
+  .ticker--sellos .tk-ico {
+    width: 1.4em; height: 1.4em; color: var(--khaki-deep); opacity: 1;
+  }
+  .ticker--sellos span::after { margin: 0 1.35rem; }
 
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
@@ -602,8 +601,6 @@
            la galeria, no como una linea de texto mas encima del precio.
            El formato, 90 capsulas y 30 dias, sigue en la tabla de "Que lleva"
            y en la descripcion de cada opcion de compra. -->
-      <p class="ficha-orientativo">Precios orientativos: la web es una vista previa y todavía no está a la venta.</p>
-      <p class="ficha-envio">Envío gratuito desde 27,95 €. Devolución en 30 días.</p>
 
       <!-- PRECIOS ORIENTATIVOS. Los corchetes se quedan hasta cerrar
            costes con proveedor. El descuento del 15% se sostiene porque el
@@ -685,13 +682,27 @@
         <div class="dato"><dt>Dosis diaria</dt><dd>3 cápsulas</dd></div>
       </dl>
 
-      <ul class="sellos">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-8 6-14 16-15 0 10-6 15-13 15H4z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>Cápsula vegetal</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 12c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 12c3 0 5-2 5-5-3 0-5 2-5 5z"/><path d="M4 4l16 16"/></svg>Sin gluten</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s5 6 5 9.5A5 5 0 0 1 7 12.5C7 9 12 3 12 3z"/><path d="M4 4l16 16"/></svg>Sin lactosa</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Hecho en España</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.5L5.5 18A2 2 0 0 0 7.3 21h9.4a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M8 15h8"/></svg>Análisis por lote</li>
-      </ul>
+      <!-- Los mismos cinco atributos, pero en movimiento: en rejilla
+           ocupaban cinco columnas de letra diminuta. Es el mismo
+           componente que la tira de la portada. -->
+      <div class="ticker ticker--sellos" aria-label="Atributos del producto">
+        <div class="ticker-track">
+      <div class="ticker-run">
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-8 6-14 16-15 0 10-6 15-13 15H4z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>Cápsula vegetal</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 12c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 12c3 0 5-2 5-5-3 0-5 2-5 5z"/><path d="M4 4l16 16"/></svg>Sin gluten</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s5 6 5 9.5A5 5 0 0 1 7 12.5C7 9 12 3 12 3z"/><path d="M4 4l16 16"/></svg>Sin lactosa</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Hecho en España</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.5L5.5 18A2 2 0 0 0 7.3 21h9.4a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M8 15h8"/></svg>Análisis por lote</span>
+      </div>
+      <div class="ticker-run" aria-hidden="true">
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-8 6-14 16-15 0 10-6 15-13 15H4z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>Cápsula vegetal</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V9"/><path d="M12 12c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 12c3 0 5-2 5-5-3 0-5 2-5 5z"/><path d="M4 4l16 16"/></svg>Sin gluten</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s5 6 5 9.5A5 5 0 0 1 7 12.5C7 9 12 3 12 3z"/><path d="M4 4l16 16"/></svg>Sin lactosa</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Hecho en España</span>
+        <span><svg class="tk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.5L5.5 18A2 2 0 0 0 7.3 21h9.4a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M8 15h8"/></svg>Análisis por lote</span>
+      </div>
+        </div>
+      </div>
     </div>
   </div>
 
