@@ -1634,11 +1634,9 @@
   }
   .ayuda { max-width: 34rem; margin: 0 auto; }
   .ayuda-titulo {
-    display: flex; align-items: center; justify-content: center; gap: 0.55rem;
     margin: 0 0 0.6rem; font-size: var(--t-3xl); font-weight: 600;
     letter-spacing: var(--tracking-lg);
   }
-  .ayuda-punto { color: var(--khaki-deep); font-size: 0.7em; line-height: 1; }
   .ayuda-sub { margin: 0 0 1.8rem; font-size: var(--t-lg); color: var(--ink-soft); }
 
   .ayuda-botones { display: grid; gap: 0.7rem; }
@@ -1649,7 +1647,7 @@
   @media (min-width: 860px) {
     #asesoria { padding: 4.5rem 3rem; }
     .ayuda-titulo { font-size: var(--t-5xl); }
-    .ayuda-botones { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .ayuda-botones { justify-content: center; }
   }
   @media (prefers-reduced-motion: reduce) { .ayuda-btn { transition: none; } }
 
@@ -2199,11 +2197,10 @@
        a secciones que si estan. -->
   <section class="band" id="asesoria">
     <div class="ayuda reveal">
-      <h2 class="ayuda-titulo"><span class="ayuda-punto" aria-hidden="true">&#9679;</span> &iquest;No sabes por cuál empezar?</h2>
+      <h2 class="ayuda-titulo">&iquest;No sabes por cuál empezar?</h2>
       <p class="ayuda-sub">No hace falta que lo adivines.</p>
       <div class="ayuda-botones">
-        <a class="btn btn-solid ayuda-btn" href="#criterio">Descubre qué te conviene</a>
-        <a class="btn ayuda-btn" href="#footer-signup">Pregúntanos lo que quieras</a>
+        <a class="btn btn-solid ayuda-btn" href="#criterio">Cómo elegir la tuya</a>
       </div>
     </div>
   </section>
