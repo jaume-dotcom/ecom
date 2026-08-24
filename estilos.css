@@ -1660,12 +1660,6 @@
   .resena-firma { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-sm); }
   .resena-firma b { color: var(--ink); font-weight: 600; }
   .resena-firma span { color: var(--ink-soft); }
-  /* el aviso de que esto es una maqueta: tiene que verse, no esconderse */
-  .resena-aviso {
-    margin: 0 0 1.1rem; padding: 0.55rem 0.9rem;
-    border: 1px dashed var(--ink-faint); border-radius: 10px;
-    font-size: var(--t-sm); color: var(--ink-soft); text-align: center;
-  }
   @media (min-width: 640px) { .resenas { grid-auto-columns: 46%; } }
   @media (min-width: 980px) {
     .resenas { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
