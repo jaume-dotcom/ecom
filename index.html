@@ -349,17 +349,17 @@
       <li class="resena">
         <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <p class="resena-texto">Aquí irá la reseña 1, tal cual la escriba quien la deje.</p>
-        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
       </li>
       <li class="resena">
         <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <p class="resena-texto">Aquí irá la reseña 2, tal cual la escriba quien la deje.</p>
-        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
       </li>
       <li class="resena">
         <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <p class="resena-texto">Aquí irá la reseña 3, tal cual la escriba quien la deje.</p>
-        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
       </li>
     </ul>
 
@@ -576,6 +576,7 @@
         </div>
       </li>
     </ul>
+    <p class="faq-cierre"><a href="#alta">&iquest;Resuelto? Déjanos tu email</a></p>
   </div>
 </section>
 
@@ -773,6 +774,7 @@
                document.querySelectorAll('#shop-puntos button'), '.p-card');
   montarPuntos(document.querySelector('.resenas'),
                document.querySelectorAll('[data-puntos="resenas"] button'), '.resena');
+
 
   // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
   // texto final y se reconstruye en cada cuadro respetando el signo de

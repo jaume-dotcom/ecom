@@ -1334,6 +1334,10 @@
   .faq-panel .section-head p { color: var(--ink-soft); }
   .faq-item { border-bottom: 1px solid rgba(35, 39, 46, 0.12); }
   .faq-item:last-child { border-bottom: none; }
+  /* la captura queda por encima de la FAQ: quien llega hasta aqui con dudas y
+     se las resuelve leyendo, se quedaba sin sitio donde dejar el email */
+  .faq-cierre { margin: 1.8rem 0 0; text-align: center; font-size: var(--t-base); }
+  .faq-cierre a { color: var(--khaki-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .faq-q { color: var(--ink); }
   .faq-ico {
     border: 1px solid rgba(35, 39, 46, 0.2);
@@ -1671,7 +1675,15 @@
   .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
   .resena-firma { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-sm); }
   .resena-firma b { color: var(--ink); font-weight: 600; }
-  .resena-firma span { color: var(--ink-soft); }
+  .resena-firma span { color: var(--ink-soft); display: inline-flex; align-items: center; gap: 0.3rem; }
+  /* el sello NO va en el marron: ese color significa "esto se pulsa" y un
+     sello no se pulsa. En el gris del propio texto se lee como una marca */
+  .resena-check {
+    width: 0.95rem; height: 0.95rem; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 1.9;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
   @media (min-width: 640px) { .resenas { grid-auto-columns: 46%; } }
   @media (min-width: 980px) {
     .resenas { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
