@@ -1431,7 +1431,7 @@
   /* la primera mitad en versalita apretada y la segunda en serif cursiva.
      Es el unico sitio donde entra una segunda familia: solo el estilo
      italico, un fichero pequeno, y siempre con serif del sistema de reserva */
-  .section-head h2 { text-transform: uppercase; letter-spacing: 0.01em; }
+  .section-head h2 { text-transform: none; letter-spacing: var(--tracking-lg); }
   /* el encabezado que envuelve cada boton de acordeon no pinta nada */
   .acc-h {
     margin: 0; font-size: inherit; font-weight: inherit;
@@ -2061,7 +2061,6 @@
   .cabecera { padding: 2.4rem 0 1.6rem; text-align: center; max-width: 34rem; margin: 0 auto; }
   .cabecera h1 {
     margin: 0 0 0.9rem; font-size: var(--t-6xl); line-height: 1.1;
-    letter-spacing: var(--tracking-lg); font-weight: 700; text-transform: uppercase;
+    letter-spacing: var(--tracking-lg); font-weight: 700;
   }
-  .cabecera .h2-soft { text-transform: none; }
   .cabecera-lede { margin: 0; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); }
