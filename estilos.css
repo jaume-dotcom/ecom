@@ -1235,6 +1235,7 @@
 
     /* cabeceras de seccion */
     .section-head h2 { font-size: var(--t-4xl); font-weight: 600; }
+    .closing h2, #asesoria .ayuda-titulo { font-size: var(--t-4xl); font-weight: 600; }
     .section-head p { font-size: var(--t-xl); }
 
     /* fichas de producto: el nombre iba a peso de parrafo */
@@ -2016,10 +2017,18 @@
   #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.55rem; text-align: center; }
   #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 0; position: relative; }
   /* centrado con el alto del item, no anclado a la primera linea */
+  /* el tick de la regla base se apaga entero: forma, bordes y giro. Si solo
+     se cambia el content, el signo aparece dentro de la caja girada */
+  #libro .pack-list li::before {
+    content: none; border: 0; transform: none;
+    position: static; width: auto; height: auto;
+  }
   #libro .pack-list li + li::before {
     content: "+"; display: block;
-    margin: 0.55rem auto 0.75rem;
-    font-size: var(--t-xl); font-weight: 400; line-height: 1;
+    position: static; width: auto; height: auto;
+    border: 0; transform: none;
+    margin: 0.6rem auto 0.8rem;
+    font-size: var(--t-2xl); font-weight: 300; line-height: 1;
     color: var(--ink-faint);
   }
   #libro .pack-list b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
@@ -2029,8 +2038,9 @@
   #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
   #libro .pack-save {
-    font-size: var(--t-sm); color: var(--khaki-deep); font-weight: 600;
-    flex-basis: 100%; text-align: center; margin-top: 0.15rem;
+    font-size: var(--t-lg); color: var(--khaki-deep); font-weight: 700;
+    flex-basis: 100%; text-align: center; margin-top: 0.35rem;
+    letter-spacing: 0.01em;
   }
 
   /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
