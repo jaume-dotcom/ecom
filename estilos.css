@@ -776,8 +776,6 @@
   .closing { display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; padding: 4.5rem 3rem; background: var(--ink); color: var(--paper); border-radius: 32px; }
   .closing .loc { font-family: var(--font-mono); font-size: var(--t-2xs); color: var(--khaki-pop); letter-spacing: 0.04em; }
   .closing h2 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; color: var(--paper); }
-  .closing .btn-solid { background: var(--khaki-pop); color: var(--ink); border-color: var(--khaki-pop); }
-  .closing .btn-solid:hover { background: var(--paper); border-color: var(--paper); }
 
   /* footer */
   footer { border-top: 1px solid var(--line); padding: 3rem 0 2rem; }
