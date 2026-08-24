@@ -2010,24 +2010,21 @@
      el ahorro decide la compra, la devolucion quita el miedo y el envio
      es el detalle. El marron se reserva para lo que se pulsa. */
 
-  #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.9rem; }
-  #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
+  #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.55rem; text-align: center; }
+  #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 0; position: relative; }
   /* centrado con el alto del item, no anclado a la primera linea */
-  #libro .pack-list li::before {
-    /* el li lleva 0,85rem de padding y el titulo 0,79em de media interlinea:
-       ahi esta el centro optico de la primera linea. Los 3px descuentan la
-       mitad del propio tick */
-    content: ""; position: absolute; left: 0;
-    top: calc(0.85rem + 0.79em - 3px);
-    width: 11px; height: 6px; border-left: 2px solid var(--khaki-deep);
-    border-bottom: 2px solid var(--khaki-deep); transform: rotate(-45deg);
+  #libro .pack-list li + li::before {
+    content: "+"; display: block;
+    margin: 0.55rem auto 0.75rem;
+    font-size: var(--t-xl); font-weight: 400; line-height: 1;
+    color: var(--ink-faint);
   }
   #libro .pack-list b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
   #libro .pack-list span { font-size: var(--t-base); color: var(--ink-soft); }
 
-  #libro .pack-price { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-bottom: 1.1rem; }
+  #libro .pack-price { display: grid; justify-items: center; gap: 0.1rem; margin-bottom: 1.1rem; }
   #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
-  #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; }
+  #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
   #libro .pack-save {
     font-size: var(--t-sm); color: var(--khaki-deep); font-weight: 600;
     flex-basis: 100%; text-align: center; margin-top: 0.15rem;
