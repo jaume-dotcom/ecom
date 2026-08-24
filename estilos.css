@@ -1529,6 +1529,12 @@
   #libro .pack-lead { font-size: var(--t-lg); }
   #libro .pack-list b { font-size: var(--t-lg); }
   #libro .pack-list span { font-size: var(--t-base); }
+  /* las dos garantias, en una linea tranquila bajo el boton en vez de en dos
+     pastillas que en movil caian cada una en su fila */
+  #libro .pack-garantias {
+    margin: 0.9rem 0 0; text-align: center;
+    font-size: var(--t-sm); color: var(--ink-soft);
+  }
   #libro .pack-note { font-size: var(--t-md); color: var(--ink-soft); }
   #libro .pack-was, #libro .pack-save { font-size: var(--t-base); }
   #libro .btn-solid { font-size: var(--t-lg); padding: 0.95rem 1.6rem; }
@@ -1990,28 +1996,19 @@
     padding: 3rem 1.6rem 3.4rem;
   }
   #libro .pack {
-    background: #fff; border: 1.5px solid var(--line); border-radius: 22px;
+    background: #fff; border: 0; border-radius: 22px;
     overflow: hidden; max-width: 34rem; margin: 0 auto;
-    box-shadow: 0 24px 60px -34px rgba(35, 39, 46, 0.4);
+    box-shadow:
+      0 1px 2px rgba(35, 39, 46, 0.05),
+      0 16px 40px -20px rgba(35, 39, 46, 0.26);
   }
   .pack-media { background: var(--tint); }
   .pack-media img { width: 100%; height: auto; display: block; }
-  #libro .pack-body { padding: 1.5rem 1.4rem 1.6rem; text-align: left; }
+  #libro .pack-body { padding: 1.9rem 1.5rem 1.8rem; text-align: left; }
 
-  .pack-pills { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.45rem; margin: 0 0 1.3rem; padding: 0; }
-  .pack-pill {
-    font-size: var(--t-sm); font-weight: 500; padding: 0.35rem 0.8rem;
-    border-radius: 999px; background: var(--tint); color: var(--ink-soft);
-  }
   /* tres intensidades del azul de marca, de mas a menos importante:
      el ahorro decide la compra, la devolucion quita el miedo y el envio
      es el detalle. El marron se reserva para lo que se pulsa. */
-  .pack-pill--1 {
-    background: var(--ink); color: var(--paper);
-    font-weight: 600; font-size: var(--t-lg); padding: 0.45rem 1rem;
-  }
-  .pack-pill--2 { background: rgba(35, 39, 46, 0.15); color: var(--ink); font-weight: 600; }
-  .pack-pill--3 { background: rgba(35, 39, 46, 0.06); color: var(--ink-soft); }
 
   #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.9rem; }
   #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 1.6rem; position: relative; }
@@ -2031,7 +2028,10 @@
   #libro .pack-price { display: flex; align-items: baseline; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin-bottom: 1.1rem; }
   #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; }
-  #libro .pack-save { font-size: var(--t-md); color: var(--ink-soft); flex-basis: 100%; text-align: center; }
+  #libro .pack-save {
+    font-size: var(--t-sm); color: var(--khaki-deep); font-weight: 600;
+    flex-basis: 100%; text-align: center; margin-top: 0.15rem;
+  }
 
   /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
      parte de esa decision */
