@@ -1594,17 +1594,6 @@
   }
 
 
-  /* ============ PUENTE AL LIBRO ============
-     Lo que queda de las cinco tarjetas que se fueron a libro.html: dos
-     frases y un enlace. Corto a proposito, que es justo lo que se buscaba. */
-  .puente { max-width: 34rem; margin: 0 auto; text-align: center; }
-  .puente h2 {
-    margin: 0 0 0.8rem; font-size: var(--t-3xl); line-height: 1.15;
-    letter-spacing: var(--tracking-lg); font-weight: 700; text-transform: uppercase;
-  }
-  .puente .h2-soft { text-transform: none; }
-  .puente-lede { margin: 0 0 1.6rem; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); }
-
   /* ============ BLOQUE DE ASESORIA ============
      Panel en tint, embutido y redondeado a los mismos 12px del borde que la
      tarjeta del hero, el bloque de venta y el pie. No se usa el amarillo de
