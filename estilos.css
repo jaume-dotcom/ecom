@@ -1000,11 +1000,11 @@
   .hero-cta {
     display: block; width: 100%; box-sizing: border-box;
     padding: var(--btn-relleno); border-radius: var(--btn-radio);
-    background: var(--khaki-pop); color: var(--ink);
+    background: var(--khaki-deep); color: var(--paper);
     font-size: var(--btn-txt); font-weight: var(--btn-peso); text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .hero-cta:hover { background: var(--paper); transform: translateY(-1px); }
+  .hero-cta:hover { background: var(--olive); transform: translateY(-1px); }
   /* solo la diapositiva activa es tabulable: las de al lado se ven con el peek */
   .hero-slide:not(.active) .hero-cta { pointer-events: none; }
 
