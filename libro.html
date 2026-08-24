@@ -409,11 +409,6 @@
           <span class="logo-word">ZEROX</span>
         </a>
         <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
-        <form class="foot-form" id="waitlist-form">
-          <input type="email" placeholder="Tu email" aria-label="Email" required />
-          <button type="submit">Avísame</button>
-        </form>
-        <p class="foot-success" id="foot-success">Hecho. Te escribimos el día que salga.</p>
         <p class="foot-copy">&copy; 2026 ZEROX</p>
       </div>
 
@@ -702,7 +697,7 @@
 
   // OJO: ninguno de los dos formularios envía a ningún sitio todavía. Se muestra
   // el mensaje de éxito y el email se pierde. Falta conectar backend o servicio.
-  [['waitlist-form', 'foot-success'], ['hero-form', 'hero-success']].forEach(function (par) {
+  [['hero-form', 'hero-success']].forEach(function (par) {
     var f = document.getElementById(par[0]);
     var ok = document.getElementById(par[1]);
     if (!f || !ok) { return; }

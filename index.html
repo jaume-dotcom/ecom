@@ -154,20 +154,6 @@
     </div>
   </div>
 
-  <div class="hero-center wrap" id="alta">
-    <p class="hero-alta-titulo">&iquest;Te avisamos el día que salga?</p>
-    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista.</p>
-    <form class="hero-signup" id="hero-form">
-      <label class="hero-signup-field">
-        <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        <input type="email" placeholder="Tu email" aria-label="Tu email" required />
-      </label>
-      <span class="shine">
-        <button type="submit">Avísame</button>
-      </span>
-    </form>
-    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
-  </div>
 </div>
 
 <div class="wrap">
@@ -524,6 +510,21 @@
   </div>
 </section>
 
+  <div class="hero-center wrap" id="alta">
+    <p class="hero-alta-titulo">&iquest;Te avisamos el día que salga?</p>
+    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista.</p>
+    <form class="hero-signup" id="hero-form">
+      <label class="hero-signup-field">
+        <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <input type="email" placeholder="Tu email" aria-label="Tu email" required />
+      </label>
+      <span class="shine">
+        <button type="submit">Avísame</button>
+      </span>
+    </form>
+    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
+  </div>
+
 <footer id="footer-signup">
   <div class="foot-panel">
     <span class="foot-hair" aria-hidden="true"></span>
@@ -543,11 +544,6 @@
           <span class="logo-word">ZEROX</span>
         </a>
         <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
-        <form class="foot-form" id="waitlist-form">
-          <input type="email" placeholder="Tu email" aria-label="Email" required />
-          <button type="submit">Avísame</button>
-        </form>
-        <p class="foot-success" id="foot-success">Hecho. Te escribimos el día que salga.</p>
         <p class="foot-copy">&copy; 2026 ZEROX</p>
       </div>
 
@@ -836,7 +832,7 @@
 
   // OJO: ninguno de los dos formularios envía a ningún sitio todavía. Se muestra
   // el mensaje de éxito y el email se pierde. Falta conectar backend o servicio.
-  [['waitlist-form', 'foot-success'], ['hero-form', 'hero-success']].forEach(function (par) {
+  [['hero-form', 'hero-success']].forEach(function (par) {
     var f = document.getElementById(par[0]);
     var ok = document.getElementById(par[1]);
     if (!f || !ok) { return; }

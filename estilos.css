@@ -735,13 +735,8 @@
   .foot-brand { max-width: 24rem; }
   .foot-brand .logo { margin-bottom: 0.8rem; }
   .foot-brand p { color: var(--ink-soft); font-size: var(--t-sm); }
-  .foot-form { display: flex; gap: 0.5rem; margin-top: 1rem; max-width: 340px; }
-  .foot-form input {
-    flex: 1; padding: 0.7rem 1rem; border: 1.5px solid var(--line-strong); background: var(--paper); color: var(--ink); font-size: var(--t-sm); border-radius: 1000px;
-  }
-  .foot-form button { padding: var(--btn-relleno-sm); background: var(--ink); color: var(--paper); border: none; font-weight: var(--btn-peso); font-size: var(--btn-txt-sm); border-radius: var(--btn-radio); }
-  .foot-success { font-size: var(--t-xs); color: var(--olive-soft); margin-top: 0.6rem; display: none; }
-  .foot-success.show { display: block; }
+
+
   .foot-cols { display: flex; flex-wrap: wrap; gap: 3rem; }
   .foot-col h3 { font-size: var(--t-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 0.9rem; }
   .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; font-size: var(--t-sm); }
@@ -1186,15 +1181,7 @@
   footer#footer-signup { border-top: 0; padding: 0 0.75rem 0; background: none; }
 
   /* el formulario estaba pensado para fondo claro */
-  .foot-panel .foot-form input {
-    background: rgba(238, 240, 244, 0.06);
-    border-color: rgba(238, 240, 244, 0.28);
-    color: var(--paper);
-  }
-  .foot-panel .foot-form input::placeholder { color: rgba(238, 240, 244, 0.5); }
-  .foot-panel .foot-form button { background: var(--paper); color: var(--ink); }
-  .foot-panel .foot-form button:hover { background: #fff; }
-  .foot-panel .foot-success { color: var(--khaki-pop); }
+
 
   .foot-panel {
     position: relative;
