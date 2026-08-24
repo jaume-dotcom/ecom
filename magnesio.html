@@ -812,9 +812,22 @@
        PARA QUIEN ES Y PARA QUIEN NO. La segunda mitad no la tiene
        ninguna competidora, y es la que hace creible la primera.
        ================================================================ -->
-  <section id="para-quien">
-    <h2>¿Te hace <span class="h2-soft">falta?</span></h2>
-
+  <!-- ====================================================================
+       TEMA 1: la decision. Antes esto estaba repartido en tres secciones
+       sueltas —para quien es, para que sirve y como tomarlo— cada una con su
+       titular. Son la misma pregunta: ¿esto es para mi?
+       ==================================================================== -->
+  <section id="es-para-mi">
+    <h2>&iquest;Es <span class="h2-soft">para mí?</span></h2>
+    <p>Para quién tiene sentido, para qué sirve exactamente y cómo se toma.</p>
+    <ul class="faq">
+      <li class="faq-item">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="t1-quien" aria-expanded="false" aria-controls="t1-quien-p">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">¿Te hace falta?</span></span>
+        </button></h3>
+        <div class="faq-a" id="t1-quien-p" role="region" aria-labelledby="t1-quien">
+          <div>
     <div class="quien-cols">
       <div class="quien-col">
         <h3>Puede encajarte si</h3>
@@ -835,11 +848,9 @@
         </ul>
       </div>
     </div>
-  </section>
-
-  <section class="info">
-    <h2>La etiqueta, <span class="h2-soft">entera</span></h2>
-    <ul class="faq">
+          </div>
+        </div>
+      </li>
       <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="info-t1" aria-expanded="true" aria-controls="info-p1">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
@@ -858,6 +869,32 @@
           </div>
         </div>
       </li>
+      <li class="faq-item">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="info-t3" aria-expanded="false" aria-controls="info-p3">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">Cómo tomarlo</span></span>
+        </button></h3>
+        <div class="faq-a" id="info-p3" role="region" aria-labelledby="info-t3">
+          <div>
+      <ol class="pasos">
+        <li><span>3 cápsulas al día, juntas o repartidas.</span></li>
+        <li><span>Con un vaso de agua, preferiblemente con una comida.</span></li>
+        <li><span>Muchas personas lo prefieren por la noche. No es obligatorio: lo importante es tomarlo todos los días.</span></li>
+      </ol>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ====================================================================
+       TEMA 2: la comprobacion. Lo que lleva, como se verifica y de donde
+       salen las afirmaciones. Antes eran otras tres secciones sueltas.
+       ==================================================================== -->
+  <section id="me-puedo-fiar">
+    <h2>&iquest;Me puedo <span class="h2-soft">fiar?</span></h2>
+    <p>Lo que lleva el bote, cómo se comprueba y de dónde sale cada cifra.</p>
+    <ul class="faq">
       <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="info-t2" aria-expanded="false" aria-controls="info-p2">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
@@ -885,36 +922,12 @@
         </div>
       </li>
       <li class="faq-item">
-        <h3 class="acc-h"><button type="button" class="faq-q" id="info-t3" aria-expanded="false" aria-controls="info-p3">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="t2-calidad" aria-expanded="false" aria-controls="t2-calidad-p">
           <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
-          <span class="faq-head"><span class="faq-title">Cómo tomarlo</span></span>
+          <span class="faq-head"><span class="faq-title">Cómo se comprueba</span></span>
         </button></h3>
-        <div class="faq-a" id="info-p3" role="region" aria-labelledby="info-t3">
+        <div class="faq-a" id="t2-calidad-p" role="region" aria-labelledby="t2-calidad">
           <div>
-      <ol class="pasos">
-        <li><span>3 cápsulas al día, juntas o repartidas.</span></li>
-        <li><span>Con un vaso de agua, preferiblemente con una comida.</span></li>
-        <li><span>Muchas personas lo prefieren por la noche. No es obligatorio: lo importante es tomarlo todos los días.</span></li>
-      </ol>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-
-
-  <!-- ================================================================
-       CALIDAD. La portada promete "analisis de un laboratorio externo,
-       lote a lote" y en la ficha no habia ni rastro. Aqui es donde toca
-       poder comprobarlo.
-       OJO: no hay ningun analisis todavia porque no hay ningun lote. El
-       aviso del final dice justo eso, y se sustituye por el enlace real
-       en cuanto exista el primero. No poner un PDF de ejemplo.
-       ================================================================ -->
-  <section id="calidad">
-    <h2>Cómo <span class="h2-soft">se comprueba</span></h2>
-
     <ul class="calidad">
       <li>Cada lote se analiza en un laboratorio externo, independiente de quien fabrica.</li>
       <li>Publicamos el análisis con su número de lote, para que puedas contrastarlo con el número que tienes impreso en tu bote.</li>
@@ -922,17 +935,16 @@
     </ul>
 
     <p class="calidad-espera">Todavía no hay ningún análisis publicado, porque todavía no hay ningún lote fabricado. El primero se publicará aquí, entero, el día que exista.</p>
-  </section>
-
-  <!-- ================================================================
-       REFERENCIAS. Las dos que hay son normativas y verificables.
-       PENDIENTE: las referencias clinicas del libro de Sento van aqui.
-       No inventar citas: en una web de suplementos una referencia
-       fabricada es exactamente el problema que la marca dice resolver.
-       ================================================================ -->
-  <section id="referencias">
-    <h2>De dónde <span class="h2-soft">sale esto</span></h2>
-
+          </div>
+        </div>
+      </li>
+      <li class="faq-item">
+        <h3 class="acc-h"><button type="button" class="faq-q" id="t2-refs" aria-expanded="false" aria-controls="t2-refs-p">
+          <span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
+          <span class="faq-head"><span class="faq-title">De dónde sale esto</span></span>
+        </button></h3>
+        <div class="faq-a" id="t2-refs-p" role="region" aria-labelledby="t2-refs">
+          <div>
     <ul class="refs">
       <li>
         <b>Las cinco frases de «para qué sirve»</b>
@@ -945,7 +957,30 @@
         <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32011R1169" target="_blank" rel="noopener">Reglamento (UE) 1169/2011</a>.
       </li>
     </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
   </section>
+
+
+
+
+  <!-- ================================================================
+       CALIDAD. La portada promete "analisis de un laboratorio externo,
+       lote a lote" y en la ficha no habia ni rastro. Aqui es donde toca
+       poder comprobarlo.
+       OJO: no hay ningun analisis todavia porque no hay ningun lote. El
+       aviso del final dice justo eso, y se sustituye por el enlace real
+       en cuanto exista el primero. No poner un PDF de ejemplo.
+       ================================================================ -->
+
+  <!-- ================================================================
+       REFERENCIAS. Las dos que hay son normativas y verificables.
+       PENDIENTE: las referencias clinicas del libro de Sento van aqui.
+       No inventar citas: en una web de suplementos una referencia
+       fabricada es exactamente el problema que la marca dice resolver.
+       ================================================================ -->
 
   <section>
     <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
