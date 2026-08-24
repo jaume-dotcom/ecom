@@ -1066,10 +1066,20 @@
     display: flex; align-items: center; gap: 1rem;
     text-align: left; width: 100%; max-width: 22rem;
   }
-  .firma-foto {
-    flex: 0 0 auto; width: 8.5rem; height: auto;
-    border-radius: 12px; display: block;
+  /* el marco recorta; la foto de dentro se acerca para que la cara ocupe lo
+     que tiene que ocupar a este tamano */
+  .firma-marco {
+    flex: 0 0 auto; width: 8.5rem; aspect-ratio: 4 / 5;
+    border-radius: 12px; overflow: hidden; display: block;
     background: var(--tint);
+  }
+  .firma-foto {
+    width: 100%; height: 100%; display: block;
+    object-fit: cover; object-position: 50% 20%;
+    transform: scale(1.28); transform-origin: 50% 20%;
+    /* blanco y negro: el granate del pijama es un rojo que no esta en la
+       paleta, y en color empuja el retrato hacia "bata clinica" */
+    filter: grayscale(1) contrast(1.04);
   }
   .firma-quien { min-width: 0; }
   .firma-nombre {
@@ -2089,7 +2099,7 @@
        es una cita literal suya. No se publica sin que el lo lea y lo
        apruebe: es su cara y su nombre en una marca de suplementos.
 
-       La foto es un marcador de sitio. Falta el retrato oficial.
+       La foto la cede el, con su permiso. El blanco y negro lo pone el CSS.
        =================================================================== -->
   <section class="band" id="quien">
     <div class="section-head reveal">
@@ -2101,9 +2111,11 @@
 
     <figure class="firma reveal">
       <div class="firma-cabeza">
-        <img class="firma-foto" src="sento-retrato.jpg" width="600" height="750"
-             loading="lazy" decoding="async"
-             alt="Retrato de Sento Segarra, farmacéutico y autor de La gran guía de la suplementación">
+        <span class="firma-marco">
+          <img class="firma-foto" src="sento-retrato.webp" width="360" height="361"
+               loading="lazy" decoding="async"
+               alt="Retrato de Sento Segarra, farmacéutico y autor de La gran guía de la suplementación">
+        </span>
         <div class="firma-quien">
           <h3 class="firma-nombre">Sento Segarra</h3>
           <p class="firma-rol">Farmacéutico &middot; Autor de <i>La gran guía de la suplementación</i></p>
