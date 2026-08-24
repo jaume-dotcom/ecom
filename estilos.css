@@ -2,6 +2,42 @@
    Antes cada pagina llevaba su propia copia y se desincronizaban solas:
    --ink llego a ser negro puro en una y #23272e en otra. Cualquier cambio
    de color, de tamano o de boton se hace AQUI y vale para todas. */
+
+/* ============ REGLAS REPARTIDAS EN VARIOS SITIOS ============
+   Estos selectores se declaran en mas de un punto de la hoja, normalmente
+   uno en la base y otro dentro de un @media. Eso significa que cambiar el
+   primero que encuentres puede no tener ningun efecto: gana el de mas
+   abajo.
+
+   Pasa de verdad y ha costado tiempo varias veces en esta hoja: una sombra
+   que no aparecia, un titular que no cambiaba de tamano, un color de texto
+   que se quedaba igual. Antes de editar cualquiera de estos, BUSCA TODAS
+   sus apariciones.
+
+     2x  .arg-card--cierre
+     2x  .arg-card--intro
+     2x  .arg-fig
+     2x  .arg-head
+     2x  .ayuda-titulo
+     2x  .faq-title
+     2x  .foot-panel
+     2x  .hero-carousel-pagination-item
+     2x  .hero-carousel-viewport
+     2x  .hero-cta
+     2x  .hero-headline
+     2x  .hero-media-box
+     2x  .hero-media-box img
+     2x  .hero-signup-field
+     2x  .mobile-menu .mm-cta
+     2x  #contexto .stack-card
+     2x  #libro
+
+   Hay ademas 36 bloques @media sueltos —7 de max-width 859, 12 de min-width
+   860, 15 de reduced-motion y 2 de min-width 980— repartidos por el
+   archivo. Juntarlos cambiaria el orden de la cascada, asi que no se toca
+   sin comprobar pagina por pagina. Queda anotado.
+   ============================================================ */
+
   :root {
     /* Neutros de Mineral Frío (Territorio C) con el ámbar del Territorio A como
        único acento. La perla azulada que definía el frío tenía 0 usos en toda
@@ -910,12 +946,6 @@
     padding: 1.3rem 1rem; background: none; border: none; cursor: pointer;
     text-align: left; font: inherit; color: var(--paper);
   }
-  .faq-ico {
-    flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
-    border: 1px solid rgba(238,240,244,0.22); background: rgba(238,240,244,0.06);
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.45s ease, border-color 0.3s ease;
-  }
   /* la mitad de arriba va rellena y la de abajo al aire: así lee como cápsula
      de verdad —tapa opaca y cuerpo translúcido— y no como una pastilla plana.
      El color se hereda de currentColor, así relleno y trazo cambian juntos. */
@@ -1373,6 +1403,14 @@
   .faq-cierre a { color: var(--khaki-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .faq-q { color: var(--ink); }
   .faq-ico {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.45s ease, border-color 0.3s ease;
     border: 1px solid rgba(35, 39, 46, 0.2);
     background: rgba(35, 39, 46, 0.04);
   }
