@@ -1085,14 +1085,14 @@
   /* el marco recorta; la foto de dentro se acerca para que la cara ocupe lo
      que tiene que ocupar a este tamano */
   .firma-marco {
-    flex: 0 0 auto; width: 8.5rem; aspect-ratio: 4 / 5;
-    border-radius: 12px; overflow: hidden; display: block;
+    flex: 0 0 auto; width: 8.5rem; aspect-ratio: 1 / 1;
+    border-radius: 50%; overflow: hidden;
+    display: grid; justify-items: center; align-items: end;
     background: var(--tint);
   }
   .firma-foto {
-    width: 100%; height: 100%; display: block;
-    object-fit: cover; object-position: 50% 20%;
-    transform: scale(1.28); transform-origin: 50% 20%;
+    width: 86%; height: 86%; display: block; align-self: end;
+    object-fit: cover; object-position: 50% 0%;
     /* blanco y negro: el granate del pijama es un rojo que no esta en la
        paleta, y en color empuja el retrato hacia "bata clinica" */
     filter: grayscale(1) contrast(1.04);
