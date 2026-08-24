@@ -797,6 +797,9 @@
 
   /* tira rotativa bajo el hero: dos pasadas idénticas y un desplazamiento
      del 50%, para que el bucle no tenga costura */
+  /* la tira va FUERA de .hero-full: ese contenedor redondea las esquinas de
+     abajo y recorta, asi que le mordia una cuna a cada lado. Aqui va de borde
+     a borde y con las esquinas rectas, como la barra de arriba */
   .ticker { width: 100%; overflow: hidden; background: var(--ink); color: var(--paper); }
   /* la duración fija el ritmo, pero la velocidad real depende del ancho del
      contenido: al cambiar frases hay que reajustarla. 28s ≈ 34px/s */
