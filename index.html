@@ -106,7 +106,14 @@
 
   <div class="hero-carousel wrap">
     <div class="hero-media-box">
-      <img src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
+      <!-- La foto se queda de poster: es lo que se pinta al instante y lo que
+           ve quien tenga el movimiento reducido. El video NO trae src: se lo
+           pone el JS despues de window.load, para que no compita con nada
+           critico. Y NO lleva loop: el ultimo fotograma no coincide con el
+           primero y el salto se veria cada ocho segundos. -->
+      <img class="hero-poster" src="hero-zerox.jpg" width="1024" height="1879" alt="Las cuatro fórmulas de ZEROX" decoding="async" fetchpriority="high">
+      <video class="hero-video" id="hero-video" data-src="hero-zerox.mp4"
+             width="720" height="1280" muted playsinline preload="none" aria-hidden="true"></video>
       <div class="hero-shade"></div>
       <div class="hero-copy">
         <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
@@ -714,6 +721,68 @@
       });
     });
     pintarShop();
+  }
+
+  // Video del hero. Se carga DESPUES de window.load y solo entonces: la foto
+  // de poster ya esta pintada, asi que el video no compite con nada critico.
+  // Sin loop a proposito: el ultimo fotograma no coincide con el primero y el
+  // salto se veria cada ocho segundos. Se reproduce una vez y se queda quieto.
+  var heroVideo = document.getElementById('hero-video');
+  if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var arrancarVideo = function () {
+      heroVideo.src = heroVideo.dataset.src;
+      // con preload="none" el navegador no descarga nada por su cuenta: hay
+      // que pedirselo. Sin este load() el canplay de abajo no llegaba nunca
+      heroVideo.load();
+      // solo se hace visible cuando ya hay imagen que mostrar
+      heroVideo.addEventListener('loadeddata', function () {
+        heroVideo.classList.add('visible');
+        var intento = heroVideo.play();
+        // si el navegador rechaza el autoplay, se queda el poster y ya
+        if (intento && intento.catch) { intento.catch(function () {}); }
+      }, { once: true });
+    };
+    if (document.readyState === 'complete') { arrancarVideo(); }
+    else { window.addEventListener('load', arrancarVideo, { once: true }); }
+  }
+
+  // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
+  // texto final tal cual y se reconstruye en cada cuadro respetando el signo
+  // de delante, la coma decimal y la unidad de detras, que si no "+2,9 M" se
+  // convierte en un numero pelado.
+  var cifras = document.querySelectorAll('.firma-datos b');
+  if (cifras.length) {
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var contar = function (el) {
+      var texto = el.textContent.trim();
+      var m = texto.match(/^([^0-9]*)([0-9]+(?:[.,][0-9]+)?)(.*)$/);
+      if (!m) { return; }
+      var antes = m[1], destino = parseFloat(m[2].replace(',', '.')), despues = m[3];
+      var decimales = (m[2].indexOf(',') >= 0 || m[2].indexOf('.') >= 0) ? 1 : 0;
+      var DURACION = 1100;
+      var t0 = null;
+      var paso = function (ahora) {
+        if (t0 === null) { t0 = ahora; }
+        var k = Math.min(1, (ahora - t0) / DURACION);
+        // frenada suave al final: sube rapido y llega despacio
+        var suave = 1 - Math.pow(1 - k, 3);
+        var v = (destino * suave).toFixed(decimales).replace('.', ',');
+        el.textContent = antes + v + despues;
+        if (k < 1) { requestAnimationFrame(paso); }
+        else { el.textContent = texto; }
+      };
+      requestAnimationFrame(paso);
+    };
+    if (!quieto && 'IntersectionObserver' in window) {
+      var obsCifras = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (!e.isIntersecting) { return; }
+          obsCifras.unobserve(e.target);
+          contar(e.target);
+        });
+      }, { threshold: 0.6 });
+      cifras.forEach(function (el) { obsCifras.observe(el); });
+    }
   }
 
   // la barra gana filete y sombra solo cuando se ha despegado del borde

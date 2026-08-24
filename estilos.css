@@ -370,6 +370,16 @@
     position: relative; width: auto;
     flex: 0 0 calc(100% - (2 * (var(--hero-peek) + var(--hero-gap))));
   }
+  /* el video va encima del poster y solo se muestra cuando tiene fotogramas:
+     asi no hay parpadeo ni hueco mientras carga */
+  .hero-video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    opacity: 0; transition: opacity 0.6s ease;
+  }
+  .hero-video.visible { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+
   .hero-media-box {
     position: relative; width: 100%; overflow: hidden; border-radius: 20px; background: #e9ebef;
   }
@@ -1080,6 +1090,9 @@
   .firma-datos b {
     font-size: var(--t-2xl); font-weight: 700; color: var(--khaki-deep);
     letter-spacing: 0.01em; line-height: 1.15;
+    /* cifras de ancho fijo: sin esto, al contar de 0 a 30 el numero cambia de
+       ancho en cada cuadro y la columna entera va dando saltos */
+    font-variant-numeric: tabular-nums;
   }
   .firma-datos span {
     font-size: var(--t-2xs); line-height: 1.3; color: var(--ink-soft);
@@ -1596,16 +1609,15 @@
   #asesoria {
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    padding: 3rem 0.5rem 3.2rem;
+    /* de borde a borde, igual que el pack y el criterio: las bandas de color
+       solo se leen como seccion si llegan al borde de la pantalla */
+    margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 3rem 2.1rem 3.2rem;
     text-align: center;
-    /* la propia foto del hero, desenfocada y con el velo horneado dentro del
-       archivo. La lupa que habia antes hablaba de inspeccionar, y este bloque
-       pregunta por cual empezar: son los cuatro botes los que contestan.
-       Ademas es producto real, no una imagen generada que no se le parece. */
-    background-image: url("asesoria-fondo.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    /* fondo liso. La foto desenfocada, con el velo que hacia falta para que
+       el texto negro se leyera, no llegaba a decir "cuatro formulas": decia
+       "hay algo borroso detras". Ni foto ni fondo limpio. */
+    background: var(--tint);
   }
   .ayuda { max-width: 34rem; margin: 0 auto; }
   .ayuda-titulo {
@@ -1852,7 +1864,12 @@
      ahorro delante del precio y el precio dentro del boton. El tachado es
      legal aqui porque no es un precio anterior del pack, es la suma de los
      dos productos por separado, y va etiquetado como tal. */
-  #libro { background: none; border-radius: 0; margin: 0; padding: 3rem 0 3.4rem; }
+  #libro {
+    background: var(--tint); border-radius: 0;
+    /* de borde a borde, como el criterio: se cancela el relleno del .wrap */
+    margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 3rem 1.6rem 3.4rem;
+  }
   #libro .pack {
     background: #fff; border: 1.5px solid var(--line); border-radius: 22px;
     overflow: hidden; max-width: 34rem; margin: 0 auto;
