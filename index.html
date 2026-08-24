@@ -325,6 +325,41 @@
 </div>
 <div class="wrap">
 
+
+  <section class="band" id="resenas">
+    <div class="section-head reveal">
+      <div>
+        <h2>Lo que dice <span class="h2-soft">quien lo toma</span></h2>
+      </div>
+    </div>
+
+    <p class="resena-aviso">Bloque de muestra: todavía no se ha vendido nada, así que todavía no hay reseñas.</p>
+
+    <ul class="resenas reveal">
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la reseña 1, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la reseña 2, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la reseña 3, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span>Compra verificada</span></p>
+      </li>
+    </ul>
+
+    <ul class="shop-puntos reveal" data-puntos="resenas">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir a la reseña 1 de 3"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir a la reseña 2 de 3"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir a la reseña 3 de 3"></button></li>
+    </ul>
+  </section>
+
   <section class="band" id="libro">
     <div class="section-head reveal">
       <div>
@@ -687,43 +722,46 @@
   }
 
 
-  // Puntos del catalogo. Sustituyen a la barra de scroll del sistema, que se
-  // ve distinta en cada navegador y no dice cuantas tarjetas quedan.
-  var tira = document.querySelector('.shop-grid');
-  var puntosShop = document.querySelectorAll('#shop-puntos button');
-  if (tira && puntosShop.length) {
-    var marcadoShop = -1;
-    var pintarShop = function () {
-      var card = tira.querySelector('.p-card');
-      if (!card) { return; }
-      // el paso es el ancho de tarjeta mas el hueco, que es lo que avanza
-      // el scroll al pasar de una a la siguiente
-      var hueco = parseFloat(getComputedStyle(tira).columnGap) || 0;
-      var paso = card.getBoundingClientRect().width + hueco;
-      var i = paso > 0 ? Math.round(tira.scrollLeft / paso) : 0;
-      if (i < 0) { i = 0; }
-      if (i > puntosShop.length - 1) { i = puntosShop.length - 1; }
-      if (i === marcadoShop) { return; }
-      marcadoShop = i;
-      for (var j = 0; j < puntosShop.length; j++) {
-        puntosShop[j].classList.toggle('act', j === i);
-      }
+  // Puntos de las tiras que se deslizan: el catalogo y las resenas. Sustituyen
+  // a la barra de scroll del sistema, que se ve distinta en cada navegador y
+  // no dice cuantas tarjetas quedan. Una sola funcion para las dos: si manana
+  // hay una tercera tira, se llama y ya.
+  var montarPuntos = function (tira, puntos, selTarjeta) {
+    if (!tira || !puntos.length) { return; }
+    var marcado = -1;
+    var paso = function () {
+      var card = tira.querySelector(selTarjeta);
+      if (!card) { return 0; }
+      // el paso es el ancho de tarjeta mas el hueco: lo que avanza el scroll
+      // al pasar de una a la siguiente
+      return card.getBoundingClientRect().width + (parseFloat(getComputedStyle(tira).columnGap) || 0);
     };
-    var pideShop = false;
+    var pintar = function () {
+      var d = paso();
+      var i = d > 0 ? Math.round(tira.scrollLeft / d) : 0;
+      if (i < 0) { i = 0; }
+      if (i > puntos.length - 1) { i = puntos.length - 1; }
+      if (i === marcado) { return; }
+      marcado = i;
+      for (var j = 0; j < puntos.length; j++) { puntos[j].classList.toggle('act', j === i); }
+    };
+    var pide = false;
     tira.addEventListener('scroll', function () {
-      if (!pideShop) { pideShop = true; requestAnimationFrame(function () { pideShop = false; pintarShop(); }); }
+      if (!pide) { pide = true; requestAnimationFrame(function () { pide = false; pintar(); }); }
     }, { passive: true });
-    window.addEventListener('resize', pintarShop, { passive: true });
-    puntosShop.forEach(function (b) {
+    window.addEventListener('resize', pintar, { passive: true });
+    puntos.forEach(function (b) {
       b.addEventListener('click', function () {
-        var card = tira.querySelectorAll('.p-card')[+b.dataset.i];
-        if (!card) { return; }
-        var hueco = parseFloat(getComputedStyle(tira).columnGap) || 0;
-        tira.scrollTo({ left: (card.getBoundingClientRect().width + hueco) * (+b.dataset.i), behavior: 'smooth' });
+        tira.scrollTo({ left: paso() * (+b.dataset.i), behavior: 'smooth' });
       });
     });
-    pintarShop();
-  }
+    pintar();
+  };
+
+  montarPuntos(document.querySelector('.shop-grid'),
+               document.querySelectorAll('#shop-puntos button'), '.p-card');
+  montarPuntos(document.querySelector('.resenas'),
+               document.querySelectorAll('[data-puntos="resenas"] button'), '.resena');
 
   // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
   // texto final y se reconstruye en cada cuadro respetando el signo de

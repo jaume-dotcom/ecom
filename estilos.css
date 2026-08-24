@@ -1638,6 +1638,40 @@
   }
 
 
+  /* ============ RESEÑAS ============
+     Misma mecanica que el catalogo: tira que se desliza con la siguiente
+     tarjeta asomando, y los mismos puntos debajo. Asi no hay que aprender
+     un gesto nuevo a mitad de pagina. */
+  .resenas {
+    list-style: none; margin: 0; padding-bottom: 0.5rem;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;
+    overflow-x: auto; scroll-snap-type: x proximity;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .resenas::-webkit-scrollbar { display: none; }
+  .resena {
+    scroll-snap-align: start;
+    display: grid; align-content: start; gap: 0.7rem;
+    padding: 1.3rem 1.2rem;
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  }
+  .resena-estrellas { color: var(--khaki-deep); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
+  .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
+  .resena-firma { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-sm); }
+  .resena-firma b { color: var(--ink); font-weight: 600; }
+  .resena-firma span { color: var(--ink-soft); }
+  /* el aviso de que esto es una maqueta: tiene que verse, no esconderse */
+  .resena-aviso {
+    margin: 0 0 1.1rem; padding: 0.55rem 0.9rem;
+    border: 1px dashed var(--ink-faint); border-radius: 10px;
+    font-size: var(--t-sm); color: var(--ink-soft); text-align: center;
+  }
+  @media (min-width: 640px) { .resenas { grid-auto-columns: 46%; } }
+  @media (min-width: 980px) {
+    .resenas { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
+    .shop-puntos[data-puntos="resenas"] { display: none; }
+  }
+
   /* ============ BLOQUE DE ASESORIA ============
      Panel en tint, embutido y redondeado a los mismos 12px del borde que la
      tarjeta del hero, el bloque de venta y el pie. No se usa el amarillo de
