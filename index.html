@@ -769,7 +769,7 @@
   var heroVideo = document.getElementById('hero-video');
   var heroTexto = document.getElementById('hero-texto');
   if (heroVideo && heroTexto && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var ENTRA = 3.8, PAUSA = 5000, SALIDA = 500;
+    var ENTRA = 4.3, PAUSA = 5000, SALIDA = 500;
     heroVideo.addEventListener('timeupdate', function () {
       if (heroVideo.currentTime >= ENTRA) { heroTexto.classList.add('visible'); }
     });
