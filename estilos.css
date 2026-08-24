@@ -71,6 +71,14 @@
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-weight: 400; line-height: 1.5; -webkit-font-smoothing: antialiased; letter-spacing: var(--tracking-sm); }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.6rem; }
+
+  /* ===== SALTOS DE LINEA: NADA DE VIUDAS ===== */
+  p, li, dd, dt, figcaption, blockquote, .faq-title, .otra-desc {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, .ayuda-titulo, .faq-title, .arg-head, .hero-headline {
+    text-wrap: balance;
+  }
   img { max-width: 100%; display: block; }
   button { font-family: var(--font); cursor: pointer; }
 
@@ -828,8 +836,8 @@
   .faq-item { border-bottom: 1px solid rgba(238,240,244,0.12); }
   .faq-item:last-child { border-bottom: none; }
   .faq-q {
-    display: flex; align-items: flex-start; gap: 1rem; width: 100%;
-    padding: 1.3rem 1.4rem; background: none; border: none; cursor: pointer;
+    display: flex; align-items: flex-start; gap: 0.8rem; width: 100%;
+    padding: 1.3rem 1rem; background: none; border: none; cursor: pointer;
     text-align: left; font: inherit; color: var(--paper);
   }
   .faq-ico {
