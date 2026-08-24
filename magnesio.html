@@ -298,28 +298,8 @@
      Misma composicion que el catalogo de la portada: tarjeta vertical con la
      foto arriba, en una tira que se desliza con la siguiente asomando. En
      horizontal las fotos salian diminutas y no se parecia a nada del resto. */
-  .otras {
-    list-style: none; margin: 0; padding-bottom: 0.5rem;
-    display: grid; grid-auto-flow: column; grid-auto-columns: 66%; gap: 0.9rem;
-    overflow-x: auto; scroll-snap-type: x proximity;
-    scrollbar-width: none; -ms-overflow-style: none;
-  }
-  .otras::-webkit-scrollbar { display: none; }
-  .otra { scroll-snap-align: start; }
-  .otra-enlace {
-    display: grid; height: 100%;
-    background: #fff; border: 1px solid var(--line); border-radius: 16px;
-    overflow: hidden; color: inherit; text-decoration: none;
-  }
-  .otra-foto { display: block; aspect-ratio: 1 / 1; background: var(--tint); }
-  .otra-foto img, .otra-foto video { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .otra-cuerpo { display: grid; gap: 0.3rem; padding: 0.9rem 1rem 1.1rem; text-align: center; }
-  .otra-nombre { font-size: var(--t-lg); font-weight: 600; letter-spacing: var(--tracking-lg); }
-  .otra-desc { font-size: var(--t-xs); line-height: 1.4; color: var(--ink-soft); }
-  .otra-precio { margin-top: 0.35rem; font-size: var(--t-xl); font-weight: 700; color: var(--ink); }
   @media (min-width: 640px) { .otras { grid-auto-columns: 40%; } }
   @media (min-width: 980px) {
-    .otras { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
   }
 
   /* ---------- secciones ---------- */
@@ -948,6 +928,105 @@
        fabricada es exactamente el problema que la marca dice resolver.
        ================================================================ -->
 
+
+  <!-- ================================================================
+       HUECO DE RESEÑAS. Se queda comentado a proposito: no hay clientes
+       porque no se ha vendido nada, y una ficha que anuncia que no tiene
+       resenas resta mas de lo que suma antes de lanzar.
+       Se descomenta cuando existan resenas reales. El sitio es este, para
+       no tener que recolocar la pagina entera mas adelante.
+
+  <section id="resenas">
+    <h2>Lo que dice quien lo toma</h2>
+  </section>
+
+       ================================================================ -->
+
+  <!-- ================================================================
+       LAS OTRAS FORMULAS. Los enlaces apuntan al catalogo de la portada
+       porque las otras tres fichas todavia no existen. En cuanto exista
+       d3k2.html, omega3.html y probiotico.html, cambiar los href.
+       Las fotos son las del hero de cada una.
+       ================================================================ -->
+  <section id="otras">
+    <h2>También <span class="h2-soft">te puede interesar</span></h2>
+    <p>La misma exigencia en las cuatro. Si esta no es la que te hace falta, quizá lo sea otra.</p>
+
+    <div class="shop-grid">
+  <div class="p-card">
+          <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+          <div class="p-info">
+            <div class="p-top">
+              <h3 class="p-name">Vitamina D3 + K2</h3>
+              <p class="p-desc">2.000&ndash;4.000&nbsp;UI de D3 con K2 en forma MK&ndash;7.</p>
+              <ul class="p-bens">
+                <li>Huesos y dientes en condiciones normales</li>
+                <li>Funcionamiento normal del sistema inmunitario</li>
+                <li>Absorción normal del calcio</li>
+              </ul>
+            </div>
+            <div class="p-bottom">
+              <p class="p-price">18,90&nbsp;&euro;</p>
+              <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+            </div>
+          </div>
+        </div>
+  <div class="p-card">
+          <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+          <div class="p-info">
+            <div class="p-top">
+              <h3 class="p-name">Omega&ndash;3 EPA+DHA</h3>
+              <p class="p-desc">EPA y DHA de origen marino, 1.000&ndash;2.000&nbsp;mg por dosis.</p>
+              <ul class="p-bens">
+                <li>Funcionamiento normal del corazón</li>
+                <li>Función cerebral normal</li>
+                <li>Visión en condiciones normales</li>
+              </ul>
+            </div>
+            <div class="p-bottom">
+              <p class="p-price">27,90&nbsp;&euro;</p>
+              <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+            </div>
+          </div>
+        </div>
+  <div class="p-card">
+          <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+          <div class="p-info">
+            <div class="p-top">
+              <h3 class="p-name">Probiótico Multicepa</h3>
+              <p class="p-desc">Varias cepas vivas, 10&ndash;20 mil millones de UFC por dosis.</p>
+              <ul class="p-bens">
+                <li>Cápsula gastrorresistente</li>
+                <li>Cepas seleccionadas por&nbsp;resistencia</li>
+                <li>Sin azúcares ni&nbsp;edulcorantes</li>
+              </ul>
+            </div>
+            <div class="p-bottom">
+              <p class="p-price">24,90&nbsp;&euro;</p>
+              <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="shop-puntos" data-puntos="otras">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir a la fórmula 1 de 3"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir a la fórmula 2 de 3"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir a la fórmula 3 de 3"></button></li>
+    </ul>
+  </section>
+
+  <section class="alta" id="alta">
+    <h2>&iquest;Te avisamos <span class="h2-soft">el día que salga?</span></h2>
+    <p>Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento para los primeros.</p>
+    <form id="form-alta">
+      <input type="email" placeholder="Tu email" aria-label="Tu email" required>
+      <button type="submit">Avísame</button>
+    </form>
+    <p class="alta-ok" id="alta-ok">Apuntado. Serás de los primeros en saberlo.</p>
+  </section>
+
   <section>
     <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
     <ul class="faq">
@@ -1020,73 +1099,6 @@
         </div>
       </li>
     </ul>
-  </section>
-
-  <!-- ================================================================
-       HUECO DE RESEÑAS. Se queda comentado a proposito: no hay clientes
-       porque no se ha vendido nada, y una ficha que anuncia que no tiene
-       resenas resta mas de lo que suma antes de lanzar.
-       Se descomenta cuando existan resenas reales. El sitio es este, para
-       no tener que recolocar la pagina entera mas adelante.
-
-  <section id="resenas">
-    <h2>Lo que dice quien lo toma</h2>
-  </section>
-
-       ================================================================ -->
-
-  <!-- ================================================================
-       LAS OTRAS FORMULAS. Los enlaces apuntan al catalogo de la portada
-       porque las otras tres fichas todavia no existen. En cuanto exista
-       d3k2.html, omega3.html y probiotico.html, cambiar los href.
-       Las fotos son las del hero de cada una.
-       ================================================================ -->
-  <section id="otras">
-    <h2>También <span class="h2-soft">te puede interesar</span></h2>
-    <p>La misma exigencia en las cuatro. Si esta no es la que te hace falta, quizá lo sea otra.</p>
-
-    <ul class="otras">
-      <li class="otra">
-        <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Vitamina D3 + K2 de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
-          <span class="otra-cuerpo">
-            <span class="otra-nombre">Vitamina D3 + K2</span>
-            <span class="otra-desc">2.000&ndash;4.000&nbsp;UI con K2 en MK&ndash;7.</span>
-            <span class="otra-precio">18,90&nbsp;&euro;</span>
-          </span>
-        </a>
-      </li>
-      <li class="otra">
-        <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Omega&ndash;3 EPA+DHA de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
-          <span class="otra-cuerpo">
-            <span class="otra-nombre">Omega&ndash;3 EPA+DHA</span>
-            <span class="otra-desc">EPA y DHA marinos, 1.000&ndash;2.000&nbsp;mg.</span>
-            <span class="otra-precio">27,90&nbsp;&euro;</span>
-          </span>
-        </a>
-      </li>
-      <li class="otra">
-        <a class="otra-enlace" href="index.html#catalogo">
-          <span class="otra-foto"><video autoplay preload="metadata" muted loop playsinline aria-label="Probiótico Multicepa de ZEROX"><source src="producto-d3k2.mp4" type="video/mp4"></video></span>
-          <span class="otra-cuerpo">
-            <span class="otra-nombre">Probiótico Multicepa</span>
-            <span class="otra-desc">Varias cepas vivas, 10&ndash;20 mil millones.</span>
-            <span class="otra-precio">24,90&nbsp;&euro;</span>
-          </span>
-        </a>
-      </li>
-    </ul>
-  </section>
-
-  <section class="alta" id="alta">
-    <h2>Todavía <span class="h2-soft">no está a la venta</span></h2>
-    <p>Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento para los primeros.</p>
-    <form id="form-alta">
-      <input type="email" placeholder="Tu email" aria-label="Tu email" required>
-      <button type="submit">Avísame</button>
-    </form>
-    <p class="alta-ok" id="alta-ok">Apuntado. Serás de los primeros en saberlo.</p>
   </section>
 
 </main>
@@ -1169,6 +1181,41 @@
   // usuario sepa exactamente que esta contratando antes de pulsar no es un
   // detalle de UX, lo exige la norma de contratos de duracion indeterminada
   var modos = document.querySelectorAll('input[name="modo-compra"]');
+  // puntos de la tira de "tambien te puede interesar", igual que el catalogo
+  // de la portada
+  (function () {
+    var tira = document.querySelector('#otras .shop-grid');
+    var puntos = document.querySelectorAll('[data-puntos="otras"] button');
+    if (!tira || !puntos.length) { return; }
+    var marcado = -1;
+    var paso = function () {
+      var card = tira.querySelector('.p-card');
+      if (!card) { return 0; }
+      return card.getBoundingClientRect().width +
+             (parseFloat(getComputedStyle(tira).columnGap) || 0);
+    };
+    var pintar = function () {
+      var d = paso();
+      var i = d > 0 ? Math.round(tira.scrollLeft / d) : 0;
+      if (i < 0) { i = 0; }
+      if (i > puntos.length - 1) { i = puntos.length - 1; }
+      if (i === marcado) { return; }
+      marcado = i;
+      for (var j = 0; j < puntos.length; j++) { puntos[j].classList.toggle('act', j === i); }
+    };
+    var pide = false;
+    tira.addEventListener('scroll', function () {
+      if (!pide) { pide = true; requestAnimationFrame(function () { pide = false; pintar(); }); }
+    }, { passive: true });
+    window.addEventListener('resize', pintar, { passive: true });
+    puntos.forEach(function (b) {
+      b.addEventListener('click', function () {
+        tira.scrollTo({ left: paso() * (+b.dataset.i), behavior: 'smooth' });
+      });
+    });
+    pintar();
+  })();
+
   var comprarBtn = document.getElementById('btn-comprar');
   function pintarModo() {
     var sel = document.querySelector('input[name="modo-compra"]:checked');
