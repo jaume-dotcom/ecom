@@ -52,7 +52,7 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a class="logo" href="#">
+      <a class="logo" href="index.html" aria-label="Volver a la portada de ZEROX">
         <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
           <g fill="none" stroke="currentColor" stroke-width="7">
             <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
@@ -102,32 +102,81 @@
   </div>
 
 <div class="wrap">
-  <header class="cabecera">
-    <p class="sec-kicker"><span class="sec-dot" aria-hidden="true"></span>Educación</p>
-    <h1>Por qué la suplementación <span class="h2-soft">no empieza con un producto</span></h1>
-    <p class="cabecera-lede">Antes de elegir un bote hay una pregunta que casi nadie hace. Esta página es el razonamiento entero, y el libro donde está desarrollado.</p>
-  </header>
+  <!-- ====================================================================
+       BLOQUE DE CONTEXTO — version en tarjetas apiladas. Convive con
+       #porque-ahora, que dice lo mismo en scroll editorial, hasta que se
+       decida con cual quedarse. No fusionar ni borrar sin decirlo.
+       ==================================================================== -->
+  <section class="band" id="contexto">
+    <div class="stack">
+
+      <article class="stack-card arg-card arg-card--intro">
+        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg></span>
+        <p class="arg-kicker"><span>30 años observando</span><span>10 años divulgando</span></p>
+        <h1 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h1>
+        <div class="arg-tarde">
+          <p class="arg-sub">Debería empezar con una pregunta:</p>
+          <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
+          <p class="arg-pie">Porque el contexto ha cambiado.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
+        <h2 class="arg-head">Nuestra alimentación ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
+          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
+          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
+        <h2 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h2>
+        <figure class="arg-fig">
+          <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
+          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card">
+        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
+        <h2 class="arg-head">Nuestro ritmo de vida ha cambiado.</h2>
+        <figure class="arg-fig">
+          <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
+        </figure>
+        <div class="arg-body">
+          <ul class="arg-mas">
+            <li>Más trabajo.</li>
+            <li>Más estímulos.</li>
+            <li>Más pantallas.</li>
+            <li>Más cosas que hacer.</li>
+          </ul>
+          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
+        </div>
+      </article>
+
+      <article class="stack-card arg-card arg-card--cierre">
+        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
+        <h2 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h2>
+        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
+        <span class="arg-sigue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
+        </span>
+      </article>
+
+      <ul class="stack-progreso" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ul>
+
+    </div>
+  </section>
 </div>
-
-<div class="hero-full">
-
-
-  <div class="hero-center wrap" id="alta">
-    <p class="hero-alta-titulo">&iquest;Te avisamos el día que salga?</p>
-    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista.</p>
-    <form class="hero-signup" id="hero-form">
-      <label class="hero-signup-field">
-        <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        <input type="email" placeholder="Tu email" aria-label="Tu email" required />
-      </label>
-      <span class="shine">
-        <button type="submit">Avísame</button>
-      </span>
-    </form>
-    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
-  </div>
-</div>
-
 <div class="wrap">
 
   <!-- ==================================================================
@@ -177,85 +226,24 @@
   </section>
 
 </div>
-<div class="wrap">
-  <!-- ====================================================================
-       BLOQUE DE CONTEXTO — version en tarjetas apiladas. Convive con
-       #porque-ahora, que dice lo mismo en scroll editorial, hasta que se
-       decida con cual quedarse. No fusionar ni borrar sin decirlo.
-       ==================================================================== -->
-  <section class="band" id="contexto">
-    <div class="stack">
+<div class="hero-full">
 
-      <article class="stack-card arg-card arg-card--intro">
-        <span class="arg-lockup"><svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg></span>
-        <p class="arg-kicker"><span>30 años observando</span><span>10 años divulgando</span></p>
-        <h2 class="arg-head arg-head--xl">La suplementación no debería empezar con un producto.</h2>
-        <div class="arg-tarde">
-          <p class="arg-sub">Debería empezar con una pregunta:</p>
-          <p class="arg-pregunta">¿Qué necesita realmente tu cuerpo?</p>
-          <p class="arg-pie">Porque el contexto ha cambiado.</p>
-        </div>
-      </article>
 
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">01</span> Alimentación</p>
-        <h3 class="arg-head">Nuestra alimentación ha cambiado.</h3>
-        <figure class="arg-fig">
-          <img src="ctx-alimentacion.jpg" alt="Una mano sostiene un envase en el supermercado y lee la etiqueta de ingredientes" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <p>Hoy tenemos acceso a más alimentos que nunca. Pero tener más opciones no significa tener una alimentación más sencilla de entender.</p>
-          <p>Ingredientes, aditivos, edulcorantes, conservantes, cantidades y nombres que muchas veces cuesta incluso identificar en una etiqueta.</p>
-          <p class="arg-remate">Comer bien no debería requerir descifrar una etiqueta.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">02</span> Sol</p>
-        <h3 class="arg-head">El sol sigue ahí. <span class="arg-head-soft">Nuestra relación con él, no.</span></h3>
-        <figure class="arg-fig">
-          <img src="ctx-sol.jpg" alt="Una mano sostiene una cápsula a contraluz frente al cielo" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <p>Pasamos gran parte del día en interiores: trabajando, conduciendo o frente a una pantalla.</p>
-          <p class="arg-remate">Nuestros hábitos han cambiado y, con ellos, la forma en la que nuestro cuerpo se relaciona con el entorno.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card">
-        <p class="arg-eyebrow"><span class="arg-num">03</span> Ritmo</p>
-        <h3 class="arg-head">Nuestro ritmo de vida ha cambiado.</h3>
-        <figure class="arg-fig">
-          <img src="ctx-ritmo.jpg" alt="Una persona descansa la cabeza sobre los brazos en su mesa de trabajo" loading="lazy" decoding="async">
-        </figure>
-        <div class="arg-body">
-          <ul class="arg-mas">
-            <li>Más trabajo.</li>
-            <li>Más estímulos.</li>
-            <li>Más pantallas.</li>
-            <li>Más cosas que hacer.</li>
-          </ul>
-          <p class="arg-remate">Y muchas veces, menos tiempo para parar, descansar y recuperar.</p>
-        </div>
-      </article>
-
-      <article class="stack-card arg-card arg-card--cierre">
-        <svg class="arg-mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="7"><path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/><path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/><path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/><path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/><path d="M16 16 L84 84 M84 16 L16 84"/></g></svg>
-        <h3 class="arg-head arg-head--xl">El cuerpo sigue siendo el mismo.</h3>
-        <p class="arg-cierre-soft">El ritmo al que le exigimos, no.</p>
-        <span class="arg-sigue" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
-        </span>
-      </article>
-
-      <ul class="stack-progreso" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ul>
-
-    </div>
-  </section>
+  <div class="hero-center wrap" id="alta">
+    <p class="hero-alta-titulo">&iquest;Te avisamos el día que salga?</p>
+    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista.</p>
+    <form class="hero-signup" id="hero-form">
+      <label class="hero-signup-field">
+        <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <input type="email" placeholder="Tu email" aria-label="Tu email" required />
+      </label>
+      <span class="shine">
+        <button type="submit">Avísame</button>
+      </span>
+    </form>
+    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
+  </div>
 </div>
-
-
-
 <div class="wrap">
 
 
@@ -304,6 +292,102 @@
     </div>
   </section>
 
+</div>
+<div class="wrap">
+  <section class="band" id="catalogo">
+    <div class="section-head reveal">
+      <div>
+        <h2>Elige <span class="h2-soft">por dónde empezar</span></h2>
+        <p>La misma exigencia en las cuatro.</p>
+      </div>
+    </div>
+    <div class="shop-grid reveal">
+      <div class="p-card">
+        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+        <div class="p-info">
+          <div class="p-top">
+            <h3 class="p-name">Magnesio Bisglicinato</h3>
+            <p class="p-desc">Quelado con glicina, 300&ndash;400&nbsp;mg por dosis. Sin óxido.</p>
+            <ul class="p-bens">
+              <li>Menos cansancio y fatiga</li>
+              <li>Función muscular normal</li>
+              <li>Función normal del sistema nervioso</li>
+            </ul>
+          </div>
+          <div class="p-bottom">
+            <p class="p-price">22,90&nbsp;&euro;</p>
+            <a class="p-buy" href="magnesio.html">Ver ficha<span class="p-arrow">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+        <div class="p-info">
+          <div class="p-top">
+            <h3 class="p-name">Vitamina D3 + K2</h3>
+            <p class="p-desc">2.000&ndash;4.000&nbsp;UI de D3 con K2 en forma MK&ndash;7.</p>
+            <ul class="p-bens">
+              <li>Huesos y dientes en condiciones normales</li>
+              <li>Funcionamiento normal del sistema inmunitario</li>
+              <li>Absorción normal del calcio</li>
+            </ul>
+          </div>
+          <div class="p-bottom">
+            <p class="p-price">18,90&nbsp;&euro;</p>
+            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+        <div class="p-info">
+          <div class="p-top">
+            <h3 class="p-name">Omega&ndash;3 EPA+DHA</h3>
+            <p class="p-desc">EPA y DHA de origen marino, 1.000&ndash;2.000&nbsp;mg por dosis.</p>
+            <ul class="p-bens">
+              <li>Funcionamiento normal del corazón</li>
+              <li>Función cerebral normal</li>
+              <li>Visión en condiciones normales</li>
+            </ul>
+          </div>
+          <div class="p-bottom">
+            <p class="p-price">27,90&nbsp;&euro;</p>
+            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb"><video autoplay preload="metadata" muted loop playsinline><source src="producto-d3k2.mp4" type="video/mp4"></video></div>
+        <div class="p-info">
+          <div class="p-top">
+            <h3 class="p-name">Probiótico Multicepa</h3>
+            <p class="p-desc">Varias cepas vivas, 10&ndash;20 mil millones de UFC por dosis.</p>
+            <ul class="p-bens">
+              <li>Cápsula gastrorresistente</li>
+              <li>Cepas seleccionadas por resistencia</li>
+              <li>Sin azúcares ni edulcorantes</li>
+            </ul>
+          </div>
+          <div class="p-bottom">
+            <p class="p-price">24,90&nbsp;&euro;</p>
+            <button class="p-buy">Ver ficha<span class="p-arrow">&rarr;</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="shop-puntos reveal" id="shop-puntos">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir a la fórmula 1 de 4"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir a la fórmula 2 de 4"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir a la fórmula 3 de 4"></button></li>
+      <li><button type="button" data-i="3" aria-label="Ir a la fórmula 4 de 4"></button></li>
+    </ul>
+  </section>
+
+  <!-- bloque de ayuda. OJO: los dos destinos son provisionales.
+       El primero deberia ir a un cuestionario que recomiende formula, y el
+       segundo a una persona de verdad atendiendo. Hasta que existan, apuntan
+       a secciones que si estan. -->
 </div>
 
 <footer id="footer-signup">
