@@ -1670,10 +1670,10 @@
   }
   .ayuda-sub { margin: 0 0 1.8rem; font-size: var(--t-lg); color: var(--ink-soft); }
 
-  .ayuda-botones { display: grid; gap: 0.7rem; }
+  .ayuda-botones { display: flex; justify-content: center; gap: 0.7rem; }
   /* solo el tamano: el color lo ponen .btn y .btn-solid, que son los de
      toda la pagina. El ambar es el color de la accion en esta marca */
-  .ayuda-btn { display: block; padding: 1rem 1.5rem; font-size: var(--t-lg); }
+  .ayuda-btn { display: inline-block; width: auto; padding: 0.85rem 1.6rem; font-size: var(--t-base); }
 
   @media (min-width: 860px) {
     #asesoria { padding: 4.5rem 3rem; }
