@@ -1149,17 +1149,17 @@
      ya ha decidido no tiene que saltarselo para llegar al CTA, y quien
      duda lo tiene sin bajar. Discreto a proposito, que el hero no es una
      ficha de producto: el peso lo lleva el titular. */
-  .hero-precio {
-    margin: 0.85rem 0 0; text-align: center;
-    font-size: var(--t-base); font-weight: 600; line-height: 1.35;
-    color: #fff;
+  /* el boton se ajusta al texto en vez de ir a todo lo ancho: con el
+     precio en su propia linea debajo ya no hace falta que ocupe la
+     tarjeta entera para pesar */
+  .hero-pie .hero-cta {
+    display: inline-block; width: auto;
+    padding: 0.82rem 1.7rem; font-size: var(--t-base);
   }
-  /* que lleva el pack, en segunda linea: es lo que justifica el precio,
-     pero no puede competir con el */
-  .hero-precio span {
-    display: block; margin-top: 0.1rem;
-    font-size: var(--t-sm); font-weight: 400;
-    color: rgba(255, 255, 255, 0.78);
+  .hero-precio {
+    margin: 0.75rem 0 0; text-align: center;
+    font-size: var(--t-sm); font-weight: 500; line-height: 1.35;
+    color: rgba(255, 255, 255, 0.92);
   }
 
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
@@ -1841,11 +1841,13 @@
     scrollbar-width: none; -ms-overflow-style: none;
   }
   .resenas::-webkit-scrollbar { display: none; }
+  /* esquina viva y no redondeada: la caja es una cita, no una tarjeta de
+     producto, y en escuadra se lee como una hoja pegada al panel */
   .resena {
     scroll-snap-align: start;
     display: grid; align-content: start; gap: 0.7rem;
     padding: 1.3rem 1.2rem;
-    background: var(--paper); border: 0; border-radius: 16px;
+    background: var(--paper); border: 0; border-radius: 0;
   }
   .resena-estrellas { color: var(--khaki-deep); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
   .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
