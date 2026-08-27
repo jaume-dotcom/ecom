@@ -680,7 +680,10 @@
     .shop-grid { grid-auto-flow: unset; grid-template-columns: repeat(4, 1fr); overflow-x: visible; }
     .shop-puntos { display: none; }
   }
+  /* position relative para que el ::after de .p-buy pueda estirarse sobre
+     toda la tarjeta y hacerla pulsable entera */
   .p-card {
+    position: relative;
     border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column;
     border-radius: 16px; overflow: hidden; transition: box-shadow 0.25s ease;
   }
@@ -731,16 +734,20 @@
   .p-bottom {
     margin-top: 0.3rem; margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; }
   .p-price { font-size: var(--t-xl); font-weight: 600; color: var(--ink); margin: 0; letter-spacing: var(--tracking-lg); }
+  /* Deja de ser un boton y pasa a ser un enlace subrayado bajo el precio.
+     Un boton con caja competia con el precio por la misma mirada y, sobre
+     todo, prometia una accion: aqui no se compra, se va a la ficha.
+     El ::after estira el enlace sobre toda la tarjeta, asi que la diana no
+     son estos 90px de texto sino los 610 de la tarjeta entera. El texto
+     sigue haciendo falta: sin el, una tarjeta pulsable no parece pulsable. */
   .p-buy {
-    align-self: flex-start; display: inline-flex; align-items: center;
-    font-size: var(--btn-txt-sm); font-weight: var(--btn-peso);
-    padding: var(--btn-relleno-sm);
-    background: transparent; color: var(--ink);
-    border: 1px solid var(--ink); border-radius: var(--btn-radio);
+    align-self: flex-start; color: var(--ink-soft);
+    font-size: var(--t-xs); font-weight: 500;
+    text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: var(--ink-faint);
   }
-  .p-buy:hover { background: var(--ink); color: var(--paper); }
-  .p-arrow { display: inline-block; opacity: 0; width: 0; margin-left: 0; overflow: hidden; transition: opacity 0.25s ease, width 0.25s ease, margin-left 0.25s ease; }
-  .p-card:hover .p-arrow { opacity: 1; width: 1em; margin-left: 0.45em; }
+  .p-buy::after { content: ""; position: absolute; inset: 0; }
+  .p-buy:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
   /* bundle */
   .bundle { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; padding: 2rem; }
@@ -1604,8 +1611,7 @@
   .p-info { text-align: center; }
   .p-bens { display: inline-block; text-align: left; }
   .p-bottom { align-items: center; }
-  /* el boton dice la accion y el precio va encima: un boton con un precio
-     dentro no deja claro si lleva a la ficha o si compra */
+  /* el enlace va centrado bajo el precio, como el resto de la tarjeta */
   .p-buy { align-self: center; }
 
   /* rotulo y titular centrados; el texto de lectura, a la izquierda.
