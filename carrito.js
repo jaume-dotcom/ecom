@@ -24,6 +24,24 @@
   var LLAVE = 'zerox-carrito';
   var ENVIO_GRATIS = 27.95;
 
+  /* La foto viaja en data-img desde el boton, pero hace falta una red de
+     seguridad: una cesta guardada ANTES de que existieran las fotos sigue
+     en el navegador de quien ya habia entrado, y sus lineas no llevan img.
+     Sin esto, esa gente ve la cesta sin fotos para siempre.
+     La clave es la parte del id anterior al guion, para que mag-unica y
+     mag-trimestral usen la del magnesio. */
+  var FOTOS = {
+    mag: 'ficha-magnesio.jpg',
+    d3: 'hero-d3k2.jpg',
+    om3: 'hero-omega3.jpg',
+    pro: 'hero-probiotico.jpg',
+    pack: 'pack-magnesio-libro.jpg'
+  };
+
+  function foto(i) {
+    return i.img || FOTOS[String(i.id).split('-')[0]] || '';
+  }
+
   /* ---------- estado ---------- */
 
   function leer() {
@@ -185,8 +203,12 @@
       cuerpo.innerHTML = '<p class="cart-vacia">La cesta está vacía.</p>';
     } else {
       cuerpo.innerHTML = carrito.map(function (i) {
+        var img = foto(i);
         return '<div class="cart-linea">' +
-            (i.img ? '<div class="cart-foto"><img src="' + i.img + '" alt="" loading="lazy" decoding="async"></div>' : '') +
+            // si el archivo faltara, el onerror se lleva el hueco entero en
+            // vez de dejar el icono de imagen rota
+            (img ? '<div class="cart-foto"><img src="' + img + '" alt="" decoding="async"' +
+                   ' onerror="this.parentNode.remove()"></div>' : '') +
             '<div class="cart-linea-txt">' +
               '<b>' + i.nombre + '</b>' +
               (i.sub ? '<span>' + i.sub + '</span>' : '') +
