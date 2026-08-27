@@ -669,12 +669,25 @@
     list-style: none; margin: 1.1rem 0 0; padding: 0;
     display: flex; justify-content: center; align-items: center; gap: 0.4rem;
   }
+  /* La marca es un filete de 3px, no un punto de 6. El boton sigue midiendo
+     28px de alto para que se pueda pulsar: lo que se ve es el ::before, no
+     la caja. Un indicador de 3px que ademas fuera de 3px de diana no lo
+     acierta nadie, y menos con 60 años. */
   .shop-puntos button {
-    display: block; width: 6px; height: 6px; padding: 0;
-    border: 0; border-radius: 999px; background: rgba(35, 39, 46, 0.22);
-    transition: width 0.3s ease, background 0.3s ease;
+    position: relative; display: block;
+    width: 16px; height: 28px; padding: 0;
+    border: 0; background: none; cursor: pointer;
+    transition: width 0.3s ease;
   }
-  .shop-puntos button.act { width: 20px; background: var(--ink); }
+  .shop-puntos button::before {
+    content: ""; position: absolute; left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 100%; height: 3px; border-radius: 999px;
+    background: rgba(35, 39, 46, 0.22);
+    transition: background 0.3s ease;
+  }
+  .shop-puntos button.act { width: 26px; }
+  .shop-puntos button.act::before { background: var(--ink); }
   @media (prefers-reduced-motion: reduce) {
     .shop-puntos button { transition: none; }
   }
@@ -1995,8 +2008,9 @@
   #resenas .section-head h2 { color: var(--paper); }
   #resenas .section-head .h2-soft { color: var(--paper); }
   /* los puntos van sobre oscuro: se invierten */
-  #resenas .shop-puntos li button { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act { background: var(--khaki-pop); }
+  /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
+  #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
+  #resenas .shop-puntos li button.act::before { background: var(--khaki-pop); }
   .resenas {
     list-style: none; margin: 0; padding-bottom: 0.5rem;
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;

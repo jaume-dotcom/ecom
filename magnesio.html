@@ -252,8 +252,9 @@
      .section-head sino h2 suelto dentro de section. */
   #resenas h2, #resenas h2 .h2-soft { color: var(--paper); }
   #resenas > p { color: rgba(238, 240, 244, 0.66); }
-  #resenas .shop-puntos li button { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act { background: var(--khaki-pop); }
+  /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
+  #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
+  #resenas .shop-puntos li button.act::before { background: var(--khaki-pop); }
 
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
