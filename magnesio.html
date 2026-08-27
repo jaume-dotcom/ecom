@@ -35,8 +35,10 @@
   img { max-width: 100%; display: block; }
   button { font-family: var(--font); cursor: pointer; }
   /* 640 y no 1280: una ficha se lee en columna, y en escritorio una
-     medida larga cansa más de lo que luce */
-  .wrap { max-width: 40rem; margin: 0 auto; padding: 0 1.15rem; }
+     medida larga cansa más de lo que luce. El relleno SI es el de la
+     portada (1.6rem): con 1.15 todo el texto de esta pagina arrancaba
+     7px mas cerca del borde y las dos paginas no casaban. */
+  .wrap { max-width: 40rem; margin: 0 auto; padding: 0 1.6rem; }
 
   /* ---------- barra de aviso + nav ---------- */
   .topbar {
@@ -71,7 +73,6 @@
   .ficha > div:last-child { text-align: center; }
   .ficha h1 { text-align: center; }
   .ficha-eyebrow { justify-content: center; }
-  .datos { justify-items: center; }
   .modo { text-align: left; }
   .ficha-eyebrow {
     margin: 1.6rem 0 0.5rem; font-size: var(--t-sm); letter-spacing: 0.16em;
@@ -153,16 +154,6 @@
     .galeria-track { transition: none; }
     .galeria-minis { scroll-behavior: auto; }
   }
-
-  /* ---------- datos clave ---------- */
-  .datos {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--line); border: 1px solid var(--line);
-    border-radius: 14px; overflow: hidden; margin: 2rem 0 0;
-  }
-  .dato { background: var(--paper); padding: 1.1rem 1rem; }
-  .dato dt { font-size: var(--t-xs); color: var(--ink-soft); margin-bottom: 0.2rem; }
-  .dato dd { margin: 0; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
 
   /* ---------- tira de atributos ----------
      Mismo componente que la tira de la portada (.ticker, en estilos.css).
@@ -340,17 +331,22 @@
 
   /* ---------- secciones ---------- */
   section { padding: 3.2rem 0; border-top: 0; }
+  /* sin line-height propio: hereda el 1.5 del body, que es lo que hacen
+     los h2 de la portada. Con 1.15 los titulos de dos lineas iban mucho
+     mas apretados aqui que alli */
   h2 {
     margin: 0 auto 0.7rem; max-width: 22ch;
     font-size: var(--t-4xl); font-weight: 600;
-    letter-spacing: var(--tracking-lg); line-height: 1.15;
+    letter-spacing: var(--tracking-lg);
     text-align: center; text-wrap: balance;
   }
   /* la entradilla de cada seccion, centrada y con la misma medida que en la
      portada: 46 caracteres es donde el ojo deja de perder el renglon */
+  /* --t-xl y no --t-lg: es el tamaño que tiene la entradilla bajo los
+     titulos en la portada */
   section > h2 + p {
     margin: 0 auto 2.6rem; max-width: 46ch;
-    font-size: var(--t-lg); color: var(--ink-soft);
+    font-size: var(--t-xl); color: var(--ink-soft);
     text-align: center; text-wrap: pretty;
   }
   section > p { font-size: var(--t-lg); color: var(--ink-soft); }
@@ -515,25 +511,30 @@
   .modo input:focus-visible + .modo-marca { outline: 2px solid var(--khaki-deep); outline-offset: 3px; }
 
   .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
-  .modo-fila { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; }
+  /* cerrada, cada opcion son dos lineas: nombre y precio arriba, sellos
+     debajo. El precio por bote y por dia se ha ido al panel: se lee al
+     elegirla, que es cuando se compara de verdad */
+  .modo-fila { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.8rem; }
   .modo-nombre { font-size: var(--t-lg); font-weight: 600; }
-  .modo-precio b { font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
-  .modo-precio small { font-size: var(--t-sm); color: var(--ink-soft); }
-  .modo-desc { font-size: var(--t-base); color: var(--ink-soft); }
+  /* el importe y su periodicidad, uno debajo del otro: en linea, "54,90 €
+     cada 3 meses" partia por donde le venia bien */
+  .modo-precio { text-align: right; white-space: nowrap; }
+  .modo-precio b { display: block; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .modo-precio small { display: block; font-size: var(--t-xs); color: var(--ink-soft); }
+  .modo-sellos { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.15rem; }
   /* la opcion que mas conviene: filete de marca y etiqueta, pero SIN venir
      premarcada. Premarcar la cara lo prohibe el articulo 22 de la directiva
      de derechos del consumidor, asi que la que viene marcada es la unica que
      no compromete a nada */
   .modo--destacado { border-color: var(--khaki-deep); border-width: 2px; }
   .modo-etiqueta {
-    display: inline-block; margin-left: 0.4rem; vertical-align: 2px;
+    display: inline-block;
     font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
     letter-spacing: 0.06em; color: #fff; background: var(--khaki-deep);
     border-radius: 999px; padding: 0.15rem 0.45rem; white-space: nowrap;
   }
 
   .modo-ahorro {
-    justify-self: start; margin-top: 0.15rem;
     font-size: var(--t-sm); font-weight: 600; color: var(--olive);
     background: var(--khaki-pop); border-radius: 999px; padding: 0.2rem 0.7rem;
   }
@@ -663,12 +664,15 @@
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
             <span class="modo-fila">
-              <span class="modo-nombre">Suscripción trimestral <span class="modo-etiqueta">La mejor relación</span></span>
-              <span class="modo-precio"><b>54,90&nbsp;&euro;</b><small>&nbsp;cada 3 meses</small></span>
+              <span class="modo-nombre">Suscripción trimestral</span>
+              <span class="modo-precio"><b>54,90&nbsp;&euro;</b><small>cada 3 meses</small></span>
             </span>
-            <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
-            <span class="modo-ahorro">Ahorras un 20&nbsp;%</span>
+            <span class="modo-sellos">
+              <span class="modo-etiqueta">La mejor relación</span>
+              <span class="modo-ahorro">Ahorras un 20&nbsp;%</span>
+            </span>
             <span class="modo-mas"><span class="modo-plus">
+              <span>18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
               <span>Tres botes en cada envío</span>
               <span>Te avisamos por email antes de cada cobro</span>
               <span>Cancelas en un clic, sin permanencia</span>
@@ -682,11 +686,13 @@
           <span class="modo-cuerpo">
             <span class="modo-fila">
               <span class="modo-nombre">Suscripción bimestral</span>
-              <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
+              <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>cada 2 meses</small></span>
             </span>
-            <span class="modo-desc">19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
-            <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
+            <span class="modo-sellos">
+              <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
+            </span>
             <span class="modo-mas"><span class="modo-plus">
+              <span>19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
               <span>Dos botes en cada envío</span>
               <span>Te avisamos por email antes de cada cobro</span>
               <span>Cancelas en un clic, sin permanencia</span>
@@ -702,8 +708,8 @@
               <span class="modo-nombre">Compra única</span>
               <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
             <span class="modo-mas"><span class="modo-plus">
+              <span>22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
               <span>Un bote. Ni renovación ni cobros después</span>
             </span></span>
           </span>
@@ -713,12 +719,9 @@
 
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
 
-      <dl class="datos">
-        <div class="dato"><dt>Magnesio elemental</dt><dd>360 mg</dd></div>
-        <div class="dato"><dt>% VRN</dt><dd>96 %</dd></div>
-        <div class="dato"><dt>Forma</dt><dd>Bisglicinato</dd></div>
-        <div class="dato"><dt>Dosis diaria</dt><dd>3 cápsulas</dd></div>
-      </dl>
+      <!-- La rejilla de datos clave (360 mg / 96 % VRN / bisglicinato /
+           3 capsulas) se retira: los cuatro datos ya estaban en el titulo,
+           en la comparativa de formas y en la tabla nutricional. -->
 
       <!-- Los mismos cinco atributos, pero en movimiento: en rejilla
            ocupaban cinco columnas de letra diminuta. Es el mismo
