@@ -102,8 +102,47 @@
     --btn-relleno-sm: 0.62rem 1.15rem;
     --tracking-sm: -0.01em;
   }
+  /* ===== LA MISMA ESCALA, UN ESCALON MAS BAJA EN MOVIL =====
+     Medido a 393px (el ancho de un iPhone Pro) contra las tres fichas de
+     referencia, la nuestra iba grande justo por arriba:
+
+       cuerpo      Cuure 14 · Be Levels 14 · ZZEN 17 · ZEROX 16
+       titular h2  ZZEN 19 · ZEROX 28
+       entradilla  ZEROX 18,4, mas grande que TODO el cuerpo de Cuure
+
+     No se copia el 14px de Cuure y Be Levels a proposito: le hablan a un
+     publico de 25-40 y aqui el comprador tiene 55-75. El cuerpo se queda
+     en 15,2 y lo que baja de verdad son los titulares y las entradillas,
+     que es lo que hinchaba la pagina.
+
+     Se tocan los tokens y no las reglas: la escala vive aqui, asi que un
+     cambio en esta tabla alcanza a las tres paginas a la vez y no puede
+     volver a divergir. De --t-3xs a --t-sm no se toca nada: son el suelo
+     de legibilidad y bajarlos era el problema, no la solucion.
+     Escritorio no cambia: todo esto vive dentro del breakpoint. */
+  @media (max-width: 859px) {
+    :root {
+      --t-md: 0.93rem;    /* 15,2 -> 14,9 */
+      --t-base: 0.95rem;  /* 16   -> 15,2  cuerpo */
+      --t-lg: 1rem;       /* 16,8 -> 16   */
+      --t-xl: 1.05rem;    /* 18,4 -> 16,8  entradilla bajo el titular */
+      --t-2xl: 1.2rem;    /* 20,8 -> 19,2 */
+      --t-3xl: 1.4rem;    /* 25,6 -> 22,4 */
+      --t-4xl: 1.5rem;    /* 28   -> 24    titulares de seccion */
+      --t-5xl: 1.6rem;    /* 30,4 -> 25,6 */
+      --t-6xl: 1.75rem;   /* 32,8 -> 28    h1 */
+      --t-7xl: 1.85rem;   /* 35,2 -> 29,6 */
+      --t-8xl: 2rem;      /* 38,4 -> 32   */
+    }
+    /* el parrafo sin clase heredaba el 16px del navegador y se quedaba
+       fuera de la escala */
+    body { font-size: var(--t-base); }
+  }
+
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  /* sin esto Safari en iPhone puede agrandar texto por su cuenta, que es
+     parte de lo que se veia mas grande de la cuenta en el movil */
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-weight: 400; line-height: 1.5; -webkit-font-smoothing: antialiased; letter-spacing: var(--tracking-sm); }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.6rem; }
@@ -1269,7 +1308,9 @@
     .hero-signup-label { color: var(--ink-soft); }
 
     /* cabeceras de seccion */
-    .section-head h2 { font-size: var(--t-4xl); font-weight: 600; }
+    /* 1,2 y no el 1,5 heredado del body: a 24px un titular de dos lineas
+       con interlineado de parrafo se abre demasiado */
+    .section-head h2 { font-size: var(--t-4xl); font-weight: 600; line-height: 1.2; }
     .closing h2, #asesoria .ayuda-titulo { font-size: var(--t-4xl); font-weight: 600; }
     .section-head p { font-size: var(--t-xl); }
 

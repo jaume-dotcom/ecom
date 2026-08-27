@@ -375,7 +375,8 @@
   section { padding: 3.2rem 0; border-top: 0; }
   /* sin line-height propio: hereda el 1.5 del body, que es lo que hacen
      los h2 de la portada. Con 1.15 los titulos de dos lineas iban mucho
-     mas apretados aqui que alli */
+     mas apretados aqui que alli. En movil si lleva 1,2, igual que alli:
+     ver el bloque de al final. */
   h2 {
     margin: 0 auto 0.7rem; max-width: 22ch;
     font-size: var(--t-4xl); font-weight: 600;
@@ -608,6 +609,12 @@
     width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
   }
   @media (prefers-reduced-motion: reduce) { .modo, .modo-mas { transition: none; } }
+
+  /* el mismo ajuste que .section-head h2 en la hoja compartida: a 24px un
+     titular de dos lineas con interlineado de parrafo se abre demasiado.
+     Aqui hace falta repetirlo porque esta pagina usa h2 suelto y no
+     .section-head. */
+  @media (max-width: 859px) { h2 { line-height: 1.2; } }
 
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
