@@ -1861,6 +1861,20 @@
   }
 
   @media (min-width: 640px) { .resenas { grid-auto-columns: 46%; } }
+
+  /* Caja mas grande y cuadrada en movil. Con 78% de ancho y el alto que
+     pidiera el texto salian tarjetas bajas y de proporcion cambiante: una
+     de dos lineas y la de al lado de cuatro, y la tira parecia rota.
+     Cuadrada, todas miden lo mismo y la de al lado asoma igual.
+     Va hasta 639 y no hasta el breakpoint de 859: de 640 en adelante ya
+     caben dos por fila, y ahi un 84% cuadrado seria una tarjeta enorme. */
+  @media (max-width: 639px) {
+    .resenas { grid-auto-columns: 84%; gap: 0.8rem; }
+    .resena {
+      aspect-ratio: 1 / 1; align-content: space-between;
+      padding: 1.7rem 1.5rem;
+    }
+  }
   @media (min-width: 980px) {
     .resenas { grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr); overflow-x: visible; }
     .shop-puntos[data-puntos="resenas"] { display: none; }
