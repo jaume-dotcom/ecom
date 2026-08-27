@@ -824,19 +824,31 @@
   .cart-barra { height: 4px; border-radius: 999px; background: var(--line); overflow: hidden; }
   .cart-barra span { display: block; height: 100%; background: var(--khaki-deep); transition: width 0.3s ease; }
   .cart-envio p { margin: 0.5rem 0 0; font-size: var(--t-xs); color: var(--ink-soft); }
+  .cart-envio p.cart-envio-casi { color: var(--khaki-deep); font-weight: 600; }
   .cart-envio p.cart-envio-ok { color: var(--olive); font-weight: 600; }
 
   .cart-cuerpo { flex: 1; overflow-y: auto; padding: 0.4rem 1.3rem; }
   .cart-vacia { margin: 2rem 0; text-align: center; color: var(--ink-soft); font-size: var(--t-base); }
+  /* foto, texto y precio en tres columnas. La foto es lo que hace que la
+     cesta se lea de un vistazo: con solo nombres, tres lineas parecidas se
+     confunden entre si */
   .cart-linea {
-    display: grid; grid-template-columns: 1fr auto; gap: 0.3rem 0.8rem;
-    align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--line);
+    display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem;
+    align-items: start; padding: 1rem 0; border-bottom: 1px solid var(--line);
   }
   .cart-linea:last-child { border-bottom: 0; }
-  .cart-linea-txt { grid-column: 1 / -1; display: grid; gap: 0.1rem; }
+  .cart-foto {
+    width: 64px; height: 64px; border-radius: 10px; overflow: hidden;
+    background: var(--tint); flex-shrink: 0;
+  }
+  .cart-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-linea-txt { display: grid; gap: 0.15rem; justify-items: start; }
   .cart-linea-txt b { font-size: var(--t-base); font-weight: 600; }
   .cart-linea-txt span { font-size: var(--t-xs); color: var(--ink-soft); }
-  .cart-linea-precio { font-size: var(--t-base); font-weight: 600; justify-self: end; }
+  .cart-linea-txt .cart-cant { margin-top: 0.35rem; }
+  .cart-linea-der { display: grid; gap: 0.1rem; justify-items: end; text-align: right; }
+  .cart-linea-precio { font-size: var(--t-base); font-weight: 600; white-space: nowrap; }
+  .cart-unidad { font-size: var(--t-3xs); color: var(--ink-soft); white-space: nowrap; }
   /* 36px por boton: por debajo de eso, sumar y restar con el dedo es un
      ejercicio de punteria, y aqui el comprador tiene 55-75 */
   .cart-cant { display: inline-flex; align-items: center; gap: 0.2rem; }

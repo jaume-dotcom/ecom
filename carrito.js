@@ -65,7 +65,7 @@
     if (y) { y.cant += 1; } else {
       carrito.push({
         id: datos.id, nombre: datos.nombre, sub: datos.sub || '',
-        precio: datos.precio, cant: 1
+        img: datos.img || '', precio: datos.precio, cant: 1
       });
     }
     guardar(carrito);
@@ -186,29 +186,46 @@
     } else {
       cuerpo.innerHTML = carrito.map(function (i) {
         return '<div class="cart-linea">' +
+            (i.img ? '<div class="cart-foto"><img src="' + i.img + '" alt="" loading="lazy" decoding="async"></div>' : '') +
             '<div class="cart-linea-txt">' +
               '<b>' + i.nombre + '</b>' +
               (i.sub ? '<span>' + i.sub + '</span>' : '') +
+              '<div class="cart-cant">' +
+                '<button type="button" data-cant="-1" data-id="' + i.id + '" aria-label="Quitar uno de ' + i.nombre + '">&minus;</button>' +
+                '<span>' + i.cant + '</span>' +
+                '<button type="button" data-cant="1" data-id="' + i.id + '" aria-label="Añadir uno de ' + i.nombre + '">+</button>' +
+              '</div>' +
             '</div>' +
-            '<div class="cart-cant">' +
-              '<button type="button" data-cant="-1" data-id="' + i.id + '" aria-label="Quitar uno de ' + i.nombre + '">&minus;</button>' +
-              '<span>' + i.cant + '</span>' +
-              '<button type="button" data-cant="1" data-id="' + i.id + '" aria-label="Añadir uno de ' + i.nombre + '">+</button>' +
+            '<div class="cart-linea-der">' +
+              '<b class="cart-linea-precio">' + euros(i.precio * i.cant) + '</b>' +
+              // el precio por unidad solo cuando hay mas de una: con una
+              // sola seria repetir el mismo numero dos veces
+              (i.cant > 1 ? '<span class="cart-unidad">' + euros(i.precio) + ' cada uno</span>' : '') +
             '</div>' +
-            '<b class="cart-linea-precio">' + euros(i.precio * i.cant) + '</b>' +
           '</div>';
       }).join('');
     }
 
     pieTotal.textContent = euros(total());
 
+    // El mensaje cambia segun lo cerca que se este, que es lo que lo hace
+    // util: "te faltan 5 €" con la cesta vacia no dice nada, y el mismo
+    // texto a un euro del objetivo desaprovecha el momento.
+    // Sin cuentas atras ni prisas: aqui se anima, no se mete presion.
     var falta = ENVIO_GRATIS - total();
     var pct = Math.min(100, Math.round((total() / ENVIO_GRATIS) * 100));
     barra.style.width = pct + '%';
-    barraTexto.textContent = falta > 0
-      ? 'Te faltan ' + euros(falta) + ' para el envío gratis'
-      : 'Envío gratis conseguido';
+
+    var msg;
+    if (falta <= 0) { msg = '¡Envío gratis conseguido!'; }
+    else if (!total()) { msg = 'Envío gratis a partir de ' + euros(ENVIO_GRATIS); }
+    else if (pct >= 80) { msg = '¡Casi! Te faltan ' + euros(falta) + ' para el envío gratis'; }
+    else if (pct >= 50) { msg = 'Vas por la mitad: ' + euros(falta) + ' más y el envío es gratis'; }
+    else { msg = 'Te faltan ' + euros(falta) + ' para el envío gratis'; }
+
+    barraTexto.textContent = msg;
     barraTexto.classList.toggle('cart-envio-ok', falta <= 0);
+    barraTexto.classList.toggle('cart-envio-casi', falta > 0 && pct >= 80);
   }
 
   /* ---------- enganches ---------- */
@@ -226,6 +243,7 @@
       id: b.getAttribute('data-add'),
       nombre: b.getAttribute('data-nombre'),
       sub: b.getAttribute('data-sub'),
+      img: b.getAttribute('data-img'),
       precio: parseFloat(b.getAttribute('data-precio'))
     });
     abrir();
