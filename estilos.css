@@ -1163,22 +1163,23 @@
      ya ha decidido no tiene que saltarselo para llegar al CTA, y quien
      duda lo tiene sin bajar. Discreto a proposito, que el hero no es una
      ficha de producto: el peso lo lleva el titular. */
-  /* El pie del hero ya no es un boton, es la oferta. El precio arriba y
-     grande, el nombre debajo y pequeño: el numero es lo que para el ojo,
-     y el nombre solo tiene que decir de que numero se trata. */
-  .hero-oferta {
-    display: inline-block; text-align: center; color: #fff;
-    padding: 0.4rem 0.6rem;
+  /* La oferta va dentro de la caja del boton, en dos lineas. El boton se
+     ajusta al texto en vez de ir de lado a lado de la tarjeta, y por eso
+     la letra baja: con el cuerpo normal, dos lineas hacian un boton
+     demasiado alto para lo poco que dice. */
+  .hero-cta--oferta {
+    display: inline-block; width: auto; text-align: center;
+    padding: 0.62rem 1.6rem; line-height: 1.2;
   }
-  .hero-oferta-precio {
-    display: block; font-size: var(--t-6xl); font-weight: 600;
-    line-height: 1; letter-spacing: var(--tracking-lg);
-    text-shadow: 0 1px 24px rgba(22, 19, 15, 0.35);
+  .hero-cta-precio {
+    display: block; font-size: var(--t-lg); font-weight: 600;
+    letter-spacing: var(--tracking-lg);
   }
-  .hero-oferta-nombre {
-    display: block; margin-top: 0.4rem;
-    font-size: var(--t-2xs); font-weight: 500;
-    letter-spacing: 0.14em; text-transform: uppercase;
+  /* el rotulo, en versalita: dice de que es el numero sin robarle sitio */
+  .hero-cta-nombre {
+    display: block; margin-top: 0.1rem;
+    font-size: var(--t-3xs); font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(255, 255, 255, 0.82);
   }
 
