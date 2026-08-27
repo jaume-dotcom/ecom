@@ -208,6 +208,43 @@
     font-size: var(--t-xs); line-height: 1.5; color: var(--ink-soft);
   }
 
+  /* ---------- cifras ----------
+     Panel oscuro a sangre, como el de reseñas. Las cifras se leen de lejos
+     y el pie explica de donde sale cada una: una cifra sin fuente al lado
+     es justo lo que esta pagina dice no hacer. */
+  .cifras-panel {
+    background: var(--ink); color: var(--paper);
+    margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 3rem 1.6rem 2.4rem;
+  }
+  .cifras-panel h2 { color: var(--paper); }
+  .cifras-panel h2 .h2-soft { color: var(--paper); }
+  .cifras-panel > p { color: rgba(238, 240, 244, 0.66); }
+  .cifras { list-style: none; margin: 2.2rem 0 0; padding: 0; display: grid; gap: 2rem; }
+  .cifras li { display: grid; gap: 0.5rem; }
+  /* peso 300 y muy grande: la cifra manda por tamaño, no por grosor */
+  .cifra {
+    font-size: clamp(3.4rem, 17vw, 4.6rem); font-weight: 300;
+    line-height: 0.95; letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .cifra small { font-size: 0.42em; font-weight: 400; letter-spacing: 0; }
+  .cifras li p { margin: 0; font-size: var(--t-lg); line-height: 1.5; color: rgba(238, 240, 244, 0.82); }
+  .cifras-nota {
+    margin: 2.4rem 0 0; padding-top: 1.4rem;
+    border-top: 1px solid rgba(238, 240, 244, 0.16);
+    font-size: var(--t-xs); line-height: 1.55; color: rgba(238, 240, 244, 0.58);
+  }
+
+  /* ---------- valoraciones ----------
+     Mismo bloque que en la portada: .resenas y .resena salen de estilos.css.
+     Aqui solo hay que repintar el titulo, porque esta pagina no usa
+     .section-head sino h2 suelto dentro de section. */
+  #resenas h2, #resenas h2 .h2-soft { color: var(--paper); }
+  #resenas > p { color: rgba(238, 240, 244, 0.66); }
+  #resenas .shop-puntos li button { background: rgba(238, 240, 244, 0.28); }
+  #resenas .shop-puntos li button.act { background: var(--khaki-pop); }
+
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
      ajena es un problema que no hace falta buscarse. */
@@ -791,6 +828,39 @@
     <p class="benes-nota">Son las tres declaraciones que la EFSA autoriza para el magnesio y que este bote cumple con su dosis diaria. No hay una cuarta, y las que verás por ahí no están autorizadas.</p>
   </section>
 
+
+  <!-- ================================================================
+       LOS NUMEROS. La referencia de la que sale este bloque son las
+       "89% han experimentado mas energia" de la competencia. Aqui NO se
+       puede hacer eso: esas cifras salen de encuestas a sus clientes, y
+       nosotros ni tenemos clientes ni tenemos encuesta.
+       Inventarlas seria exactamente lo contrario de lo que promete la
+       marca, asi que el bloque se llena con numeros que si se pueden
+       comprobar: reglamento, quimica y registro de declaraciones.
+       Si algun dia hay datos propios, van aqui con su metodo al lado.
+       ================================================================ -->
+  <section class="cifras-panel" id="cifras">
+    <h2>Los números <span class="h2-soft">que sí se pueden dar</span></h2>
+    <p>Ninguno sale de una encuesta nuestra. Todos se pueden comprobar.</p>
+
+    <ul class="cifras">
+      <li>
+        <b class="cifra">375<small>&nbsp;mg</small></b>
+        <p>Es la cantidad diaria de referencia de magnesio en la Unión Europea. Es la vara de medir: tres cápsulas de este bote llegan a 360.</p>
+      </li>
+      <li>
+        <b class="cifra">2</b>
+        <p>Moléculas de glicina por cada átomo de magnesio. Eso es, literalmente, el «bis» del bisglicinato.</p>
+      </li>
+      <li>
+        <b class="cifra">10</b>
+        <p>Declaraciones de salud que la autoridad europea autoriza para el magnesio. Son todas las que hay: esta ficha usa tres.</p>
+      </li>
+    </ul>
+
+    <p class="cifras-nota">Las cifras vienen del reglamento europeo de información alimentaria, de la fórmula del propio compuesto y del registro de declaraciones autorizadas. El día que tengamos datos de quien lo toma, los verás aquí con el método al lado.</p>
+  </section>
+
   <!-- ================================================================
        COMPARATIVA DE FORMAS. Va alto a proposito: es el argumento de la
        marca, y hasta ahora vivia enterrado en un parrafo de la FAQ.
@@ -1123,6 +1193,43 @@
     <p class="alta-ok" id="alta-ok">Apuntado. Serás de los primeros en saberlo.</p>
   </section>
 
+
+  <!-- ================================================================
+       VALORACIONES. MISMO AVISO QUE EN LA PORTADA: el texto de estas
+       tres tarjetas es un hueco, no una reseña. NO se sustituye por
+       reseñas "de ejemplo" que suenen creibles: esta pagina esta
+       publicada, y una valoracion inventada con su sello de compra
+       verificada al lado es una practica desleal, no un placeholder.
+       Se rellenan cuando haya clientes que las escriban.
+       ================================================================ -->
+  <section id="resenas">
+    <h2>Lo que dice <span class="h2-soft">quien lo toma</span></h2>
+
+    <ul class="resenas">
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 1, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 2, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 3, tal cual la escriba quien la deje.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+    </ul>
+
+    <ul class="shop-puntos" data-puntos="resenas">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir a la valoración 1 de 3"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir a la valoración 2 de 3"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir a la valoración 3 de 3"></button></li>
+    </ul>
+  </section>
+
   <section>
     <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
     <ul class="faq">
@@ -1277,15 +1384,16 @@
   // usuario sepa exactamente que esta contratando antes de pulsar no es un
   // detalle de UX, lo exige la norma de contratos de duracion indeterminada
   var modos = document.querySelectorAll('input[name="modo-compra"]');
-  // puntos de la tira de "tambien te puede interesar", igual que el catalogo
-  // de la portada
-  (function () {
-    var tira = document.querySelector('#otras .shop-grid');
-    var puntos = document.querySelectorAll('[data-puntos="otras"] button');
+  // puntos de los carruseles: "tambien te puede interesar" y valoraciones.
+  // Mismo comportamiento que el catalogo de la portada, escrito una vez y
+  // llamado dos veces en vez de copiado
+  function puntosDe(selTira, nombre, selItem) {
+    var tira = document.querySelector(selTira);
+    var puntos = document.querySelectorAll('[data-puntos="' + nombre + '"] button');
     if (!tira || !puntos.length) { return; }
     var marcado = -1;
     var paso = function () {
-      var card = tira.querySelector('.p-card');
+      var card = tira.querySelector(selItem);
       if (!card) { return 0; }
       return card.getBoundingClientRect().width +
              (parseFloat(getComputedStyle(tira).columnGap) || 0);
@@ -1310,7 +1418,9 @@
       });
     });
     pintar();
-  })();
+  }
+  puntosDe('#otras .shop-grid', 'otras', '.p-card');
+  puntosDe('#resenas .resenas', 'resenas', '.resena');
 
   var comprarBtn = document.getElementById('btn-comprar');
   function pintarModo() {
