@@ -110,12 +110,25 @@
            el video la tapaba medio segundo despues, y eso es el parpadeo de
            la primera carga. La foto entra desde el CSS solo si hay movimiento
            reducido o si el video falla, y asi ni siquiera se descarga. -->
+      <!-- el video lleva loop propio: ya no hay coreografia con el texto que
+           coordinar, porque el texto no entra ni sale -->
       <video class="hero-video" id="hero-video" src="hero-zerox.mp4"
-             width="720" height="1280" muted playsinline preload="auto" aria-hidden="true"></video>
+             width="720" height="1280" muted playsinline loop preload="auto" aria-hidden="true"></video>
       <div class="hero-shade"></div>
+
+      <!-- EL TEXTO YA NO ESPERA AL VIDEO. Entraba en el segundo 4,3, asi
+           que los primeros cuatro segundos la portada no decia nada: se
+           veian botes y ya. Ahora esta puesto desde el primer fotograma y
+           no se va nunca, pase lo que pase por detras. -->
       <div class="hero-texto" id="hero-texto">
-        <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
+        <h1 class="hero-headline">Cero incógnitas<br>en lo que tomas</h1>
         <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
+      </div>
+
+      <!-- El boton se separa del titular y baja al pie de la imagen: el
+           texto manda arriba y la accion espera abajo, sin pelearse por el
+           mismo sitio. Sigue dentro de la tarjeta. -->
+      <div class="hero-pie">
         <a class="hero-cta" href="#alta">Reserva tu acceso</a>
         <!-- PRUEBA: precio antes del primer scroll. Be Levels enseña uno en
              la pantalla 0 y aqui el primero aparecia a 1.546px, ya en la
@@ -863,36 +876,18 @@
   // hasta bien pasado el final: el video no lleva loop propio, termina, el
   // texto aguanta cinco segundos mas y solo entonces vuelve a empezar. Asi da
   // tiempo a leerlo, que en bucle seco duraba tres segundos.
+  // Ya no hay coreografia que coordinar. El texto no entra ni sale, asi que
+  // el video solo tiene que reproducirse en bucle, y de eso se encarga su
+  // atributo loop. Aqui queda lo unico que sigue haciendo falta: arrancarlo,
+  // porque el autoplay silencioso puede rechazarse, y tener a mano la foto
+  // fija por si el video no carga.
   var heroVideo = document.getElementById('hero-video');
-  var heroTexto = document.getElementById('hero-texto');
-  if (heroVideo && heroTexto && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var ENTRA = 4.3, PAUSA = 5000, SALIDA = 500;
-    heroVideo.addEventListener('timeupdate', function () {
-      if (heroVideo.currentTime >= ENTRA) { heroTexto.classList.add('visible'); }
-    });
-    heroVideo.addEventListener('ended', function () {
-      // el ultimo fotograma se queda congelado con el texto encima
-      setTimeout(function () {
-        heroTexto.classList.remove('visible');
-        // se espera a que el texto termine de irse antes de rebobinar, para
-        // que el corte del video no se vea con el titular todavia puesto
-        setTimeout(function () {
-          heroVideo.currentTime = 0;
-          var otra = heroVideo.play();
-          if (otra && otra.catch) { otra.catch(function () {}); }
-        }, SALIDA);
-      }, PAUSA);
-    });
+  if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     heroVideo.addEventListener('error', function () {
       heroVideo.closest('.hero-media-box').classList.add('sin-video');
-      heroTexto.classList.add('visible');
     });
     var intento = heroVideo.play();
-    if (intento && intento.catch) {
-      intento.catch(function () { heroTexto.classList.add('visible'); });
-    }
-  } else if (heroTexto) {
-    heroTexto.classList.add('visible');
+    if (intento && intento.catch) { intento.catch(function () {}); }
   }
 
   // la barra gana filete y sombra solo cuando se ha despegado del borde
