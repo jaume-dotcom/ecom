@@ -722,16 +722,22 @@
   .p-bens {
     list-style: none; margin: 1rem 0 0; padding: 0.95rem 0 0;
     border-top: 1px solid var(--line);
-    display: flex; flex-direction: column; gap: 0.55rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
   }
+  /* interlineado 1,5: con 1,35 las de dos lineas se pegaban entre si y la
+     lista se leia como un bloque de texto en vez de como tres puntos */
   .p-bens li {
-    position: relative; padding-left: 1.5rem; font-size: var(--t-xs);
-    line-height: 1.35; color: var(--ink);
+    position: relative; padding-left: 1.6rem; font-size: var(--t-xs);
+    line-height: 1.5; color: var(--ink);
   }
+  /* el tick entero en em, borde incluido: antes el grosor iba en px fijos,
+     asi que al cambiar el tamaño de letra la marca no acompañaba y quedaba
+     gorda al lado de un texto pequeño. En negro y no en marron: el marron
+     de la marca significa "esto se pulsa", y un tick no se pulsa */
   .p-bens li::before {
-    content: ""; position: absolute; left: 0; top: 0.28em;
+    content: ""; position: absolute; left: 0.1em; top: 0.34em;
     width: 0.95em; height: 0.55em;
-    border-left: 2px solid var(--khaki-deep); border-bottom: 2px solid var(--khaki-deep);
+    border-left: 0.16em solid var(--ink); border-bottom: 0.16em solid var(--ink);
     transform: rotate(-45deg);
   }
 
