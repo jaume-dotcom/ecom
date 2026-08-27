@@ -82,14 +82,10 @@
      los titulares de las secciones y como en la portada */
   .ficha > div:last-child { text-align: center; }
   .ficha h1 { text-align: center; }
-  .ficha-eyebrow { justify-content: center; }
   .modo { text-align: left; }
-  .ficha-eyebrow {
-    margin: 1.6rem 0 0.5rem; font-size: var(--t-sm); letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--khaki-deep); font-weight: 500;
-  }
+  /* margen arriba: lo daba la etiqueta "Formula 01", que ya no esta */
   h1 {
-    margin: 0 0 0.7rem; font-size: var(--t-6xl); font-weight: 600;
+    margin: 1.6rem 0 0.7rem; font-size: var(--t-6xl); font-weight: 600;
     line-height: 1.1; letter-spacing: var(--tracking-lg);
   }
   .ficha-lede { margin: 0 0 1.5rem; font-size: var(--t-xl); color: var(--ink-soft); }
@@ -148,10 +144,11 @@
     scrollbar-width: none; padding-bottom: 2px;
   }
   .galeria-minis::-webkit-scrollbar { display: none; }
-  /* 64px: por debajo de eso no se distingue que hay en cada una, y con el
-     dedo se falla */
+  /* 48 y no 64: la miniatura solo tiene que decir que hay mas fotos, no
+     enseñarlas. Se queda por encima de los 44px de diana tactil, que es el
+     suelo por debajo del cual se falla con el dedo */
   .mini {
-    flex: 0 0 auto; width: 64px; height: 64px; padding: 0;
+    flex: 0 0 auto; width: 48px; height: 48px; padding: 0;
     border: 2px solid transparent; border-radius: 10px; overflow: hidden;
     background: var(--tint); cursor: pointer;
     transition: border-color 0.2s ease, opacity 0.2s ease;
@@ -576,16 +573,21 @@
      de derechos del consumidor, asi que la que viene marcada es la unica que
      no compromete a nada */
   .modo--destacado { border-color: var(--khaki-deep); border-width: 2px; }
+  /* Los dos sellos caben ahora en una linea. Antes eran "LA MEJOR RELACION"
+     y "Ahorras un 20 %", que a 375px partian en dos filas y estiraban la
+     opcion casi un tercio de su alto. Dicen lo mismo con menos: el ahorro
+     no necesita la palabra ahorro, le basta el signo. */
   .modo-etiqueta {
     display: inline-block;
     font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
     letter-spacing: 0.06em; color: #fff; background: var(--khaki-deep);
-    border-radius: 999px; padding: 0.15rem 0.45rem; white-space: nowrap;
+    border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
 
   .modo-ahorro {
-    font-size: var(--t-sm); font-weight: 600; color: var(--olive);
-    background: var(--khaki-pop); border-radius: 999px; padding: 0.2rem 0.7rem;
+    font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.06em;
+    color: var(--olive); background: var(--khaki-pop);
+    border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
   .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
   .faq-lista li { position: relative; padding-left: 1.1rem; }
@@ -628,7 +630,6 @@
     .galeria-slide { aspect-ratio: 4 / 5; }
     .wrap { max-width: 60rem; }
     h1 { font-size: var(--t-8xl); }
-    .ficha-eyebrow { margin-top: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -692,7 +693,6 @@
     </div>
 
     <div>
-      <p class="ficha-eyebrow">Fórmula 01</p>
       <h1>Magnesio Bisglicinato</h1>
       <!-- PENDIENTE: la entradilla que habia aqui —"La forma que mejor se
            tolera. Sin oxido de magnesio, sin dosis a medias y con la etiqueta
@@ -720,11 +720,11 @@
           <span class="modo-cuerpo">
             <span class="modo-fila">
               <span class="modo-nombre">Suscripción trimestral</span>
-              <span class="modo-precio"><b>54,90&nbsp;&euro;</b><small>cada 3 meses</small></span>
+              <span class="modo-precio"><b>54,90&nbsp;&euro;</b></span>
             </span>
             <span class="modo-sellos">
-              <span class="modo-etiqueta">La mejor relación</span>
-              <span class="modo-ahorro">Ahorras un 20&nbsp;%</span>
+              <span class="modo-etiqueta">Mejor relación</span>
+              <span class="modo-ahorro">&minus;20&nbsp;%</span>
             </span>
             <span class="modo-mas"><span class="modo-plus">
               <span>18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
@@ -741,10 +741,10 @@
           <span class="modo-cuerpo">
             <span class="modo-fila">
               <span class="modo-nombre">Suscripción bimestral</span>
-              <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>cada 2 meses</small></span>
+              <span class="modo-precio"><b>38,90&nbsp;&euro;</b></span>
             </span>
             <span class="modo-sellos">
-              <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
+              <span class="modo-ahorro">&minus;15&nbsp;%</span>
             </span>
             <span class="modo-mas"><span class="modo-plus">
               <span>19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
