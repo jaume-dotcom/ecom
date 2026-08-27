@@ -169,6 +169,10 @@
   .ticker--sellos {
     margin: 1.6rem 0 0; border-top: 1px solid var(--line);
     background: transparent; color: var(--ink-soft);
+    /* en la portada la tira es un bloque suelto a todo lo ancho; aqui vive
+       dentro de la columna de la ficha, que en escritorio es una rejilla.
+       Sin esto la pista en max-content ensancha la columna y desborda. */
+    min-width: 0; max-width: 100%; contain: inline-size;
   }
   /* 24s para las cinco frases: da los mismos ~34 px/s que la portada */
   .ticker--sellos .ticker-track { animation-duration: 24s; }
@@ -494,13 +498,6 @@
     letter-spacing: 0.06em; color: #fff; background: var(--khaki-deep);
     border-radius: 999px; padding: 0.15rem 0.45rem; white-space: nowrap;
   }
-  /* las condiciones de la suscripcion salen de dentro de cada opcion: cuatro
-     linetas por opcion hacian el selector ilegible. Van una vez, debajo */
-  .modos-nota {
-    margin: 0.9rem 0 0; font-size: var(--t-xs); line-height: 1.5;
-    color: var(--ink-soft); text-align: center;
-  }
-  .modos-nota a { color: var(--khaki-deep); text-decoration: underline; text-underline-offset: 3px; }
 
   .modo-ahorro {
     justify-self: start; margin-top: 0.15rem;
@@ -513,16 +510,28 @@
     content: ""; position: absolute; left: 0; top: 0.62em;
     width: 5px; height: 5px; border-radius: 50%; background: var(--khaki-deep);
   }
-  .modo-plus { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
-  .modo-plus li {
+  /* Las condiciones ya no van sueltas debajo del selector: se abren dentro
+     de la opcion que eliges. Cerradas no ocupan, asi que las tres opciones
+     se leen de un vistazo, y cuando marcas una te cuenta a que te apuntas
+     justo antes de darle al boton.
+     El relleno va en la lista y no en el envoltorio: a 0fr el grid NO
+     colapsa el padding y quedaria un hueco en las opciones cerradas. */
+  .modo-mas {
+    display: grid; grid-template-rows: 0fr; overflow: hidden;
+    transition: grid-template-rows 0.28s ease;
+  }
+  .modo:has(input:checked) .modo-mas { grid-template-rows: 1fr; }
+  .modo-plus { min-height: 0; display: grid; gap: 0.4rem; }
+  .modo:has(input:checked) .modo-plus { padding-top: 0.75rem; }
+  .modo-plus span {
     position: relative; padding-left: 1.1rem;
     font-size: var(--t-md); color: var(--ink-soft); line-height: 1.45;
   }
-  .modo-plus li::before {
+  .modo-plus span::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
     width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
   }
-  @media (prefers-reduced-motion: reduce) { .modo { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .modo, .modo-mas { transition: none; } }
 
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
@@ -606,29 +615,12 @@
            costes con proveedor. El descuento del 15% se sostiene porque el
            envio se reparte entre dos botes; con envio gratis por unidad no
            salia. -->
-      <!-- ================================================================
-           PENDIENTE: escalera de tres precios con efecto senuelo.
-           Hoy hay dos opciones. La idea es pasar a tres:
-             compra unica  ·  cada 2 meses  ·  cada 3 meses
-           con el descuento subiendo en cada escalon y la trimestral
-           presentada como la que mas conviene, para que la eleccion natural
-           caiga ahi. Es lo que se llama efecto senuelo: la de en medio
-           existe sobre todo para que la de al lado parezca mejor.
-
-           AL MONTARLO, TENER EN CUENTA:
-           - La compra unica NO puede venir premarcada por debajo de otra que
-             cueste mas al mes. Premarcar la opcion cara la prohibe el
-             articulo 22 de la directiva de derechos del consumidor
-           - El % de ahorro de cada escalon tiene que ser el real, y el
-             precio por bote o por dia tiene que estar a la vista para que se
-             pueda comparar sin calculadora
-           - Cancelar tiene que ser tan facil como suscribirse
-
-           Y LIMPIAR: el bloque de la suscripcion lleva hoy cuatro lineas de
-           condiciones dentro de la propia opcion. Eso se saca de aqui y se
-           lleva a la FAQ de esta pagina; en el selector solo van precio,
-           periodicidad y ahorro.
-           ================================================================ -->
+      <!-- Escalera de tres, con la trimestral presentada como la que mas
+           conviene. La que viene marcada es la compra unica: premarcar una
+           opcion mas cara la prohibe el articulo 22 de la directiva de
+           derechos del consumidor.
+           Los % de ahorro son los reales y el precio por bote y por dia
+           esta a la vista, para poder comparar sin calculadora. -->
       <fieldset class="modos">
         <legend class="modos-legend">Cómo lo quieres</legend>
 
@@ -637,11 +629,16 @@
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
             <span class="modo-fila">
-              <span class="modo-nombre">Cada 3 meses <span class="modo-etiqueta">La mejor relación</span></span>
+              <span class="modo-nombre">Suscripción trimestral <span class="modo-etiqueta">La mejor relación</span></span>
               <span class="modo-precio"><b>54,90&nbsp;&euro;</b><small>&nbsp;cada 3 meses</small></span>
             </span>
-            <span class="modo-desc">Tres botes, a 18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
+            <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
             <span class="modo-ahorro">Ahorras un 20&nbsp;%</span>
+            <span class="modo-mas"><span class="modo-plus">
+              <span>Tres botes en cada envío</span>
+              <span>Te avisamos por email antes de cada cobro</span>
+              <span>Cancelas en un clic, sin permanencia</span>
+            </span></span>
           </span>
         </label>
 
@@ -650,11 +647,16 @@
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
             <span class="modo-fila">
-              <span class="modo-nombre">Cada 2 meses</span>
+              <span class="modo-nombre">Suscripción bimestral</span>
               <span class="modo-precio"><b>38,90&nbsp;&euro;</b><small>&nbsp;cada 2 meses</small></span>
             </span>
-            <span class="modo-desc">Dos botes, a 19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
+            <span class="modo-desc">19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
             <span class="modo-ahorro">Ahorras un 15&nbsp;%</span>
+            <span class="modo-mas"><span class="modo-plus">
+              <span>Dos botes en cada envío</span>
+              <span>Te avisamos por email antes de cada cobro</span>
+              <span>Cancelas en un clic, sin permanencia</span>
+            </span></span>
           </span>
         </label>
 
@@ -666,11 +668,13 @@
               <span class="modo-nombre">Compra única</span>
               <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-desc">Un bote, a 22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
+            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
+            <span class="modo-mas"><span class="modo-plus">
+              <span>Un bote. Ni renovación ni cobros después</span>
+            </span></span>
           </span>
         </label>
 
-        <p class="modos-nota">Las suscripciones se cancelan desde tu cuenta en un clic, sin permanencia. Te avisamos por email antes de cada cobro. <a href="#faq-sub">Cómo funciona</a></p>
       </fieldset>
 
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
