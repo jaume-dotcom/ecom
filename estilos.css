@@ -1151,13 +1151,15 @@
      ficha de producto: el peso lo lleva el titular. */
   .hero-precio {
     margin: 0.85rem 0 0; text-align: center;
-    font-size: var(--t-sm); line-height: 1.4;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--t-base); font-weight: 600; line-height: 1.35;
+    color: #fff;
   }
+  /* que lleva el pack, en segunda linea: es lo que justifica el precio,
+     pero no puede competir con el */
   .hero-precio span {
-    display: block; margin-top: 0.15rem;
-    font-size: var(--t-3xs); letter-spacing: 0.04em;
-    text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+    display: block; margin-top: 0.1rem;
+    font-size: var(--t-sm); font-weight: 400;
+    color: rgba(255, 255, 255, 0.78);
   }
 
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
