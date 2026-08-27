@@ -117,6 +117,12 @@
         <h1 class="hero-headline">Cuatro fórmulas,<br>cero incógnitas</h1>
         <p class="hero-lede">Qué lleva, cuánto lleva y por qué.</p>
         <a class="hero-cta" href="#alta">Reserva tu acceso</a>
+        <!-- PRUEBA: precio antes del primer scroll. Be Levels enseña uno en
+             la pantalla 0 y aqui el primero aparecia a 1.546px, ya en la
+             segunda. Se dan los dos extremos de la escalera para que se
+             pueda situar sin bajar, y se dice que son orientativos aqui
+             mismo: es una vista previa y el precio aun no es firme. -->
+        <p class="hero-precio">Desde 22,90&nbsp;&euro; &middot; con el libro de Sento, 39,90&nbsp;&euro;<span>Precios orientativos</span></p>
       </div>
     </div>
   </div>
@@ -163,6 +169,34 @@
 
 <div class="wrap">
 
+
+  <!-- ==================================================================
+       POR DONDE EMPEZAR. Sube por delante del catalogo, que es donde lo
+       pone Be Levels con su "¿Cual es tu objetivo?" (pantalla 0,5 de su
+       portada). La idea es la misma: quien llega no sabe cual de las
+       cuatro necesita, asi que antes de enseñarle cuatro cajas se le
+       ofrece una salida.
+       Estaba en la pantalla 2,0, dos por debajo de la rejilla de
+       producto: llegaba cuando ya habias elegido o ya te habias ido.
+       =================================================================== -->
+  <section class="band" id="asesoria">
+    <div class="ayuda reveal">
+      <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="5">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <h2 class="ayuda-titulo">&iquest;No sabes <span class="h2-soft">por dónde empezar?</span></h2>
+      <p class="ayuda-sub">No hace falta que lo adivines.</p>
+      <div class="ayuda-botones">
+        <a class="btn btn-solid ayuda-btn" href="libro.html">Cómo elegir la tuya</a>
+      </div>
+    </div>
+  </section>
 
   <section class="band" id="catalogo">
     <div class="section-head reveal">
@@ -259,25 +293,6 @@
        OJO: el destino sigue siendo provisional. Lo suyo seria un
        cuestionario que recomiende formula; hasta que exista, lleva a la
        pagina de educacion, que es la ayuda que si hay. -->
-  <section class="band" id="asesoria">
-    <div class="ayuda reveal">
-      <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="5">
-          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
-          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
-          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
-          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
-          <path d="M16 16 L84 84 M84 16 L16 84"/>
-        </g>
-      </svg>
-      <h2 class="ayuda-titulo">&iquest;No sabes <span class="h2-soft">por dónde empezar?</span></h2>
-      <p class="ayuda-sub">No hace falta que lo adivines.</p>
-      <div class="ayuda-botones">
-        <a class="btn btn-solid ayuda-btn" href="libro.html">Cómo elegir la tuya</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ==================================================================
        QUIEN FIRMA. Va antes del catalogo a proposito: hasta este punto la
        unica razon para creerse las dosis era la palabra de la marca.

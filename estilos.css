@@ -1131,6 +1131,21 @@
     .hero-slide-left .hero-cta { display: inline-block; width: auto; }
   }
 
+  /* PRUEBA: el precio en el hero. Va debajo del boton y no encima: quien
+     ya ha decidido no tiene que saltarselo para llegar al CTA, y quien
+     duda lo tiene sin bajar. Discreto a proposito, que el hero no es una
+     ficha de producto: el peso lo lleva el titular. */
+  .hero-precio {
+    margin: 0.85rem 0 0; text-align: center;
+    font-size: var(--t-sm); line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .hero-precio span {
+    display: block; margin-top: 0.15rem;
+    font-size: var(--t-3xs); letter-spacing: 0.04em;
+    text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+  }
+
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
 
   @media (max-width: 859px) {
