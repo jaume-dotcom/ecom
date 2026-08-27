@@ -101,7 +101,10 @@
     touch-action: pan-y; user-select: none; -webkit-user-select: none;
   }
   .galeria-track { display: flex; transition: transform 0.45s cubic-bezier(.16,1,.3,1); }
-  .galeria-slide { flex: 0 0 100%; aspect-ratio: 4 / 5; position: relative; }
+  /* cuadrada en movil, no 4/5: los 85px que ahorra son justo los que hacen
+     que el titulo y la primera opcion de compra entren en la pantalla sin
+     desplazar. En escritorio se queda en 4/5, que es donde luce. */
+  .galeria-slide { flex: 0 0 100%; aspect-ratio: 1 / 1; position: relative; }
   .galeria-slide img { width: 100%; height: 100%; object-fit: cover; }
 
   /* El copy que llevaba esta foto cuando era diapositiva del hero de la
@@ -183,6 +186,36 @@
     width: 1.4em; height: 1.4em; color: var(--khaki-deep); opacity: 1;
   }
   .ticker--sellos span::after { margin: 0 1.35rem; }
+
+  /* ---------- para que sirve ----------
+     Cada linea es una declaracion autorizada por la EFSA para el magnesio,
+     con su redaccion oficial. No se añade ni una que no lo este, y no se
+     mencionan vitaminas que el producto no lleva. */
+  .benes { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; }
+  .benes li {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.3rem 0; border-top: 1px solid var(--line);
+  }
+  .benes li:first-child { border-top: 0; padding-top: 0.4rem; }
+  /* el hueco esta pensado para una foto: al cambiar el svg por un <img>
+     no hay que tocar nada mas */
+  .bene-fig {
+    flex: 0 0 auto; width: 5.5rem; height: 5.5rem; border-radius: 12px;
+    overflow: hidden; background: var(--tint); display: grid; place-items: center;
+  }
+  .bene-fig img { width: 100%; height: 100%; object-fit: cover; }
+  .bene-fig svg {
+    width: 30px; height: 30px; color: var(--khaki-deep);
+    fill: none; stroke: currentColor; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .bene-txt { flex: 1; }
+  .bene-txt h3 { margin: 0 0 0.35rem; font-size: var(--t-lg); font-weight: 600; }
+  .bene-txt p { margin: 0; font-size: var(--t-base); color: var(--ink-soft); line-height: 1.55; }
+  .benes-nota {
+    margin: 1.4rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--line);
+    font-size: var(--t-xs); line-height: 1.5; color: var(--ink-soft);
+  }
 
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
@@ -536,6 +569,7 @@
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
     .galeria { position: sticky; top: 1.5rem; }
+    .galeria-slide { aspect-ratio: 4 / 5; }
     .wrap { max-width: 60rem; }
     h1 { font-size: var(--t-8xl); }
     .ficha-eyebrow { margin-top: 0; }
@@ -709,6 +743,50 @@
       </div>
     </div>
   </div>
+
+
+  <!-- ================================================================
+       PARA QUE SIRVE. Va detras de la ficha y delante de la comparativa
+       de formas: primero para que sirve, y solo despues por que la
+       nuestra es distinta.
+       LAS TRES FRASES SON LITERALES DEL REGISTRO DE LA EFSA. No se
+       reescriben "para que suenen mejor": cambiarles una palabra es lo
+       que convierte una declaracion autorizada en una que no lo esta.
+       Tampoco se nombra la vitamina B6 ni ninguna otra que el bote no
+       lleve, aunque la lleven las fichas con las que competimos.
+       PENDIENTE: tres fotos, una por beneficio. El hueco ya tiene el
+       tamaño; solo hay que cambiar el svg por un <img>.
+       ================================================================ -->
+  <section id="beneficios">
+    <h2>Para qué <span class="h2-soft">sirve el magnesio</span></h2>
+    <p>Lo que la autoridad europea permite decir de este mineral, con sus palabras.</p>
+
+    <ul class="benes">
+      <li>
+        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5 5.2 13.2a.6.6 0 0 0 .5 1H11l-1 7.3 7.8-10.7a.6.6 0 0 0-.5-1H12l1-7.3z"/></svg></span>
+        <div class="bene-txt">
+          <h3>Menos cansancio</h3>
+          <p>El magnesio contribuye a disminuir el cansancio y la fatiga.</p>
+        </div>
+      </li>
+      <li>
+        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 21.5V19c2.6-1 4.5-3.6 4.5-6.6A7.4 7.4 0 0 0 4.7 10L3.1 13a.9.9 0 0 0 .8 1.3H6v2.4c0 1.1.9 2 2 2h1.6v2.8"/><path d="M9.5 10.5a2.2 2.2 0 1 1 3.2 2 2.2 2.2 0 0 0-1.2 2"/></svg></span>
+        <div class="bene-txt">
+          <h3>Sistema nervioso</h3>
+          <p>El magnesio contribuye al funcionamiento normal del sistema nervioso y a la función psicológica normal.</p>
+        </div>
+      </li>
+      <li>
+        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16.5v-2.8a3 3 0 0 1 3-3h3.6l2.6-3.6a3.1 3.1 0 0 1 5.6 1.8v3.4a5.2 5.2 0 0 1-5.2 5.2H6a3 3 0 0 1-3-3z"/><path d="M9.6 10.7c1.5 1.5 2.2 3.2 2.2 5.3"/></svg></span>
+        <div class="bene-txt">
+          <h3>Músculos</h3>
+          <p>El magnesio contribuye al funcionamiento normal de los músculos.</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="benes-nota">Son las tres declaraciones que la EFSA autoriza para el magnesio y que este bote cumple con su dosis diaria. No hay una cuarta, y las que verás por ahí no están autorizadas.</p>
+  </section>
 
   <!-- ================================================================
        COMPARATIVA DE FORMAS. Va alto a proposito: es el argumento de la
