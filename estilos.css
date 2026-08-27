@@ -699,18 +699,15 @@
     align-self: flex-start; font-size: var(--t-3xs); font-weight: 500; letter-spacing: normal;
     background: var(--khaki-pop); color: var(--ink); padding: 0.3rem 0.65rem; border-radius: 1000px;
   }
-  /* la numeracion es el "nombre" de cada formula. No se les pone nombre de
-     beneficio (Descanso, Defensas, Digestion...) a proposito: un nombre que
-     promete un efecto es una alegacion de salud implicita, y para
-     probioticos no hay ni una autorizada en la UE. Ademas el argumento de
-     la marca es que la etiqueta diga lo que hay, no taparlo con un nombre */
-  .p-kicker {
-    margin: 0; font-size: var(--t-3xs); font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--khaki-deep);
-  }
+  /* El nombre grande es la sustancia a secas y la forma quimica baja a la
+     linea de abajo con la dosis. Antes iba al reves y el nombre era una
+     ficha tecnica: "Omega-3 EPA+DHA", "Probiotico Multicepa". Asi lo
+     primero que se lee es lo que uno viene buscando, y el detalle esta
+     debajo para quien lo quiera.
+     No se les pone nombre de beneficio (Descanso, Defensas, Digestion...)
+     a proposito: un nombre que promete un efecto es una alegacion de salud
+     implicita, y para probioticos no hay ni una autorizada en la UE. */
   .p-name { font-size: var(--t-xl); font-weight: 500; margin: 0; letter-spacing: var(--tracking-sm); }
-  /* dejo de ser un parrafo y pasa a ser la segunda linea del nombre: la
-     dosis. Es lo unico del parrafo viejo que hacia falta */
   .p-desc { font-size: var(--t-xs); color: var(--ink-soft); margin: 0; }
   /* beneficios en lista de comprobación. Los del probiótico son de
      composición, no de efecto: en la UE no hay alegaciones autorizadas
