@@ -1052,11 +1052,25 @@
   }
   .pack-list b { color: var(--ink); font-weight: 600; font-size: var(--t-base); }
   .pack-list span { color: var(--ink-soft); font-size: var(--t-xs); }
-  .pack-price { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+  .pack-price { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
   .pack-now { font-size: var(--t-8xl); font-weight: 600; letter-spacing: var(--tracking-lg); color: var(--ink); line-height: 1; }
   .pack-was { font-size: var(--t-base); color: var(--ink-faint); text-decoration: line-through; }
+  /* el que manda es #libro .pack-save, mas abajo: ahi ya se le dio peso
+     propio. Esta regla solo cubre un pack que viviera fuera de #libro */
   .pack-save { font-size: var(--t-2xs); color: var(--ink-faint); }
   .pack-note { font-size: var(--t-2xs); color: var(--ink-soft); margin: 1rem 0 0; max-width: 46ch; }
+
+  /* El bloque iba muy suelto para lo poco que dice: dos lineas de
+     contenido, un precio y un boton ocupaban casi una pantalla. Se
+     aprieta el aire de dentro sin tocar ningun tamaño de letra. */
+  @media (max-width: 859px) {
+    .pack-body { padding: 1.4rem 1.3rem 1.5rem; }
+    .pack-list { margin: 0 0 1.1rem; }
+    .pack-list li { padding: 0.62rem 0 0.62rem 1.9rem; }
+    .pack-list li::before { top: 0.92rem; }
+    .pack-cta { padding: 0.9rem 1.4rem; }
+    #libro .pack-note { margin: 0.7rem 0 0; }
+  }
   /* va aquí y no en el bloque móvil de arriba: la regla base de .ticker está
      más abajo en el archivo y ganaba por orden */
   @media (max-width: 859px) {
@@ -1149,17 +1163,23 @@
      ya ha decidido no tiene que saltarselo para llegar al CTA, y quien
      duda lo tiene sin bajar. Discreto a proposito, que el hero no es una
      ficha de producto: el peso lo lleva el titular. */
-  /* el boton se ajusta al texto en vez de ir a todo lo ancho: con el
-     precio en su propia linea debajo ya no hace falta que ocupe la
-     tarjeta entera para pesar */
-  .hero-pie .hero-cta {
-    display: inline-block; width: auto;
-    padding: 0.82rem 1.7rem; font-size: var(--t-base);
+  /* El pie del hero ya no es un boton, es la oferta. El precio arriba y
+     grande, el nombre debajo y pequeño: el numero es lo que para el ojo,
+     y el nombre solo tiene que decir de que numero se trata. */
+  .hero-oferta {
+    display: inline-block; text-align: center; color: #fff;
+    padding: 0.4rem 0.6rem;
   }
-  .hero-precio {
-    margin: 0.75rem 0 0; text-align: center;
-    font-size: var(--t-sm); font-weight: 500; line-height: 1.35;
-    color: rgba(255, 255, 255, 0.92);
+  .hero-oferta-precio {
+    display: block; font-size: var(--t-6xl); font-weight: 600;
+    line-height: 1; letter-spacing: var(--tracking-lg);
+    text-shadow: 0 1px 24px rgba(22, 19, 15, 0.35);
+  }
+  .hero-oferta-nombre {
+    display: block; margin-top: 0.4rem;
+    font-size: var(--t-2xs); font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
   }
 
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
