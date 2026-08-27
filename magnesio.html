@@ -11,6 +11,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilos.css">
+<noscript><style>
+  /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
+     quedaria invisible, incluidos los avisos legales del pie */
+  .reveal, .foot-anim { opacity: 1 !important; filter: none !important; transform: none !important; }
+</style></noscript>
 <style>
   /* ============================================================
      FICHA DE PRODUCTO — plantilla
@@ -1230,7 +1235,7 @@
     </ul>
   </section>
 
-  <section>
+  <section id="faq">
     <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
     <ul class="faq">
       <li class="faq-item">
@@ -1306,15 +1311,98 @@
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <p>ZEROX · Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada. Mantener fuera del alcance de los niños.</p>
-    <p><a href="index.html">Volver al inicio</a></p>
+<!-- ================================================================
+     PIE. El mismo que el de la portada y el del libro, copiado tal cual.
+     Solo cambian los destinos: los enlaces a otras paginas llevan
+     index.html delante, igual que en libro.html, y los que apuntan a
+     algo de ESTA pagina van sin prefijo.
+     Las clases reveal/foot-anim solo se ven si algo les añade .in, asi
+     que esta pagina lleva ahora el mismo observador que la portada. Sin
+     el, el pie entero se quedaba invisible.
+     ================================================================ -->
+<footer id="footer-signup">
+  <div class="foot-panel">
+    <span class="foot-hair" aria-hidden="true"></span>
+    <div class="foot-grid">
+
+      <div class="foot-brand reveal foot-anim">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="7">
+              <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+              <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+              <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+              <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+              <path d="M16 16 L84 84 M84 16 L16 84"/>
+            </g>
+          </svg>
+          <span class="logo-word">ZEROX</span>
+        </a>
+        <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
+        <p class="foot-copy">&copy; 2026 ZEROX</p>
+      </div>
+
+      <div class="foot-cols">
+        <div class="foot-col reveal foot-anim">
+          <h3>Fórmulas</h3>
+          <ul>
+            <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>La marca</h3>
+          <ul>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="libro.html">El libro</a></li>
+            <li><a href="#faq">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#alta">Acceso anticipado</a></li>
+            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="#footer-signup">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada.</span>
+      <span class="disclaimer">Vista previa: nombre y packaging provisionales, pendientes de confirmación de marca y dominio.</span>
+    </div>
   </div>
 </footer>
 
 <script>
 (function () {
+  // el observador de la portada: sin el, todo lo que lleve .reveal se queda
+  // a opacidad 0 para siempre, y el pie va entero con esas clases
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+
   // galeria: miniaturas + deslizar. Las miniaturas se desplazan solas para que
   // la activa quede siempre a la vista, tambien cuando se avanza deslizando
   var galTrack = document.getElementById('gal-track');
