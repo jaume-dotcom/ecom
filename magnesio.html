@@ -380,8 +380,11 @@
      los h2 de la portada. Con 1.15 los titulos de dos lineas iban mucho
      mas apretados aqui que alli. En movil si lleva 1,2, igual que alli:
      ver el bloque de al final. */
+  /* 1rem y no 0,7: es el hueco que deja la portada entre el titular y su
+     entradilla. Con 0,7 esta pagina los llevaba 5px mas juntos, y puestas
+     las dos al lado se notaba aunque la letra fuera identica. */
   h2 {
-    margin: 0 auto 0.7rem; max-width: 22ch;
+    margin: 0 auto 1rem; max-width: 22ch;
     font-size: var(--t-4xl); font-weight: 600;
     letter-spacing: var(--tracking-lg);
     text-align: center; text-wrap: balance;
