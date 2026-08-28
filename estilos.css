@@ -791,6 +791,39 @@
     stroke-linecap: round; stroke-linejoin: round;
   }
 
+  /* ===== SEGUNDO PUNTO DE COMPRA =====
+     Va donde termina el argumento fuerte, no en cualquier hueco: quien
+     acaba de leer por que bisglicinato y no oxido esta convencido ahi, y
+     hasta ahora el sitio mas cercano para comprar estaba cinco pantallas
+     mas arriba.
+     Es un recordatorio, no otro selector: repite lo que ya esta elegido.
+     Dos selectores con el mismo grupo de radios se pisarian. */
+  .recompra-caja {
+    display: flex; gap: 1rem; align-items: center;
+    background: var(--tint); border-radius: 18px; padding: 1.1rem;
+  }
+  .recompra-foto {
+    flex: 0 0 auto; width: 88px; height: 88px;
+    border-radius: 12px; overflow: hidden; background: var(--paper);
+  }
+  .recompra-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .recompra-cuerpo { flex: 1; min-width: 0; text-align: left; }
+  .recompra-nombre { margin: 0; font-size: var(--t-lg); font-weight: 600; }
+  .recompra-sub { margin: 0.15rem 0 0.7rem; font-size: var(--t-xs); color: var(--ink-soft); }
+  .recompra-btn {
+    display: block; width: 100%; padding: 0.8rem 1.2rem;
+    border: 0; border-radius: var(--btn-radio);
+    background: var(--khaki-deep); color: var(--paper);
+    font-family: var(--font); font-size: var(--t-base); font-weight: var(--btn-peso);
+    cursor: pointer; transition: background 0.2s ease;
+  }
+  .recompra-btn:hover { background: var(--olive); }
+  @media (max-width: 459px) {
+    /* por debajo de 460 la foto deja al boton en 150px y el precio parte */
+    .recompra-caja { display: block; }
+    .recompra-foto { width: 100%; height: 140px; margin-bottom: 0.9rem; }
+  }
+
   /* ===== BARRA DE COMPRA =====
      Aparece pegada abajo cuando el selector de compra se ha ido de la
      pantalla. En la ficha del magnesio hay ocho pantallas por debajo del

@@ -939,6 +939,24 @@
   </section>
 
   <!-- ================================================================
+       SEGUNDO PUNTO DE COMPRA. Va justo aqui y no en otro hueco: encima
+       acaba de explicarse por que bisglicinato y no oxido, que es el
+       argumento mas fuerte de la ficha. Quien se convence ahi tenia el
+       sitio de comprar mas cercano cinco pantallas mas arriba.
+       NO es otro selector: repite la opcion que ya este elegida arriba.
+       Dos grupos de radios con el mismo name se pisarian. -->
+  <section id="comprar">
+    <div class="recompra-caja">
+      <div class="recompra-foto"><img src="ficha-magnesio.jpg" width="761" height="1024" alt="" loading="lazy" decoding="async"></div>
+      <div class="recompra-cuerpo">
+        <p class="recompra-nombre">Magnesio Bisglicinato</p>
+        <p class="recompra-sub">360&nbsp;mg por dosis &middot; 90 cápsulas, para 30 días</p>
+        <button type="button" class="recompra-btn" id="recompra-btn">Añadir a la cesta</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
        PARA QUIEN ES Y PARA QUIEN NO. La segunda mitad no la tiene
        ninguna competidora, y es la que hace creible la primera.
        ================================================================ -->
@@ -1549,13 +1567,17 @@
     // el boton de la barra de abajo es un espejo del de arriba: mismo texto
     // y mismos datos, para que añada la opcion que este marcada y no una
     // compra unica siempre
-    var barraBtn = document.getElementById('barra-btn');
-    if (barraBtn) {
-      barraBtn.textContent = m.txt;
-      ['data-add', 'data-nombre', 'data-sub', 'data-precio', 'data-img'].forEach(function (a) {
-        barraBtn.setAttribute(a, comprarBtn.getAttribute(a));
+    // los dos botones de mas abajo son espejos del de la ficha: mismo texto
+    // y mismos datos, para que añadan la opcion que este marcada y no una
+    // compra unica siempre
+    ['barra-btn', 'recompra-btn'].forEach(function (id) {
+      var eco = document.getElementById(id);
+      if (!eco) { return; }
+      eco.textContent = m.txt;
+      ['data-add', 'data-nombre', 'data-sub', 'data-precio', 'data-img'].forEach(function (at) {
+        eco.setAttribute(at, comprarBtn.getAttribute(at));
       });
-    }
+    });
   }
   modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
   pintarModo();
@@ -1568,11 +1590,19 @@
   // decision se puede comprobar en cualquier momento llamando a decidir().
   var barra = document.getElementById('barra-compra');
   var selector = document.querySelector('.modos');
+  var recompra = document.getElementById('comprar');
   var pie = document.querySelector('footer');
   if (barra && selector) {
     var decidir = function () {
-      var s = selector.getBoundingClientRect();
-      var fueraElSelector = s.bottom < 0 || s.top > window.innerHeight;
+      // la barra se calla si hay CUALQUIER punto de compra a la vista:
+      // el selector de arriba o el bloque de mitad de pagina. Dos botones
+      // iguales en la misma pantalla no ayudan a decidir
+      var aLaVista = function (el) {
+        if (!el) { return false; }
+        var r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      };
+      var fueraElSelector = !aLaVista(selector) && !aLaVista(recompra);
       var pieALaVista = false;
       if (pie) {
         var f = pie.getBoundingClientRect();
