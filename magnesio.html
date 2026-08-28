@@ -1325,6 +1325,26 @@
 </main>
 
 <!-- ================================================================
+     BARRA DE COMPRA. Sale pegada abajo cuando el selector de compra ya no
+     se ve. Debajo del boton hay ocho pantallas de argumentos: quien se
+     convence leyendo "¿Me puedo fiar?" tenia que subir hasta arriba del
+     todo para poder comprar.
+     El boton no es otro boton: lleva los mismos datos que el de la ficha,
+     copiados en cuanto cambia la opcion elegida, asi que añade lo que este
+     marcado arriba y no una compra unica siempre.
+     ================================================================ -->
+<div class="barra-compra" id="barra-compra">
+  <div class="wrap">
+    <button type="button" class="barra-btn" id="barra-btn">Añadir a la cesta</button>
+    <ul class="barra-garantias">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Envío gratis desde 27,95&nbsp;&euro;</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.2 4.6v4.6h4.6"/></svg>Devolución en 30 días</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ================================================================
      PIE. El mismo que el de la portada y el del libro, copiado tal cual.
      Solo cambian los destinos: los enlaces a otras paginas llevan
      index.html delante, igual que en libro.html, y los que apuntan a
@@ -1544,9 +1564,48 @@
     comprarBtn.setAttribute('data-sub', m.sub);
     comprarBtn.setAttribute('data-precio', m.precio);
     comprarBtn.setAttribute('data-img', 'ficha-magnesio.jpg');
+    // el boton de la barra de abajo es un espejo del de arriba: mismo texto
+    // y mismos datos, para que añada la opcion que este marcada y no una
+    // compra unica siempre
+    var barraBtn = document.getElementById('barra-btn');
+    if (barraBtn) {
+      barraBtn.textContent = m.txt;
+      ['data-add', 'data-nombre', 'data-sub', 'data-precio', 'data-img'].forEach(function (a) {
+        barraBtn.setAttribute(a, comprarBtn.getAttribute(a));
+      });
+    }
   }
   modos.forEach(function (r) { r.addEventListener('change', pintarModo); });
   pintarModo();
+
+  // La barra se enseña solo cuando NO se ve el selector de compra, y se
+  // esconde tambien con el pie a la vista: ahi estan los avisos legales, que
+  // es justo lo que no puede quedar tapado por una barra fija.
+  // Se resuelve mirando el scroll y no con IntersectionObserver: son dos
+  // rectangulos por evento, el navegador ya agrupa los scroll, y asi la
+  // decision se puede comprobar en cualquier momento llamando a decidir().
+  var barra = document.getElementById('barra-compra');
+  var selector = document.querySelector('.modos');
+  var pie = document.querySelector('footer');
+  if (barra && selector) {
+    var decidir = function () {
+      var s = selector.getBoundingClientRect();
+      var fueraElSelector = s.bottom < 0 || s.top > window.innerHeight;
+      var pieALaVista = false;
+      if (pie) {
+        var f = pie.getBoundingClientRect();
+        pieALaVista = f.top < window.innerHeight && f.bottom > 0;
+      }
+      barra.classList.toggle('visto', fueraElSelector && !pieALaVista);
+    };
+    window.addEventListener('scroll', decidir, { passive: true });
+    window.addEventListener('resize', decidir, { passive: true });
+    // y otra vez al terminar de cargar: hasta que las fotos de la galeria no
+    // ocupan su sitio, el selector esta mas abajo de donde acabara, y la
+    // barra asomaba medio segundo nada mas entrar
+    window.addEventListener('load', decidir);
+    decidir();
+  }
 })();
 </script>
 
