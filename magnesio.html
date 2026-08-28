@@ -541,7 +541,19 @@
     border-radius: 16px; background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
-  .modo:has(input:checked) { border-color: var(--ink); background: #fff; }
+  /* La elegida se separa de las otras dos por tres cosas a la vez: el fondo
+     se tiñe, el filete engorda y la caja levanta una sombra corta. Antes
+     solo cambiaba el color del borde, que en un movil y con sol de frente
+     no se ve. Con el fondo cambiado se sabe cual esta marcada sin buscar el
+     circulito. */
+  .modo:has(input:checked) {
+    border-color: var(--ink); border-width: 2px;
+    background: var(--tint);
+    box-shadow: 0 2px 12px rgba(35, 39, 46, 0.07);
+  }
+  /* el relleno compensa el borde, que pasa de 1,5 a 2: sin esto la opcion
+     elegida daba un salto de medio pixel y las de al lado bailaban */
+  .modo:has(input:checked) { padding: calc(1.1rem - 0.5px) calc(1.2rem - 0.5px); }
   .modo input { position: absolute; opacity: 0; width: 0; height: 0; }
   /* circulo dibujado a mano: el radio nativo no se puede agrandar y con 60+
      anos una diana de 13px es un ejercicio de punteria */
@@ -551,9 +563,15 @@
     display: grid; place-items: center; transition: border-color 0.2s ease;
   }
   .modo:has(input:checked) .modo-marca { border-color: var(--ink); }
-  .modo:has(input:checked) .modo-marca::after {
-    content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--ink);
+  /* el punto esta siempre puesto, encogido a cero. Asi al marcar entra con
+     un golpe corto en vez de aparecer de golpe, y se ve que ha pasado algo
+     aunque estes mirando el precio y no el circulo */
+  .modo-marca::after {
+    content: ""; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--ink); transform: scale(0);
+    transition: transform 0.22s cubic-bezier(0.2, 1.5, 0.4, 1);
   }
+  .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
   .modo input:focus-visible + .modo-marca { outline: 2px solid var(--khaki-deep); outline-offset: 3px; }
 
   .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
@@ -616,7 +634,10 @@
     content: ""; position: absolute; left: 0; top: 0.62em;
     width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
   }
-  @media (prefers-reduced-motion: reduce) { .modo, .modo-mas { transition: none; } }
+  /* sin movimiento: el punto sigue apareciendo, pero sin el golpe */
+  @media (prefers-reduced-motion: reduce) {
+    .modo, .modo-mas, .modo-marca::after { transition: none; }
+  }
 
   /* el mismo ajuste que .section-head h2 en la hoja compartida: a 24px un
      titular de dos lineas con interlineado de parrafo se abre demasiado.
