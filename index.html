@@ -724,6 +724,33 @@
 </aside>
 
 <script>
+  // ALTURA DEL HERO, FIJADA UNA VEZ.
+  // La tarjeta media 100svh menos la nav y la barra de aviso. En un iPhone,
+  // al desplazarse hacia abajo la barra de direcciones se pliega y se
+  // despliega, el navegador reevalua la unidad de viewport y la tarjeta
+  // cambiaba de tamaño sola varias veces por gesto.
+  // Se resuelve a pixeles al cargar y solo se vuelve a calcular si cambia el
+  // ANCHO, que es lo unico que significa un cambio de verdad: girar el
+  // telefono o redimensionar la ventana. Un cambio solo de alto es la barra
+  // del navegador yendo y viniendo, y eso ya no mueve nada.
+  (function () {
+    var raiz = document.documentElement;
+    var ancho = window.innerWidth;
+    var fijar = function () {
+      raiz.style.setProperty('--hero-alto', window.innerHeight + 'px');
+    };
+    fijar();
+    window.addEventListener('resize', function () {
+      if (window.innerWidth === ancho) { return; }
+      ancho = window.innerWidth;
+      fijar();
+    }, { passive: true });
+    window.addEventListener('orientationchange', function () {
+      ancho = window.innerWidth;
+      setTimeout(fijar, 120);
+    });
+  })();
+
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {

@@ -1417,8 +1417,14 @@
 
   @media (max-width: 859px) {
     /* sin proporcion fija: la tarjeta ocupa la pantalla menos la barra de
-       aviso, la nav y un respiro, como en Loop */
-    .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(100svh - 10.5rem), 42rem); }
+       aviso, la nav y un respiro, como en Loop.
+       La altura sale de --hero-alto, que fija el JS una sola vez al cargar,
+       y NO de 100svh directamente. En un iPhone, al desplazarse hacia abajo
+       la barra de direcciones se pliega y se despliega, el navegador
+       reevalua la unidad de viewport y la tarjeta cambiaba de tamaño sola
+       varias veces por gesto. Con un valor en pixeles ya resuelto no puede
+       moverse. El 100svh queda de respaldo por si no hay JS. */
+    .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(var(--hero-alto, 100svh) - 10.5rem), 42rem); }
     /* deja de ir a sangre: margen igual por los cuatro lados. Arriba bajaba
        de 22px a 12 y abajo el ticker arrancaba pegado a la tarjeta (0px) */
     .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; margin-top: 0.75rem; padding-bottom: 1rem; }
