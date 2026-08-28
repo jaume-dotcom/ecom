@@ -804,6 +804,28 @@
     stroke-linecap: round; stroke-linejoin: round;
   }
 
+  /* ===== GARANTIA =====
+     Caja con filete, debajo del boton. Va ahi y no en el pie: la duda de
+     "¿y si no me va bien?" aparece con el dedo encima del boton, no tres
+     pantallas mas abajo. */
+  .garantia {
+    margin: 1.4rem 0 0; padding: 1.3rem 1.2rem;
+    border: 1px solid var(--line); border-radius: 16px; text-align: center;
+  }
+  .garantia-titulo {
+    margin: 0 0 0.4rem; font-size: var(--t-base); font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .garantia p {
+    margin: 0 auto; max-width: 34ch;
+    font-size: var(--t-sm); line-height: 1.5; color: var(--ink-soft);
+  }
+  .garantia svg {
+    width: 26px; height: 26px; margin-bottom: 0.5rem; color: var(--khaki-deep);
+    fill: none; stroke: currentColor; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
   /* ===== SEGUNDO PUNTO DE COMPRA =====
      Va donde termina el argumento fuerte, no en cualquier hueco: quien
      acaba de leer por que bisglicinato y no oxido esta convencido ahi, y
