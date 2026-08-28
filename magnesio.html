@@ -541,19 +541,19 @@
     border-radius: 16px; background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
-  /* La elegida se separa de las otras dos por tres cosas a la vez: el fondo
-     se tiñe, el filete engorda y la caja levanta una sombra corta. Antes
-     solo cambiaba el color del borde, que en un movil y con sol de frente
-     no se ve. Con el fondo cambiado se sabe cual esta marcada sin buscar el
-     circulito. */
+  /* La elegida cambia el borde a tinta y lava el fondo con un crema muy
+     claro. Nada mas.
+     Se probo con el crema de la marca a plena fuerza, el filete de 1,5 a
+     2px y una sombra debajo, y era demasiado ruido para lo unico que hay
+     que decir: cual de las tres esta marcada. Ademas engordar el borde
+     obligaba a recortar el relleno medio pixel para que las de al lado no
+     bailaran, o sea un apaño para un efecto que no hacia falta.
+     El lavado apenas se ve en una opcion suelta, pero con las tres en
+     columna la diferencia salta sin buscar el circulito. */
   .modo:has(input:checked) {
-    border-color: var(--ink); border-width: 2px;
-    background: var(--tint);
-    box-shadow: 0 2px 12px rgba(35, 39, 46, 0.07);
+    border-color: var(--ink);
+    background: #f8f6f2;
   }
-  /* el relleno compensa el borde, que pasa de 1,5 a 2: sin esto la opcion
-     elegida daba un salto de medio pixel y las de al lado bailaban */
-  .modo:has(input:checked) { padding: calc(1.1rem - 0.5px) calc(1.2rem - 0.5px); }
   .modo input { position: absolute; opacity: 0; width: 0; height: 0; }
   /* circulo dibujado a mano: el radio nativo no se puede agrandar y con 60+
      anos una diana de 13px es un ejercicio de punteria */
@@ -563,13 +563,13 @@
     display: grid; place-items: center; transition: border-color 0.2s ease;
   }
   .modo:has(input:checked) .modo-marca { border-color: var(--ink); }
-  /* el punto esta siempre puesto, encogido a cero. Asi al marcar entra con
-     un golpe corto en vez de aparecer de golpe, y se ve que ha pasado algo
-     aunque estes mirando el precio y no el circulo */
+  /* el punto esta siempre puesto, encogido a cero, y crece al marcar. La
+     curva ya no se pasa de largo: rebotaba, y un rebote en un selector de
+     precio parece un juguete */
   .modo-marca::after {
     content: ""; width: 11px; height: 11px; border-radius: 50%;
     background: var(--ink); transform: scale(0);
-    transition: transform 0.22s cubic-bezier(0.2, 1.5, 0.4, 1);
+    transition: transform 0.16s ease-out;
   }
   .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
   .modo input:focus-visible + .modo-marca { outline: 2px solid var(--khaki-deep); outline-offset: 3px; }
