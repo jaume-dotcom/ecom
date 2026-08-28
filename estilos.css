@@ -853,10 +853,13 @@
   }
   .barra-compra.visto { transform: none; }
   @media (prefers-reduced-motion: reduce) { .barra-compra { transition: none; } }
+  /* en el marron de accion, como los otros dos botones de añadir. Iba en
+     tinta, y el resultado era que la misma frase, "Añadir a la cesta", se
+     pintaba de dos colores segun donde la vieras */
   .barra-btn {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
     width: 100%; padding: 0.95rem 1.3rem; border: 0; border-radius: var(--btn-radio);
-    background: var(--ink); color: var(--paper);
+    background: var(--khaki-deep); color: var(--paper);
     font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
@@ -970,9 +973,12 @@
      Decirlo aqui, con la cesta llena, es mas honesto que dejar que lo
      descubra en la pasarela */
   .cart-aviso { margin: 0 0 0.9rem; font-size: var(--t-xs); line-height: 1.5; color: var(--ink-soft); }
+  /* tambien en marron: es la accion principal de su pantalla, y la regla es
+     una sola, marron = esto se pulsa. La tinta se queda para lo que no es
+     una accion */
   .cart-cta {
     display: block; text-align: center; padding: var(--btn-relleno);
-    border-radius: var(--btn-radio); background: var(--ink); color: var(--paper);
+    border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
     font-size: var(--btn-txt); font-weight: var(--btn-peso);
   }
   .cart-cta:hover { background: var(--olive); }
