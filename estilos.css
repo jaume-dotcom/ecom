@@ -662,9 +662,9 @@
   .band.tint { background: var(--tint); border-radius: 32px; }
   /* centrado: la página alterna bloques centrados (hero, cierre) con estos
      alineados a la izquierda, y esa mezcla es lo que la hacía ver desordenada */
-  .section-head { max-width: 60ch; margin: 0 auto 2.6rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.7rem; }
+  .section-head { max-width: 60ch; margin: 0 0 2.6rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 0.7rem; }
   .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; max-width: 22ch; }
-  .section-head p { color: var(--ink-soft); margin: 0 auto; max-width: 46ch; text-wrap: pretty; }
+  .section-head p { color: var(--ink-soft); margin: 0; max-width: 46ch; text-wrap: pretty; }
   .section-head .see-all { font-size: var(--t-sm); font-weight: 500; border-bottom: 1.5px solid var(--ink); white-space: nowrap; }
 
   /* shop grid — Seed-style card: top block / media / bottom block, arrow-in-on-hover */
@@ -810,7 +810,7 @@
      pantallas mas abajo. */
   .garantia {
     margin: 1.4rem 0 0; padding: 1.3rem 1.2rem;
-    border: 1px solid var(--line); border-radius: 16px; text-align: center;
+    border: 1px solid var(--line); border-radius: 16px;
   }
   /* el titular en tinta y no en el gris del parrafo: es un <p>, asi que la
      regla de .garantia p le alcanza tambien y los dos salian del mismo
@@ -823,7 +823,7 @@
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);
   }
   .garantia p {
-    margin: 0 auto; max-width: 34ch;
+    margin: 0; max-width: 34ch;
     font-size: var(--t-sm); line-height: 1.5; color: var(--ink-soft);
   }
   .garantia svg {
@@ -1506,7 +1506,7 @@
      leerse como publicidad y pierde justo lo que lo hace funcionar. */
   .firma {
     margin: 0 auto; max-width: 32rem; padding: 0;
-    display: grid; gap: 1.2rem; justify-items: center; text-align: center;
+    display: grid; gap: 1.2rem; justify-items: start; text-align: left;
   }
   /* la pareja va centrada como bloque, pero por dentro alineada a la izquierda:
      un nombre centrado bajo una foto cuadrada se lee a poster */
@@ -1775,7 +1775,7 @@
   .faq-item:last-child { border-bottom: none; }
   /* la captura queda por encima de la FAQ: quien llega hasta aqui con dudas y
      se las resuelve leyendo, se quedaba sin sitio donde dejar el email */
-  .faq-cierre { margin: 1.8rem 0 0; text-align: center; font-size: var(--t-base); }
+  .faq-cierre { margin: 1.8rem 0 0; font-size: var(--t-base); }
   .faq-cierre a { color: var(--khaki-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .faq-q { color: var(--ink); }
   .faq-ico {
@@ -1876,17 +1876,16 @@
   .sec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--khaki-deep); flex-shrink: 0; }
 
   /* ---- fichas de producto: todo centrado ---- */
-  .p-info { text-align: center; }
-  .p-bens { display: inline-block; text-align: left; }
-  .p-bottom { align-items: center; }
-  /* el enlace va centrado bajo el precio, como el resto de la tarjeta */
-  .p-buy { align-self: center; }
+  .p-info { text-align: left; }
+  .p-bens { display: flex; text-align: left; }
+  .p-bottom { align-items: stretch; }
+  .p-buy { align-self: flex-start; }
 
   /* rotulo y titular centrados; el texto de lectura, a la izquierda.
      Con parrafos de tres lineas el borde izquierdo recto le da al ojo un
      punto fijo al que volver en cada salto — centrado hay que buscarlo. */
-  .arg-eyebrow { justify-content: center; }
-  .arg-head { text-align: center; }
+  .arg-eyebrow { justify-content: flex-start; }
+  .arg-head { text-align: left; }
   .arg-body, .arg-body p, .arg-mas { text-align: left; }
   /* el remate cierra el bloque, y centrado lo separa de los parrafos */
   /* .arg-body p (0,2,0) le ganaba a .arg-remate (0,1,0) */
@@ -1906,7 +1905,7 @@
   }
 
   /* intro y cierre: sin foto, centradas y con más aire */
-  .arg-card--intro, .arg-card--cierre { text-align: center; }
+  .arg-card--intro, .arg-card--cierre { text-align: left; }
   .arg-kicker {
     margin: 0 0 1.6rem; font-family: var(--font-mono);
     font-size: var(--t-2xs); letter-spacing: 0.16em; text-transform: uppercase;
@@ -1958,7 +1957,7 @@
   /* las dos garantias, en una linea tranquila bajo el boton en vez de en dos
      pastillas que en movil caian cada una en su fila */
   #libro .pack-garantias {
-    margin: 0.9rem 0 0; text-align: center;
+    margin: 0.9rem 0 0;
     font-size: var(--t-sm); color: var(--ink-soft);
   }
   #libro .pack-note { font-size: var(--t-md); color: var(--ink-soft); }
@@ -2113,11 +2112,11 @@
   }
   .libro-datos span { font-size: var(--t-3xs); line-height: 1.3; color: var(--ink-soft); }
   .libro-temas {
-    margin: 0 auto 0.9rem; max-width: 30rem; text-align: center;
+    margin: 0 0 0.9rem; max-width: 30rem;
     font-size: var(--t-md); line-height: 1.7; color: var(--ink-soft);
   }
   .libro-pie {
-    margin: 0; text-align: center;
+    margin: 0;
     font-size: var(--t-sm); color: var(--ink-faint);
   }
 
@@ -2197,14 +2196,13 @@
     /* de borde a borde, igual que el pack y el criterio: las bandas de color
        solo se leen como seccion si llegan al borde de la pantalla */
     margin-left: -1.6rem; margin-right: -1.6rem;
-    padding: 3rem 2.1rem 3.2rem;
-    text-align: center;
+    padding: 3rem 1.6rem 3.2rem;
     /* el mismo panel oscuro que el bloque de criterio, con su misma marca de
        agua. Los dos son bloques de "te explicamos", asi que se leen como
        pareja y no como dos cosas distintas */
     background: #23272e;
   }
-  .ayuda { max-width: 34rem; margin: 0 auto; position: relative; z-index: 1; }
+  .ayuda { max-width: 34rem; margin: 0; position: relative; z-index: 1; }
   #asesoria .closing-marca { z-index: 0; }
   #asesoria .ayuda-titulo { color: var(--paper); }
   #asesoria .ayuda-titulo .h2-soft { color: var(--paper); }
@@ -2221,7 +2219,7 @@
   }
   .ayuda-sub { margin: 0 0 1.8rem; font-size: var(--t-lg); color: var(--ink-soft); }
 
-  .ayuda-botones { display: flex; justify-content: center; gap: 0.7rem; }
+  .ayuda-botones { display: flex; justify-content: flex-start; gap: 0.7rem; }
   /* solo el tamano: el color lo ponen .btn y .btn-solid, que son los de
      toda la pagina. El ambar es el color de la accion en esta marca */
   .ayuda-btn { display: inline-block; width: auto; padding: 0.85rem 1.6rem; font-size: var(--t-base); }
@@ -2287,7 +2285,9 @@
   /* --ink es negro puro desde el cambio de paleta, y es la unica superficie
      de la web en negro absoluto: el pie va en #23272e. Se iguala, que ademas
      sobre blanco el negro puro corta demasiado */
-  .closing { align-items: center; text-align: center; background: #23272e; position: relative; overflow: hidden; }
+  /* el relleno lateral es 1,6rem, el mismo que .wrap: asi el titular de
+     este panel a sangre arranca en la misma vertical que los de fuera */
+  .closing { align-items: flex-start; text-align: left; background: #23272e; position: relative; overflow: hidden; }
   /* marca de agua: propia, gratis y sin peticiones. Se queda muy por debajo
      del texto en contraste — a 0,05 de opacidad el trazo apenas separa 1,04
      del fondo, asi que ningun texto de encima pierde legibilidad */
@@ -2303,13 +2303,15 @@
   /* 3rem de relleno dejaban 228px utiles en una pantalla de 375, con el
      padding del .wrap ya contado por fuera */
   @media (max-width: 859px) {
+    /* 1,6rem de relleno, el mismo que .wrap: asi el titular de este panel
+       a sangre arranca en la misma vertical que los de fuera */
     .closing {
-      padding: 3rem 1.4rem 2.6rem;
+      padding: 3rem 1.6rem 2.6rem;
       margin-left: -1.6rem; margin-right: -1.6rem;
       width: auto; border-radius: 0;
     }
   }
-  .closing .loc { align-self: center; }
+  .closing .loc { align-self: flex-start; }
   .closing-lede {
     margin: 0 auto 1.8rem; font-size: var(--t-lg); line-height: 1.55;
     color: rgba(238, 240, 244, 0.82); max-width: 42ch;
@@ -2480,7 +2482,7 @@
      el ahorro decide la compra, la devolucion quita el miedo y el envio
      es el detalle. El marron se reserva para lo que se pulsa. */
 
-  #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.55rem; text-align: center; }
+  #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.55rem; }
   #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 0; position: relative; }
   /* centrado con el alto del item, no anclado a la primera linea */
   /* el tick de la regla base se apaga entero: forma, bordes y giro. Si solo
@@ -2505,7 +2507,7 @@
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
   #libro .pack-save {
     font-size: var(--t-lg); color: var(--khaki-deep); font-weight: 700;
-    flex-basis: 100%; text-align: center; margin-top: 0.35rem;
+    flex-basis: 100%; margin-top: 0.35rem;
     letter-spacing: 0.01em;
   }
 
@@ -2523,7 +2525,7 @@
   }
   .pack-cta:hover { background: var(--olive); transform: translateY(-1px); }
   .pack-cta-precio { opacity: 0.75; font-weight: 500; }
-  #libro .pack-note { margin: 0.9rem 0 0; font-size: var(--t-sm); color: var(--ink-soft); text-align: center; }
+  #libro .pack-note { margin: 0.9rem 0 0; font-size: var(--t-sm); color: var(--ink-soft); }
 
   @media (min-width: 860px) {
     #libro { padding: 4.5rem 0 5rem; }
@@ -2537,7 +2539,7 @@
   /* ============ CABECERA DE PAGINA INTERIOR ============
      Solo la usan las paginas interiores, pero vive aqui: repartir reglas
      entre archivos es justo lo que se viene a arreglar. */
-  .cabecera { padding: 2.4rem 0 1.6rem; text-align: center; max-width: 34rem; margin: 0 auto; }
+  .cabecera { padding: 2.4rem 0 1.6rem; max-width: 34rem; }
   .cabecera h1 {
     margin: 0 0 0.9rem; font-size: var(--t-6xl); line-height: 1.1;
     letter-spacing: var(--tracking-lg); font-weight: 700;
