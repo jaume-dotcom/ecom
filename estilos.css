@@ -54,18 +54,21 @@
     --ink-faint: #8b9aa8;
     --khaki: #a4844a;
     --khaki-pop: #ecdcbe;
-    /* El marron de accion se corre hacia el rojo. El anterior, #8c5a22, era
-       el menos saturado de todos los candidatos: se leia como marron tierra
-       y no como ambar, poco para el color que tiene que atraer la mirada.
-       Este gana en las dos cosas a la vez, que no es lo normal:
-         contraste con texto blanco   5,83 -> 6,25
-         croma (cuanto se separa del gris)  76% -> 88%
-       Subir el croma suele costar legibilidad; aqui no, porque va hacia el
-       rojo en vez de hacia el amarillo. Los ambares mas encendidos que este
-       (#c2610a, #d97706) no llegan al 4,5 minimo con texto blanco. */
-    --khaki-deep: #9a4a12;
+    /* El marron de accion, mas encendido pero SIN moverse de tono. El
+       original, #8c5a22, era el menos saturado de todos los candidatos: se
+       leia como marron tierra y no como ambar, poco para el color que tiene
+       que atraer la mirada en toda la web.
+       Se probo #9a4a12 y se descarta: subia el croma tirando del tono hacia
+       el rojo, 32° -> 25°, y se notaba. Este sube lo mismo quedandose donde
+       estaba, que era el problema real:
+         tono                              32° -> 33°   (igual)
+         croma, cuanto se separa del gris  76% -> 89%
+         contraste con texto blanco       5,83 -> 6,04
+       Los ambares mas encendidos que este no llegan al minimo de 4,5 con
+       texto blanco: #c2610a da 4,19 y #d97706 da 3,19. */
+    --khaki-deep: #8f5510;
     /* el hover acompaña: mismo tono, un escalon mas oscuro */
-    --olive: #7d3b0e;
+    --olive: #74440c;
     --olive-soft: #6b5c46;
     --line: #dce1e7;
     --line-strong: #23272e;
