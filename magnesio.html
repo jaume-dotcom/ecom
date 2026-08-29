@@ -74,7 +74,7 @@
   /* ---------- cabecera de producto ---------- */
   .ficha { padding: 0.5rem 0 2.5rem; }
   .ficha-foto {
-    background: var(--tint); border-radius: 16px; overflow: hidden;
+    background: var(--tint); border-radius: var(--r-md); overflow: hidden;
     aspect-ratio: 4 / 5;
   }
   .ficha-foto img { width: 100%; height: 100%; object-fit: cover; }
@@ -103,7 +103,7 @@
 
   /* ---------- galeria de producto ---------- */
   .galeria-viewport {
-    overflow: hidden; border-radius: 16px; background: var(--tint);
+    overflow: hidden; border-radius: var(--r-md); background: var(--tint);
     touch-action: pan-y; user-select: none; -webkit-user-select: none;
   }
   .galeria-track { display: flex; transition: transform 0.45s cubic-bezier(.16,1,.3,1); }
@@ -148,7 +148,7 @@
      suelo por debajo del cual se falla con el dedo */
   .mini {
     flex: 0 0 auto; width: 48px; height: 48px; padding: 0;
-    border: 2px solid transparent; border-radius: 10px; overflow: hidden;
+    border: 2px solid transparent; border-radius: var(--r-sm); overflow: hidden;
     background: var(--tint); cursor: pointer;
     transition: border-color 0.2s ease, opacity 0.2s ease;
     opacity: 0.55;
@@ -197,7 +197,7 @@
   /* el hueco esta pensado para una foto: al cambiar el svg por un <img>
      no hay que tocar nada mas */
   .bene-fig {
-    flex: 0 0 auto; width: 5.5rem; height: 5.5rem; border-radius: 12px;
+    flex: 0 0 auto; width: 5.5rem; height: 5.5rem; border-radius: var(--r-md);
     overflow: hidden; background: var(--tint); display: grid; place-items: center;
   }
   .bene-fig img { width: 100%; height: 100%; object-fit: cover; }
@@ -257,7 +257,7 @@
      ajena es un problema que no hace falta buscarse. */
   .formas { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
   .forma {
-    border: 1px solid var(--line); border-radius: 14px;
+    border: 1px solid var(--line); border-radius: var(--r-md);
     background: #fff; overflow: hidden;
   }
   /* la fila: titulo a la izquierda, sello y signo a la derecha */
@@ -354,7 +354,7 @@
     transform: rotate(-45deg);
   }
   .calidad-espera {
-    margin: 0; padding: 0.9rem 1rem; border-radius: 12px;
+    margin: 0; padding: 0.9rem 1rem; border-radius: var(--r-md);
     background: var(--tint); font-size: var(--t-sm); line-height: 1.5;
     color: var(--ink-soft);
   }
@@ -419,7 +419,7 @@
   .tabla-nota { margin: 0.9rem 0 0; font-size: var(--t-md); color: var(--ink-soft); }
   .ingredientes {
     margin: 1.5rem 0 0; padding: 1.1rem 1.2rem;
-    background: var(--tint); border-radius: 14px;
+    background: var(--tint); border-radius: var(--r-md);
     font-size: var(--t-base); color: var(--ink-soft);
   }
   .ingredientes strong { color: var(--ink); }
@@ -548,7 +548,7 @@
   .modo {
     display: flex; gap: 0.85rem; align-items: flex-start;
     padding: 1.1rem 1.2rem; border: 1.5px solid var(--line);
-    border-radius: 16px; background: #fff; cursor: pointer;
+    border-radius: var(--r-md); background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
   /* La elegida cambia el borde a tinta y lava el fondo con un crema muy

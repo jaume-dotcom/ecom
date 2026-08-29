@@ -107,6 +107,20 @@
                     una foto oscura o encima del panel oscuro del pie
        Y un solo juego de medidas, con variante compacta para barras y
        tarjetas. */
+    /* ===== ESQUINAS =====
+       Habia once radios distintos en uso: 9, 10, 12, 14, 16, 18, 20, 22,
+       24, 28 y 32. Varios separados por 2px, que no se ven pero impiden
+       que nada case, igual que pasaba con los 40 tamaños de letra.
+       Tres escalones, y todos mas rectos que antes:
+         sm  piezas pequeñas: miniaturas, fotos de lista, botones de cantidad
+         md  tarjetas y cajas: producto, opciones de compra, garantia, pack
+         lg  paneles grandes: el pie, el hero, las bandas a sangre
+       Las pastillas (999px) y los circulos (50%) van aparte: no son una
+       esquina redondeada, son una forma. */
+    --r-sm: 8px;
+    --r-md: 10px;
+    --r-lg: 16px;
+
     --btn-radio: 999px;
     --btn-peso: 600;
     --btn-txt: 1.05rem;
@@ -223,14 +237,14 @@
   .navmenu-panel {
     position: absolute; top: calc(100% + 0.6rem); left: 50%; transform: translateX(-50%) translateY(-6px);
     z-index: 50; width: 30rem; padding: 0.6rem;
-    background: var(--paper); border: 1px solid var(--line); border-radius: 16px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
     box-shadow: 0 18px 40px rgba(35,39,46,0.14);
     opacity: 0; visibility: hidden;
     transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
   }
   .navmenu-panel.open { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
   .navmenu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem; }
-  .navmenu-grid a { display: block; padding: 0.75rem; border-radius: 10px; transition: background 0.2s ease; }
+  .navmenu-grid a { display: block; padding: 0.75rem; border-radius: var(--r-sm); transition: background 0.2s ease; }
   .navmenu-grid a:hover { background: var(--tint); }
   .nm-title { margin: 0 0 0.15rem; font-weight: 600; font-size: var(--t-md); color: var(--ink); }
   .nm-desc { margin: 0; font-size: var(--t-2xs); color: var(--ink-soft); }
@@ -376,7 +390,7 @@
   /* hero — full-bleed image with nav + text overlaid, matching Seed's real layout */
   .hero-full {
     position: relative; display: flex; flex-direction: column;
-    border-radius: 0 0 28px 28px; overflow: hidden;
+    border-radius: 0 0 var(--r-lg) var(--r-lg); overflow: hidden;
   }
   /* z-index por encima de .hero-center (2): si no, el h1 del hero se pinta
      sobre el desplegable de "Fórmulas" y lo tapa */
@@ -522,7 +536,7 @@
   }
 
   .hero-media-box {
-    position: relative; width: 100%; overflow: hidden; border-radius: 20px; background: #e9ebef;
+    position: relative; width: 100%; overflow: hidden; border-radius: var(--r-md); background: #e9ebef;
   }
   /* parallax ligero: la imagen va al 105% para tener margen de recorrido sin
      dejar borde vacío; el desplazamiento lo marca la clase prev/active/next
@@ -643,7 +657,7 @@
     }
     /* más presencia vertical que el 16:9 anterior, acercándose a la referencia
        sin llegar a cuadrado; el producto sigue sin cortarse con object-fit:cover */
-    .hero-media-box { border-radius: 24px; aspect-ratio: 3 / 2; }
+    .hero-media-box { border-radius: var(--r-md); aspect-ratio: 3 / 2; }
     .hero-media-box img { height: 100%; object-fit: cover; object-position: left center; }
     .hero-carousel-arrow { display: flex; left: 1.5rem; }
     .hero-carousel-next { left: auto; right: 1.5rem; }
@@ -672,7 +686,7 @@
 
   /* section shells */
   section.band { padding: 4rem 0; }
-  .band.tint { background: var(--tint); border-radius: 32px; }
+  .band.tint { background: var(--tint); border-radius: var(--r-lg); }
   /* centrado: la página alterna bloques centrados (hero, cierre) con estos
      alineados a la izquierda, y esa mezcla es lo que la hacía ver desordenada */
   .section-head { max-width: 60ch; margin: 0 0 2.6rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 0.7rem; }
@@ -728,7 +742,7 @@
   .p-card {
     position: relative;
     border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column;
-    border-radius: 16px; overflow: hidden; transition: box-shadow 0.25s ease;
+    border-radius: var(--r-md); overflow: hidden; transition: box-shadow 0.25s ease;
   }
   .p-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
 
@@ -823,7 +837,7 @@
      pantallas mas abajo. */
   .garantia {
     margin: 1.4rem 0 0; padding: 1.3rem 1.2rem;
-    border: 1px solid var(--line); border-radius: 16px;
+    border: 1px solid var(--line); border-radius: var(--r-md);
   }
   /* el titular en tinta y no en el gris del parrafo: es un <p>, asi que la
      regla de .garantia p le alcanza tambien y los dos salian del mismo
@@ -854,11 +868,11 @@
      Dos selectores con el mismo grupo de radios se pisarian. */
   .recompra-caja {
     display: flex; gap: 1rem; align-items: center;
-    background: var(--tint); border-radius: 18px; padding: 1.1rem;
+    background: var(--tint); border-radius: var(--r-md); padding: 1.1rem;
   }
   .recompra-foto {
     flex: 0 0 auto; width: 88px; height: 88px;
-    border-radius: 12px; overflow: hidden; background: var(--paper);
+    border-radius: var(--r-md); overflow: hidden; background: var(--paper);
   }
   .recompra-foto img { width: 100%; height: 100%; object-fit: cover; }
   .recompra-cuerpo { flex: 1; min-width: 0; text-align: left; }
@@ -996,7 +1010,7 @@
   }
   .cart-linea:last-child { border-bottom: 0; }
   .cart-foto {
-    width: 64px; height: 64px; border-radius: 10px; overflow: hidden;
+    width: 64px; height: 64px; border-radius: var(--r-sm); overflow: hidden;
     background: var(--tint); flex-shrink: 0;
   }
   .cart-foto img { width: 100%; height: 100%; object-fit: cover; }
@@ -1011,7 +1025,7 @@
      ejercicio de punteria, y aqui el comprador tiene 55-75 */
   .cart-cant { display: inline-flex; align-items: center; gap: 0.2rem; }
   .cart-cant button {
-    width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 9px;
+    width: 36px; height: 36px; border: 1px solid var(--line); border-radius: var(--r-sm);
     background: var(--paper); color: var(--ink); font-size: var(--t-lg);
     font-family: var(--font); line-height: 1; cursor: pointer;
   }
@@ -1047,7 +1061,7 @@
   }
   .bundle-text h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.8rem; text-wrap: balance; }
   .bundle-text p { color: var(--ink-soft); max-width: 46ch; margin: 0 0 1.4rem; }
-  .bundle-figure img { border-radius: 16px; }
+  .bundle-figure img { border-radius: var(--r-md); }
 
   /* ingredient spotlight (deep-dive section) */
   /* bloque claro y tipográfico: la página ya tiene cuatro superficies oscuras
@@ -1066,7 +1080,7 @@
     position: sticky; top: 5rem;
     background: #ffffff; color: var(--ink);
     border: 1px solid rgba(35,39,46,0.10);
-    border-radius: 28px; padding: 2.4rem 1.6rem;
+    border-radius: var(--r-lg); padding: 2.4rem 1.6rem;
     box-shadow: 0 -18px 44px -20px rgba(35,39,46,0.45), 0 4px 16px rgba(35,39,46,0.07);
   }
   /* la última lleva el acento: es la ficha de confianza y merece destacar */
@@ -1116,7 +1130,7 @@
 
   .spot-note {
     display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0.9rem 1.4rem;
-    border: 1px solid rgba(244,241,222,0.35); border-radius: 16px; padding: 1.1rem 1.4rem; margin-bottom: 1.8rem;
+    border: 1px solid rgba(244,241,222,0.35); border-radius: var(--r-md); padding: 1.1rem 1.4rem; margin-bottom: 1.8rem;
   }
   .spot-pill {
     display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--t-xs); font-weight: 500;
@@ -1136,7 +1150,7 @@
   .spot-col p { font-size: var(--t-sm); color: var(--ink-soft); margin: 0; max-width: 34ch; }
 
   .spot-figure {
-    border-radius: 20px; overflow: hidden; opacity: 0; transform: translateY(28px) scale(0.92);
+    border-radius: var(--r-md); overflow: hidden; opacity: 0; transform: translateY(28px) scale(0.92);
     transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .spot-figure.in { opacity: 1; transform: translateY(0) scale(1); }
@@ -1156,12 +1170,12 @@
   /* audience stats (replaces fake testimonials) */
   .stat-row { display: grid; grid-template-columns: 1fr; gap: 1.4rem; margin-top: 2rem; }
   @media (min-width: 700px) { .stat-row { grid-template-columns: repeat(3, 1fr); } }
-  .stat { background: var(--paper); border-radius: 16px; padding: 1.4rem 1.5rem; }
+  .stat { background: var(--paper); border-radius: var(--r-md); padding: 1.4rem 1.5rem; }
   .stat .num { font-size: var(--t-8xl); font-weight: 500; letter-spacing: var(--tracking-lg); font-variant-numeric: tabular-nums; }
   .stat .lbl { font-size: var(--t-sm); color: var(--ink-soft); }
 
   /* closing feature */
-  .closing { display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; padding: 4.5rem 3rem; background: var(--ink); color: var(--paper); border-radius: 32px; }
+  .closing { display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; padding: 4.5rem 3rem; background: var(--ink); color: var(--paper); border-radius: var(--r-lg); }
   /* Cifras de cierre. Mismo lenguaje que la tira de Sento, pero sobre el
      panel oscuro: cifra en crema y rotulo en papel apagado.
      NO se animan como las de Sento: dos de las tres son cero, y contar de
@@ -1276,7 +1290,7 @@
   .cookies {
     position: fixed; z-index: 1100; left: 1rem; right: 1rem; bottom: 1rem;
     max-width: 30rem; background: var(--paper);
-    border: 1px solid var(--line); border-radius: 16px;
+    border: 1px solid var(--line); border-radius: var(--r-md);
     padding: 1.15rem 1.25rem; box-shadow: 0 12px 34px rgba(35,39,46,0.18);
     display: flex; flex-direction: column; gap: 0.9rem;
     transform: translateY(140%); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
@@ -1342,7 +1356,7 @@
   .pack {
     display: grid; grid-template-columns: 1fr; gap: 0; align-items: center;
     background: #ffffff; border: 1px solid var(--line);
-    border-radius: 24px; overflow: hidden;
+    border-radius: var(--r-md); overflow: hidden;
     box-shadow: 0 4px 20px rgba(35,39,46,0.06);
   }
   @media (min-width: 760px) { .pack { grid-template-columns: 1.05fr 1fr; } }
@@ -1520,7 +1534,7 @@
     /* deja de ir a sangre: margen igual por los cuatro lados. Arriba bajaba
        de 22px a 12 y abajo el ticker arrancaba pegado a la tarjeta (0px) */
     .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; margin-top: 0.75rem; padding-bottom: 1rem; }
-    .hero-media-box { border-radius: 14px; }
+    .hero-media-box { border-radius: var(--r-md); }
   }
 
   @media (min-width: 860px) {
@@ -1732,7 +1746,7 @@
       radial-gradient(38% 150px at 50% 0%, rgba(236, 220, 190, 0.13), transparent),
       var(--foot-ink);
     color: var(--paper);
-    border-radius: 2rem 2rem 0 0;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
     overflow: hidden;
   }
   /* la linea difuminada del original: 1/3 de ancho, centrada sobre el borde */
@@ -1792,7 +1806,7 @@
 
   @media (min-width: 860px) {
     footer#footer-signup { padding: 0 1.2rem; }
-    .foot-panel { padding: 3.4rem 2.4rem 1.8rem; border-radius: 3rem 3rem 0 0; }
+    .foot-panel { padding: 3.4rem 2.4rem 1.8rem; border-radius: var(--r-lg) var(--r-lg) 0 0; }
     .foot-grid { grid-template-columns: 1fr 2fr; gap: 3rem; }
     .foot-cols { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
     .foot-bottom { grid-template-columns: 1fr auto; gap: 2rem; align-items: baseline; }
@@ -1884,7 +1898,7 @@
   /* 4:3 y con tope: la tarjeta tiene alto fijo y si la foto crece se come
      el texto de abajo */
   .arg-fig {
-    margin: 0 auto 1.4rem; border-radius: 14px; overflow: hidden;
+    margin: 0 auto 1.4rem; border-radius: var(--r-md); overflow: hidden;
     background: var(--tint);
     aspect-ratio: 4 / 3; max-height: 17rem;
   }
@@ -1986,7 +2000,7 @@
      solo que aqui se cambia de registro. */
   #libro {
     background: #f6efe3;
-    border-radius: 2rem;
+    border-radius: var(--r-lg);
     margin: 0 -0.85rem;
     padding: 3rem 1.5rem 3.2rem;
   }
@@ -2010,7 +2024,7 @@
   #libro .btn-solid { font-size: var(--t-lg); padding: 0.95rem 1.6rem; }
 
   @media (min-width: 860px) {
-    #libro { border-radius: 3rem; margin: 0 -0.4rem; padding: 4.5rem 3rem; }
+    #libro { border-radius: var(--r-lg); margin: 0 -0.4rem; padding: 4.5rem 3rem; }
   }
 
 
@@ -2518,7 +2532,7 @@
     padding: 3rem 1.6rem 3.4rem;
   }
   #libro .pack {
-    background: #fff; border: 0; border-radius: 22px;
+    background: #fff; border: 0; border-radius: var(--r-md);
     overflow: hidden; max-width: 34rem; margin: 0 auto;
     box-shadow:
       0 1px 2px rgba(35, 39, 46, 0.05),
