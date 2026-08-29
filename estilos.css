@@ -1000,7 +1000,31 @@
   .cart-envio p.cart-envio-ok { color: var(--olive); font-weight: 600; }
 
   .cart-cuerpo { flex: 1; overflow-y: auto; padding: 0.4rem 1.3rem; }
-  .cart-vacia { margin: 2rem 0; text-align: center; color: var(--ink-soft); font-size: var(--t-base); }
+  /* La cesta vacia se centra en el hueco, no arriba: el panel deja 400px
+     de blanco y una frase pegada al techo lo hace parecer roto. */
+  .cart-vacia {
+    /* 100% y no una altura fija: asi se centra en el hueco que quede, que
+       cambia con el alto de la pantalla */
+    min-height: 100%; box-sizing: border-box;
+    display: grid; align-content: center; justify-items: center;
+    gap: 0.9rem; text-align: center; color: var(--ink-soft); font-size: var(--t-base);
+  }
+  /* la bolsa a media tinta, no un icono de error: una cesta vacia no es un
+     fallo de nadie */
+  .cart-vacia svg {
+    width: 52px; height: 52px; opacity: 0.28; color: var(--ink);
+    fill: none; stroke: currentColor; stroke-width: 1.3;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .cart-vacia p { margin: 0; }
+  /* la salida: quien abre la cesta vacia se ha quedado sin sitio al que ir */
+  /* el relleno lo sube a 44px de diana: es un enlace de texto, pero es la
+     unica salida del panel y se pulsa con el dedo */
+  .cart-vacia a {
+    display: inline-block; padding: 0.7rem 0.9rem;
+    color: var(--khaki-deep); font-weight: 600; font-size: var(--t-sm);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
   /* foto, texto y precio en tres columnas. La foto es lo que hace que la
      cesta se lea de un vistazo: con solo nombres, tres lineas parecidas se
      confunden entre si */

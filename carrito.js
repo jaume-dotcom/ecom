@@ -144,6 +144,11 @@
     velo.addEventListener('click', cerrar);
     panel.querySelector('.cart-x').addEventListener('click', cerrar);
     panel.querySelector('.cart-cta').addEventListener('click', cerrar);
+    // el enlace de la cesta vacia lleva a otra parte de la pagina: si el
+    // panel se queda abierto encima, el salto no se ve
+    cuerpo.addEventListener('click', function (ev) {
+      if (ev.target.closest('.cart-vacia a')) { cerrar(); }
+    });
 
     cuerpo.addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-cant]');
@@ -218,7 +223,19 @@
     if (!cuerpo) { return; }
 
     if (!carrito.length) {
-      cuerpo.innerHTML = '<p class="cart-vacia">La cesta está vacía.</p>';
+      // La cesta vacia dejaba 400px de blanco y una frase suelta arriba. El
+      // hueco es el problema, no la falta de un icono: lo que hace falta ahi
+      // es una salida, porque quien abre la cesta vacia se ha quedado sin
+      // sitio al que ir.
+      // El catalogo esta en la portada; si la pagina lo tiene, se enlaza el
+      // ancla de aqui mismo y no se hace salir de la pagina.
+      var aDonde = document.getElementById('catalogo') ? '#catalogo' : 'index.html#catalogo';
+      cuerpo.innerHTML =
+        '<div class="cart-vacia">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z"/><path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3"/></svg>' +
+          '<p>Tu cesta está vacía.</p>' +
+          '<a href="' + aDonde + '">Ver las cuatro fórmulas</a>' +
+        '</div>';
     } else {
       cuerpo.innerHTML = carrito.map(function (i) {
         var img = foto(i);
