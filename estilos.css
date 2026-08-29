@@ -1184,7 +1184,17 @@
   }
   .cierre-cifras span { font-size: var(--t-3xs); line-height: 1.3; color: rgba(238, 240, 244, 0.78); }
 
-  .closing .loc { font-family: var(--font-mono); font-size: var(--t-2xs); color: var(--khaki-pop); letter-spacing: 0.04em; }
+  /* Deja la monoespaciada y pasa a la serif de la casa, la misma que ya
+     usan las mitades en italica de los titulares. En mono parecia un dato
+     tecnico mas; en italica se lee como una firma al pie, que es lo que es:
+     quien lo hace y donde, no una especificacion.
+     Sin el punto de delante: era una viñeta para un solo elemento. */
+  .closing .loc {
+    font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+    font-style: italic; font-weight: 400;
+    font-size: var(--t-xl); letter-spacing: 0;
+    color: var(--khaki-pop);
+  }
   .closing h2 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; color: var(--paper); }
 
   /* footer */
