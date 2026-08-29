@@ -420,20 +420,38 @@
              El boton ya no repite el importe: lo tiene justo encima. -->
         <div class="pack-price">
           <span class="pack-now">39,90&nbsp;&euro;</span>
-          <span class="pack-was">47,80&nbsp;&euro;</span>
           <span class="pack-save">Ahorras un 16&nbsp;%</span>
         </div>
 
+        <!-- La lista se lee como una suma: cada pieza con SU precio, el signo
+             mas entre las dos, y abajo el total por separado tachado. Antes el
+             47,80 estaba arriba, junto al precio del pack, y no salia de
+             ningun sitio: era un numero tachado sin explicacion.
+             Los 24,90 del libro no se inventan, salen de la resta: el pack por
+             separado son 47,80 y el bote 22,90. -->
         <ul class="pack-list">
-          <li><b>Magnesio Bisglicinato</b><span>90 cápsulas &middot; 30 días</span></li>
-          <li><b>La gran guía de la suplementación</b><span>Sento Segarra &middot; tapa dura</span></li>
+          <li>
+            <span class="pack-item">
+              <b>Magnesio Bisglicinato</b>
+              <span>90 cápsulas &middot; 30 días</span>
+            </span>
+            <b class="pack-item-precio">22,90&nbsp;&euro;</b>
+          </li>
+          <li>
+            <span class="pack-item">
+              <b>La gran guía de la suplementación</b>
+              <span>Sento Segarra &middot; tapa dura</span>
+            </span>
+            <b class="pack-item-precio">24,90&nbsp;&euro;</b>
+          </li>
         </ul>
+
+        <p class="pack-suma"><span>Por separado</span><span class="pack-was">47,80&nbsp;&euro;</span></p>
 
         <button type="button" class="pack-cta" data-add="pack" data-img="pack-magnesio-libro.jpg"
                 data-nombre="Pack de lanzamiento"
                 data-sub="El magnesio y el libro de Sento" data-precio="39.90">Añadir el pack &middot; 39,90&nbsp;&euro;</button>
         <p class="pack-garantias">Envío gratis &middot; Devolución en 30 días</p>
-        <p class="pack-note">Precios orientativos. Todavía no está a la venta.</p>
       </div>
     </div>
   </section>

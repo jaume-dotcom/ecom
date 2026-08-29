@@ -2547,7 +2547,31 @@
      es el detalle. El marron se reserva para lo que se pulsa. */
 
   #libro .pack-list { list-style: none; margin: 0 0 1.4rem; padding: 0; display: grid; gap: 0.55rem; }
-  #libro .pack-list li { display: grid; gap: 0.1rem; padding-left: 0; position: relative; }
+  /* cada pieza en una fila: lo que es a la izquierda y su precio a la
+     derecha. Asi el signo + de entre las dos suma dos numeros y no dos
+     titulos sueltos */
+  #libro .pack-list li {
+    /* flex-direction row explicito: la regla base de .pack-list li lo pone
+       en column, y en column el space-between reparte en vertical, asi que
+       el precio se iba debajo y pegado a la izquierda */
+    display: flex; flex-direction: row;
+    align-items: baseline; justify-content: space-between;
+    gap: 0.8rem; padding-left: 0; position: relative;
+  }
+  .pack-item { display: grid; gap: 0.1rem; }
+  .pack-item-precio { flex-shrink: 0; white-space: nowrap; }
+  /* el mas se saca del flujo de la fila y se centra bajo ella */
+  #libro .pack-list li + li::before { position: absolute; top: -1.65rem; left: 0; right: 0; text-align: center; }
+  #libro .pack-list li + li { margin-top: 1.9rem; }
+  /* el total por separado: cierra la suma, tachado, alineado con los precios
+     de arriba. Antes este 47,80 vivia junto al precio del pack y no salia de
+     ningun sitio */
+  .pack-suma {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 0.8rem; margin: 0.9rem 0 1.3rem; padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    font-size: var(--t-sm); color: var(--ink-soft);
+  }
   /* centrado con el alto del item, no anclado a la primera linea */
   /* el tick de la regla base se apaga entero: forma, bordes y giro. Si solo
      se cambia el content, el signo aparece dentro de la caja girada */
