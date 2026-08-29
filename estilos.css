@@ -1178,11 +1178,19 @@
     border-left: 1px solid rgba(238, 240, 244, 0.16);
   }
   .cierre-cifras li:first-child { border-left: 0; }
+  /* La cifra manda por TAMAÑO, no por grosor. En negrita a 19px las tres
+     quedaban apretadas y con pinta de tabla; en fina y mas grandes se leen
+     como cifras, que es lo que son.
+     Es ademas el mismo tratamiento que "Los numeros que si se pueden dar"
+     de la ficha: alli las cifras van en peso 300 y grandes. Eran dos
+     lenguajes distintos para la misma idea en dos paginas. */
   .cierre-cifras b {
-    font-size: var(--t-2xl); font-weight: 700; color: var(--khaki-pop);
-    letter-spacing: 0.01em; line-height: 1.15; font-variant-numeric: tabular-nums;
+    font-size: var(--t-4xl); font-weight: 300; color: var(--khaki-pop);
+    letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums;
   }
-  .cierre-cifras span { font-size: var(--t-3xs); line-height: 1.3; color: rgba(238, 240, 244, 0.78); }
+  /* el rotulo sube de 11,5 a 12,8: era el texto mas pequeño de la web, justo
+     por debajo del suelo que nos habiamos puesto */
+  .cierre-cifras span { font-size: var(--t-2xs); line-height: 1.35; color: rgba(238, 240, 244, 0.82); }
 
   /* Deja la monoespaciada y pasa a la serif de la casa, la misma que ya
      usan las mitades en italica de los titulares. En mono parecia un dato
