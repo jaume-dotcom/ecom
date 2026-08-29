@@ -191,9 +191,27 @@
         punto = document.createElement('span');
         punto.className = 'cart-num';
         b.appendChild(punto);
+        // el oyente se pone una sola vez, al crear el contador: si se pusiera
+        // en cada añadido y la animacion no llegara a correr (pestaña de
+        // fondo, por ejemplo), se irian acumulando oyentes que nunca se
+        // quitan
+        punto.addEventListener('animationend', function () {
+          punto.classList.remove('golpe');
+        });
       }
+      // el golpe solo cuando SUBE. Al restar tambien cambia el numero, pero
+      // ahi no hay nada que confirmar: se acaba de quitar algo a proposito
+      var antes = +punto.textContent || 0;
       punto.textContent = n;
       punto.hidden = n === 0;
+      if (n > antes) {
+        // hay que quitar la clase y forzar un reflow antes de volver a
+        // ponerla: si no, al añadir dos veces seguidas la animacion no se
+        // reinicia y el segundo golpe no se ve
+        punto.classList.remove('golpe');
+        void punto.offsetWidth;
+        punto.classList.add('golpe');
+      }
       b.setAttribute('aria-label', n === 0 ? 'Tu cesta, vacía' : 'Tu cesta, ' + n + (n === 1 ? ' artículo' : ' artículos'));
     });
 

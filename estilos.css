@@ -172,7 +172,20 @@
 
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+  /* ENTRADA ESCALONADA. Igual que .reveal, pero el que entra es cada hijo,
+     con 80ms de diferencia entre uno y el siguiente. Tres tarjetas
+     apareciendo a la vez se leen como un salto; una detras de otra, como
+     intencion.
+     Del sexto en adelante comparten retraso: en una lista de once, el ultimo
+     llegaria casi un segundo tarde y pareceria que falta algo. */
+  .reveal-esc > * { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal-esc.in > * { opacity: 1; transform: translateY(0); }
+  .reveal-esc.in > *:nth-child(2) { transition-delay: 0.08s; }
+  .reveal-esc.in > *:nth-child(3) { transition-delay: 0.16s; }
+  .reveal-esc.in > *:nth-child(4) { transition-delay: 0.24s; }
+  .reveal-esc.in > *:nth-child(5) { transition-delay: 0.32s; }
+  .reveal-esc.in > *:nth-child(n+6) { transition-delay: 0.4s; }
+  @media (prefers-reduced-motion: reduce) { .reveal, .reveal-esc > * { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 
   /* nav */
   nav { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 0; }
@@ -918,6 +931,20 @@
     border-radius: 999px; background: var(--khaki-deep); color: var(--paper);
     font-size: 10.5px; font-weight: 600; line-height: 17px; text-align: center;
   }
+  /* Al añadir algo, el contador da un golpe corto. Es la unica
+     confirmacion de que ha funcionado, y hasta ahora el numero cambiaba
+     sin un solo fotograma: si el panel tardaba en abrirse, no habia forma
+     de saber si se habia registrado.
+     Un 1,35 y de vuelta en 280ms. Ni rebote ni giro: esto confirma, no
+     celebra. */
+  @keyframes cart-golpe {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.35); }
+    100% { transform: scale(1); }
+  }
+  .cart-num.golpe { animation: cart-golpe 0.28s ease-out; }
+  @media (prefers-reduced-motion: reduce) { .cart-num.golpe { animation: none; } }
+
   .cart-velo {
     position: fixed; inset: 0; z-index: 90;
     background: rgba(22, 19, 15, 0.45);
