@@ -2585,7 +2585,6 @@
   .pack-item { display: grid; gap: 0.1rem; }
   .pack-item-precio { flex-shrink: 0; white-space: nowrap; }
   /* el mas se saca del flujo de la fila y se centra bajo ella */
-  #libro .pack-list li + li::before { position: absolute; top: -1.65rem; left: 0; right: 0; text-align: center; }
   #libro .pack-list li + li { margin-top: 1.9rem; }
   /* el total por separado: cierra la suma, tachado, alineado con los precios
      de arriba. Antes este 47,80 vivia junto al precio del pack y no salia de
@@ -2603,22 +2602,34 @@
     content: none; border: 0; transform: none;
     position: static; width: auto; height: auto;
   }
+  /* El signo va CENTRADO entre las dos filas, no delante de la segunda.
+     Como la fila es flex, en el flujo se convierte en un item mas y se
+     pegaba a la izquierda, partiendo la simetria. Sacandolo del flujo y
+     estirandolo de lado a lado se centra sobre la linea que las separa. */
   #libro .pack-list li + li::before {
     content: "+"; display: block;
-    position: static; width: auto; height: auto;
-    border: 0; transform: none;
-    margin: 0.6rem auto 0.8rem;
+    position: absolute; top: -1.75rem; left: 0; right: 0;
+    width: auto; height: auto; text-align: center;
+    border: 0; transform: none; margin: 0;
     font-size: var(--t-2xl); font-weight: 300; line-height: 1;
     color: var(--ink-faint);
   }
   #libro .pack-list b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
   #libro .pack-list span { font-size: var(--t-base); color: var(--ink-soft); }
 
-  #libro .pack-price { display: grid; justify-items: center; gap: 0.1rem; margin-bottom: 1.1rem; }
+  /* El precio del pack, en su propia caja crema. Suelto sobre blanco era
+     un numero grande mas, del mismo color que todo lo demas y sin nada que
+     lo separara de la lista que viene debajo. Con fondo propio se lee como
+     lo que es: la oferta, y no un dato del bloque. */
+  #libro .pack-price {
+    display: grid; justify-items: center; gap: 0.2rem;
+    margin-bottom: 1.4rem; padding: 1.1rem 1rem;
+    background: var(--khaki-pop); border-radius: var(--r-md);
+  }
   #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
   #libro .pack-save {
-    font-size: var(--t-lg); color: var(--khaki-deep); font-weight: 700;
+    font-size: var(--t-lg); color: var(--olive); font-weight: 700;
     flex-basis: 100%; margin-top: 0.35rem;
     letter-spacing: 0.01em;
   }
