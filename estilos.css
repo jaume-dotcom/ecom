@@ -2197,12 +2197,17 @@
        solo se leen como seccion si llegan al borde de la pantalla */
     margin-left: -1.6rem; margin-right: -1.6rem;
     padding: 3rem 1.6rem 3.2rem;
+    /* LA EXCEPCION a que todo vaya a la izquierda: aqui no hay lista, ni
+       tarjetas, ni acordeones. Son un titular, una frase y un boton, o sea
+       nada con lo que alinearse. Centrado se lee como una pausa entre dos
+       bloques de contenido, que es justo lo que es. */
+    text-align: center;
     /* el mismo panel oscuro que el bloque de criterio, con su misma marca de
        agua. Los dos son bloques de "te explicamos", asi que se leen como
        pareja y no como dos cosas distintas */
     background: #23272e;
   }
-  .ayuda { max-width: 34rem; margin: 0; position: relative; z-index: 1; }
+  .ayuda { max-width: 34rem; margin: 0 auto; position: relative; z-index: 1; }
   #asesoria .closing-marca { z-index: 0; }
   #asesoria .ayuda-titulo { color: var(--paper); }
   #asesoria .ayuda-titulo .h2-soft { color: var(--paper); }
@@ -2219,7 +2224,7 @@
   }
   .ayuda-sub { margin: 0 0 1.8rem; font-size: var(--t-lg); color: var(--ink-soft); }
 
-  .ayuda-botones { display: flex; justify-content: flex-start; gap: 0.7rem; }
+  .ayuda-botones { display: flex; justify-content: center; gap: 0.7rem; }
   /* solo el tamano: el color lo ponen .btn y .btn-solid, que son los de
      toda la pagina. El ambar es el color de la accion en esta marca */
   .ayuda-btn { display: inline-block; width: auto; padding: 0.85rem 1.6rem; font-size: var(--t-base); }
