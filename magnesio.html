@@ -586,7 +586,7 @@
     transition: transform 0.16s ease-out;
   }
   .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
-  .modo input:focus-visible + .modo-marca { outline: 2px solid var(--khaki-deep); outline-offset: 3px; }
+  .modo input:focus-visible + .modo-marca { outline: 2px solid var(--azul); outline-offset: 3px; }
 
   .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
   /* cerrada, cada opcion son dos lineas: nombre y precio arriba, sellos
@@ -600,11 +600,16 @@
   .modo-precio b { display: block; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .modo-precio small { display: block; font-size: var(--t-xs); color: var(--ink-soft); }
   .modo-sellos { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.15rem; }
-  /* la opcion que mas conviene: filete de marca y etiqueta, pero SIN venir
+  /* La opcion que mas conviene: filete y etiqueta, pero SIN venir
      premarcada. Premarcar la cara lo prohibe el articulo 22 de la directiva
      de derechos del consumidor, asi que la que viene marcada es la unica que
-     no compromete a nada */
-  .modo--destacado { border-color: var(--khaki-deep); border-width: 2px; }
+     no compromete a nada.
+     Todo el señalamiento de este bloque va en AZUL y no en el marron de
+     marca. El marron significa "esto se pulsa" en toda la web, y el boton de
+     añadir esta a dos dedos: con los dos en marron habia dos marrones en la
+     misma pantalla y solo uno se podia pulsar. Ahora cada color dice una
+     sola cosa. */
+  .modo--destacado { border-color: var(--azul); border-width: 2px; }
   /* Los dos sellos caben ahora en una linea. Antes eran "LA MEJOR RELACION"
      y "Ahorras un 20 %", que a 375px partian en dos filas y estiraban la
      opcion casi un tercio de su alto. Dicen lo mismo con menos: el ahorro
@@ -612,13 +617,13 @@
   .modo-etiqueta {
     display: inline-block;
     font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.06em; color: #fff; background: var(--khaki-deep);
+    letter-spacing: 0.06em; color: #fff; background: var(--azul);
     border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
 
   .modo-ahorro {
     font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.06em;
-    color: var(--olive); background: var(--khaki-pop);
+    color: var(--azul); background: var(--azul-pop);
     border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
   .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
@@ -646,7 +651,7 @@
   }
   .modo-plus span::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
+    width: 5px; height: 5px; border-radius: 50%; background: var(--azul);
   }
   /* sin movimiento: el punto sigue apareciendo, pero sin el golpe */
   @media (prefers-reduced-motion: reduce) {
