@@ -2644,9 +2644,9 @@
     position: absolute; top: -1.75rem; left: 0; right: 0;
     width: auto; height: auto; text-align: center;
     border: 0; transform: none; margin: 0;
-    font-size: var(--t-2xl); font-weight: 300; line-height: 1;
-    /* en tinta y no en el gris claro: es el operador de la suma, no un
-       adorno, y en gris apenas se veia */
+    /* mas grande y en tinta: es el operador de la suma, no un adorno. A
+       19px y en gris claro apenas se veia */
+    font-size: var(--t-4xl); font-weight: 300; line-height: 1;
     color: var(--ink);
   }
   #libro .pack-list b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
@@ -2659,18 +2659,24 @@
      el mismo tratamiento que ya usan las opciones de compra de la ficha:
      precio a secas, ahorro en pastilla. Dos bloques que dicen lo mismo con
      el mismo lenguaje. */
+  /* Tres columnas: la de la izquierda vacia, el precio en la del medio y el
+     ahorro en la derecha. Asi el precio queda centrado de verdad en el
+     bloque, y no solo "centrado entre sus dos vecinos", que es lo que pasa
+     con un flex cuando uno de los dos ocupa mas que el otro. */
   #libro .pack-price {
-    display: flex; flex-wrap: wrap; align-items: baseline;
-    justify-content: flex-start; gap: 0.7rem;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 0.5rem;
     margin-bottom: 1.3rem; padding: 0; background: none;
   }
+  #libro .pack-now { grid-column: 2; text-align: center; }
+  #libro .pack-save { grid-column: 3; justify-self: end; }
   /* mas grande que antes: sin caja detras, el peso lo tiene que poner el
      tamaño */
   #libro .pack-now { font-size: var(--t-8xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
   /* la pastilla del ahorro, la misma que .modo-ahorro en la ficha */
   #libro .pack-save {
-    font-size: var(--t-sm); font-weight: 600; letter-spacing: 0.01em;
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.01em;
     color: var(--olive); background: var(--khaki-pop);
     border-radius: 999px; padding: 0.25rem 0.7rem;
     flex-basis: auto; margin-top: 0; white-space: nowrap;
