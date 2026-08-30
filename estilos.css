@@ -1429,9 +1429,6 @@
   .pack-price { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
   .pack-now { font-size: var(--t-8xl); font-weight: 600; letter-spacing: var(--tracking-lg); color: var(--ink); line-height: 1; }
   .pack-was { font-size: var(--t-base); color: var(--ink-faint); text-decoration: line-through; }
-  /* el que manda es #libro .pack-save, mas abajo: ahi ya se le dio peso
-     propio. Esta regla solo cubre un pack que viviera fuera de #libro */
-  .pack-save { font-size: var(--t-2xs); color: var(--ink-faint); }
   .pack-note { font-size: var(--t-2xs); color: var(--ink-soft); margin: 1rem 0 0; max-width: 46ch; }
 
   /* El bloque iba muy suelto para lo poco que dice: dos lineas de
@@ -2058,7 +2055,7 @@
     font-size: var(--t-sm); color: var(--ink-soft);
   }
   #libro .pack-note { font-size: var(--t-md); color: var(--ink-soft); }
-  #libro .pack-was, #libro .pack-save { font-size: var(--t-base); }
+  #libro .pack-was { font-size: var(--t-base); }
   #libro .btn-solid { font-size: var(--t-lg); padding: 0.95rem 1.6rem; }
 
   @media (min-width: 860px) {
@@ -2613,18 +2610,44 @@
   }
   #libro .pack-list li:last-child { border-bottom: 0; }
   .pack-item { display: grid; gap: 0.1rem; }
-  .pack-item-precio { flex-shrink: 0; white-space: nowrap; }
+  .pack-item-precio {
+    flex-shrink: 0; white-space: nowrap;
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
   /* el mas se saca del flujo de la fila y se centra bajo ella */
   #libro .pack-list li + li { margin-top: 1.9rem; }
   /* el total por separado: cierra la suma, tachado, alineado con los precios
      de arriba. Antes este 47,80 vivia junto al precio del pack y no salia de
      ningun sitio */
+  /* LA CUENTA, COMO EN UN TICKET. Concepto a la izquierda, importe a la
+     derecha y la linea de puntos uniendolos, en monoespaciada y con cifras
+     tabulares para que los digitos caigan en columna.
+     Sale de quitar el "-16 %" de arriba: el porcentaje obliga a calcular y
+     ademas era una pastilla de color peleandose con el precio. Aqui la resta
+     se lee sola, 47,80 menos 7,90 son los 39,90 del titular.
+     El descuento es la unica cifra en tinta y en negrita de las dos: es lo
+     que hay que llevarse de este bloque. El marron sigue reservado para lo
+     que se pulsa. */
   .pack-suma {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 0.8rem; margin: 0.9rem 0 1.3rem; padding-top: 0.9rem;
+    margin: 0.9rem 0 1.3rem; padding-top: 0.9rem;
     border-top: 1px solid var(--line);
-    font-size: var(--t-sm); color: var(--ink-soft);
+    font-family: var(--font-mono); font-size: var(--t-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
   }
+  .pack-suma > div { display: flex; align-items: baseline; gap: 0.45rem; }
+  .pack-suma > div + div { margin-top: 0.5rem; }
+  .pack-suma dt { order: 0; }
+  .pack-suma dd { order: 2; margin: 0; white-space: nowrap; }
+  /* el puntito de union: un pseudo elastico entre concepto e importe, subido
+     un cuarto de eme para que caiga a la altura de la linea de base */
+  .pack-suma > div::before {
+    content: ""; order: 1; flex: 1 1 auto;
+    border-bottom: 1px dotted var(--ink-faint);
+    transform: translateY(-0.28em);
+  }
+  .pack-dto { color: var(--ink); font-weight: 600; }
   /* centrado con el alto del item, no anclado a la primera linea */
   /* el tick de la regla base se apaga entero: forma, bordes y giro. Si solo
      se cambia el content, el signo aparece dentro de la caja girada */
@@ -2666,18 +2689,10 @@
     margin-bottom: 1.3rem; padding: 0; background: none;
   }
   #libro .pack-now { grid-column: 2; text-align: center; }
-  #libro .pack-save { grid-column: 3; justify-self: end; }
   /* mas grande que antes: sin caja detras, el peso lo tiene que poner el
      tamaño */
   #libro .pack-now { font-size: var(--t-8xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
-  /* la pastilla del ahorro, la misma que .modo-ahorro en la ficha */
-  #libro .pack-save {
-    font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.01em;
-    color: var(--olive); background: var(--khaki-pop);
-    border-radius: 999px; padding: 0.25rem 0.7rem;
-    flex-basis: auto; margin-top: 0; white-space: nowrap;
-  }
 
   /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
      parte de esa decision */

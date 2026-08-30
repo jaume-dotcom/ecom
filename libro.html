@@ -129,7 +129,6 @@
              El boton ya no repite el importe: lo tiene justo encima. -->
         <div class="pack-price">
           <span class="pack-now">39,90&nbsp;&euro;</span>
-          <span class="pack-save">&minus;16&nbsp;%</span>
         </div>
 
         <!-- La lista se lee como una suma: cada pieza con SU precio, el signo
@@ -155,7 +154,15 @@
           </li>
         </ul>
 
-        <p class="pack-suma"><span>Por separado</span><span class="pack-was">47,80&nbsp;&euro;</span></p>
+        <!-- La cuenta, como en un ticket: concepto a la izquierda, importe a
+             la derecha y la linea de puntos uniendolos.
+             El descuento va en EUROS y no en porcentaje. Un "−16 %" obliga a
+             calcular; 7,90 € es lo que te ahorras, y ademas cuadra la resta a
+             la vista: 47,80 menos 7,90 son los 39,90 de arriba. -->
+        <dl class="pack-suma">
+          <div><dt>Por separado</dt><dd class="pack-was">47,80&nbsp;&euro;</dd></div>
+          <div><dt>Descuento del pack</dt><dd class="pack-dto">&minus;7,90&nbsp;&euro;</dd></div>
+        </dl>
 
         <button type="button" class="pack-cta" data-add="pack" data-img="pack-magnesio-libro.jpg"
                 data-nombre="Pack de lanzamiento"
