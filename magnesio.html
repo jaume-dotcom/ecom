@@ -280,7 +280,14 @@
   @media (prefers-reduced-motion: reduce) {
     .forma-mas::before, .forma-mas::after { transition: none; }
   }
-  .forma--nuestra { border-color: var(--khaki-deep); border-width: 2px; }
+  /* La nuestra se distingue con un escalon mas de la misma tinta, no con
+     un color. Igual que la opcion recomendada del selector de compra: aqui
+     las tres filas SE PULSAN, y el marron significa exactamente eso en toda
+     la web. Un sello marron que no se pulsa, al lado de tres cosas que si,
+     manda dos mensajes con el mismo color.
+     Y el borde no engorda: a 2px la fila daba un salto de medio pixel
+     respecto a las otras dos. */
+  .forma--nuestra { border-color: var(--ink); }
   .forma-alto {
     display: flex; align-items: baseline; justify-content: space-between;
     gap: 0.6rem; margin: 0 0 0.5rem;
@@ -292,10 +299,18 @@
   .forma-sello {
     flex: 0 0 auto; font-size: var(--t-3xs); font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.08em;
-    color: #fff; background: var(--khaki-deep);
+    color: #fff; background: var(--ink);
     border-radius: 999px; padding: 0.22rem 0.55rem; white-space: nowrap;
   }
-  .forma-sello--gris { background: var(--ink-faint); }
+  /* El sello secundario, en claro con texto oscuro. Iba en blanco sobre el
+     gris medio y daba 2,88 de contraste, por debajo del minimo de 4,5: era
+     el unico texto de la ficha que no se leia bien.
+     Ademas asi hay jerarquia de verdad entre los dos sellos: el nuestro en
+     tinta solida y este en claro. Antes los dos eran macizos y el secundario
+     pesaba lo mismo que el principal. */
+  .forma-sello--gris {
+    background: rgba(35, 39, 46, 0.07); color: var(--ink-soft);
+  }
   .forma p { margin: 0; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
   .forma .faq-a .forma-dato {
     margin: 0.7rem 0 0; padding-top: 0.7rem;
