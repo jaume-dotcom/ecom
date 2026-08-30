@@ -873,12 +873,17 @@
     display: flex; gap: 1rem; align-items: center;
     background: var(--ink); border-radius: var(--r-md); padding: 1.1rem;
   }
+  /* el hueco es vertical, como el bote: en un cuadrado de 88 el recorte se
+     comia la mitad de la etiqueta */
   .recompra-foto {
-    flex: 0 0 auto; width: 88px; height: 88px;
+    flex: 0 0 auto; width: 104px; height: 132px;
     border-radius: var(--r-md); overflow: hidden; background: var(--paper);
   }
-  .recompra-foto img { width: 100%; height: 100%; object-fit: cover; }
-  .recompra-cuerpo { flex: 1; min-width: 0; text-align: left; }
+  /* contain y no cover: aqui la foto ES el producto, y de un bote recortado
+     no se lee ni la dosis ni la marca. Con contain nunca se corta; el marco
+     blanco rellena lo que sobra */
+  .recompra-foto img { width: 100%; height: 100%; object-fit: contain; }
+  .recompra-cuerpo { flex: 1; min-width: 0; text-align: center; }
   .recompra-nombre { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--paper); }
   .recompra-sub { margin: 0.15rem 0 0.7rem; font-size: var(--t-xs); color: rgba(238, 240, 244, 0.78); }
   /* sobre el fondo oscuro el boton va en claro, no en el marron de marca:
@@ -896,7 +901,14 @@
   @media (max-width: 459px) {
     /* por debajo de 460 la foto deja al boton en 150px y el precio parte */
     .recompra-caja { display: block; }
-    .recompra-foto { width: 100%; height: 140px; margin-bottom: 0.9rem; }
+    /* el marco toma la proporcion del bote (761x1024, o sea 3/4) en vez de
+       ir a lo ancho de la tarjeta. Con un hueco apaisado, el bote entero
+       ocupaba el 56 % del ancho y el resto era blanco; con 3/4 ocupa casi
+       todo y la tarjeta ademas es mas baja */
+    .recompra-foto {
+      width: 160px; height: auto; aspect-ratio: 3 / 4;
+      margin: 0 auto 0.9rem;
+    }
   }
 
   /* ===== BARRA DE COMPRA =====
