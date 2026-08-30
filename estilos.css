@@ -2305,34 +2305,17 @@
     background: #23272e;
   }
   .ayuda { max-width: 34rem; margin: 0 auto; position: relative; z-index: 1; }
-  /* LA MARCA DE AGUA REBOTA EN LAS PAREDES, como el logo en reposo de una
-     consola. Dos animaciones a la vez, una por eje y con duraciones que no
-     son multiplo la una de la otra (23 y 17 segundos): asi el recorrido no
-     se repite y no se ve el patron.
-     Van sobre left y top, no sobre transform, porque cada eje necesita su
-     propia duracion y dos animaciones no pueden compartir transform.
-     9rem y no mas: el panel mide 250px de alto, asi que con una marca de
-     240 el recorrido vertical se quedaba en 10px y no rebotaba, solo se
-     deslizaba de lado. Con 144 le quedan 106px arriba y abajo.
-     Muy lenta a proposito: unos 10 px/s en horizontal y 6 en vertical. A esa
-     velocidad no se percibe como algo que se mueve, sino como que la pagina
-     esta viva. Y sigue al 5 % de opacidad, que es lo que garantiza que el
-     titular de encima no pierda ni un punto de contraste.
-     Solo en movil: en escritorio el panel es mucho mas ancho y el recorrido
-     habria que recalcularlo. */
-  #asesoria .closing-marca { z-index: 0; }
-  @media (max-width: 859px) {
-    #asesoria .closing-marca {
-      top: 0; left: 0; right: auto;
-      width: 9rem; height: auto;
-      animation: marca-x 23s linear infinite alternate,
-                 marca-y 17s linear infinite alternate;
-    }
-    @keyframes marca-x { from { left: 0; } to { left: calc(100% - 9rem); } }
-    @keyframes marca-y { from { top: 0; } to { top: calc(100% - 9rem); } }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    #asesoria .closing-marca { animation: none; }
+  /* La marca de agua, quieta y centrada en el panel. Estuvo rebotando de
+     borde a borde, como el logo en reposo de una consola, y se quita: en un
+     bloque que es una pausa entre dos secciones, algo que se mueve por
+     detras del titular pide atencion en vez de dejar leer.
+     Sigue al 5 % de opacidad, que es lo que garantiza que el titular de
+     encima no pierda contraste. */
+  #asesoria .closing-marca {
+    z-index: 0;
+    top: 50%; left: 50%; right: auto;
+    width: 15rem; height: auto;
+    transform: translate(-50%, -50%);
   }
   #asesoria .ayuda-titulo { color: var(--paper); }
   #asesoria .ayuda-titulo .h2-soft { color: var(--paper); }
