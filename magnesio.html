@@ -627,30 +627,21 @@
     content: ""; position: absolute; left: 0; top: 0.62em;
     width: 5px; height: 5px; border-radius: 50%; background: var(--khaki-deep);
   }
-  /* Las condiciones ya no van sueltas debajo del selector: se abren dentro
-     de la opcion que eliges. Cerradas no ocupan, asi que las tres opciones
-     se leen de un vistazo, y cuando marcas una te cuenta a que te apuntas
-     justo antes de darle al boton.
-     El relleno va en la lista y no en el envoltorio: a 0fr el grid NO
-     colapsa el padding y quedaria un hueco en las opciones cerradas. */
-  .modo-mas {
-    display: grid; grid-template-rows: 0fr; overflow: hidden;
-    transition: grid-template-rows 0.28s ease;
-  }
-  .modo:has(input:checked) .modo-mas { grid-template-rows: 1fr; }
-  .modo-plus { min-height: 0; display: grid; gap: 0.4rem; }
-  .modo:has(input:checked) .modo-plus { padding-top: 0.75rem; }
-  .modo-plus span {
-    position: relative; padding-left: 1.1rem;
-    font-size: var(--t-md); color: var(--ink-soft); line-height: 1.45;
-  }
-  .modo-plus span::before {
-    content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--ink-faint);
+  /* La linea del precio por bote y por dia. Estaba dentro del panel que se
+     desplegaba al elegir; ahora esta siempre puesta, que es lo que pide: es
+     el dato con el que se comparan las tres, y comparar con el panel cerrado
+     era imposible.
+     El resto de lo que decia el panel (aviso antes del cobro, cancelar en un
+     clic, sin permanencia) estaba ya palabra por palabra en la pregunta
+     "¿Como funciona la suscripcion?" de la FAQ de esta misma pagina, asi que
+     al quitar el panel no se pierde nada. */
+  .modo-desc {
+    margin-top: 0.1rem;
+    font-size: var(--t-xs); color: var(--ink-soft); line-height: 1.4;
   }
   /* sin movimiento: el punto sigue apareciendo, pero sin el golpe */
   @media (prefers-reduced-motion: reduce) {
-    .modo, .modo-mas, .modo-marca::after { transition: none; }
+    .modo, .modo-marca::after { transition: none; }
   }
 
   /* el mismo ajuste que .section-head h2 en la hoja compartida: a 24px un
@@ -757,16 +748,11 @@
               <span class="modo-nombre">Suscripción trimestral</span>
               <span class="modo-precio"><b>54,90&nbsp;&euro;</b></span>
             </span>
+            <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
             <span class="modo-sellos">
               <span class="modo-etiqueta">Mejor relación</span>
               <span class="modo-ahorro">&minus;20&nbsp;%</span>
             </span>
-            <span class="modo-mas"><span class="modo-plus">
-              <span>18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
-              <span>Tres botes en cada envío</span>
-              <span>Te avisamos por email antes de cada cobro</span>
-              <span>Cancelas en un clic, sin permanencia</span>
-            </span></span>
           </span>
         </label>
 
@@ -778,15 +764,10 @@
               <span class="modo-nombre">Suscripción bimestral</span>
               <span class="modo-precio"><b>38,90&nbsp;&euro;</b></span>
             </span>
+            <span class="modo-desc">19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
             <span class="modo-sellos">
               <span class="modo-ahorro">&minus;15&nbsp;%</span>
             </span>
-            <span class="modo-mas"><span class="modo-plus">
-              <span>19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
-              <span>Dos botes en cada envío</span>
-              <span>Te avisamos por email antes de cada cobro</span>
-              <span>Cancelas en un clic, sin permanencia</span>
-            </span></span>
           </span>
         </label>
 
@@ -798,10 +779,7 @@
               <span class="modo-nombre">Compra única</span>
               <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-mas"><span class="modo-plus">
-              <span>22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
-              <span>Un bote. Ni renovación ni cobros después</span>
-            </span></span>
+            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
           </span>
         </label>
 
