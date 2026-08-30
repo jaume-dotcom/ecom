@@ -213,10 +213,6 @@
   .bene-txt { flex: 1; }
   .bene-txt h3 { margin: 0 0 0.35rem; font-size: var(--t-lg); font-weight: 600; }
   .bene-txt p { margin: 0; font-size: var(--t-base); color: var(--ink-soft); line-height: 1.55; }
-  .benes-nota {
-    margin: 1.4rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--line);
-    font-size: var(--t-xs); line-height: 1.5; color: var(--ink-soft);
-  }
 
   /* ---------- cifras ----------
      Panel oscuro a sangre, como el de reseñas. Las cifras se leen de lejos
@@ -868,29 +864,29 @@
        que convierte una declaracion autorizada en una que no lo esta.
        Tampoco se nombra la vitamina B6 ni ninguna otra que el bote no
        lleve, aunque la lleven las fichas con las que competimos.
-       PENDIENTE: tres fotos, una por beneficio. El hueco ya tiene el
-       tamaño; solo hay que cambiar el svg por un <img>.
+       Las tres fotos ya estan puestas. Van con alt vacio a proposito: son
+       ilustracion, y lo que dicen ya lo dice el texto que tienen al lado.
        ================================================================ -->
   <section id="beneficios">
     <h2 class="reveal">Para qué <span class="h2-soft">sirve el magnesio</span></h2>
 
     <ul class="benes reveal-esc">
       <li>
-        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5 5.2 13.2a.6.6 0 0 0 .5 1H11l-1 7.3 7.8-10.7a.6.6 0 0 0-.5-1H12l1-7.3z"/></svg></span>
+        <span class="bene-fig"><img src="bene-cansancio.avif" width="800" height="533" alt="" loading="lazy" decoding="async"></span>
         <div class="bene-txt">
           <h3>Menos cansancio</h3>
           <p>El magnesio contribuye a disminuir el cansancio y la fatiga.</p>
         </div>
       </li>
       <li>
-        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 21.5V19c2.6-1 4.5-3.6 4.5-6.6A7.4 7.4 0 0 0 4.7 10L3.1 13a.9.9 0 0 0 .8 1.3H6v2.4c0 1.1.9 2 2 2h1.6v2.8"/><path d="M9.5 10.5a2.2 2.2 0 1 1 3.2 2 2.2 2.2 0 0 0-1.2 2"/></svg></span>
+        <span class="bene-fig"><img src="bene-nervioso.avif" width="800" height="1000" alt="" loading="lazy" decoding="async"></span>
         <div class="bene-txt">
           <h3>Sistema nervioso</h3>
           <p>El magnesio contribuye al funcionamiento normal del sistema nervioso y a la función psicológica normal.</p>
         </div>
       </li>
       <li>
-        <span class="bene-fig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16.5v-2.8a3 3 0 0 1 3-3h3.6l2.6-3.6a3.1 3.1 0 0 1 5.6 1.8v3.4a5.2 5.2 0 0 1-5.2 5.2H6a3 3 0 0 1-3-3z"/><path d="M9.6 10.7c1.5 1.5 2.2 3.2 2.2 5.3"/></svg></span>
+        <span class="bene-fig"><img src="bene-musculos.avif" width="800" height="800" alt="" loading="lazy" decoding="async"></span>
         <div class="bene-txt">
           <h3>Músculos</h3>
           <p>El magnesio contribuye al funcionamiento normal de los músculos.</p>
@@ -898,7 +894,6 @@
       </li>
     </ul>
 
-    <p class="benes-nota reveal">Son las tres declaraciones que la EFSA autoriza para el magnesio y que este bote cumple con su dosis diaria. No hay una cuarta, y las que verás por ahí no están autorizadas.</p>
   </section>
 
 
