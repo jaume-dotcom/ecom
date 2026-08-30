@@ -162,27 +162,31 @@
   }
 
   /* ---------- tira de atributos ----------
-     Mismo componente que la tira de la portada (.ticker, en estilos.css).
-     Aqui solo se le quita el fondo oscuro: va dentro de la ficha, en blanco.
-     El bloque local carga despues de la hoja compartida, asi que estas
-     reglas ganan aunque empaten en especificidad. */
+     El mismo formato que la tira de la portada, banda oscura incluida: se
+     hereda .ticker de estilos.css y aqui solo queda lo que esta pagina
+     necesita de mas.
+     Antes iba en transparente con letra gris, porque vive dentro de la
+     ficha; el problema es que asi no se parecia a la de la portada, que es
+     lo que se buscaba. Ahora va a sangre, como alli. */
   .ticker--sellos {
-    margin: 1.6rem 0 0; border-top: 1px solid var(--line);
-    background: transparent; color: var(--ink-soft);
-    /* en la portada la tira es un bloque suelto a todo lo ancho; aqui vive
-       dentro de la columna de la ficha, que en escritorio es una rejilla.
-       Sin esto la pista en max-content ensancha la columna y desborda. */
+    margin: 1.8rem 0 0;
+    /* la pista va en max-content, y aqui la tira es un item de la rejilla de
+       la ficha: sin esto ensancha la columna y desborda en escritorio */
     min-width: 0; max-width: 100%; contain: inline-size;
+  }
+  /* a sangre solo en movil: en escritorio la ficha son dos columnas y unos
+     margenes negativos se comerian la de al lado */
+  @media (max-width: 859px) {
+    /* width auto ademas de los margenes: .ticker lleva width 100% en la hoja
+       compartida, asi que los margenes negativos la movian pero no la
+       ensanchaban, y se quedaba corta por la derecha */
+    .ticker--sellos {
+      margin-left: -1.6rem; margin-right: -1.6rem;
+      width: auto; max-width: none;
+    }
   }
   /* 24s para las cinco frases: da los mismos ~34 px/s que la portada */
   .ticker--sellos .ticker-track { animation-duration: 24s; }
-  .ticker--sellos span {
-    padding: 0.95rem 0; font-size: var(--t-2xs); letter-spacing: normal;
-  }
-  .ticker--sellos .tk-ico {
-    width: 1.4em; height: 1.4em; color: var(--ink-soft); opacity: 1;
-  }
-  .ticker--sellos span::after { margin: 0 1.35rem; }
 
   /* ---------- para que sirve ----------
      Cada linea es una declaracion autorizada por la EFSA para el magnesio,
@@ -820,7 +824,6 @@
       <div class="garantia">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.2c0 4.4-2.9 7.4-7 8.8-4.1-1.4-7-4.4-7-8.8V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
         <p class="garantia-titulo">30 días de garantía</p>
-        <p>Pruébalo con tranquilidad. Si no te convence, nos lo devuelves y te reembolsamos el importe.</p>
       </div>
 
       <!-- La rejilla de datos clave (360 mg / 96 % VRN / bisglicinato /

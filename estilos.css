@@ -835,8 +835,11 @@
      Caja con filete, debajo del boton. Va ahi y no en el pie: la duda de
      "¿y si no me va bien?" aparece con el dedo encima del boton, no tres
      pantallas mas abajo. */
+  /* centrada: se ha quedado en icono y titular, y dos piezas cortas una
+     encima de otra piden eje, no margen izquierdo. Es la misma excepcion
+     que los bloques de un titular y un boton */
   .garantia {
-    margin: 1.4rem 0 0; padding: 1.3rem 1.2rem;
+    margin: 1.4rem 0 0; padding: 1.3rem 1.2rem; text-align: center;
     border: 1px solid var(--line); border-radius: var(--r-md);
   }
   /* el titular en tinta y no en el gris del parrafo: es un <p>, asi que la
