@@ -859,53 +859,52 @@
   }
 
   /* ===== SEGUNDO PUNTO DE COMPRA =====
-     Va donde termina el argumento fuerte, no en cualquier hueco: quien
-     acaba de leer por que bisglicinato y no oxido esta convencido ahi, y
-     hasta ahora el sitio mas cercano para comprar estaba cinco pantallas
-     mas arriba.
+     Va donde termina el argumento fuerte: quien acaba de leer por que
+     bisglicinato y no oxido esta convencido ahi, y el sitio de comprar mas
+     cercano estaba cinco pantallas mas arriba.
      Es un recordatorio, no otro selector: repite lo que ya esta elegido.
-     Dos selectores con el mismo grupo de radios se pisarian. */
+     Dos grupos de radios con el mismo name se pisarian.
+
+     EN CLARO Y NO EN TINTA. Estuvo en fondo oscuro y se descarta, y no por
+     gusto: sobre tinta el marron de accion separa 2,48 del fondo, por
+     debajo del minimo de 3 que necesita un control, asi que habia que pasar
+     el boton a crema. O sea que el fondo oscuro obligaba a renunciar al
+     color de accion de la marca justo en el boton de comprar.
+     Ademas los paneles oscuros de esta web son los de ARGUMENTAR (cifras,
+     reseñas, por donde empezar, como elegimos) y este es de ACTUAR. */
   .recompra-caja {
-    display: flex; gap: 1rem; align-items: center;
-    background: var(--ink); border-radius: var(--r-md); padding: 1.1rem;
+    background: var(--tint); border: 1px solid var(--line);
+    border-radius: var(--r-md); padding: 1.2rem;
+    box-shadow: 0 2px 16px rgba(35, 39, 46, 0.06);
   }
-  /* el hueco es vertical, como el bote: en un cuadrado de 88 el recorte se
-     comia la mitad de la etiqueta */
+  /* La foto manda, pero con la proporcion del bote y no a todo el ancho.
+     Se probo a 100 % con marco 4/3 y el bote entero ocupaba solo el 56 % del
+     marco: el resto, blanco. Con 3/4 llena el 99 % y ademas la tarjeta no se
+     dispara de alto.
+     200px de ancho frente a los 160 de antes: la foto crece un 25 % y sigue
+     siendo la pieza mas grande de la tarjeta. */
   .recompra-foto {
-    flex: 0 0 auto; width: 104px; height: 132px;
-    border-radius: var(--r-md); overflow: hidden; background: var(--paper);
+    width: 200px; aspect-ratio: 3 / 4;
+    border-radius: var(--r-sm); overflow: hidden; background: var(--paper);
+    margin: 0 auto 1.1rem;
   }
   /* contain y no cover: aqui la foto ES el producto, y de un bote recortado
-     no se lee ni la dosis ni la marca. Con contain nunca se corta; el marco
-     blanco rellena lo que sobra */
+     no se lee ni la dosis ni la marca */
   .recompra-foto img { width: 100%; height: 100%; object-fit: contain; }
-  .recompra-cuerpo { flex: 1; min-width: 0; text-align: center; }
-  .recompra-nombre { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--paper); }
-  .recompra-sub { margin: 0.15rem 0 0.7rem; font-size: var(--t-xs); color: rgba(238, 240, 244, 0.78); }
-  /* sobre el fondo oscuro el boton va en claro, no en el marron de marca:
-     el marron sobre tinta apenas separa del fondo. Es el mismo cambio que
-     ya hacen los otros dos paneles oscuros de la web, el de "por donde
-     empezar" y el de "como elegimos". */
+  .recompra-cuerpo { text-align: center; }
+  .recompra-nombre {
+    margin: 0; font-size: var(--t-2xl); font-weight: 600;
+    letter-spacing: var(--tracking-lg); color: var(--ink);
+  }
+  .recompra-sub { margin: 0.25rem 0 1.1rem; font-size: var(--t-sm); color: var(--ink-soft); }
   .recompra-btn {
-    display: block; width: 100%; padding: 0.8rem 1.2rem;
+    display: block; width: 100%; padding: 0.95rem 1.2rem;
     border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-pop); color: var(--ink);
-    font-family: var(--font); font-size: var(--t-base); font-weight: var(--btn-peso);
+    background: var(--khaki-deep); color: var(--paper);
+    font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
-  .recompra-btn:hover { background: var(--paper); }
-  @media (max-width: 459px) {
-    /* por debajo de 460 la foto deja al boton en 150px y el precio parte */
-    .recompra-caja { display: block; }
-    /* el marco toma la proporcion del bote (761x1024, o sea 3/4) en vez de
-       ir a lo ancho de la tarjeta. Con un hueco apaisado, el bote entero
-       ocupaba el 56 % del ancho y el resto era blanco; con 3/4 ocupa casi
-       todo y la tarjeta ademas es mas baja */
-    .recompra-foto {
-      width: 160px; height: auto; aspect-ratio: 3 / 4;
-      margin: 0 auto 0.9rem;
-    }
-  }
+  .recompra-btn:hover { background: var(--olive); }
 
   /* ===== BARRA DE COMPRA =====
      Aparece pegada abajo cuando el selector de compra se ha ido de la
