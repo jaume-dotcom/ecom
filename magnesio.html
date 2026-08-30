@@ -228,7 +228,15 @@
     position: absolute; inset: 0; z-index: 0;
     width: 100%; height: 100%; object-fit: cover;
     pointer-events: none;
+    transition: opacity 0.5s ease;
   }
+  /* El video no cierra el bucle: entre su primer fotograma y el ultimo hay
+     25 puntos de diferencia sobre 255, o sea un tiron visible cada 10
+     segundos. Como no se puede recodificar el archivo desde aqui, se tapa:
+     medio segundo antes del final la textura se funde, y al volver a empezar
+     entra otra vez. Debajo esta la misma tinta del panel, asi que lo unico
+     que se ve es la textura yendose y volviendo. */
+  .cifras-video.fundido { opacity: 0; }
   /* 85 % de tinta encima. No es un gusto: el pixel mas claro del video es
      rgb(236,233,222) y el titular blanco sin velo daria 1,22 de contraste,
      el mismo numero que llevaba el hero cuando era un bloqueante. */
@@ -1495,6 +1503,28 @@
 
 <script>
 (function () {
+  // FUNDIDO DEL FONDO EN VIDEO. El clip no cierra el bucle, asi que al
+  // reiniciarse da un salto. Se funde medio segundo antes del final y se
+  // recupera al volver a empezar.
+  // Va con timeupdate y no con un temporizador: el video puede tardar en
+  // arrancar o pararse solo en una pestaña de fondo, y un temporizador se
+  // desincronizaria del clip a los pocos bucles.
+  var fondo = document.querySelector('.cifras-video');
+  if (fondo) {
+    var MARGEN = 0.5;
+    fondo.addEventListener('timeupdate', function () {
+      if (!fondo.duration) { return; }
+      var queda = fondo.duration - fondo.currentTime;
+      fondo.classList.toggle('fundido', queda < MARGEN);
+    });
+    // al reiniciar el bucle vuelve a entrar
+    fondo.addEventListener('seeked', function () {
+      if (fondo.currentTime < MARGEN) { fondo.classList.remove('fundido'); }
+    });
+    var intento = fondo.play();
+    if (intento && intento.catch) { intento.catch(function () {}); }
+  }
+
   // el observador de la portada: sin el, todo lo que lleve .reveal se queda
   // a opacidad 0 para siempre, y el pie va entero con esas clases
   var items = document.querySelectorAll('.reveal, .reveal-esc');
