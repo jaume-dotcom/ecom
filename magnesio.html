@@ -523,9 +523,10 @@
      titular, una frase y un campo. Nada con lo que alinearse, asi que se
      centra. Y asi coincide con la captura de la portada, que es la misma. */
   .alta { text-align: center; }
-  /* el h2 lleva text-align:left en su propia regla, que le gana al del
-     bloque: hay que decirselo a el */
-  .alta h2 { text-align: center; }
+  /* el h2 y su entradilla llevan text-align:left en sus propias reglas, que
+     le ganan a la del bloque por especificidad: heredar no basta, hay que
+     decirselo a cada uno */
+  .alta h2, .alta h2 + p { text-align: center; }
   .alta h2, .alta > p { margin-left: auto; margin-right: auto; }
   .alta form { display: grid; gap: 0.7rem; margin: 1.2rem 0 0; }
   .alta input {
@@ -1154,7 +1155,7 @@
 
   <section class="alta" id="alta">
     <h2 class="reveal">&iquest;Te avisamos <span class="h2-soft">el día que salga?</span></h2>
-    <p>Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento para los primeros.</p>
+    <p>Déjanos tu email y te avisamos el día que salga, con una oferta especial por ser de los primeros.</p>
     <form id="form-alta">
       <input type="email" placeholder="Tu email" aria-label="Tu email" required>
       <button type="submit">Avísame</button>
