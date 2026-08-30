@@ -69,9 +69,10 @@
     --khaki-deep: #8f5510;
     /* el hover acompaña: mismo tono, un escalon mas oscuro */
     --olive: #74440c;
-    /* el azul de marca, el mismo tono del pie y de los paneles oscuros pero
-       aclarado para poder usarse como texto sobre fondos claros */
-    --azul: #2f4a6d;
+    /* El azul de marca. Se usa como FONDO, no como texto: es la caja del
+       precio del pack, lo unico que tenia que despegarse del blanco.
+       Encima van blanco (11,55) y crema (8,55). */
+    --azul: #1f3a5c;
     --olive-soft: #6b5c46;
     --line: #dce1e7;
     --line-strong: #23272e;
@@ -2660,14 +2661,15 @@
   #libro .pack-price {
     display: grid; justify-items: center; gap: 0.2rem;
     margin-bottom: 1.4rem; padding: 1.1rem 1rem;
-    background: var(--khaki-pop); border-radius: var(--r-md);
+    background: var(--azul); border-radius: var(--r-md);
   }
-  #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
+  #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--paper); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
-  /* en el azul de marca y no en el oliva: sobre el crema pesa mas y no se
-     confunde con el marron de los botones, que significa "esto se pulsa" */
+  /* sobre el azul de la caja el texto va en crema, que es el acento que la
+     web ya usa encima de los paneles oscuros: el boton de "por donde
+     empezar", la firma del pie del criterio y los puntos de las reseñas */
   #libro .pack-save {
-    font-size: var(--t-lg); color: var(--azul); font-weight: 700;
+    font-size: var(--t-lg); color: var(--khaki-pop); font-weight: 700;
     flex-basis: 100%; margin-top: 0.35rem;
     letter-spacing: 0.01em;
   }
