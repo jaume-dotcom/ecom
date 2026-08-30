@@ -871,7 +871,7 @@
      Dos selectores con el mismo grupo de radios se pisarian. */
   .recompra-caja {
     display: flex; gap: 1rem; align-items: center;
-    background: var(--tint); border-radius: var(--r-md); padding: 1.1rem;
+    background: var(--ink); border-radius: var(--r-md); padding: 1.1rem;
   }
   .recompra-foto {
     flex: 0 0 auto; width: 88px; height: 88px;
@@ -879,16 +879,20 @@
   }
   .recompra-foto img { width: 100%; height: 100%; object-fit: cover; }
   .recompra-cuerpo { flex: 1; min-width: 0; text-align: left; }
-  .recompra-nombre { margin: 0; font-size: var(--t-lg); font-weight: 600; }
-  .recompra-sub { margin: 0.15rem 0 0.7rem; font-size: var(--t-xs); color: var(--ink-soft); }
+  .recompra-nombre { margin: 0; font-size: var(--t-lg); font-weight: 600; color: var(--paper); }
+  .recompra-sub { margin: 0.15rem 0 0.7rem; font-size: var(--t-xs); color: rgba(238, 240, 244, 0.78); }
+  /* sobre el fondo oscuro el boton va en claro, no en el marron de marca:
+     el marron sobre tinta apenas separa del fondo. Es el mismo cambio que
+     ya hacen los otros dos paneles oscuros de la web, el de "por donde
+     empezar" y el de "como elegimos". */
   .recompra-btn {
     display: block; width: 100%; padding: 0.8rem 1.2rem;
     border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--khaki-pop); color: var(--ink);
     font-family: var(--font); font-size: var(--t-base); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
-  .recompra-btn:hover { background: var(--olive); }
+  .recompra-btn:hover { background: var(--paper); }
   @media (max-width: 459px) {
     /* por debajo de 460 la foto deja al boton en 150px y el precio parte */
     .recompra-caja { display: block; }
