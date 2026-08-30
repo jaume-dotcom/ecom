@@ -2652,24 +2652,28 @@
   #libro .pack-list b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
   #libro .pack-list span { font-size: var(--t-base); color: var(--ink-soft); }
 
-  /* El precio del pack, en su propia caja crema. Suelto sobre blanco era
-     un numero grande mas, del mismo color que todo lo demas y sin nada que
-     lo separara de la lista que viene debajo. Con fondo propio se lee como
-     lo que es: la oferta, y no un dato del bloque. */
+  /* SIN CAJA. La tenia, y pesaba de mas: un bloque oscuro justo encima del
+     boton macizo, dos pesos fuertes seguidos, y ademas centrado cuando el
+     resto del pack quedo a la izquierda.
+     Lo que destaca ahora es el AHORRO, en pastilla crema, y no el fondo. Es
+     el mismo tratamiento que ya usan las opciones de compra de la ficha:
+     precio a secas, ahorro en pastilla. Dos bloques que dicen lo mismo con
+     el mismo lenguaje. */
   #libro .pack-price {
-    display: grid; justify-items: center; gap: 0.2rem;
-    margin-bottom: 1.4rem; padding: 1.1rem 1rem;
-    background: var(--ink); border-radius: var(--r-md);
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    justify-content: flex-start; gap: 0.7rem;
+    margin-bottom: 1.3rem; padding: 0; background: none;
   }
-  #libro .pack-now { font-size: var(--t-7xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--paper); }
+  /* mas grande que antes: sin caja detras, el peso lo tiene que poner el
+     tamaño */
+  #libro .pack-now { font-size: var(--t-8xl); font-weight: 600; letter-spacing: var(--tracking-lg); line-height: 1; color: var(--ink); }
   #libro .pack-was { font-size: var(--t-lg); color: var(--ink-faint); text-decoration: line-through; line-height: 1.2; }
-  /* sobre la caja oscura el texto va en crema, que es el acento que la
-     web ya usa encima de los paneles oscuros: el boton de "por donde
-     empezar", la firma del pie del criterio y los puntos de las reseñas */
+  /* la pastilla del ahorro, la misma que .modo-ahorro en la ficha */
   #libro .pack-save {
-    font-size: var(--t-lg); color: var(--khaki-pop); font-weight: 700;
-    flex-basis: 100%; margin-top: 0.35rem;
-    letter-spacing: 0.01em;
+    font-size: var(--t-sm); font-weight: 600; letter-spacing: 0.01em;
+    color: var(--olive); background: var(--khaki-pop);
+    border-radius: 999px; padding: 0.25rem 0.7rem;
+    flex-basis: auto; margin-top: 0; white-space: nowrap;
   }
 
   /* el precio va dentro del boton: aqui la accion es comprar, y el precio es
