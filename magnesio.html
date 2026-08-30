@@ -555,19 +555,18 @@
     border-radius: var(--r-md); background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
-  /* La elegida cambia el borde a tinta y lava el fondo con un crema muy
-     claro. Nada mas.
-     Se probo con el crema de la marca a plena fuerza, el filete de 1,5 a
-     2px y una sombra debajo, y era demasiado ruido para lo unico que hay
-     que decir: cual de las tres esta marcada. Ademas engordar el borde
-     obligaba a recortar el relleno medio pixel para que las de al lado no
-     bailaran, o sea un apaño para un efecto que no hacia falta.
-     El lavado apenas se ve en una opcion suelta, pero con las tres en
-     columna la diferencia salta sin buscar el circulito. */
-  .modo:has(input:checked) {
-    border-color: var(--ink);
-    background: #f8f6f2;
-  }
+  /* La elegida solo cambia el filete, que pasa a tinta. Sin fondo, sin
+     sombra y sin engordar el borde.
+     Se probo con un lavado crema detras y se quita: teñir de sepia la
+     opcion marcada ensucia el bloque y ademas mete un color calido en el
+     unico sitio de la pagina que no lo necesita. El filete negro y el
+     punto relleno ya dicen cual esta marcada.
+     Toda la escala de este selector es la misma tinta a tres fuerzas:
+       --line        las que no pasan nada
+       --ink-faint   la recomendada, sin marcar
+       --ink         la elegida
+     Sin un solo color en todo el bloque, que es lo que lo hace callado. */
+  .modo:has(input:checked) { border-color: var(--ink); }
   .modo input { position: absolute; opacity: 0; width: 0; height: 0; }
   /* circulo dibujado a mano: el radio nativo no se puede agrandar y con 60+
      anos una diana de 13px es un ejercicio de punteria */
@@ -586,7 +585,7 @@
     transition: transform 0.16s ease-out;
   }
   .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
-  .modo input:focus-visible + .modo-marca { outline: 2px solid var(--azul); outline-offset: 3px; }
+  .modo input:focus-visible + .modo-marca { outline: 2px solid var(--ink); outline-offset: 3px; }
 
   .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
   /* cerrada, cada opcion son dos lineas: nombre y precio arriba, sellos
@@ -604,12 +603,12 @@
      premarcada. Premarcar la cara lo prohibe el articulo 22 de la directiva
      de derechos del consumidor, asi que la que viene marcada es la unica que
      no compromete a nada.
-     Todo el señalamiento de este bloque va en AZUL y no en el marron de
-     marca. El marron significa "esto se pulsa" en toda la web, y el boton de
-     añadir esta a dos dedos: con los dos en marron habia dos marrones en la
-     misma pantalla y solo uno se podia pulsar. Ahora cada color dice una
-     sola cosa. */
-  .modo--destacado { border-color: var(--azul); border-width: 2px; }
+     El filete de la recomendada NO es un color: es un escalon mas de la
+     misma tinta. Estuvo en marron y chocaba, porque el marron significa
+     "esto se pulsa" y el boton de añadir esta a dos dedos; estuvo en azul y
+     era un color de mas. En gris medio se distingue de las otras dos sin
+     pedir nada. Quien lo dice de verdad es el sello. */
+  .modo--destacado { border-color: var(--ink-faint); }
   /* Los dos sellos caben ahora en una linea. Antes eran "LA MEJOR RELACION"
      y "Ahorras un 20 %", que a 375px partian en dos filas y estiraban la
      opcion casi un tercio de su alto. Dicen lo mismo con menos: el ahorro
@@ -617,13 +616,13 @@
   .modo-etiqueta {
     display: inline-block;
     font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.06em; color: #fff; background: var(--azul);
+    letter-spacing: 0.06em; color: #fff; background: var(--ink);
     border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
 
   .modo-ahorro {
     font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.06em;
-    color: var(--azul); background: var(--azul-pop);
+    color: var(--ink); background: rgba(35, 39, 46, 0.07);
     border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
   }
   .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
@@ -651,7 +650,7 @@
   }
   .modo-plus span::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--azul);
+    width: 5px; height: 5px; border-radius: 50%; background: var(--ink-faint);
   }
   /* sin movimiento: el punto sigue apareciendo, pero sin el golpe */
   @media (prefers-reduced-motion: reduce) {

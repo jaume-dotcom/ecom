@@ -69,15 +69,6 @@
     --khaki-deep: #8f5510;
     /* el hover acompaña: mismo tono, un escalon mas oscuro */
     --olive: #74440c;
-    /* El azul de marca, para SEÑALAR sin llamar a la accion. El marron
-       significa "esto se pulsa" en toda la web, asi que usarlo tambien para
-       destacar la opcion recomendada mezclaba dos mensajes: uno de los dos
-       marrones no se podia pulsar. Con el azul cada color dice una sola
-       cosa: marron, actua; azul, mira aqui.
-       Blanco encima 11,55 · el azul sobre blanco 11,55 · el azul sobre la
-       pastilla clara 9,23. */
-    --azul: #1f3a5c;
-    --azul-pop: #dde7f2;
     --olive-soft: #6b5c46;
     --line: #dce1e7;
     --line-strong: #23272e;
