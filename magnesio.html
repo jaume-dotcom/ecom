@@ -219,10 +219,27 @@
      y el pie explica de donde sale cada una: una cifra sin fuente al lado
      es justo lo que esta pagina dice no hacer. */
   .cifras-panel {
+    position: relative; overflow: hidden;
     background: var(--ink); color: var(--paper);
     margin-left: -1.6rem; margin-right: -1.6rem;
     padding: 3rem 1.6rem 2.4rem;
   }
+  .cifras-video {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    pointer-events: none;
+  }
+  /* 85 % de tinta encima. No es un gusto: el pixel mas claro del video es
+     rgb(236,233,222) y el titular blanco sin velo daria 1,22 de contraste,
+     el mismo numero que llevaba el hero cuando era un bloqueante. */
+  .cifras-velo {
+    position: absolute; inset: 0; z-index: 1;
+    background: rgba(35, 39, 46, 0.85); pointer-events: none;
+  }
+  /* todo el contenido por encima de los dos */
+  .cifras-panel > *:not(.cifras-video):not(.cifras-velo) { position: relative; z-index: 2; }
+  /* sin movimiento: se queda el fondo plano que ya habia */
+  @media (prefers-reduced-motion: reduce) { .cifras-video { display: none; } }
   .cifras-panel h2 { color: var(--paper); }
   .cifras-panel h2 .h2-soft { color: var(--paper); }
   .cifras-panel > p { color: rgba(238, 240, 244, 0.66); }
@@ -907,6 +924,15 @@
        Si algun dia hay datos propios, van aqui con su metodo al lado.
        ================================================================ -->
   <section class="cifras-panel" id="cifras">
+    <!-- El video de fondo y su velo. El velo esta al 85 % y no es decorativo:
+         medido sobre fotogramas reales, el pixel mas claro del video es
+         rgb(236,233,222) y sin velo el titular blanco encima daria 1,22 de
+         contraste. Con el 85 % da 9,77 y el parrafo 6,63.
+         Sin sonido, sin controles y fuera del arbol de accesibilidad: es una
+         textura, no un contenido. -->
+    <video class="cifras-video" src="cifras-fondo.mp4" autoplay muted loop playsinline
+           preload="metadata" aria-hidden="true" tabindex="-1"></video>
+    <span class="cifras-velo" aria-hidden="true"></span>
     <h2 class="reveal">Los números <span class="h2-soft">que sí se pueden dar</span></h2>
     <p>Ninguno sale de una encuesta nuestra. Todos se pueden comprobar.</p>
 
