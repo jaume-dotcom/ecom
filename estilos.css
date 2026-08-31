@@ -2728,3 +2728,27 @@
     letter-spacing: var(--tracking-lg); font-weight: 700;
   }
   .cabecera-lede { margin: 0; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); }
+
+  /* ===== EL PACK DE LA LANDING, EN CORTO (SOLO MOVIL) =====
+     Fuera la foto. La misma imagen abre libro.html, que es donde el pack ES
+     el producto; aqui era un teaser que costaba 675 de los 1322 px del
+     bloque, mas de la mitad. El bloque entero pedia 1,63 pantallas de movil
+     para decir un precio y dos lineas. De referencia, el bloque de compra de
+     be levels ocupa 370 px de la primera pantalla a su boton.
+     Con loading=lazy dentro de un contenedor oculto la imagen no llega a
+     descargarse, asi que en movil son 107 KB menos.
+
+     SOLO MOVIL, y no por capricho: en escritorio el pack es una rejilla de
+     dos columnas con la foto a la izquierda, y quitarla dejaria la mitad de
+     la tarjeta vacia. */
+  @media (max-width: 859px) {
+    .pack-compacto .pack-media { display: none; }
+    #libro .pack-compacto .pack-body { padding: 1.5rem 1.3rem 1.4rem; }
+    #libro .pack-compacto .pack-price { margin-bottom: 1rem; }
+    #libro .pack-compacto .pack-list { margin-bottom: 1.1rem; }
+    #libro .pack-compacto .pack-list li + li { margin-top: 1.55rem; }
+    /* el signo sube con el hueco: si no, se queda pegado al nombre de arriba */
+    #libro .pack-compacto .pack-list li + li::before { top: -1.45rem; }
+    .pack-compacto .pack-suma { margin: 0.8rem 0 1.05rem; }
+    .pack-compacto .pack-garantias { margin-top: 0.7rem; }
+  }
