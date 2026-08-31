@@ -2585,6 +2585,10 @@
       0 16px 40px -20px rgba(35, 39, 46, 0.26);
   }
   .pack-media { background: var(--tint); }
+  /* solo movil: en escritorio manda la foto grande de la columna izquierda */
+  .pack-fotos { display: none; }
+  /* en escritorio tampoco: alli el titular no se toca */
+  .oferta-kicker { display: none; }
   .pack-media img { width: 100%; height: auto; display: block; }
   #libro .pack-body { padding: 1.9rem 1.5rem 1.8rem; text-align: left; }
 
@@ -2751,4 +2755,60 @@
     #libro .pack-compacto .pack-list li + li::before { top: -1.45rem; }
     .pack-compacto .pack-suma { margin: 0.8rem 0 1.05rem; }
     .pack-compacto .pack-garantias { margin-top: 0.7rem; }
+
+    /* LAS DOS PIEZAS, EN PEQUENO Y JUNTAS. Quitar la foto grande dejaba la
+       portada del libro sin aparecer en toda la landing.
+       Se probo un sello por linea de la cuenta, que es la convencion, y no
+       cabe: la tarjeta mide 282 px de ancho y al nombre le quedaban 147, con
+       "Magnesio Bisglicinato" partido en dos lineas. Juntas arriba las lineas
+       se quedan como estaban.
+       Contain y no cover: una portada recortada no se lee. Mismo criterio que
+       .recompra-foto en la ficha.
+       3/4 porque las dos piezas son verticales y asi casi no sobra fondo. */
+    .pack-compacto .pack-fotos {
+      display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 1rem;
+    }
+    .pack-compacto .pack-fotos span {
+      position: relative; height: 91px;
+      background: var(--tint); border-radius: var(--r-sm); overflow: hidden;
+    }
+    /* misma altura las dos y el ancho segun su forma, en vez de meter las dos
+       en la misma caja: el bote es 3/4 y la cubierta 2/3, y forzarlas al mismo
+       marco dejaba franjas de fondo en una de las dos */
+    .pack-compacto .foto-bote { width: 68px; }
+    .pack-compacto .foto-bote img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    /* LA CUBIERTA, RECORTADA DE LA FOTO DE LA CAJA.
+       No hay un fichero suelto de la portada y esta foto la lleva entera, de
+       frente y sin perspectiva, asi que se encuadra por CSS en vez de pedir
+       una imagen nueva.
+       Medido sobre el original de 1000x1241: la cubierta ocupa de x=255 a
+       x=485 y de y=658 a y=962, o sea 230x304 px. El primer encuadre iba de
+       y=627 a y=980 y colaba una franja de carton arriba y otra abajo.
+       Los numeros van en % de esta ventana para que el encuadre aguante:
+         ancho  1000/230 = 435%
+         izq    -255/230 = -110.8%
+         arriba -658/304 = -216.9% */
+    .pack-compacto .foto-libro { width: 69px; }
+    .pack-compacto .foto-libro img {
+      position: absolute; display: block;
+      width: 435%; max-width: none; height: auto;
+      left: -110.8%; top: -216.9%;
+    }
+
+    /* LA ETIQUETA DE OFERTA. Misma familia que .kno y que la cuenta de abajo.
+       En --t-2xs y no en --t-3xs como .kno: a este publico no se le pone
+       letra de 12 px, y menos en versalitas.
+       Khaki sobre papel separa 6,04, de sobra para texto. */
+    #libro .oferta-kicker {
+      display: block; margin: 0;
+      font-family: var(--font-mono); font-size: var(--t-2xs); font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--khaki-deep);
+    }
+    /* y el titular, un escalon por encima de los otros cinco */
+    #libro .section-head h2 { font-size: var(--t-6xl); }
+    /* el gap de .section-head es 0.7rem para dos piezas; con tres, la
+       etiqueta se pega demasiado al titular */
+    #libro .section-head > div { display: grid; gap: 0.45rem; }
   }

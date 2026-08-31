@@ -403,6 +403,13 @@
   <section class="band" id="libro">
     <div class="section-head reveal">
       <div>
+        <!-- Esta es la unica seccion que vende, y su titular era identico al
+             de las otras cinco. La etiqueta la separa sin romper el sistema:
+             monoespaciada, la misma de la cuenta del ticket de abajo, asi que
+             el ojo lee "aqui se habla de dinero" antes que la primera letra.
+             Y devuelve el ahorro al nivel de titular, que es de donde salio
+             al quitar la pastilla del -16 %. -->
+        <p class="oferta-kicker">Ahorras 7,90&nbsp;&euro;</p>
         <h2>Oferta <span class="h2-soft">de lanzamiento</span></h2>
         <p>La fórmula y el criterio para entenderla.</p>
       </div>
@@ -422,6 +429,21 @@
              dos lineas de contenido y solo despues cuanto costaba, asi que
              el numero, que es el que decide, llegaba el ultimo.
              El boton ya no repite el importe: lo tiene justo encima. -->
+        <!-- Las dos piezas, en pequeno y juntas. Entran para recuperar lo
+             unico que se perdia al quitar la foto grande: la portada del
+             libro no aparece en ningun otro sitio de la landing.
+             Van AQUI y no una por linea de la cuenta: la tarjeta mide 282 px
+             de ancho, y metiendo un sello en la fila al nombre le quedaban
+             147 px y "Magnesio Bisglicinato" se partia en dos lineas.
+             Cuestan 106 px de alto; la foto grande costaba 675. -->
+        <div class="pack-fotos">
+          <span class="foto-bote"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></span>
+          <!-- La portada sale RECORTADA de la foto de la caja, que ya estaba en
+               el repo. No hay un fichero suelto de la cubierta, y esta foto la
+               contiene entera y de frente. Encuadre en estilos.css. -->
+          <span class="foto-libro"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></span>
+        </div>
+
         <div class="pack-price">
           <span class="pack-now">39,90&nbsp;&euro;</span>
         </div>
