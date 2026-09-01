@@ -1534,24 +1534,28 @@
      ya ha decidido no tiene que saltarselo para llegar al CTA, y quien
      duda lo tiene sin bajar. Discreto a proposito, que el hero no es una
      ficha de producto: el peso lo lleva el titular. */
-  /* La oferta va dentro de la caja del boton, en dos lineas. El boton se
-     ajusta al texto en vez de ir de lado a lado de la tarjeta, y por eso
-     la letra baja: con el cuerpo normal, dos lineas hacian un boton
-     demasiado alto para lo poco que dice. */
+  /* El boton, UNA SOLA LINEA. Antes llevaba dentro el precio y el rotulo, y
+     para que la caja no creciera habia que encoger las dos: el boton
+     principal de la portada acababa con la letra mas pequena de la tarjeta.
+     Ahora dice una cosa, al tamano de boton de toda la web: hereda --btn-txt
+     y --btn-relleno de .hero-cta en vez de pisarlos. */
   .hero-cta--oferta {
     display: inline-block; width: auto; text-align: center;
-    padding: 0.62rem 1.6rem; line-height: 1.2;
-  }
-  .hero-cta-precio {
-    display: block; font-size: var(--t-lg); font-weight: 600;
     letter-spacing: var(--tracking-lg);
+    /* con solo el precio dentro, la pastilla se quedaba en 108 px: demasiado
+       poca cosa para la accion principal de la portada */
+    min-width: 12rem;
   }
-  /* el rotulo, en versalita: dice de que es el numero sin robarle sitio */
-  .hero-cta-nombre {
-    display: block; margin-top: 0.1rem;
-    font-size: var(--t-3xs); font-weight: 500;
+  /* el rotulo, fuera y debajo. En versalita pequena: dice de que es el numero
+     sin pelearse con el.
+     Ya no va sobre el marron del boton sino sobre la foto, asi que sube a 0.92
+     de blanco y lleva sombra, como el resto del texto del hero. */
+  .hero-cta-nota {
+    margin: 0.55rem 0 0;
+    font-size: var(--t-2xs); font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 12px rgba(22, 19, 15, 0.55);
   }
 
   /* las flechas siguen siendo circulos blancos: sobre el degradado funcionan */
