@@ -2842,8 +2842,10 @@
       border-bottom: 1px dotted var(--ink-faint);
       transform: translateY(-0.28em);
     }
+    /* el detalle cruza las dos columnas: debajo del precio no hay nada, y en
+       la columna 1 sola el nombre del libro se partia en dos lineas */
     #libro .pack-compacto .pack-item > span {
-      grid-column: 1; grid-row: 2;
+      grid-column: 1 / -1; grid-row: 2;
       font-size: var(--t-xs); color: var(--ink-soft);
     }
     #libro .pack-compacto .pack-item-precio {
