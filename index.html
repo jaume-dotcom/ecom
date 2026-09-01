@@ -401,13 +401,6 @@
   <section class="band" id="libro">
     <div class="section-head reveal">
       <div>
-        <!-- Esta es la unica seccion que vende, y su titular era identico al
-             de las otras cinco. La etiqueta la separa sin romper el sistema:
-             monoespaciada, la misma de la cuenta del ticket de abajo, asi que
-             el ojo lee "aqui se habla de dinero" antes que la primera letra.
-             Y devuelve el ahorro al nivel de titular, que es de donde salio
-             al quitar la pastilla del -16 %. -->
-        <p class="oferta-kicker">Ahorras 7,90&nbsp;&euro;</p>
         <h2>Oferta <span class="h2-soft">de lanzamiento</span></h2>
         <p>La fórmula y el criterio para entenderla.</p>
       </div>
@@ -436,6 +429,9 @@
              Cuestan 106 px de alto; la foto grande costaba 675. -->
         <div class="pack-fotos">
           <span class="foto-bote"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></span>
+          <!-- el signo, entre las dos piezas. Decorativo: la suma ya se lee en
+               la cuenta de abajo, aqui solo dice que van juntas -->
+          <span class="pack-mas" aria-hidden="true">+</span>
           <!-- La portada sale RECORTADA de la foto de la caja, que ya estaba en
                el repo. No hay un fichero suelto de la cubierta, y esta foto la
                contiene entera y de frente. Encuadre en estilos.css. -->
@@ -476,7 +472,7 @@
              la vista: 47,80 menos 7,90 son los 39,90 de arriba. -->
         <dl class="pack-suma">
           <div><dt>Por separado</dt><dd class="pack-was">47,80&nbsp;&euro;</dd></div>
-          <div><dt>Descuento del pack</dt><dd class="pack-dto">&minus;7,90&nbsp;&euro;</dd></div>
+          <div><dt>Descuento 16&nbsp;%</dt><dd class="pack-dto">&minus;7,90&nbsp;&euro;</dd></div>
         </dl>
 
         <button type="button" class="pack-cta" data-add="pack" data-img="pack-magnesio-libro.jpg"

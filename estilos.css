@@ -2591,8 +2591,6 @@
   .pack-media { background: var(--tint); }
   /* solo movil: en escritorio manda la foto grande de la columna izquierda */
   .pack-fotos { display: none; }
-  /* en escritorio tampoco: alli el titular no se toca */
-  .oferta-kicker { display: none; }
   .pack-media img { width: 100%; height: auto; display: block; }
   #libro .pack-body { padding: 1.9rem 1.5rem 1.8rem; text-align: left; }
 
@@ -2754,9 +2752,10 @@
     #libro .pack-compacto .pack-body { padding: 1.5rem 1.3rem 1.4rem; }
     #libro .pack-compacto .pack-price { margin-bottom: 1rem; }
     #libro .pack-compacto .pack-list { margin-bottom: 1.1rem; }
-    #libro .pack-compacto .pack-list li + li { margin-top: 1.55rem; }
-    /* el signo sube con el hueco: si no, se queda pegado al nombre de arriba */
-    #libro .pack-compacto .pack-list li + li::before { top: -1.45rem; }
+    /* el + se ha ido a las fotos, asi que las dos lineas se pegan y ya no
+       hace falta el hueco que le dejaba sitio */
+    #libro .pack-compacto .pack-list li + li { margin-top: 0.85rem; }
+    #libro .pack-compacto .pack-list li + li::before { content: none; }
     .pack-compacto .pack-suma { margin: 0.8rem 0 1.05rem; }
     .pack-compacto .pack-garantias { margin-top: 0.7rem; }
 
@@ -2770,11 +2769,21 @@
        .recompra-foto en la ficha.
        3/4 porque las dos piezas son verticales y asi casi no sobra fondo. */
     .pack-compacto .pack-fotos {
-      display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.7rem; margin-bottom: 1rem;
     }
-    .pack-compacto .pack-fotos span {
+    /* de punta cuadrada. El resto de la tarjeta va redondeado, pero estas dos
+       no son botones ni tarjetas: son las dos piezas puestas una al lado de la
+       otra, y la esquina viva las lee como producto y no como interfaz. */
+    .pack-compacto .pack-fotos > span:not(.pack-mas) {
       position: relative; height: 91px;
-      background: var(--tint); border-radius: var(--r-sm); overflow: hidden;
+      background: var(--tint); border-radius: 0; overflow: hidden;
+    }
+    /* el signo, entre las dos piezas. Dice lo mismo que decia en la lista pero
+       donde se ve: entre las cosas, no entre los renglones. */
+    .pack-compacto .pack-mas {
+      font-size: var(--t-4xl); font-weight: 300; line-height: 1;
+      color: var(--ink); flex-shrink: 0;
     }
     /* misma altura las dos y el ancho segun su forma, en vez de meter las dos
        en la misma caja: el bote es 3/4 y la cubierta 2/3, y forzarlas al mismo
@@ -2800,19 +2809,51 @@
       left: -110.8%; top: -216.9%;
     }
 
-    /* LA ETIQUETA DE OFERTA. Misma familia que .kno y que la cuenta de abajo.
-       En --t-2xs y no en --t-3xs como .kno: a este publico no se le pone
-       letra de 12 px, y menos en versalitas.
-       Khaki sobre papel separa 6,04, de sobra para texto. */
-    #libro .oferta-kicker {
-      display: block; margin: 0;
-      font-family: var(--font-mono); font-size: var(--t-2xs); font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--khaki-deep);
+    /* ===== LAS LINEAS DEL PACK, TAMBIEN EN TICKET =====
+       Antes la cuenta de abajo era monoespaciada y las dos piezas de arriba
+       no, asi que en el mismo bloque convivian dos maneras de escribir un
+       precio. Ahora las cuatro cifras son de la misma familia y caen en la
+       misma columna.
+
+       El armazon es una rejilla de dos columnas con display:contents en
+       .pack-item, para que el nombre, su detalle y el precio pasen a ser
+       celdas de la fila. Con el flex de antes el detalle no podia ir debajo
+       del nombre y a la vez dejar el precio arriba a la derecha.
+
+       La linea de puntos es un ::after elastico dentro del nombre. Cuando el
+       nombre es corto, los puntos llenan hasta el precio; cuando es largo y
+       parte, se quedan en nada. Es lo que hace un ticket de verdad. */
+    #libro .pack-compacto .pack-list li {
+      display: grid; grid-template-columns: 1fr auto;
+      column-gap: 0.5rem; align-items: baseline;
+      font-family: var(--font-mono); font-variant-numeric: tabular-nums;
     }
-    /* y el titular, un escalon por encima de los otros cinco */
+    .pack-compacto .pack-item { display: contents; }
+    /* .pack-item > b y no .pack-list b: el precio tambien es un <b>, y con el
+       selector ancho se llevaba la columna 1 y los puntos, y caia encima del
+       nombre */
+    #libro .pack-compacto .pack-item > b {
+      grid-column: 1; grid-row: 1;
+      display: flex; align-items: baseline; gap: 0.45rem;
+      font-size: var(--t-base); font-weight: 600; letter-spacing: -0.01em;
+    }
+    #libro .pack-compacto .pack-item > b::after {
+      content: ""; flex: 1 1 auto; min-width: 0;
+      border-bottom: 1px dotted var(--ink-faint);
+      transform: translateY(-0.28em);
+    }
+    #libro .pack-compacto .pack-item > span {
+      grid-column: 1; grid-row: 2;
+      font-size: var(--t-xs); color: var(--ink-soft);
+    }
+    #libro .pack-compacto .pack-item-precio {
+      grid-column: 2; grid-row: 1;
+      font-size: var(--t-base); font-weight: 600;
+    }
+
+    /* la etiqueta AHORRAS 7,90 EUR se quito: el porcentaje vive ahora en la
+       linea de descuento de la cuenta, que es donde se explica solo.
+       El titular se sigue distinguiendo por tamano. */
     #libro .section-head h2 { font-size: var(--t-6xl); }
-    /* el gap de .section-head es 0.7rem para dos piezas; con tres, la
-       etiqueta se pega demasiado al titular */
     #libro .section-head > div { display: grid; gap: 0.45rem; }
   }
