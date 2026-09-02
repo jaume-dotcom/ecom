@@ -762,6 +762,9 @@
      de la columna izquierda, que alli tiene sitio de sobra.
      ================================================================ */
   .ficha-foto { display: none; }
+  /* en compra unica la nota va vacia; sin esto deja su linea en blanco.
+     Fuera del media de movil: en escritorio pasaba lo mismo. */
+  .precio-nota:empty { display: none; }
 
   /* Aspecto, no maquetacion: estas tres van FUERA del media de movil.
      Estuvieron dentro y en escritorio las estrellas salian del tamano de su
@@ -805,8 +808,11 @@
        pack) dejan de verse en movil. */
     .galeria { display: none; }
 
+    /* 150 y no 132: la foto es lo unico que enseña el producto en movil,
+       ahora que la galeria no sale. Al quitar la nota del precio la columna
+       de la derecha tiene una linea menos, asi que aguanta el recorte. */
     .ficha-cabecera {
-      display: grid; grid-template-columns: 132px 1fr;
+      display: grid; grid-template-columns: 150px 1fr;
       gap: 0.9rem; align-items: start; margin-bottom: 1.3rem;
     }
     /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
@@ -818,11 +824,14 @@
     .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 
-    /* el h1 baja de 28 a 24: en una columna de 186 px "Bisglicinato" a 28
-       se comia el ancho entero y quedaba pegado al borde */
-    .ficha-cab-txt h1 { margin: 0 0 0.15rem; font-size: var(--t-4xl); }
+    /* el h1 baja de 28 a 22,4: en una columna de 160 px "Bisglicinato" a 28
+       se salia, y a 24 llegaba justo al borde */
+    .ficha-cab-txt h1 { margin: 0 0 0.15rem; font-size: var(--t-3xl); }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
-    .ficha-cabecera > .ficha-envio { grid-column: 1 / -1; margin: 0.9rem 0 0; }
+    /* el envio y las claves ya no viven en la cabecera; alli solo quedan la
+       foto, la valoracion, el nombre y el precio */
+    .ficha-envio { margin: 1.2rem 0 0; }
+    .ficha-claves { margin-top: 0.9rem; }
 
   }
 
@@ -941,27 +950,15 @@
                este marcada, asi que arranca en la compra unica. -->
           <div class="ficha-precio">
             <span class="precio" id="precio-num">22,90&nbsp;&euro;</span>
-            <span class="precio-nota" id="precio-nota">pago único &middot; 0,76&nbsp;&euro; al día</span>
+            <!-- La nota se queda VACIA en la compra unica: el precio por bote y
+                 por dia ya esta en la tarjeta de su opcion, dos dedos mas abajo.
+                 Pero NO se borra el elemento: en la suscripcion tiene que decir
+                 "cada 3 meses", porque un importe grande sin periodicidad al
+                 lado no dice lo que se contrata. -->
+            <span class="precio-nota" id="precio-nota"></span>
           </div>
         </div>
-        <!-- fuera de la columna estrecha: con el icono al lado, En stock y el
-             plazo no caben en 177 px y partian en dos lineas -->
-        <p class="ficha-envio">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
-          <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
-        </p>
       </div>
-
-      <!-- COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
-           relajacion: el magnesio no tiene ninguna alegacion autorizada en
-           la UE y esta pagina esta publicada. Los cuatro datos salen de la
-           tabla nutricional de mas abajo y del comparador de formas. -->
-      <ul class="ficha-claves">
-        <li>360&nbsp;mg de magnesio elemental por dosis</li>
-        <li>96&nbsp;% del valor de referencia</li>
-        <li>Bisglicinato, sin óxido de magnesio</li>
-        <li>3 cápsulas al día &middot; 90 cápsulas, para 30 días</li>
-      </ul>
 
       <!-- PRECIOS ORIENTATIVOS. Los corchetes se quedan hasta cerrar
            costes con proveedor. El descuento del 15% se sostiene porque el
@@ -1022,6 +1019,25 @@
         </label>
 
       </fieldset>
+
+      <!-- La disponibilidad y la composicion, DEBAJO de las opciones. Arriba
+           estaban entre el precio y el selector, y separaban las dos cosas
+           que se comparan: cuanto cuesta y como lo compras. -->
+      <p class="ficha-envio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+        <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
+      </p>
+
+      <!-- COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
+           relajacion: el magnesio no tiene ninguna alegacion autorizada en
+           la UE y esta pagina esta publicada. Los cuatro datos salen de la
+           tabla nutricional de mas abajo y del comparador de formas. -->
+      <ul class="ficha-claves">
+        <li>360&nbsp;mg de magnesio elemental por dosis</li>
+        <li>96&nbsp;% del valor de referencia</li>
+        <li>Bisglicinato, sin óxido de magnesio</li>
+        <li>3 cápsulas al día &middot; 90 cápsulas, para 30 días</li>
+      </ul>
 
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
 
@@ -1830,10 +1846,14 @@
   // proposito: un importe grande sin "cada 3 meses" al lado no informa de
   // lo que se contrata, y es lo primero que mira quien desconfia.
   var MODOS = {
+    // la nota solo lleva la PERIODICIDAD. El precio por bote y por dia se
+    // repetia palabra por palabra en la tarjeta de cada opcion, tres lineas
+    // mas abajo. En la compra unica no hay periodicidad que dar, asi que va
+    // vacia y el hueco desaparece.
     trimestral: { txt: 'Suscribirme · 54,90 € cada 3 meses', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
-                  euros: '54,90 €', nota: 'cada 3 meses · 18,30 € el bote · 0,61 € al día' },
+                  euros: '54,90 €', nota: 'cada 3 meses' },
     unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
-                  euros: '22,90 €', nota: 'pago único · 0,76 € al día' }
+                  euros: '22,90 €', nota: '' }
   };
   var precioNum = document.getElementById('precio-num');
   var precioNota = document.getElementById('precio-nota');
