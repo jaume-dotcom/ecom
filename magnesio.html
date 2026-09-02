@@ -753,6 +753,79 @@
     }
   }
 
+
+  /* ================================================================
+     CABECERA DE FICHA A DOS COLUMNAS (SOLO MOVIL)
+     Copia el formato de la referencia: la foto en caja a la izquierda y
+     valoracion, nombre, formato y precio a la derecha.
+     En escritorio no cambia nada: .ficha-foto no existe y manda la galeria
+     de la columna izquierda, que alli tiene sitio de sobra.
+     ================================================================ */
+  .ficha-foto { display: none; }
+
+  /* Aspecto, no maquetacion: estas tres van FUERA del media de movil.
+     Estuvieron dentro y en escritorio las estrellas salian del tamano de su
+     viewBox, o sea enormes, porque nadie les daba medida. */
+
+  /* LA VALORACION. Estrellas en el marron de marca: es el unico sitio de la
+     ficha donde el color no significa "esto se pulsa", porque en una nota no
+     hay nada que pulsar. La nota en tinta y el recuento en gris, de mas a
+     menos importante. */
+  .ficha-rating {
+    display: flex; align-items: center; gap: 0.3rem; margin: 0 0 0.35rem;
+    font-size: var(--t-2xs); color: var(--ink-soft);
+  }
+  .ficha-estrellas { display: inline-flex; gap: 1px; }
+  .ficha-estrellas svg { width: 13px; height: 13px; fill: var(--khaki-deep); }
+  .ficha-rating b { color: var(--ink); font-weight: 600; }
+
+  /* el formato, debajo del nombre. En la referencia esa linea dice de que
+     producto se trata; aqui el nombre ya lo dice, asi que dice lo que te
+     llevas por ese precio. */
+  .ficha-sub { margin: 0 0 0.55rem; font-size: var(--t-sm); color: var(--ink-soft); }
+
+  /* LAS TRES VENTAJAS de la suscripcion, dentro de su tarjeta. En la
+     referencia van en la opcion marcada; aqui van en la recomendada, que por
+     ley no puede venir marcada.
+     Con checks y no con puntos: no es una lista de caracteristicas, es lo que
+     te llevas de mas por elegir esa. */
+  .modo-ventajas { display: grid; gap: 0.22rem; margin-top: 0.5rem; }
+  .modo-ventajas span {
+    position: relative; padding-left: 1.05rem;
+    font-size: var(--t-xs); color: var(--ink-soft); line-height: 1.35;
+  }
+  .modo-ventajas span::before {
+    content: "\2713"; position: absolute; left: 0; top: 0;
+    color: var(--ink); font-weight: 700;
+  }
+
+  @media (max-width: 859px) {
+    /* la galeria se va: en la referencia hay una sola foto, en caja y
+       pequena. Las otras dos imagenes de la ficha (la mesilla y la caja del
+       pack) dejan de verse en movil. */
+    .galeria { display: none; }
+
+    .ficha-cabecera {
+      display: grid; grid-template-columns: 132px 1fr;
+      gap: 0.9rem; align-items: start; margin-bottom: 1.3rem;
+    }
+    /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
+       nada y la caja se llena entera */
+    .ficha-foto {
+      display: block; aspect-ratio: 3 / 4;
+      border-radius: var(--r-md); overflow: hidden; background: var(--tint);
+    }
+    .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+
+    /* el h1 baja de 28 a 24: en una columna de 186 px "Bisglicinato" a 28
+       se comia el ancho entero y quedaba pegado al borde */
+    .ficha-cab-txt h1 { margin: 0 0 0.15rem; font-size: var(--t-4xl); }
+    .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
+    .ficha-cabecera > .ficha-envio { grid-column: 1 / -1; margin: 0.9rem 0 0; }
+
+  }
+
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
     .galeria { position: sticky; top: 1.5rem; }
@@ -821,12 +894,42 @@
       </div>
     </div>
 
-    <div>
-      <!-- Las dos tipografias, igual que los titulares de la portada: la
-           sustancia en Inter y la forma quimica en la serif en italica. No es
-           solo estetico, parte el nombre por donde se parte de verdad: el
-           mineral es magnesio y lo que cambia entre marcas es la sal. -->
-      <h1>Magnesio <span class="h2-soft">Bisglicinato</span></h1>
+    <div class="ficha-col">
+
+      <!-- ================================================================
+           CABECERA A DOS COLUMNAS EN MOVIL: la foto en caja a la izquierda y
+           valoracion, nombre, formato y precio a la derecha.
+           En escritorio esta foto no existe: alli sigue mandando la galeria
+           de la columna izquierda, que no se toca.
+           ================================================================ -->
+      <div class="ficha-cabecera">
+        <div class="ficha-foto">
+          <img src="ficha-magnesio.jpg" width="761" height="1024"
+               alt="Bote de Magnesio Bisglicinato de ZEROX sobre piedra"
+               decoding="async">
+        </div>
+        <div class="ficha-cab-txt">
+
+          <!-- ============================================================
+               OJO: LA NOTA Y EL NUMERO DE RESENAS SON DE RELLENO.
+               NO PUBLICAR ASI. Inventar una valoracion en una web abierta al
+               publico es practica desleal per se desde el RDL 24/2021, que
+               metio el articulo 21 bis en la Ley de Competencia Desleal.
+               Esta aqui para ver el formato, igual que los "Nombre" de las
+               resenas de la portada. Cuando haya opiniones de verdad, el
+               numero sale de contarlas.
+               ============================================================ -->
+          <p class="ficha-rating">
+            <span class="ficha-estrellas" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
+            <b>4,8</b> <span class="ficha-rating-n">(342)</span>
+          </p>
+
+          <!-- Las dos tipografias, igual que los titulares de la portada: la
+               sustancia en Inter y la forma quimica en la serif en italica. No
+               es solo estetico, parte el nombre por donde se parte de verdad:
+               el mineral es magnesio y lo que cambia entre marcas es la sal. -->
+          <h1>Magnesio <span class="h2-soft">Bisglicinato</span></h1>
+          <p class="ficha-sub">90 cápsulas &middot; 30 días</p>
       <!-- PENDIENTE: la entradilla que habia aqui —"La forma que mejor se
            tolera. Sin oxido de magnesio, sin dosis a medias y con la etiqueta
            entera a la vista"— tiene que ir quemada en uno de los creativos de
@@ -834,17 +937,20 @@
            El formato, 90 capsulas y 30 dias, sigue en la tabla de "Que lleva"
            y en la descripcion de cada opcion de compra. -->
 
-      <!-- El precio y el plazo, antes de las opciones. Lo pinta pintarModo()
-           con la opcion que este marcada, asi que arranca en la compra
-           unica, que es la premarcada. -->
-      <div class="ficha-precio">
-        <span class="precio" id="precio-num">22,90&nbsp;&euro;</span>
-        <span class="precio-nota" id="precio-nota">pago único &middot; 0,76&nbsp;&euro; al día</span>
+          <!-- El precio y el plazo. Lo pinta pintarModo() con la opcion que
+               este marcada, asi que arranca en la compra unica. -->
+          <div class="ficha-precio">
+            <span class="precio" id="precio-num">22,90&nbsp;&euro;</span>
+            <span class="precio-nota" id="precio-nota">pago único &middot; 0,76&nbsp;&euro; al día</span>
+          </div>
+        </div>
+        <!-- fuera de la columna estrecha: con el icono al lado, En stock y el
+             plazo no caben en 177 px y partian en dos lineas -->
+        <p class="ficha-envio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+          <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
+        </p>
       </div>
-      <p class="ficha-envio">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
-        <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
-      </p>
 
       <!-- COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
            relajacion: el magnesio no tiene ninguna alegacion autorizada en
@@ -867,8 +973,28 @@
            derechos del consumidor.
            Los % de ahorro son los reales y el precio por bote y por dia
            esta a la vista, para poder comparar sin calculadora. -->
+      <!-- DOS OPCIONES Y NO TRES: fuera la bimestral.
+           La compra unica va PRIMERO y ademas es la premarcada. En el bloque
+           del que copiamos el formato la suscripcion viene marcada de salida,
+           y eso aqui no se puede: premarcar un pago recurrente mas caro es lo
+           que prohibe el articulo 22 de la directiva de derechos del
+           consumidor. La trimestral se lleva todo el peso visual -filete,
+           etiqueta, ahorro y las tres ventajas- pero marcarla la tiene que
+           marcar quien compra. -->
       <fieldset class="modos">
         <legend class="modos-legend">Elige cómo lo compras</legend>
+
+        <label class="modo">
+          <input type="radio" name="modo-compra" value="unica" checked>
+          <span class="modo-marca" aria-hidden="true"></span>
+          <span class="modo-cuerpo">
+            <span class="modo-fila">
+              <span class="modo-nombre">Compra única</span>
+              <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
+            </span>
+            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
+          </span>
+        </label>
 
         <label class="modo modo--destacado">
           <input type="radio" name="modo-compra" value="trimestral">
@@ -883,33 +1009,15 @@
               <span class="modo-etiqueta">Mejor relación</span>
               <span class="modo-ahorro">&minus;20&nbsp;%</span>
             </span>
-          </span>
-        </label>
-
-        <label class="modo">
-          <input type="radio" name="modo-compra" value="bimestral">
-          <span class="modo-marca" aria-hidden="true"></span>
-          <span class="modo-cuerpo">
-            <span class="modo-fila">
-              <span class="modo-nombre">Suscripción bimestral</span>
-              <span class="modo-precio"><b>38,90&nbsp;&euro;</b></span>
+            <!-- Las tres ventajas salen de la respuesta "¿Como funciona la
+                 suscripcion?" de la FAQ de esta misma pagina. No se promete
+                 nada que no estuviera ya escrito ahi.
+                 El ahorro no se repite: ya lo dice la pastilla de al lado. -->
+            <span class="modo-ventajas">
+              <span>Envío gratis</span>
+              <span>Cancelas en un clic, sin permanencia</span>
+              <span>Te avisamos por email antes de cada cobro</span>
             </span>
-            <span class="modo-desc">19,45&nbsp;&euro; el bote &middot; 0,65&nbsp;&euro; al día</span>
-            <span class="modo-sellos">
-              <span class="modo-ahorro">&minus;15&nbsp;%</span>
-            </span>
-          </span>
-        </label>
-
-        <label class="modo">
-          <input type="radio" name="modo-compra" value="unica" checked>
-          <span class="modo-marca" aria-hidden="true"></span>
-          <span class="modo-cuerpo">
-            <span class="modo-fila">
-              <span class="modo-nombre">Compra única</span>
-              <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
-            </span>
-            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
           </span>
         </label>
 
@@ -1718,14 +1826,12 @@
   // cualquier elemento con data-add.
   var comprarBtn = document.getElementById('btn-comprar');
   // 'euros' y 'nota' son lo que se pinta en el precio de arriba del todo.
-  // La nota de las dos suscripciones EMPIEZA por la periodicidad a
+  // La nota de la suscripcion EMPIEZA por la periodicidad a
   // proposito: un importe grande sin "cada 3 meses" al lado no informa de
   // lo que se contrata, y es lo primero que mira quien desconfia.
   var MODOS = {
     trimestral: { txt: 'Suscribirme · 54,90 € cada 3 meses', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
                   euros: '54,90 €', nota: 'cada 3 meses · 18,30 € el bote · 0,61 € al día' },
-    bimestral:  { txt: 'Suscribirme · 38,90 € cada 2 meses', sub: 'Suscripción bimestral · un envío cada 2 meses',  precio: '38.90',
-                  euros: '38,90 €', nota: 'cada 2 meses · 19,45 € el bote · 0,65 € al día' },
     unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
                   euros: '22,90 €', nota: 'pago único · 0,76 € al día' }
   };
