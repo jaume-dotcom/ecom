@@ -1696,6 +1696,47 @@
        Comprobado que ningun texto con este color cae sobre fondo oscuro. */
     :root { --ink-soft: #3a4149; }
 
+    /* ===== CRISTAL DEL BOTON DEL HERO =====
+       El tinte es --khaki-pop (#ecdcbe), el mismo crema que ya usan las
+       etiquetas: el cristal no mete ningun color nuevo en la paleta.
+
+       Por que un tinte CLARO con letra blanca encima si se lee: el cristal
+       es translucido, asi que el color final lo pone lo que hay DETRAS, no
+       el tinte. Detras esta hero-zerox.mp4 con .hero-shade encima, que a la
+       altura del boton aporta entre 0,74 de opacidad abajo y 0,60 arriba.
+       El resultado sigue siendo oscuro y el texto blanco se lee de sobra.
+
+       Medido sobre el video de verdad, no sobre una foto: 5.600 pixeles de
+       la caja del boton en 10 fotogramas repartidos por los 10 segundos,
+       componiendo el degradado fila a fila.
+         opacidad   contraste medio   el peor pixel de todo el video
+           18%           7,69                  5,20      <- en uso
+           20%           7,30                  4,99
+           22%           6,92                  4,80      <- toque
+           25%           6,40                  4,52      <- el techo
+           26%           6,24                  4,44      NO PASA
+       NO SUBIR DEL 25%. El minimo exigible es 4,5 y el margen que queda
+       arriba es pequeno, asi que cualquier retoque hay que volver a medirlo.
+
+       Con blanco puro en vez de este crema el techo baja al 20%: el oro es
+       mas oscuro y por eso aguanta mas. Ese es el motivo de tintarlo, mas
+       alla de que pegue con la marca.
+
+       Y depende del degradado y del video, no del tinte: si se suaviza
+       .hero-shade para que se vea mejor el producto, o se cambia el video
+       por uno mas claro, esto cae antes que cualquier fondo solido. Si se
+       toca cualquiera de los dos, volver aqui y medir otra vez.
+
+       Sin backdrop-filter (Firefox con la opcion desactivada) el boton se
+       queda en el mismo tinte plano sin desenfoque: cambia el acabado, no
+       el contraste, asi que no hace falta respaldo. */
+    :root {
+      --cristal-bg: rgba(236, 220, 190, 0.18);
+      --cristal-bg-toque: rgba(236, 220, 190, 0.22);
+      --cristal-bd: rgba(255, 255, 255, 0.34);
+      --cristal-filo: rgba(255, 255, 255, 0.30);
+    }
+
     /* el nombre, en negrita y con el tracking mas cerrado: abierto a 0,26em
        la negrita se desparrama y pierde la fuerza que gana en peso */
     .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
@@ -1709,6 +1750,27 @@
       font-size: var(--btn-txt); font-weight: var(--btn-peso);
       padding: var(--btn-relleno);
       display: inline-block; width: auto; max-width: 100%;
+      /* cristal en vez del marron solido; ver los tokens --cristal-* arriba.
+         El filo claro de dentro es lo que despega la pastilla del video:
+         sin el, un fondo translucido sobre imagen oscura no se lee COMO
+         boton aunque el texto se lea. El color del texto no cambia: sigue
+         siendo --paper de la regla base. */
+      background: var(--cristal-bg);
+      border: 1px solid var(--cristal-bd);
+      -webkit-backdrop-filter: blur(14px) saturate(1.15);
+      backdrop-filter: blur(14px) saturate(1.15);
+      box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55),
+                  inset 0 1px 0 var(--cristal-filo);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    /* la regla base manda el boton a --olive al pasar por encima, que aqui
+       lo devolveria al marron solido. En tactil el :hover ademas se queda
+       pegado despues de tocar, asi que hay que pisarlo: el toque sube el
+       cristal de 18% a 22%, que se nota y sigue pasando el minimo (4,80 en
+       el peor pixel del video). Al 26% ya no pasaba. */
+    .hero-cta:hover,
+    .hero-cta:focus-visible {
+      background: var(--cristal-bg-toque);
     }
     /* ya no hay puntos dentro de la tarjeta: el hero es una sola imagen */
     .hero-copy { padding-bottom: 1.8rem; }
