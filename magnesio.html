@@ -6,7 +6,7 @@
 <title>Magnesio Bisglicinato — ZEROX</title>
 <meta name="description" content="Magnesio bisglicinato, la forma que mejor se tolera. 360 mg por dosis diaria. Qué lleva, cuánto lleva y por qué.">
 <link rel="canonical" href="https://jaume-dotcom.github.io/ecom/magnesio.html">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
@@ -102,17 +102,6 @@
   .ficha-precio { flex-wrap: wrap; }
   .precio-nota { line-height: 1.35; }
 
-  /* Disponibilidad y plazo, pegados al precio. Estaban abajo del todo, en
-     la fila de garantias, muy por debajo de donde aparece la pregunta. */
-  .ficha-envio {
-    display: flex; align-items: center; gap: 0.45rem;
-    margin: 0 0 1.2rem; font-size: var(--t-sm); color: var(--ink-soft);
-  }
-  .ficha-envio svg {
-    width: 1rem; height: 1rem; flex-shrink: 0;
-    fill: none; stroke: currentColor; stroke-width: 1.7;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
 
   /* LOS CUATRO DATOS, BAJO EL TITULO.
      Son COMPOSICION, no efecto, y tienen que seguir siendolo: el magnesio
@@ -121,21 +110,44 @@
      relajacion, ni sueno—. Solo lo que lleva el bote y cuanto.
      Es ademas lo que mejor funciona con este comprador: desconfia del
      marketing, y un dato comprobable le dice mas que una promesa. */
+  /* LA COMPOSICION, COMO UNA FICHA TECNICA Y NO COMO UNA LISTA DE VENTAJAS.
+     Eran cuatro frases con un tick delante, todas del mismo peso, y habia
+     que leerlas enteras para sacar el dato. Ahora el dato va delante, en
+     monoespaciada y en columna, y la explicacion detras en gris: se puede
+     recorrer con la vista sin leer una palabra.
+     Los ticks se van con ellas. Un tick dice "esto es bueno", y 360 mg no es
+     bueno ni malo, es lo que hay en el bote. Lo que separa las filas es una
+     linea de pelo, como en la tabla nutricional de mas abajo.
+     Monoespaciada porque es el mismo idioma que la cuenta del pack de la
+     portada: en esta marca las cifras se escriben asi. */
   .ficha-claves {
-    list-style: none; margin: 0 0 1.5rem; padding: 0;
-    display: grid; gap: 0.55rem;
+    list-style: none; margin: 0.9rem 0 1.7rem; padding: 0;
   }
   .ficha-claves li {
-    position: relative; padding-left: 1.6rem;
-    font-size: var(--t-base); color: var(--ink); line-height: 1.4;
+    display: grid; grid-template-columns: 6.6rem 1fr; gap: 0.7rem;
+    align-items: baseline;
+    padding: 0.62rem 0; border-top: 1px solid var(--line);
+    font-size: var(--t-sm); line-height: 1.4;
   }
-  /* el tick dibujado con dos bordes y un giro, igual que el de la lista
-     del pack: no hace falta un SVG por linea para cuatro lineas */
-  .ficha-claves li::before {
-    content: ""; position: absolute; left: 0.2rem; top: 0.36em;
-    width: 0.4rem; height: 0.7rem;
-    border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
-    transform: rotate(45deg);
+  .ficha-claves li:last-child { border-bottom: 1px solid var(--line); }
+  .ficha-claves b {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-weight: 600; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .ficha-claves span { color: var(--ink-soft); }
+
+  /* la disponibilidad. Era "En stock - Envio en 24-48 h" con un camion; el
+     plazo ya lo dice el sello de aqui arriba, asi que se queda el stock y el
+     icono pasa a ser un visto: es una confirmacion, no un envio. */
+  .ficha-stock {
+    display: flex; align-items: center; gap: 0.45rem;
+    /* aire tras la caja de sellos, que va pegada al boton */
+    margin: 1.5rem 0 0; font-size: var(--t-sm); color: var(--ink-soft);
+  }
+  .ficha-stock svg {
+    width: 17px; height: 17px; flex-shrink: 0;
+    fill: none; stroke: var(--khaki-deep); stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
   }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
@@ -836,10 +848,6 @@
     .ficha-minis { display: flex; gap: 0.5rem; margin-top: 0.7rem; }
     .ficha-minis .mini { width: 44px; height: 44px; }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
-    /* el envio y las claves ya no viven en la cabecera; alli solo quedan la
-       foto, la valoracion, el nombre y el precio */
-    .ficha-envio { margin: 1.2rem 0 0; }
-    .ficha-claves { margin-top: 0.9rem; }
 
   }
 
@@ -1043,25 +1051,6 @@
 
       </fieldset>
 
-      <!-- La disponibilidad y la composicion, DEBAJO de las opciones. Arriba
-           estaban entre el precio y el selector, y separaban las dos cosas
-           que se comparan: cuanto cuesta y como lo compras. -->
-      <p class="ficha-envio">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
-        <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
-      </p>
-
-      <!-- COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
-           relajacion: el magnesio no tiene ninguna alegacion autorizada en
-           la UE y esta pagina esta publicada. Los cuatro datos salen de la
-           tabla nutricional de mas abajo y del comparador de formas. -->
-      <ul class="ficha-claves">
-        <li>360&nbsp;mg de magnesio elemental por dosis</li>
-        <li>96&nbsp;% del valor de referencia</li>
-        <li>Bisglicinato, sin óxido de magnesio</li>
-        <li>3 cápsulas al día &middot; 90 cápsulas, para 30 días</li>
-      </ul>
-
       <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
 
       <!-- ================================================================
@@ -1090,9 +1079,35 @@
           <span>Pago<br>seguro</span>
         </li>
       </ul>
-      <!-- La rejilla de datos clave (360 mg / 96 % VRN / bisglicinato /
-           3 capsulas) se retira: los cuatro datos ya estaban en el titulo,
-           en la comparativa de formas y en la tabla nutricional. -->
+      <!-- ================================================================
+           DISPONIBILIDAD Y COMPOSICION, DEBAJO DEL BOTON.
+           Va detras de los sellos y no entre ellos y el boton: los sellos
+           son la respuesta a "¿y si no me va bien?", que es una duda que
+           aparece con el dedo encima del boton. Meter cuatro datos tecnicos
+           en medio los despega de la pregunta que contestan.
+
+           TEXTO QUE SE VA, por estar dos veces en la misma pantalla:
+             "Envio en 24-48 h"  -> ya lo dice el sello de aqui arriba
+             "90 capsulas, para 30 dias" -> ya lo dice la linea de formato
+                                            debajo del nombre
+
+           COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
+           relajacion: el magnesio no tiene ninguna alegacion autorizada en
+           la UE y esta pagina esta publicada. Los cuatro datos salen de la
+           tabla nutricional de mas abajo y del comparador de formas.
+           ================================================================ -->
+      <p class="ficha-stock">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.9"/></svg>
+        <span>En stock</span>
+      </p>
+
+      <ul class="ficha-claves">
+        <li><b>360&nbsp;mg</b> <span>de magnesio elemental por dosis</span></li>
+        <li><b>96&nbsp;%</b> <span>del valor de referencia</span></li>
+        <li><b>Bisglicinato</b> <span>sin óxido de magnesio</span></li>
+        <li><b>3 cápsulas</b> <span>al día</span></li>
+      </ul>
+
 
       <!-- Los mismos cinco atributos, pero en movimiento: en rejilla
            ocupaban cinco columnas de letra diminuta. Es el mismo
