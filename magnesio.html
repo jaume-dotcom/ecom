@@ -762,6 +762,9 @@
      de la columna izquierda, que alli tiene sitio de sobra.
      ================================================================ */
   .ficha-foto { display: none; }
+  /* la tira de la cabecera es solo de movil; en escritorio manda la de la
+     galeria, que esta debajo de su visor */
+  .ficha-minis { display: none; }
   /* en compra unica la nota va vacia; sin esto deja su linea en blanco.
      Fuera del media de movil: en escritorio pasaba lo mismo. */
   .precio-nota:empty { display: none; }
@@ -827,6 +830,11 @@
     /* el h1 baja de 28 a 22,4: en una columna de 160 px "Bisglicinato" a 28
        se salia, y a 24 llegaba justo al borde */
     .ficha-cab-txt h1 { margin: 0 0 0.15rem; font-size: var(--t-3xl); }
+
+    /* 44 y no 48: tres de 48 con sus huecos piden 162 px y la columna mide
+       159. 44 es el suelo de diana tactil, asi que no se baja de ahi. */
+    .ficha-minis { display: flex; gap: 0.5rem; margin-top: 0.7rem; }
+    .ficha-minis .mini { width: 44px; height: 44px; }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
     /* el envio y las claves ya no viven en la cabecera; alli solo quedan la
        foto, la valoracion, el nombre y el precio */
@@ -956,6 +964,21 @@
                  "cada 3 meses", porque un importe grande sin periodicidad al
                  lado no dice lo que se contrata. -->
             <span class="precio-nota" id="precio-nota"></span>
+          </div>
+
+          <!-- LA TIRA DE MINIATURAS, bajo el precio. Es una SEGUNDA tira, no la
+               de la galeria: aquella vive dentro de .galeria, que es hermana de
+               esta columna, y desde CSS no se puede meter un hermano dentro de
+               otro. Duplicar tres botones sale mas barato que reordenar la
+               ficha entera y arriesgar el escritorio.
+               Solo una de las dos se ve a la vez: en movil esta y en escritorio
+               la de la galeria, la otra con display:none, o sea fuera tambien
+               del arbol de accesibilidad.
+               Las engancha el mismo JS, que busca .mini a secas. -->
+          <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
+            <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
           </div>
         </div>
       </div>
@@ -1737,11 +1760,26 @@
     var galVp = document.getElementById('gal-viewport');
     var galIndex = 0;
 
+    // en movil la galeria no se ve: la foto de la cabecera hace de visor, asi
+    // que la miniatura tiene que cambiarla a ella tambien. Se copia el src y el
+    // alt de la diapositiva, para no tener el mismo dato escrito dos veces.
+    var fichaFoto = document.querySelector('.ficha-foto img');
+
     function galIr(i) {
       galIndex = Math.max(0, Math.min(i, galSlides.length - 1));
       galTrack.style.transform = 'translateX(-' + (galIndex * 100) + '%)';
-      galMinis.forEach(function (m, n) {
-        var on = n === galIndex;
+      if (fichaFoto) {
+        var src = galSlides[galIndex].querySelector('img');
+        if (src) {
+          fichaFoto.src = src.getAttribute('src');
+          fichaFoto.alt = src.getAttribute('alt') || '';
+        }
+      }
+      // por su data-i y no por su posicion en la lista: hay DOS tiras de
+      // miniaturas, la de la galeria y la de la cabecera, asi que galMinis
+      // tiene seis elementos y la posicion ya no coincide con la diapositiva
+      galMinis.forEach(function (m) {
+        var on = parseInt(m.dataset.i, 10) === galIndex;
         m.classList.toggle('is-on', on);
         if (on) { m.setAttribute('aria-current', 'true'); } else { m.removeAttribute('aria-current'); }
         if (on && m.scrollIntoView) { m.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
