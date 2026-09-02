@@ -1741,6 +1741,62 @@
        la negrita se desparrama y pierde la fuerza que gana en peso */
     .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
 
+    /* El contador de la cesta, en tinta y no en marron. Era el unico punto
+       de color de toda la barra superior y tiraba del ojo hacia una cifra
+       que no es una accion: el numero informa, no pide que lo toques.
+       En tinta se lee igual de bien (blanco sobre --ink da 14,99, frente a
+       los 6,04 que daba sobre el marron) y la barra queda de un solo color,
+       con el icono, el logotipo y la hamburguesa.
+       --ink y no negro puro a proposito: el negro pleno no se usa en ningun
+       sitio de la interfaz, y al lado del texto en #23272e cantaria como una
+       pieza de otro juego. */
+    .cart-num { background: var(--ink); }
+
+    /* ===== LOS BOTONES DE ACCION SOBRE FONDO CLARO =====
+       El cristal del hero NO se puede traer aqui: es translucido, y sobre
+       una tarjeta blanca un tinte claro al 18% se queda en blanco sobre
+       blanco. El cristal necesita algo oscuro detras, y en el hero lo tiene
+       porque hay video; estos botones se apoyan en blanco puro.
+       Asi que sobre claro va un solido, y el solido es la misma tinta que
+       el contador de la cesta: blanco sobre --ink da 14,99, mas del doble
+       de los 6,04 que daba el marron.
+
+       Contrapartida, por si algun dia chirria: el boton queda del mismo
+       color que el texto del cuerpo, asi que ya no hay ni un solo color que
+       diga "aqui se actua". Lo que separa el boton ahora es la pastilla y
+       el relleno, no el tono. Es la eleccion de Alejandro del 2 de
+       septiembre de 2026, sabiendo esto.
+
+       El hover baja a #14161a en vez de subir: sobre un fondo claro, un
+       boton oscuro que se oscurece se lee como que se hunde al pulsarlo.
+       Blanco encima da 18,11.
+
+       OJO: .pack-cta NO esta en esta lista. Se declara mucho mas abajo, en
+       la seccion del libro, asi que desde aqui no le llegaria: gana la de
+       mas abajo. Va en el bloque movil de esa seccion; buscar
+       --accion-hover para encontrar las dos mitades. */
+    :root { --accion-hover: #14161a; }
+
+    .btn-solid,
+    .hero-signup button,
+    .p-add,
+    .recompra-btn,
+    .barra-btn,
+    .cart-cta { background: var(--ink); border-color: var(--ink); }
+
+    .btn-solid:hover,
+    .hero-signup button:hover,
+    .p-add:hover,
+    .recompra-btn:hover,
+    .barra-btn:hover,
+    .cart-cta:hover { background: var(--accion-hover); border-color: var(--accion-hover); }
+
+    /* Las tres lineas iguales. La de en medio media 16px y entraba 7px, un
+       detalle que aligeraba pero que a este tamano se leia como un icono a
+       medio cargar. Al estado abierto no le afecta: ahi la del medio ya se
+       desvanecia y volvia a 24px para formar la equis. */
+    .nav-toggle span:nth-child(2) { width: 24px; margin-left: 0; align-self: center; }
+
     /* hero */
     .hero-lockup { font-weight: 500; color: rgba(255, 255, 255, 0.9); }
     .hero-headline { font-size: var(--t-7xl); }
@@ -2810,6 +2866,13 @@
      dos columnas con la foto a la izquierda, y quitarla dejaria la mitad de
      la tarjeta vacia. */
   @media (max-width: 859px) {
+    /* La otra mitad del cambio de los botones de accion a tinta; la primera
+       esta arriba, en el bloque de TIPOGRAFIA SOLO MOVIL, junto al resto.
+       Tiene que estar AQUI porque .pack-cta se declara unas lineas mas
+       arriba, en esta misma seccion, y desde alli gana a lo de arriba. */
+    .pack-cta { background: var(--ink); border-color: var(--ink); }
+    .pack-cta:hover { background: var(--accion-hover); border-color: var(--accion-hover); }
+
     .pack-compacto .pack-media { display: none; }
     #libro .pack-compacto .pack-body { padding: 1.5rem 1.3rem 1.4rem; }
     #libro .pack-compacto .pack-price { margin-bottom: 1rem; }
