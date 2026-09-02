@@ -69,6 +69,15 @@
     --khaki-deep: #8f5510;
     /* el hover acompaña: mismo tono, un escalon mas oscuro */
     --olive: #74440c;
+    /* La accion pasa a tinta en TODA la web el 2 de septiembre de 2026, no
+       solo en movil: partido por el breakpoint el sitio tenia dos
+       identidades y quien lo abria en un portatil veia la vieja.
+       Blanco sobre --ink da 14,99, frente a los 6,04 del marron. El hover
+       BAJA en vez de subir: sobre fondo claro un boton oscuro que se
+       oscurece se lee como que se hunde al pulsarlo. Da 18,11.
+       El marron sigue vivo como acento de TEXTO (kickers, puntos, estrellas);
+       lo que ya no es marron es lo que se pulsa. */
+    --accion-hover: #14161a;
     --olive-soft: #6b5c46;
     --line: #dce1e7;
     --line-strong: #23272e;
@@ -384,8 +393,8 @@
   .btn:hover { background: var(--tint); }
   /* el ámbar es el color de la acción: es el único sitio donde la marca se
      permite color, y así el acento se lee como criterio y no como adorno */
-  .btn-solid { background: var(--khaki-deep); color: var(--paper); border-color: var(--khaki-deep); }
-  .btn-solid:hover { background: var(--olive); border-color: var(--olive); }
+  .btn-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-solid:hover { background: var(--accion-hover); border-color: var(--accion-hover); }
 
   /* hero — full-bleed image with nav + text overlaid, matching Seed's real layout */
   .hero-full {
@@ -427,18 +436,18 @@
   .hero-signup-field input::placeholder { color: var(--ink-faint); }
   .hero-signup button {
     display: flex; align-items: center; gap: 0.5rem; padding: var(--btn-relleno-sm);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     border: none; border-radius: var(--btn-radio);
     font-weight: var(--btn-peso); font-size: var(--btn-txt-sm);
     cursor: pointer; font-family: var(--font);
   }
-  .hero-signup button:hover { background: var(--olive); }
+  .hero-signup button:hover { background: var(--accion-hover); }
   .hero-signup-arrow { width: 1rem; height: 1rem; }
   .hero-signup-success { text-align: center; font-size: var(--t-xs); color: var(--olive-soft); margin: 0.9rem 0 0; display: none; }
   .hero-signup-success.show { display: block; }
   .hero-signup-label { font-size: var(--t-md); font-weight: 500; color: var(--ink); margin: 0 0 0.8rem; }
   /* el botón del formulario es la acción principal: va en ámbar como los demás */
-  .hero-signup button { background: var(--khaki-deep); }
+  .hero-signup button { background: var(--ink); }
 
   /* Aro con destello giratorio. Traducción del componente de 21st.dev: un
      pseudoelemento con un degradado pequeño y desenfocado que da una vuelta
@@ -820,11 +829,11 @@
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
     width: 100%; padding: 0.8rem 1.2rem;
     border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     font-family: var(--font); font-size: var(--t-base); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
-  .p-add:hover { background: var(--olive); }
+  .p-add:hover { background: var(--accion-hover); }
   .p-add svg {
     width: 1.05em; height: 1.05em; flex-shrink: 0;
     fill: none; stroke: currentColor; stroke-width: 1.7;
@@ -900,11 +909,11 @@
   .recompra-btn {
     display: block; width: 100%; padding: 0.95rem 1.2rem;
     border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
-  .recompra-btn:hover { background: var(--olive); }
+  .recompra-btn:hover { background: var(--accion-hover); }
 
   /* ===== BARRA DE COMPRA =====
      Aparece pegada abajo cuando el selector de compra se ha ido de la
@@ -928,11 +937,11 @@
   .barra-btn {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
     width: 100%; padding: 0.95rem 1.3rem; border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
-  .barra-btn:hover { background: var(--olive); }
+  .barra-btn:hover { background: var(--accion-hover); }
   /* las dos promesas que ya hace la barra de arriba. Aqui vuelven a
      aparecer porque es el momento de decidir, y arriba quedan a nueve
      pantallas de distancia */
@@ -956,7 +965,7 @@
   .cart-num {
     position: absolute; top: 2px; right: 0;
     min-width: 17px; height: 17px; padding: 0 4px;
-    border-radius: 999px; background: var(--khaki-deep); color: var(--paper);
+    border-radius: 999px; background: var(--ink); color: var(--paper);
     font-size: 10.5px; font-weight: 600; line-height: 17px; text-align: center;
   }
   /* Al añadir algo, el contador da un golpe corto. Es la unica
@@ -1085,10 +1094,10 @@
      una accion */
   .cart-cta {
     display: block; text-align: center; padding: var(--btn-relleno);
-    border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
+    border-radius: var(--btn-radio); background: var(--ink); color: var(--paper);
     font-size: var(--btn-txt); font-weight: var(--btn-peso);
   }
-  .cart-cta:hover { background: var(--olive); }
+  .cart-cta:hover { background: var(--accion-hover); }
 
   /* bundle */
   .bundle { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; padding: 2rem; }
@@ -1741,55 +1750,20 @@
        la negrita se desparrama y pierde la fuerza que gana en peso */
     .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
 
-    /* El contador de la cesta, en tinta y no en marron. Era el unico punto
-       de color de toda la barra superior y tiraba del ojo hacia una cifra
-       que no es una accion: el numero informa, no pide que lo toques.
-       En tinta se lee igual de bien (blanco sobre --ink da 14,99, frente a
-       los 6,04 que daba sobre el marron) y la barra queda de un solo color,
-       con el icono, el logotipo y la hamburguesa.
-       --ink y no negro puro a proposito: el negro pleno no se usa en ningun
-       sitio de la interfaz, y al lado del texto en #23272e cantaria como una
-       pieza de otro juego. */
-    .cart-num { background: var(--ink); }
-
-    /* ===== LOS BOTONES DE ACCION SOBRE FONDO CLARO =====
-       El cristal del hero NO se puede traer aqui: es translucido, y sobre
-       una tarjeta blanca un tinte claro al 18% se queda en blanco sobre
-       blanco. El cristal necesita algo oscuro detras, y en el hero lo tiene
-       porque hay video; estos botones se apoyan en blanco puro.
-       Asi que sobre claro va un solido, y el solido es la misma tinta que
-       el contador de la cesta: blanco sobre --ink da 14,99, mas del doble
-       de los 6,04 que daba el marron.
-
-       Contrapartida, por si algun dia chirria: el boton queda del mismo
-       color que el texto del cuerpo, asi que ya no hay ni un solo color que
-       diga "aqui se actua". Lo que separa el boton ahora es la pastilla y
-       el relleno, no el tono. Es la eleccion de Alejandro del 2 de
-       septiembre de 2026, sabiendo esto.
-
-       El hover baja a #14161a en vez de subir: sobre un fondo claro, un
-       boton oscuro que se oscurece se lee como que se hunde al pulsarlo.
-       Blanco encima da 18,11.
-
-       OJO: .pack-cta NO esta en esta lista. Se declara mucho mas abajo, en
-       la seccion del libro, asi que desde aqui no le llegaria: gana la de
-       mas abajo. Va en el bloque movil de esa seccion; buscar
-       --accion-hover para encontrar las dos mitades. */
-    :root { --accion-hover: #14161a; }
-
-    .btn-solid,
-    .hero-signup button,
-    .p-add,
-    .recompra-btn,
-    .barra-btn,
-    .cart-cta { background: var(--ink); border-color: var(--ink); }
-
-    .btn-solid:hover,
-    .hero-signup button:hover,
-    .p-add:hover,
-    .recompra-btn:hover,
-    .barra-btn:hover,
-    .cart-cta:hover { background: var(--accion-hover); border-color: var(--accion-hover); }
+    /* El contador de la cesta y todos los botones de accion se han ido a
+       la BASE de la hoja: el color ya no es solo de movil. Buscar
+       --accion-hover arriba para el porque y las medidas.
+       Lo unico que se queda aqui es el cristal del hero, y no por gusto:
+       en escritorio NO pasa. Medido sobre el video publicado a 1280, con
+       el boton de 272px y el recorte que hace object-fit:cover en una caja
+       ancha, detras del boton queda mas claro que en movil:
+         movil 375px    18% -> 7,69 de media, 5,20 el peor pixel   PASA
+         escritorio     18% -> 6,36 de media, 4,02 el peor pixel   NO PASA
+       y ahi el techo baja del 25% al 11%, donde el cristal ya no se ve.
+       No se arregla tocando la opacidad: el problema es que el degradado
+       .hero-shade deja pasar demasiada luz en esa caja. Si algun dia se
+       quiere el cristal tambien en escritorio, hay que oscurecer ahi el
+       degradado primero y volver a medir. */
 
     /* Las tres lineas iguales. La de en medio media 16px y entraba 7px, un
        detalle que aligeraba pero que a este tamano se leia como un icono a
@@ -2825,12 +2799,12 @@
   .pack-cta {
     display: flex; align-items: center; justify-content: center; gap: 0.7rem;
     width: 100%; padding: 1.05rem 1.4rem; border-radius: 999px; border: 0;
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     font-family: var(--font); cursor: pointer;
     font-size: var(--btn-txt); font-weight: var(--btn-peso);
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .pack-cta:hover { background: var(--olive); transform: translateY(-1px); }
+  .pack-cta:hover { background: var(--accion-hover); transform: translateY(-1px); }
   .pack-cta-precio { opacity: 0.75; font-weight: 500; }
   #libro .pack-note { margin: 0.9rem 0 0; font-size: var(--t-sm); color: var(--ink-soft); }
 
@@ -2866,13 +2840,6 @@
      dos columnas con la foto a la izquierda, y quitarla dejaria la mitad de
      la tarjeta vacia. */
   @media (max-width: 859px) {
-    /* La otra mitad del cambio de los botones de accion a tinta; la primera
-       esta arriba, en el bloque de TIPOGRAFIA SOLO MOVIL, junto al resto.
-       Tiene que estar AQUI porque .pack-cta se declara unas lineas mas
-       arriba, en esta misma seccion, y desde alli gana a lo de arriba. */
-    .pack-cta { background: var(--ink); border-color: var(--ink); }
-    .pack-cta:hover { background: var(--accion-hover); border-color: var(--accion-hover); }
-
     .pack-compacto .pack-media { display: none; }
     #libro .pack-compacto .pack-body { padding: 1.5rem 1.3rem 1.4rem; }
     #libro .pack-compacto .pack-price { margin-bottom: 1rem; }

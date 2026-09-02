@@ -139,17 +139,17 @@
   }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
-    border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
+    border-radius: var(--btn-radio); background: var(--ink); color: var(--paper);
     font-size: var(--btn-txt); font-weight: var(--btn-peso); text-align: center;
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .btn-comprar:hover { background: var(--olive); transform: translateY(-1px); }
-  /* Este boton se declara AQUI y no en estilos.css, asi que el cambio de
-     los CTA a tinta no le llegaba: se habia quedado en marron el mas
-     importante de la ficha. Mismo criterio que el resto y solo movil. */
+  .btn-comprar:hover { background: var(--accion-hover); transform: translateY(-1px); }
+  /* Este boton se declara AQUI y no en estilos.css: al pasar los CTA a
+     tinta hubo que acordarse de el a mano, y por eso se quedo atras un dia.
+     Va en la regla base, como el resto, para que valga a cualquier ancho.
+     Lo de dentro del breakpoint si es solo movil: es peso visual, no color
+     de accion. */
   @media (max-width: 859px) {
-    .btn-comprar { background: var(--ink); }
-    .btn-comprar:hover { background: var(--accion-hover, #14161a); }
 
     /* El ahorro de la opcion recomendada, con el peso que tiene en las
        fichas de referencia: pastilla llena en vez de texto gris. Para que
