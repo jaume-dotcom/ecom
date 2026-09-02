@@ -93,6 +93,50 @@
   }
   .precio { font-size: var(--t-4xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .precio-nota { font-size: var(--t-md); color: var(--ink-soft); }
+  /* El precio, arriba y no solo dentro de las opciones. Lo pedia la
+     comparacion: quien mira tres fichas de tres marcas busca el numero
+     antes que nada, y aqui habia que leerse el selector para encontrarlo.
+     Cambia con la opcion marcada, y la nota lleva SIEMPRE la periodicidad
+     cuando es suscripcion: un importe sin "cada 3 meses" al lado es
+     justo lo que no se puede publicar. */
+  .ficha-precio { flex-wrap: wrap; }
+  .precio-nota { line-height: 1.35; }
+
+  /* Disponibilidad y plazo, pegados al precio. Estaban abajo del todo, en
+     la fila de garantias, muy por debajo de donde aparece la pregunta. */
+  .ficha-envio {
+    display: flex; align-items: center; gap: 0.45rem;
+    margin: 0 0 1.2rem; font-size: var(--t-sm); color: var(--ink-soft);
+  }
+  .ficha-envio svg {
+    width: 1rem; height: 1rem; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* LOS CUATRO DATOS, BAJO EL TITULO.
+     Son COMPOSICION, no efecto, y tienen que seguir siendolo: el magnesio
+     no tiene ni una sola alegacion de salud autorizada en la UE, asi que
+     aqui no puede entrar nada que prometa un resultado —ni descanso, ni
+     relajacion, ni sueno—. Solo lo que lleva el bote y cuanto.
+     Es ademas lo que mejor funciona con este comprador: desconfia del
+     marketing, y un dato comprobable le dice mas que una promesa. */
+  .ficha-claves {
+    list-style: none; margin: 0 0 1.5rem; padding: 0;
+    display: grid; gap: 0.55rem;
+  }
+  .ficha-claves li {
+    position: relative; padding-left: 1.6rem;
+    font-size: var(--t-base); color: var(--ink); line-height: 1.4;
+  }
+  /* el tick dibujado con dos bordes y un giro, igual que el de la lista
+     del pack: no hace falta un SVG por linea para cuatro lineas */
+  .ficha-claves li::before {
+    content: ""; position: absolute; left: 0.2rem; top: 0.36em;
+    width: 0.4rem; height: 0.7rem;
+    border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    transform: rotate(45deg);
+  }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
     border-radius: var(--btn-radio); background: var(--khaki-deep); color: var(--paper);
@@ -100,6 +144,23 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
   .btn-comprar:hover { background: var(--olive); transform: translateY(-1px); }
+  /* Este boton se declara AQUI y no en estilos.css, asi que el cambio de
+     los CTA a tinta no le llegaba: se habia quedado en marron el mas
+     importante de la ficha. Mismo criterio que el resto y solo movil. */
+  @media (max-width: 859px) {
+    .btn-comprar { background: var(--ink); }
+    .btn-comprar:hover { background: var(--accion-hover, #14161a); }
+
+    /* El ahorro de la opcion recomendada, con el peso que tiene en las
+       fichas de referencia: pastilla llena en vez de texto gris. Para que
+       no haya dos pastillas llenas peleandose, "Mejor relacion" pasa a
+       contorno: el sello dice cual es, pero el que se ve es el numero.
+       Sigue sin premarcarse la cara, que es lo que prohibe el articulo 22:
+       esto cambia el peso visual, no cual viene marcada.
+       La otra mitad, "Mejor relacion" a contorno, esta mas abajo: tiene que
+       ir detras de la declaracion de .modo-etiqueta o no le llega. */
+    .modo--destacado .modo-ahorro { background: var(--ink); color: #fff; }
+  }
 
   /* ---------- galeria de producto ---------- */
   .galeria-viewport {
@@ -681,7 +742,16 @@
      titular de dos lineas con interlineado de parrafo se abre demasiado.
      Aqui hace falta repetirlo porque esta pagina usa h2 suelto y no
      .section-head. */
-  @media (max-width: 859px) { h2 { line-height: 1.2; } }
+  @media (max-width: 859px) {
+    h2 { line-height: 1.2; }
+    /* la otra mitad del cambio de sellos; la primera esta arriba, con
+       .btn-comprar. Aqui porque .modo-etiqueta se declara unas lineas mas
+       arriba y desde alli gana a lo de antes. */
+    .modo-etiqueta {
+      background: none; color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--ink-faint);
+    }
+  }
 
   @media (min-width: 860px) {
     .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
@@ -763,6 +833,29 @@
            la galeria, no como una linea de texto mas encima del precio.
            El formato, 90 capsulas y 30 dias, sigue en la tabla de "Que lleva"
            y en la descripcion de cada opcion de compra. -->
+
+      <!-- El precio y el plazo, antes de las opciones. Lo pinta pintarModo()
+           con la opcion que este marcada, asi que arranca en la compra
+           unica, que es la premarcada. -->
+      <div class="ficha-precio">
+        <span class="precio" id="precio-num">22,90&nbsp;&euro;</span>
+        <span class="precio-nota" id="precio-nota">pago único &middot; 0,76&nbsp;&euro; al día</span>
+      </div>
+      <p class="ficha-envio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+        <span>En stock &middot; Envío en 24&ndash;48&nbsp;h</span>
+      </p>
+
+      <!-- COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
+           relajacion: el magnesio no tiene ninguna alegacion autorizada en
+           la UE y esta pagina esta publicada. Los cuatro datos salen de la
+           tabla nutricional de mas abajo y del comparador de formas. -->
+      <ul class="ficha-claves">
+        <li>360&nbsp;mg de magnesio elemental por dosis</li>
+        <li>96&nbsp;% del valor de referencia</li>
+        <li>Bisglicinato, sin óxido de magnesio</li>
+        <li>3 cápsulas al día &middot; 90 cápsulas, para 30 días</li>
+      </ul>
 
       <!-- PRECIOS ORIENTATIVOS. Los corchetes se quedan hasta cerrar
            costes con proveedor. El descuento del 15% se sostiene porque el
@@ -1624,15 +1717,26 @@
   // linea. De meterlo en la cesta se encarga carrito.js, que escucha
   // cualquier elemento con data-add.
   var comprarBtn = document.getElementById('btn-comprar');
+  // 'euros' y 'nota' son lo que se pinta en el precio de arriba del todo.
+  // La nota de las dos suscripciones EMPIEZA por la periodicidad a
+  // proposito: un importe grande sin "cada 3 meses" al lado no informa de
+  // lo que se contrata, y es lo primero que mira quien desconfia.
   var MODOS = {
-    trimestral: { txt: 'Suscribirme · 54,90 € cada 3 meses', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90' },
-    bimestral:  { txt: 'Suscribirme · 38,90 € cada 2 meses', sub: 'Suscripción bimestral · un envío cada 2 meses',  precio: '38.90' },
-    unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90' }
+    trimestral: { txt: 'Suscribirme · 54,90 € cada 3 meses', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
+                  euros: '54,90 €', nota: 'cada 3 meses · 18,30 € el bote · 0,61 € al día' },
+    bimestral:  { txt: 'Suscribirme · 38,90 € cada 2 meses', sub: 'Suscripción bimestral · un envío cada 2 meses',  precio: '38.90',
+                  euros: '38,90 €', nota: 'cada 2 meses · 19,45 € el bote · 0,65 € al día' },
+    unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
+                  euros: '22,90 €', nota: 'pago único · 0,76 € al día' }
   };
+  var precioNum = document.getElementById('precio-num');
+  var precioNota = document.getElementById('precio-nota');
   function pintarModo() {
     var sel = document.querySelector('input[name="modo-compra"]:checked');
     if (!sel || !comprarBtn) { return; }
     var m = MODOS[sel.value] || MODOS.unica;
+    if (precioNum) { precioNum.textContent = m.euros; }
+    if (precioNota) { precioNota.textContent = m.nota; }
     comprarBtn.textContent = m.txt;
     comprarBtn.setAttribute('data-add', 'mag-' + sel.value);
     comprarBtn.setAttribute('data-nombre', 'Magnesio');
