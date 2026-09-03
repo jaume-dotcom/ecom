@@ -199,6 +199,40 @@
     .modo--destacado .modo-ahorro { background: var(--ink); color: #fff; }
   }
 
+  /* ---------- indice de secciones ---------- */
+  /* SOLO MOVIL: en escritorio la pagina se recorre con la barra de
+     desplazamiento y ya se ve donde estas; la tira solo quitaria sitio. */
+  .indice { display: none; }
+
+  @media (max-width: 859px) {
+    /* los margenes negativos la sacan del relleno de .wrap para que sangre de
+       borde a borde: una tira pegada arriba con margenes a los lados se lee
+       como una tarjeta suelta, no como una barra */
+    .indice {
+      position: sticky; top: 0; z-index: 60;
+      display: flex; gap: 0.4rem;
+      margin: 0 -1rem 1.6rem; padding: 0.55rem 1rem;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .indice::-webkit-scrollbar { display: none; }
+    .indice a {
+      flex: 0 0 auto; display: inline-flex; align-items: center;
+      min-height: 40px; padding: 0 0.85rem;
+      border: 1px solid var(--line); border-radius: 999px; background: #fff;
+      font-size: var(--t-sm); color: var(--ink-soft); white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    /* la de la seccion en la que estas, en tinta llena */
+    .indice a.on {
+      background: var(--ink); border-color: var(--ink); color: var(--paper);
+    }
+    .indice a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    /* el titular no puede quedar debajo de la tira al saltar */
+    #beneficios, #cifras, #formas, #resenas, #faq { scroll-margin-top: 4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .indice a { transition: none; } }
+
   /* ---------- galeria de producto ---------- */
   .galeria-viewport {
     overflow: hidden; border-radius: var(--r-md); background: var(--tint);
@@ -1285,6 +1319,29 @@
        Las tres fotos ya estan puestas. Van con alt vacio a proposito: son
        ilustracion, y lo que dicen ya lo dice el texto que tienen al lado.
        ================================================================ -->
+  <!-- ================================================================
+       INDICE DE SECCIONES. Esta pagina tiene ocho bloques y hasta ahora la
+       unica forma de saber que habia era bajar hasta el final. La tira dice
+       de un vistazo lo que hay y deja saltar a lo que interese.
+
+       Va DESPUES de la ficha y no antes: delante empujaria el producto y el
+       precio fuera de la primera pantalla, que es lo ultimo que se hace en
+       una pagina de producto.
+
+       Se queda pegada arriba al pasarla, asi que sigue estando a mano en
+       cualquier punto de la pagina.
+       No entran #comprar (ya se viene de ahi), #otras (es venta cruzada) ni
+       #alta (es la captura de email): el indice es para leer, no para
+       navegar la pagina entera.
+       ================================================================ -->
+  <nav class="indice" id="indice" aria-label="Secciones de esta página">
+    <a href="#beneficios">Para qué sirve</a>
+    <a href="#cifras">Los números</a>
+    <a href="#formas">Las formas</a>
+    <a href="#resenas">Opiniones</a>
+    <a href="#faq">Preguntas</a>
+  </nav>
+
   <section id="beneficios">
     <h2 class="reveal">Para qué <span class="h2-soft">sirve el magnesio</span></h2>
 
@@ -2056,6 +2113,51 @@
     unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
                   euros: '22,90 €', nota: '' }
   };
+  // EL INDICE. Marca la pastilla de la seccion que se esta leyendo.
+  // Se CALCULA a partir de una posicion en vez de observarse con un
+  // IntersectionObserver, por lo mismo que la barra de compra: asi la
+  // decision se puede comprobar en cualquier momento llamando a la funcion
+  // con un numero, sin depender de que el navegador este desplazandose.
+  (function () {
+    var indice = document.getElementById('indice');
+    if (!indice) { return; }
+    var enlaces = Array.prototype.slice.call(indice.querySelectorAll('a'));
+    var destinos = enlaces.map(function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    // LA LINEA DE CORTE va 120 px por debajo del borde de arriba: una seccion
+    // cuenta como "la que se esta leyendo" cuando su titular ya ha pasado la
+    // tira, no cuando asoma por el pie de la pantalla.
+    // cual() recibe la lista de posiciones y devuelve el indice, sin mirar
+    // nada del navegador: asi se puede comprobar dandole numeros a mano.
+    var LINEA = 120;
+    function cual(tops) {
+      var n = -1;
+      for (var i = 0; i < tops.length; i++) { if (tops[i] <= LINEA) { n = i; } }
+      return n;
+    }
+
+    function pintarIndice() {
+      var n = cual(destinos.map(function (d) {
+        return d ? d.getBoundingClientRect().top : Infinity;
+      }));
+      enlaces.forEach(function (a, i) {
+        a.classList.toggle('on', i === n);
+        if (i === n) { a.setAttribute('aria-current', 'true'); }
+        else { a.removeAttribute('aria-current'); }
+      });
+      // la marcada, siempre a la vista dentro de la tira
+      if (n >= 0 && enlaces[n].scrollIntoView) {
+        enlaces[n].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+    }
+
+    window.addEventListener('scroll', pintarIndice, { passive: true });
+    window.addEventListener('resize', pintarIndice, { passive: true });
+    pintarIndice();
+  })();
+
   // el selector de cantidad. Solo toca data-cant del boton de la ficha; los
   // otros dos puntos de compra de la pagina siguen añadiendo de uno en uno,
   // que es lo suyo: alli no hay selector que mirar.
