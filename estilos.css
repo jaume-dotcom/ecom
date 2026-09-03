@@ -468,6 +468,30 @@
   .hero-signup-success { text-align: center; font-size: var(--t-xs); color: var(--ink-soft); margin: 0.9rem 0 0; display: none; }
   .hero-signup-success.show { display: block; }
   .hero-signup-label { font-size: var(--t-md); font-weight: 500; color: var(--ink); margin: 0 0 0.8rem; }
+
+  /* ===== LA CAPTURA, EN OSCURO =====
+     Es el unico sitio de la pagina donde se pide algo a cambio de nada, y
+     ahora es tambien el unico bloque oscuro del tramo final: el ojo para ahi
+     porque cambia el fondo, no porque se lo pida un titular mas grande.
+     Sangra a los lados con margenes negativos, igual que hacia el panel de
+     resenas, porque .wrap tiene relleno propio y sin esto el negro se
+     quedaria con dos franjas blancas a los lados. */
+  #alta.hero-center {
+    background: var(--ink); color: var(--paper);
+    max-width: none; margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 2.6rem 1.6rem;
+  }
+  #alta .hero-alta-titulo { color: var(--paper); }
+  #alta .hero-alta-titulo .h2-soft { color: var(--paper); }
+  #alta .hero-signup-label { color: rgba(238, 240, 244, 0.78); }
+  /* el campo se queda en papel: sobre tinta, una caja clara es lo que dice
+     "aqui se escribe". En oscuro con borde claro parecia un boton mas. */
+  #alta .hero-signup-field { background: var(--paper); border-color: transparent; }
+  /* EL BOTON SE INVIERTE. Era tinta sobre tinta, o sea invisible. Sobre el
+     panel oscuro el que manda es el claro. */
+  #alta .hero-signup button { background: var(--paper); color: var(--ink); }
+  #alta .hero-signup button:hover { background: var(--pop); }
+  #alta .hero-signup-success { color: var(--pop); }
   /* el botón del formulario es la acción principal: va en ámbar como los demás */
   .hero-signup button { background: var(--ink); }
 
@@ -2449,23 +2473,22 @@
      Misma mecanica que el catalogo: tira que se desliza con la siguiente
      tarjeta asomando, y los mismos puntos debajo. Asi no hay que aprender
      un gesto nuevo a mitad de pagina.
-     Panel en el azul de marca, a sangre como el resto de bandas, con las
-     tarjetas en blanco encima. */
-  #resenas {
-    background: var(--ink);
-    margin-left: -1.6rem; margin-right: -1.6rem;
-    padding: 3rem 1.6rem 2.6rem;
-  }
-  #resenas .section-head h2 { color: var(--paper); }
-  #resenas .section-head .h2-soft { color: var(--paper); }
-  /* EL "VER TODAS" TAMBIEN. .see-all se pinta en tinta, y esta banda es
-     oscura: el enlace estaba ahi desde el principio pero se dibujaba tinta
-     sobre tinta, o sea invisible. El filete de debajo, igual. */
-  #resenas .section-head .see-all { color: var(--paper); border-bottom-color: var(--paper); }
-  /* los puntos van sobre oscuro: se invierten */
-  /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
-  #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act::before { background: var(--pop); }
+     EN CLARO. Estuvo en tinta a sangre con las tarjetas en blanco encima, y
+     se cambia por dos motivos.
+     El primero es de ritmo: "¿No sabes por donde empezar?" ya es un panel
+     oscuro y venia justo antes, asi que habia dos bloques oscuros seguidos y
+     el segundo dejaba de destacar.
+     El segundo es de contenido: una opinion se lee mejor sobre papel. El
+     panel oscuro de esta web es para ARGUMENTAR —las cifras, como elegimos—,
+     y aqui no argumenta la marca, habla otro. */
+  #resenas { padding-top: 0.5rem; }
+  /* con el fondo en papel, unas tarjetas blancas no se veian: lo que las
+     separaba antes era el contraste con el panel. Ahora las separa un filete.
+     Va con #resenas delante porque .resena declara border:0 mas abajo en esta
+     hoja y con un solo selector de clase ganaba aquella.
+     Solo en el carrusel de la portada: en resenas.html las valoraciones van en
+     lista y lo que las separa es una linea entre una y otra, no una caja. */
+  #resenas .resena { border: 1px solid var(--line); }
   .resenas {
     list-style: none; margin: 0; padding-bottom: 0.5rem;
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;

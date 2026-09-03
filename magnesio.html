@@ -694,6 +694,19 @@
   .resenas-cabeza h2 { margin: 0; }
   .resenas-cabeza .see-all { flex-shrink: 0; }
 
+  /* ===== LA CAPTURA, EN OSCURO =====
+     Igual que en la portada y en la del libro: es el unico sitio donde se
+     pide algo, y el cambio de fondo es lo que hace que el ojo pare.
+     Aqui el bloque tiene su propio HTML, asi que las reglas van aparte; el
+     texto es el mismo y el resultado tiene que ser el mismo. */
+  .alta {
+    background: var(--ink); color: var(--paper);
+    margin-left: -1rem; margin-right: -1rem;
+    padding: 2.6rem 1rem; border-radius: var(--r-lg);
+  }
+  .alta h2, .alta h2 .h2-soft { color: var(--paper); }
+  .alta > p { color: rgba(238, 240, 244, 0.78); }
+
   .alta { text-align: center; }
   /* el h2 y su entradilla llevan text-align:left en sus propias reglas, que
      le ganan a la del bloque por especificidad: heredar no basta, hay que
@@ -711,6 +724,14 @@
     font-size: var(--btn-txt); font-weight: var(--btn-peso);
   }
   .alta-ok { display: none; margin: 0.9rem 0 0; color: var(--ink); font-weight: 500; }
+
+  /* LA INVERSION DEL CAMPO Y EL BOTON VA AQUI, detras de sus propias reglas.
+     Puestas antes no servian de nada: mismo peso de selector y gana la ultima,
+     asi que el boton se quedaba en tinta sobre el panel de tinta, o sea
+     invisible. Sobre oscuro el que manda es el claro. */
+  .alta input { background: var(--paper); border-color: transparent; }
+  .alta button { background: var(--paper); color: var(--ink); }
+  .alta-ok { color: var(--pop); }
   .alta-ok.on { display: block; }
 
   /* el pie ya no tiene reglas propias aqui: usa las de estilos.css, las
