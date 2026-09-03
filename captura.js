@@ -1,16 +1,16 @@
 /* ===========================================================================
-   CAPTURA DE EMAIL — un solo sitio para las tres paginas.
+   CAPTURA DE EMAIL — un solo sitio para todas las paginas.
 
    Hace tres cosas:
      1. Manda el email a Klaviyo. UNA funcion, alta(), y todo lo demas la
         llama. Cuando cambie el proveedor se toca aqui y solo aqui.
      2. Engancha los formularios que ya hay en la pagina, los del bloque
-        "Los primeros pagan menos". Se reconocen por data-alta.
+        de captacion. Se reconocen por data-alta.
      3. Monta el pop-up y decide cuando sale.
 
    Se escribe en JS y no en el HTML de cada pagina por lo mismo que el
-   carrito: son tres paginas y el dia que cambie el copy o el porcentaje no
-   se pueden tocar tres sitios y confiar en acordarse del tercero.
+   carrito: son cuatro paginas y el dia que cambie el copy o el porcentaje no
+   se pueden tocar cuatro sitios y confiar en acordarse del ultimo.
 
    ---------------------------------------------------------------------------
    OJO, ESTO TODAVIA NO GUARDA NADA. Faltan las dos constantes de aqui abajo.
@@ -29,7 +29,17 @@
   var KLAVIYO_LISTA = '';     // id de la lista
 
   var DESCUENTO = '15 %';
-  var LLAVE = 'zerox-alta';   // quien ya se apunto o cerro el pop-up
+
+  /* DOS MEMORIAS, y hacen cosas distintas.
+     LLAVE (localStorage): quien se apunto o cerro el pop-up. Ese dijo que no
+     o ya esta dentro, y no se le insiste en 30 dias.
+     VISTO (sessionStorage): con que SE HAYA ABIERTO basta. El sitio son
+     cuatro paginas y sin esto salia una vez por pagina: veias el pop-up en
+     la portada, lo ignorabas, entrabas en la ficha y volvia a saltar. Una
+     visita, una vez. Al cerrar la pestaña se olvida, asi que quien vuelva
+     otro dia sin haberlo cerrado si lo vera. */
+  var LLAVE = 'zerox-alta';
+  var VISTO = 'zerox-alta-visto';
   var DIAS_SILENCIO = 30;
 
   /* ---------- el envio ---------- */
@@ -71,6 +81,13 @@
     try { localStorage.setItem(LLAVE, String(Date.now())); } catch (e) {}
   }
 
+  function yaSalio() {
+    try { return sessionStorage.getItem(VISTO) === '1'; } catch (e) { return false; }
+  }
+  function marcarSalida() {
+    try { sessionStorage.setItem(VISTO, '1'); } catch (e) {}
+  }
+
   /* ---------- los formularios que ya estan en la pagina ---------- */
 
   document.addEventListener('submit', function (ev) {
@@ -94,7 +111,8 @@
      contenido nada mas llegar en movil, y ademas pedirle el correo a alguien
      que todavia no ha visto nada es pedirlo antes de dar. Sale cuando se ha
      leido casi la mitad de la pagina o tras 25 segundos, lo que pase antes.
-     Si ya se apunto o ya lo cerro, no vuelve a salir en 30 dias. */
+     Si ya se apunto o ya lo cerro, no vuelve en 30 dias; y dentro de una misma
+     visita sale UNA vez, aunque se recorran las cuatro paginas. */
   var UMBRAL = 0.45;
   var ESPERA = 25000;
 
@@ -113,14 +131,13 @@
         '<button type="button" class="pop-alta-x" data-pop-cerrar aria-label="Cerrar">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
         '</button>' +
-        '<p class="pop-alta-kicker">Antes de que abramos</p>' +
-        '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Los primeros <span class="h2-soft">pagan menos</span></h2>' +
-        '<p class="pop-alta-lede">Te mandamos un código de −' + DESCUENTO + ' para tu primer pedido. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>' +
+        '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Te escribimos <span class="h2-soft">el día que salga</span></h2>' +
+        '<p class="pop-alta-lede">Con un ' + DESCUENTO + ' para tu primer pedido, por llegar antes. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>' +
         '<form class="pop-alta-form" data-alta="pop-alta-ok" data-origen="popup">' +
           '<input type="email" placeholder="Tu email" aria-label="Tu email" required>' +
-          '<button type="submit">Quiero mi ' + DESCUENTO + '</button>' +
+          '<button type="submit">Apuntarme</button>' +
         '</form>' +
-        '<p class="pop-alta-ok" id="pop-alta-ok">Hecho. El código te llega en el email de bienvenida.</p>' +
+        '<p class="pop-alta-ok" id="pop-alta-ok">Apuntado. Te escribimos el día que salga, con tu código dentro.</p>' +
         '<p class="pop-alta-legal">Al dejar tu email aceptas recibir nuestros correos comerciales. ' +
           '<a href="#">Politica de privacidad</a>.</p>' +
       '</div>';
@@ -133,9 +150,12 @@
   var devolverFoco = null;
 
   function abrir() {
-    if (abierto || apuntado()) { return; }
+    if (abierto || apuntado() || yaSalio()) { return; }
     pop = pop || montar();
     if (!pop) { return; }
+    // se marca AL ABRIR, no al cerrar: quien lo ignora y cambia de pagina
+    // tampoco tiene que volver a verlo
+    marcarSalida();
     devolverFoco = document.activeElement;
     abierto = true;
     pop.classList.add('visto');
@@ -158,7 +178,7 @@
     if (ev.key === 'Escape') { cerrar(); }
   });
 
-  if (!apuntado()) {
+  if (!apuntado() && !yaSalio()) {
     var reloj = setTimeout(abrir, ESPERA);
     var mirar = function () {
       var alto = document.documentElement.scrollHeight - window.innerHeight;
@@ -173,5 +193,5 @@
   }
 
   /* para poder comprobarlo sin esperar 25 segundos ni desplazarse */
-  window.zeroxCaptura = { abrir: abrir, cerrar: cerrar, alta: alta, apuntado: apuntado, LLAVE: LLAVE };
+  window.zeroxCaptura = { abrir: abrir, cerrar: cerrar, alta: alta, apuntado: apuntado, yaSalio: yaSalio, LLAVE: LLAVE, VISTO: VISTO };
 })();
