@@ -120,7 +120,10 @@
      Lo que dice "en vivo" aqui es el latido, no el color. */
   .ficha-stock {
     display: flex; align-items: center; gap: 0.45rem;
-    margin: 0.4rem 0 0; font-size: var(--t-xs); color: var(--ink-soft);
+    /* el margen de abajo es un suelo minimo. La tira de miniaturas se empuja
+       con margin-top:auto, asi que cuando el texto casi llena la altura de la
+       foto el hueco automatico es cero y "En stock" quedaba pegado a ellas. */
+    margin: 0.4rem 0 0.75rem; font-size: var(--t-xs); color: var(--ink-soft);
   }
   .stock-luz {
     position: relative; flex-shrink: 0;
@@ -966,13 +969,23 @@
     /* el margen automatico se come el hueco que sobre: las miniaturas caen
        siempre abajo, este el texto mas alto o mas bajo */
     .ficha-minis { margin-top: auto; }
-    /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
-       nada y la caja se llena entera.
+    /* SIN PROPORCION FIJA: la foto sigue la altura de la fila en vez de
+       imponerla, y asi su suelo coincide siempre con el de las miniaturas,
+       mida lo que mida el texto de al lado.
+       El aspect-ratio de 3/4 que habia aqui es incompatible con eso: al
+       estirarse, el ancho se recalcula desde el alto y la foto se salia de su
+       columna y tapaba el texto. El ancho lo manda la columna de 172 px y el
+       recorte lo resuelve el object-fit:cover de la imagen.
        Radio de 4 px y no --r-md (10): la esquina se nota mucho menos pero no
        llega a viva. A 10 la foto se leia como una tarjeta de interfaz; a 0
        se leia como un recorte. 4 es una foto con la esquina matada. */
     .ficha-foto {
-      display: block; aspect-ratio: 3 / 4;
+      display: block; align-self: stretch;
+      /* width y min-width explicitos: un elemento de rejilla tiene min-width
+         auto, o sea su contenido minimo, y como dentro hay una imagen estirada
+         al alto de la fila ese minimo crecia con ella y la caja se salia de su
+         columna de 172 px. Con min-width 0 manda la columna. */
+      width: 100%; min-width: 0;
       border-radius: 4px; overflow: hidden; background: var(--tint);
     }
     .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
