@@ -72,7 +72,7 @@
     --ink-soft: #454c55;
     --ink-faint: #8b9aa8;
     /* claro sobre fondo oscuro: kickers y sellos del pie y de las bandas.
-       Antes era el crema --khaki-pop; ahora es neutro, para no meter
+       Antes era el crema --pop; ahora es neutro, para no meter
        calidez donde no hay accion. 11,9 sobre --ink. */
     --pop: #e9ebef;
     /* EL ACENTO. Un solo trabajo. Ver arriba antes de usarlo en un sitio
@@ -263,7 +263,7 @@
   .nm-desc { margin: 0; font-size: var(--t-2xs); color: var(--ink-soft); }
   .navmenu-foot {
     display: block; margin-top: 0.3rem; padding: 0.7rem 0.75rem;
-    border-top: 1px solid var(--line); font-size: var(--t-xs); color: var(--khaki-deep);
+    border-top: 1px solid var(--line); font-size: var(--t-xs); color: var(--ink-soft);
   }
   .navmenu-foot:hover { color: var(--ink); }
 
@@ -447,7 +447,7 @@
   }
   .hero-signup button:hover { background: var(--accion-hover); }
   .hero-signup-arrow { width: 1rem; height: 1rem; }
-  .hero-signup-success { text-align: center; font-size: var(--t-xs); color: var(--olive-soft); margin: 0.9rem 0 0; display: none; }
+  .hero-signup-success { text-align: center; font-size: var(--t-xs); color: var(--ink-soft); margin: 0.9rem 0 0; display: none; }
   .hero-signup-success.show { display: block; }
   .hero-signup-label { font-size: var(--t-md); font-weight: 500; color: var(--ink); margin: 0 0 0.8rem; }
   /* el botón del formulario es la acción principal: va en ámbar como los demás */
@@ -466,7 +466,7 @@
   }
   .shine::before {
     content: ""; position: absolute; z-index: 0; inset: -50%;
-    background-image: linear-gradient(var(--khaki));
+    background-image: linear-gradient(var(--ink-faint));
     background-repeat: no-repeat; background-size: 50% 30%; background-position: 100% 50%;
     filter: blur(6px);
     animation: shine-rotate 4s linear infinite;
@@ -770,7 +770,7 @@
   .p-top { display: flex; flex-direction: column; gap: 0.55rem; }
   .p-tag {
     align-self: flex-start; font-size: var(--t-3xs); font-weight: 500; letter-spacing: normal;
-    background: var(--khaki-pop); color: var(--ink); padding: 0.3rem 0.65rem; border-radius: 1000px;
+    background: var(--pop); color: var(--ink); padding: 0.3rem 0.65rem; border-radius: 1000px;
   }
   /* El nombre grande es la sustancia a secas y la forma quimica baja a la
      linea de abajo con la dosis. Antes iba al reves y el nombre era una
@@ -1014,10 +1014,10 @@
      arriba, pero ahi es una promesa y aqui es una cuenta */
   .cart-envio { padding: 0.9rem 1.3rem; border-bottom: 1px solid var(--line); }
   .cart-barra { height: 4px; border-radius: 999px; background: var(--line); overflow: hidden; }
-  .cart-barra span { display: block; height: 100%; background: var(--khaki-deep); transition: width 0.3s ease; }
+  .cart-barra span { display: block; height: 100%; background: var(--ink); transition: width 0.3s ease; }
   .cart-envio p { margin: 0.5rem 0 0; font-size: var(--t-xs); color: var(--ink-soft); }
-  .cart-envio p.cart-envio-casi { color: var(--khaki-deep); font-weight: 600; }
-  .cart-envio p.cart-envio-ok { color: var(--olive); font-weight: 600; }
+  .cart-envio p.cart-envio-casi { color: var(--ink); font-weight: 600; }
+  .cart-envio p.cart-envio-ok { color: var(--ink); font-weight: 600; }
 
   .cart-cuerpo { flex: 1; overflow-y: auto; padding: 0.4rem 1.3rem; }
   /* La cesta vacia se centra en el hueco, no arriba: el panel deja 400px
@@ -1042,7 +1042,7 @@
      unica salida del panel y se pulsa con el dedo */
   .cart-vacia a {
     display: inline-block; padding: 0.7rem 0.9rem;
-    color: var(--khaki-deep); font-weight: 600; font-size: var(--t-sm);
+    color: var(--ink); font-weight: 600; font-size: var(--t-sm);
     text-decoration: underline; text-underline-offset: 3px;
   }
   /* foto, texto y precio en tres columnas. La foto es lo que hace que la
@@ -1101,7 +1101,7 @@
   @media (min-width: 860px) { .bundle { grid-template-columns: 0.95fr 1.05fr; padding: 3rem; } }
   .bundle-tag {
     display: inline-block; font-size: var(--t-3xs); font-weight: 500; letter-spacing: normal;
-    background: var(--khaki-pop); color: var(--ink); padding: 0.4rem 0.8rem; margin-bottom: 0.9rem; border-radius: 1000px;
+    background: var(--pop); color: var(--ink); padding: 0.4rem 0.8rem; margin-bottom: 0.9rem; border-radius: 1000px;
   }
   .bundle-text h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0 0 0.8rem; text-wrap: balance; }
   .bundle-text p { color: var(--ink-soft); max-width: 46ch; margin: 0 0 1.4rem; }
@@ -1129,7 +1129,7 @@
   }
   /* la última lleva el acento: es la ficha de confianza y merece destacar */
   .stack-card--alt {
-    background: var(--khaki-pop); border-color: rgba(140,90,34,0.22);
+    background: var(--pop); border-color: rgba(140,90,34,0.22);
   }
   /* Todas con la misma altura mínima y apilando z-index. Sin esto la primera
      tarjeta —158px más alta que la última— asomaba por debajo al salir del
@@ -1156,7 +1156,7 @@
   .stack-list li::before {
     content: ""; position: absolute; left: 0; top: 1.15rem;
     width: 0.95em; height: 0.55em;
-    border-left: 2px solid var(--khaki-deep); border-bottom: 2px solid var(--khaki-deep);
+    border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
     transform: rotate(-45deg);
   }
   /* en "lo que no hacemos" el check pasa a una raya: no es una promesa */
@@ -1166,8 +1166,8 @@
   }
   /* el apilado depende de sticky; sin él las tarjetas simplemente se suceden */
   @media (prefers-reduced-motion: reduce) { .stack-card { position: static; } }
-  .spot-eyebrow { font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.08em; margin: 0 0 1rem; color: var(--khaki-deep); }
-  .spot-eyebrow .dot { color: var(--khaki); }
+  .spot-eyebrow { font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.08em; margin: 0 0 1rem; color: var(--ink-soft); }
+  .spot-eyebrow .dot { color: var(--ink-faint); }
   .spot-letter { display: inline-block; opacity: 0; transition: opacity 0.25s ease; }
   .spot-letter.in { opacity: 1; }
   .spot-head { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.15; margin: 0 0 1.6rem; text-wrap: balance; }
@@ -1181,7 +1181,7 @@
     border: 1px solid rgba(244,241,222,0.5); border-radius: 1000px; padding: 0.3rem 0.7rem;
   }
   .spot-stat { display: flex; align-items: baseline; gap: 0.3rem; }
-  .spot-stat .arrow { color: var(--khaki-deep); font-size: var(--t-2xl); }
+  .spot-stat .arrow { color: var(--ink); font-size: var(--t-2xl); }
   .spot-stat .count { font-size: var(--t-7xl); font-weight: 500; letter-spacing: var(--tracking-lg); font-variant-numeric: tabular-nums; }
   .spot-stat .unit { font-size: var(--t-md); color: var(--ink-soft); }
   /* --ink-faint valía sobre oscuro; sobre este fondo claro se quedaba en 2,32 */
@@ -1207,7 +1207,7 @@
 
   /* ethos */
   .ethos { text-align: left; max-width: 46rem; }
-  .ethos .kicker { font-size: var(--t-2xs); font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--khaki-deep); margin-bottom: 1rem; }
+  .ethos .kicker { font-size: var(--t-2xs); font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1rem; }
   .ethos h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.08; margin: 0 0 1.2rem; text-wrap: balance; }
   .ethos p { color: var(--ink-soft); font-size: var(--t-lg); max-width: 52ch; margin: 0 0 1.6rem; }
 
@@ -1243,7 +1243,7 @@
      de la ficha: alli las cifras van en peso 300 y grandes. Eran dos
      lenguajes distintos para la misma idea en dos paginas. */
   .cierre-cifras b {
-    font-size: var(--t-4xl); font-weight: 300; color: var(--khaki-pop);
+    font-size: var(--t-4xl); font-weight: 300; color: var(--pop);
     letter-spacing: -0.02em; line-height: 1.05; font-variant-numeric: tabular-nums;
   }
   /* el rotulo sube de 11,5 a 12,8: era el texto mas pequeño de la web, justo
@@ -1259,7 +1259,7 @@
     font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
     font-style: italic; font-weight: 400;
     font-size: var(--t-xl); letter-spacing: 0;
-    color: var(--khaki-pop);
+    color: var(--pop);
   }
   .closing h2 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; color: var(--paper); }
 
@@ -1274,7 +1274,7 @@
   .foot-cols { display: flex; flex-wrap: wrap; gap: 3rem; }
   .foot-col h3 { font-size: var(--t-2xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 0.9rem; }
   .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; font-size: var(--t-sm); }
-  .foot-col a:hover { color: var(--khaki-deep); }
+  .foot-col a:hover { color: var(--ink); }
   .foot-bottom { border-top: 1px solid var(--line); padding-top: 1.4rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: var(--t-2xs); color: var(--ink-faint); }
   .foot-bottom .disclaimer { max-width: 60ch; }
 
@@ -1376,8 +1376,8 @@
   .faq-ico .cap-fill { fill: currentColor; stroke: none; }
   /* la cápsula gira 90°: al ser simétrica, 180° no se notaría.
      El latón se lee sobre oscuro; el ámbar de los botones no. */
-  .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--khaki); }
-  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-pop); }
+  .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--ink-faint); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--pop); }
   .faq-head { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
   @media (min-width: 620px) { .faq-head { flex-direction: row; align-items: center; gap: 1rem; } }
   .faq-title { font-size: var(--t-base); font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
@@ -1412,7 +1412,7 @@
   .pack-body { padding: 1.8rem 1.6rem 2rem; }
   @media (min-width: 760px) { .pack-body { padding: 2.8rem; } }
   /* .kno vivía dentro de .criterion, que se eliminó; el pack sigue usándola */
-  .kno { font-family: var(--font-mono); font-size: var(--t-3xs); letter-spacing: 0.08em; color: var(--khaki-deep); text-transform: uppercase; margin: 0 0 0.7rem; }
+  .kno { font-family: var(--font-mono); font-size: var(--t-3xs); letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; margin: 0 0 0.7rem; }
   .pack-body h3 { font-size: var(--t-3xl); font-weight: 500; margin: 0.3rem 0 0.6rem; letter-spacing: var(--tracking-lg); }
   .pack-lead { color: var(--ink-soft); font-size: var(--t-md); margin: 0 0 1.5rem; max-width: 40ch; }
   /* cada línea a dos niveles: qué es, y su detalle debajo. Separadas por una
@@ -1427,7 +1427,7 @@
   .pack-list li::before {
     content: ""; position: absolute; left: 0; top: 1.15rem;
     width: 0.95em; height: 0.55em;
-    border-left: 2px solid var(--khaki-deep); border-bottom: 2px solid var(--khaki-deep);
+    border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
     transform: rotate(-45deg);
   }
   .pack-list b { color: var(--ink); font-weight: 600; font-size: var(--t-base); }
@@ -1499,14 +1499,24 @@
     margin: 0 auto 1.4rem; max-width: 34ch;
     font-size: var(--t-lg); line-height: 1.5; color: rgba(255, 255, 255, 0.92);
   }
+  /* EL UNICO BOTON QUE NO VA EN TINTA, y no por gusto: aqui detras hay
+     video, y una pastilla oscura sobre imagen oscura no se separa del
+     fondo. Medido, el boton en --ink contra lo que tiene detras da 1,1,
+     cuando el minimo para que una forma se vea es 3: la letra se leia
+     perfecta y el boton no parecia un boton.
+     En blanco se separa 9,77 de media, 5,42 en el peor pixel de 8
+     fotogramas y 17,45 en el mejor: el valor mas alto de todo lo que
+     probamos sobre imagen. El texto va en --ink, 14,99 encima.
+     En movil esto lo pisa el cristal, que ahi si pasa; en escritorio el
+     cristal NO pasa (4,02 el peor pixel) y por eso se queda el blanco. */
   .hero-cta {
     display: block; width: 100%; box-sizing: border-box;
     padding: var(--btn-relleno); border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--paper); color: var(--ink);
     font-size: var(--btn-txt); font-weight: var(--btn-peso); text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .hero-cta:hover { background: var(--olive); transform: translateY(-1px); }
+  .hero-cta:hover { background: #eef1f5; transform: translateY(-1px); }
   /* solo la diapositiva activa es tabulable: las de al lado se ven con el peek */
   .hero-slide:not(.active) .hero-cta { pointer-events: none; }
 
@@ -1667,7 +1677,7 @@
   }
   .firma-datos li:first-child { border-left: 0; }
   .firma-datos b {
-    font-size: var(--t-2xl); font-weight: 700; color: var(--khaki-deep);
+    font-size: var(--t-2xl); font-weight: 700; color: var(--ink);
     letter-spacing: 0.01em; line-height: 1.15;
     /* cifras de ancho fijo: sin esto, al contar de 0 a 30 el numero cambia de
        ancho en cada cuadro y la columna entera va dando saltos */
@@ -1700,7 +1710,7 @@
     margin: 1.3rem 0 0;
     font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
     font-style: italic; font-size: var(--t-4xl); line-height: 1;
-    color: var(--khaki-deep);
+    color: var(--ink);
   }
 
   /* ===== TIPOGRAFIA, SOLO MOVIL =====
@@ -1713,8 +1723,11 @@
     :root { --ink-soft: #3a4149; }
 
     /* ===== CRISTAL DEL BOTON DEL HERO =====
-       El tinte es --khaki-pop (#ecdcbe), el mismo crema que ya usan las
-       etiquetas: el cristal no mete ningun color nuevo en la paleta.
+       El tinte es un crema #ecdcbe escrito a pelo en --cristal-bg, no un
+       token: era --khaki-pop, que se retiro al pasar a teja. Se queda tal
+       cual porque el valor esta medido y neutralizarlo cambiaria el techo
+       de opacidad; sobre el video se lee como blanco calido, no como
+       ambar, asi que no reabre el acento retirado.
 
        Por que un tinte CLARO con letra blanca encima si se lee: el cristal
        es translucido, asi que el color final lo pone lo que hay DETRAS, no
@@ -1787,11 +1800,13 @@
       font-size: var(--btn-txt); font-weight: var(--btn-peso);
       padding: var(--btn-relleno);
       display: inline-block; width: auto; max-width: 100%;
-      /* cristal en vez del marron solido; ver los tokens --cristal-* arriba.
-         El filo claro de dentro es lo que despega la pastilla del video:
-         sin el, un fondo translucido sobre imagen oscura no se lee COMO
-         boton aunque el texto se lea. El color del texto no cambia: sigue
-         siendo --paper de la regla base. */
+      /* cristal en vez del blanco solido de la regla base; ver los tokens
+         --cristal-* arriba. El filo claro de dentro es lo que despega la
+         pastilla del video: sin el, un fondo translucido sobre imagen
+         oscura no se lee COMO boton aunque el texto se lea.
+         El TEXTO HAY QUE PONERLO: la regla base ahora es un boton blanco
+         con letra en --ink, y esa letra sobre el cristal no se veria. */
+      color: var(--paper);
       background: var(--cristal-bg);
       border: 1px solid var(--cristal-bd);
       -webkit-backdrop-filter: blur(14px) saturate(1.15);
@@ -1800,7 +1815,7 @@
                   inset 0 1px 0 var(--cristal-filo);
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    /* la regla base manda el boton a --olive al pasar por encima, que aqui
+    /* la regla base manda el boton a --ink al pasar por encima, que aqui
        lo devolveria al marron solido. En tactil el :hover ademas se queda
        pegado despues de tocar, asi que hay que pisarlo: el toque sube el
        cristal de 18% a 22%, que se nota y sigue pasando el minimo (4,80 en
@@ -1973,7 +1988,7 @@
   /* la captura queda por encima de la FAQ: quien llega hasta aqui con dudas y
      se las resuelve leyendo, se quedaba sin sitio donde dejar el email */
   .faq-cierre { margin: 1.8rem 0 0; font-size: var(--t-base); }
-  .faq-cierre a { color: var(--khaki-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .faq-cierre a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .faq-q { color: var(--ink); }
   .faq-ico {
     flex-shrink: 0;
@@ -1989,8 +2004,8 @@
   }
   .faq-ico svg { color: var(--ink); }
   /* sobre claro el laton se pierde; aqui manda el ambar oscuro */
-  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--khaki-deep); }
-  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-deep); }
+  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--ink); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--ink); }
   .faq-meta { color: var(--ink-soft); border: 1px solid rgba(35, 39, 46, 0.2); }
   .faq-a p { color: var(--ink-soft); }
 
@@ -2021,7 +2036,7 @@
      y por cuál se va sin tener que contarlas */
   .arg-num {
     font-family: var(--font-mono); font-size: var(--t-2xs); font-weight: 600;
-    color: var(--khaki-deep); letter-spacing: 0.02em;
+    color: var(--ink-soft); letter-spacing: 0.02em;
   }
   .arg-num::after { content: " —"; color: var(--ink-faint); }
 
@@ -2070,7 +2085,7 @@
     margin: 0 0 0.7rem; font-size: var(--t-2xs); font-weight: 600;
     letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
   }
-  .sec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--khaki-deep); flex-shrink: 0; }
+  .sec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); flex-shrink: 0; }
 
   /* ---- fichas de producto: todo centrado ---- */
   .p-info { text-align: left; }
@@ -2098,7 +2113,7 @@
   }
   .arg-mas li::before {
     content: ""; position: absolute; left: 0; top: 1.05em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki);
+    width: 5px; height: 5px; border-radius: 50%; background: var(--ink-faint);
   }
 
   /* intro y cierre: sin foto, centradas y con más aire */
@@ -2106,7 +2121,7 @@
   .arg-kicker {
     margin: 0 0 1.6rem; font-family: var(--font-mono);
     font-size: var(--t-2xs); letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--khaki-deep);
+    color: var(--ink-soft);
   }
   .arg-sub { margin: 0 0 0.5rem; font-size: var(--t-lg); color: var(--ink-soft); }
   .arg-pregunta {
@@ -2116,7 +2131,7 @@
   .arg-pie { margin: 0; font-size: var(--t-base); color: var(--ink-faint); }
   .arg-cierre-soft {
     margin: 0; font-size: clamp(1.5rem, 5.4vw, 2rem);
-    font-weight: 500; color: var(--olive-soft); letter-spacing: var(--tracking-lg);
+    font-weight: 500; color: var(--ink-soft); letter-spacing: var(--tracking-lg);
     text-wrap: balance;
   }
 
@@ -2188,7 +2203,7 @@
 
   .arg-card--intro .arg-kicker { color: rgba(236, 220, 190, 0.96); font-size: var(--t-sm); letter-spacing: 0.12em; }
   .arg-card--intro .arg-sub { color: rgba(238, 240, 244, 0.95); }
-  .arg-card--intro .arg-pregunta { color: var(--khaki-pop); }
+  .arg-card--intro .arg-pregunta { color: var(--pop); }
   .arg-card--intro .arg-pie {
     color: rgba(238, 240, 244, 0.95); font-size: var(--t-md);
     margin-top: 2.2rem; padding-top: 1.4rem;
@@ -2304,7 +2319,7 @@
   }
   .libro-datos li:first-child { border-left: 0; }
   .libro-datos b {
-    font-size: var(--t-2xl); font-weight: 700; color: var(--khaki-deep);
+    font-size: var(--t-2xl); font-weight: 700; color: var(--ink);
     line-height: 1.15; font-variant-numeric: tabular-nums;
   }
   .libro-datos span { font-size: var(--t-3xs); line-height: 1.3; color: var(--ink-soft); }
@@ -2333,7 +2348,7 @@
   /* los puntos van sobre oscuro: se invierten */
   /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
   #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act::before { background: var(--khaki-pop); }
+  #resenas .shop-puntos li button.act::before { background: var(--pop); }
   .resenas {
     list-style: none; margin: 0; padding-bottom: 0.5rem;
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;
@@ -2349,7 +2364,7 @@
     padding: 1.3rem 1.2rem;
     background: var(--paper); border: 0; border-radius: 0;
   }
-  .resena-estrellas { color: var(--khaki-deep); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
+  .resena-estrellas { color: var(--ink); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
   .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
   .resena-firma { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-sm); }
   .resena-firma b { color: var(--ink); font-weight: 600; }
@@ -2423,7 +2438,7 @@
   /* sobre oscuro el marron no separa del fondo: el mismo boton claro que usa
      el criterio */
   #asesoria .btn-solid {
-    background: var(--khaki-pop); color: var(--ink); border-color: var(--khaki-pop);
+    background: var(--pop); color: var(--ink); border-color: var(--pop);
   }
   #asesoria .btn-solid:hover { background: var(--paper); border-color: var(--paper); }
   .ayuda-titulo {
@@ -2491,7 +2506,7 @@
      Recupera el contenido del #criterio que se borro: la dosis, lo que se
      publica y lo que no se hace. Eran los argumentos de confianza, y los dos
      bloques de contexto que quedaron hablan de otra cosa. */
-  .sec-kicker--claro { color: var(--khaki-pop); }
+  .sec-kicker--claro { color: var(--pop); }
 
   /* el bloque va centrado; las filas del acordeon no, que son de ancho
      completo y llevan icono a un lado y el mas al otro */
@@ -2507,7 +2522,7 @@
   .closing-marca {
     position: absolute; pointer-events: none; z-index: 0;
     top: -8%; right: -30%; width: 105%; height: auto;
-    color: var(--khaki-pop); opacity: 0.05;
+    color: var(--pop); opacity: 0.05;
   }
   /* todo el contenido por encima de la marca */
   .closing > *:not(.closing-marca) { position: relative; z-index: 1; }
@@ -2549,8 +2564,8 @@
     stroke-linecap: round; stroke-linejoin: round;
   }
   .crit-ico .cap-fill { fill: currentColor; stroke: none; }
-  .crit-q[aria-expanded="true"] .crit-ico { transform: rotate(90deg); border-color: var(--khaki-pop); }
-  .crit-q[aria-expanded="true"] .crit-ico svg { color: var(--khaki-pop); }
+  .crit-q[aria-expanded="true"] .crit-ico { transform: rotate(90deg); border-color: var(--pop); }
+  .crit-q[aria-expanded="true"] .crit-ico svg { color: var(--pop); }
   .crit-title {
     flex: 1; font-size: var(--t-lg); font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.06em;
@@ -2583,8 +2598,8 @@
   .crit-lista li::before {
     content: ""; position: absolute; left: 0; top: 0.58em;
     width: 10px; height: 5px; border-radius: 0; background: none;
-    border-left: 2px solid var(--khaki-pop);
-    border-bottom: 2px solid var(--khaki-pop);
+    border-left: 2px solid var(--pop);
+    border-bottom: 2px solid var(--pop);
     transform: rotate(-45deg);
   }
   /* la cruz son dos barras: el ::before hace de aspa y el ::after de la otra */

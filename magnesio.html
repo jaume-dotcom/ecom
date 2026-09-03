@@ -111,6 +111,37 @@
      Es ademas lo que mejor funciona con este comprador: desconfia del
      marketing, y un dato comprobable le dice mas que una promesa. */
 
+  /* LA LUZ DE DISPONIBILIDAD. El punto de dentro esta quieto y el de fuera se
+     expande y se apaga, que es como se dibuja un estado en vivo.
+     EN TINTA, ni en verde ni en el acento. El verde es la convencion pero esta
+     paleta no tiene verde, y el acento teja tiene un solo trabajo asignado en
+     el sistema de color —la opcion recomendada y su ahorro, y si aparece en
+     mas de cuatro sitios esta mal—. Un punto de 8 px no vale ese gasto.
+     Lo que dice "en vivo" aqui es el latido, no el color. */
+  .ficha-stock {
+    display: flex; align-items: center; gap: 0.45rem;
+    margin: 0.4rem 0 0; font-size: var(--t-xs); color: var(--ink-soft);
+  }
+  .stock-luz {
+    position: relative; flex-shrink: 0;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ink);
+  }
+  .stock-luz::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: var(--ink);
+    animation: stock-latido 2.4s ease-out infinite;
+  }
+  @keyframes stock-latido {
+    0%   { transform: scale(1);   opacity: 0.5; }
+    70%  { transform: scale(2.8); opacity: 0; }
+    100% { transform: scale(2.8); opacity: 0; }
+  }
+  /* quien ha pedido que no se mueva nada ve el punto quieto, no un hueco */
+  @media (prefers-reduced-motion: reduce) {
+    .stock-luz::after { animation: none; opacity: 0; }
+  }
+
   .compra-fila { display: flex; align-items: stretch; gap: 0.6rem; }
   .cantidad {
     display: flex; align-items: center; flex-shrink: 0;
@@ -153,12 +184,6 @@
      de accion. */
   @media (max-width: 859px) {
 
-    /* El ahorro de la opcion recomendada, con el peso que tiene en las
-       fichas de referencia: pastilla llena en vez de texto gris. Ahora es la
-       unica pastilla de la fila, asi que no compite con nada.
-       Sigue sin premarcarse la cara, que es lo que prohibe el articulo 22:
-       esto cambia el peso visual, no cual viene marcada. */
-    .modo--destacado .modo-ahorro { background: var(--ink); color: #fff; }
   }
 
   /* ---------- indice de secciones ---------- */
@@ -249,7 +274,7 @@
   }
   .mini img { width: 100%; height: 100%; object-fit: cover; }
   .mini.is-on { border-color: var(--ink); opacity: 1; }
-  .mini:focus-visible { outline: 2px solid var(--khaki-deep); outline-offset: 2px; }
+  .mini:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) {
     .galeria-track { transition: none; }
     .galeria-minis { scroll-behavior: auto; }
@@ -364,7 +389,7 @@
   #resenas > p { color: rgba(238, 240, 244, 0.66); }
   /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
   #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act::before { background: var(--khaki-pop); }
+  #resenas .shop-puntos li button.act::before { background: var(--pop); }
 
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
@@ -454,8 +479,8 @@
   .quien-si li::before {
     content: ""; position: absolute; left: 0; top: 0.42em;
     width: 10px; height: 5px;
-    border-left: 2px solid var(--khaki-deep);
-    border-bottom: 2px solid var(--khaki-deep);
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
     transform: rotate(-45deg);
   }
   .quien-no li::before, .quien-no li::after {
@@ -475,8 +500,8 @@
   .calidad li::before {
     content: ""; position: absolute; left: 0; top: 0.42em;
     width: 10px; height: 5px;
-    border-left: 2px solid var(--khaki-deep);
-    border-bottom: 2px solid var(--khaki-deep);
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
     transform: rotate(-45deg);
   }
   .calidad-espera {
@@ -489,7 +514,7 @@
   .refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
   .refs li { font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
   .refs b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.15rem; }
-  .refs a { color: var(--khaki-deep); }
+  .refs a { color: var(--ink); }
 
   /* ---------- tambien te puede interesar ----------
      Misma composicion que el catalogo de la portada: tarjeta vertical con la
@@ -556,7 +581,7 @@
   .pasos li::before {
     counter-increment: paso; content: counter(paso);
     flex-shrink: 0; width: 1.9rem; height: 1.9rem; border-radius: 50%;
-    background: var(--khaki-pop); color: var(--olive);
+    background: var(--pop); color: var(--ink);
     display: grid; place-items: center;
     font-size: var(--t-sm); font-weight: 600; font-family: var(--font-mono);
   }
@@ -594,8 +619,8 @@
   .faq-ico .cap-fill { fill: currentColor; stroke: none; }
   /* la cápsula gira 90°: al ser simétrica, 180° no se notaría.
      El latón se lee sobre oscuro; el ámbar de los botones no. */
-  .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--khaki); }
-  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-pop); }
+  .faq-q[aria-expanded="true"] .faq-ico { transform: rotate(90deg); border-color: var(--ink-faint); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--pop); }
   .faq-head { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
   @media (min-width: 620px) { .faq-head { flex-direction: row; align-items: center; gap: 1rem; } }
   .faq-title { font-size: var(--t-base); font-weight: 500; line-height: 1.35; letter-spacing: var(--tracking-sm); }
@@ -630,8 +655,8 @@
   }
   .faq-ico svg { color: var(--ink); }
   /* sobre claro el laton se pierde; aqui manda el ambar oscuro */
-  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--khaki-deep); }
-  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--khaki-deep); }
+  .faq-q[aria-expanded="true"] .faq-ico { border-color: var(--ink); }
+  .faq-q[aria-expanded="true"] .faq-ico svg { color: var(--ink); }
   .faq-meta { color: var(--ink-soft); border: 1px solid rgba(35, 39, 46, 0.2); }
   .faq-a p { color: var(--ink-soft); }
 
@@ -654,10 +679,10 @@
   }
   .alta button {
     padding: var(--btn-relleno); border: 0; border-radius: var(--btn-radio);
-    background: var(--khaki-deep); color: var(--paper);
+    background: var(--ink); color: var(--paper);
     font-size: var(--btn-txt); font-weight: var(--btn-peso);
   }
-  .alta-ok { display: none; margin: 0.9rem 0 0; color: var(--olive); font-weight: 500; }
+  .alta-ok { display: none; margin: 0.9rem 0 0; color: var(--ink); font-weight: 500; }
   .alta-ok.on { display: block; }
 
   /* el pie ya no tiene reglas propias aqui: usa las de estilos.css, las
@@ -770,12 +795,18 @@
      "esto se pulsa" y el boton de añadir esta a dos dedos; estuvo en azul y
      era un color de mas. En gris medio se distingue de las otras dos sin
      pedir nada. Quien lo dice de verdad es el sello. */
-  /* La recomendada YA NO LLEVA FILETE PROPIO. Lo tenia en --ink-faint, un
-     escalon por encima de la otra, y eso era exactamente lo que emborronaba
-     la lectura: habia tres fuerzas de filete para dos estados. Ahora el
-     filete solo dice UNA cosa, cual esta marcada, y que la trimestral es la
-     que conviene lo dicen sus dos pastillas, que para eso estan. */
-  .modo--destacado { border-color: var(--line); }
+  /* AQUI VIVE EL ACENTO, y es uno de los dos unicos sitios de toda la web
+     donde puede aparecer. Sistema B: la tinta se queda con los botones y el
+     acento marca la opcion recomendada. Asi no compiten —el acento dirige
+     la mirada ANTES de llegar al boton, y el boton cierra en tinta.
+     El comentario de arriba decia que el filete de la recomendada "no es un
+     color" porque el marron de entonces significaba "esto se pulsa" y
+     chocaba con el boton de al lado. Con el sistema B ese choque ya no
+     existe: el acento no esta en ningun boton, asi que puede decir "mira
+     aqui" sin que nadie lo confunda con "pulsa aqui". */
+  .modo--destacado { border-color: var(--acento); background: var(--acento-tinte); }
+  .modo--destacado .modo-marca { border-color: var(--acento); }
+  .modo--destacado .modo-marca::after { background: var(--acento); }
   /* Los dos sellos caben ahora en una linea. Antes eran "LA MEJOR RELACION"
      y "Ahorras un 20 %", que a 375px partian en dos filas y estiraban la
      opcion casi un tercio de su alto. Dicen lo mismo con menos: el ahorro
@@ -790,11 +821,17 @@
     color: var(--ink); background: rgba(35, 39, 46, 0.08);
     border-radius: 999px; padding: 0.15rem 0.35rem; white-space: nowrap;
   }
+  /* El SEGUNDO y ultimo sitio del acento. Va en la base y no dentro del
+     breakpoint: el color es de toda la web desde el 2 de septiembre.
+     Blanco sobre teja da 5,41. Y sigue sin premarcarse la opcion cara, que
+     es lo que prohibe el articulo 22: esto es peso visual, no cual viene
+     marcada. */
+  .modo--destacado .modo-ahorro { background: var(--acento); color: var(--paper); }
   .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
   .faq-lista li { position: relative; padding-left: 1.1rem; }
   .faq-lista li::before {
     content: ""; position: absolute; left: 0; top: 0.62em;
-    width: 5px; height: 5px; border-radius: 50%; background: var(--khaki-deep);
+    width: 5px; height: 5px; border-radius: 50%; background: var(--ink);
   }
   /* La linea del precio por bote y por dia. Estaba dentro del panel que se
      desplegaba al elegir; ahora esta siempre puesta, que es lo que pide: es
@@ -850,7 +887,7 @@
     font-size: var(--t-2xs); color: var(--ink-soft);
   }
   .ficha-estrellas { display: inline-flex; gap: 1px; }
-  .ficha-estrellas svg { width: 13px; height: 13px; fill: var(--khaki-deep); }
+  .ficha-estrellas svg { width: 13px; height: 13px; fill: var(--ink); }
   .ficha-rating b { color: var(--ink); font-weight: 600; }
 
   /* el formato, debajo del nombre. En la referencia esa linea dice de que
@@ -1081,6 +1118,13 @@
                  lado no dice lo que se contrata. -->
             <span class="precio-nota" id="precio-nota"></span>
           </div>
+
+          <!-- LA DISPONIBILIDAD, pegada al precio. Estuvo debajo del boton y de
+               ahi se quito por redundante; aqui no lo es, porque es lo unico
+               que dice si se puede comprar hoy y esta donde se decide.
+               El punto late para que se lea como un estado en vivo y no como
+               una etiqueta impresa. -->
+          <p class="ficha-stock"><span class="stock-luz" aria-hidden="true"></span>En stock</p>
 
           <!-- LA TIRA DE MINIATURAS, debajo del precio y dentro de la columna
                de texto. Eso fija el ancho minimo de la columna: tres botones
