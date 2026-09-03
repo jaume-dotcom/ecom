@@ -795,6 +795,15 @@
     var ancho = window.innerWidth;
     var fijar = function () {
       raiz.style.setProperty('--hero-alto', window.innerHeight + 'px');
+      // y lo que hay por encima del hero: la barra de aviso mas la nav.
+      // Se mide en vez de estimarlo, que es lo que se hacia antes con una
+      // resta de 10,5rem a ojo. Asi la tarjeta acaba justo en el borde de
+      // abajo de la pantalla y no antes.
+      var caja = document.querySelector('.hero-carousel');
+      if (caja) {
+        var arriba = caja.getBoundingClientRect().top + window.scrollY;
+        raiz.style.setProperty('--hero-tope', Math.round(arriba) + 'px');
+      }
     };
     fijar();
     window.addEventListener('resize', function () {

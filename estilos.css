@@ -926,7 +926,10 @@
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
     background: var(--paper); border-top: 1px solid var(--line);
     box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.08);
-    padding: 0.75rem 0 calc(0.75rem + env(safe-area-inset-bottom));
+    /* mas baja: sin la linea de garantias debajo del boton, el relleno de
+       0,75rem sobraba. Una barra fija tapa contenido todo el rato, asi que
+       cuanto menos ocupe, mejor. */
+    padding: 0.55rem 0 calc(0.55rem + env(safe-area-inset-bottom));
     transform: translateY(110%); transition: transform 0.28s cubic-bezier(.16,1,.3,1);
   }
   .barra-compra.visto { transform: none; }
@@ -934,30 +937,20 @@
   /* en el marron de accion, como los otros dos botones de añadir. Iba en
      tinta, y el resultado era que la misma frase, "Añadir a la cesta", se
      pintaba de dos colores segun donde la vieras */
+  /* mas pequeño que los botones de añadir de la pagina, y a proposito: este
+     no compra, lleva a las opciones. Si pesara lo mismo que el de la ficha
+     estaria prometiendo una accion que no hace. */
   .barra-btn {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    width: 100%; padding: 0.95rem 1.3rem; border: 0; border-radius: var(--btn-radio);
+    width: 100%; padding: 0.78rem 1.3rem; border: 0; border-radius: var(--btn-radio);
     background: var(--ink); color: var(--paper);
-    font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
+    font-family: var(--font); font-size: var(--t-base); font-weight: var(--btn-peso);
     cursor: pointer; transition: background 0.2s ease;
   }
   .barra-btn:hover { background: var(--accion-hover); }
   /* las dos promesas que ya hace la barra de arriba. Aqui vuelven a
      aparecer porque es el momento de decidir, y arriba quedan a nueve
      pantallas de distancia */
-  .barra-garantias {
-    list-style: none; margin: 0.6rem 0 0; padding: 0;
-    display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem 1.4rem;
-  }
-  .barra-garantias li {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    font-size: var(--t-2xs); color: var(--ink-soft);
-  }
-  .barra-garantias svg {
-    width: 1.15em; height: 1.15em; flex-shrink: 0; color: var(--ink);
-    fill: none; stroke: currentColor; stroke-width: 1.6;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
 
   /* ===== CESTA =====
      El panel se monta desde carrito.js y no desde el HTML, para que las tres
@@ -1578,11 +1571,21 @@
        reevalua la unidad de viewport y la tarjeta cambiaba de tamaño sola
        varias veces por gesto. Con un valor en pixeles ya resuelto no puede
        moverse. El 100svh queda de respaldo por si no hay JS. */
-    .hero-media-box { aspect-ratio: auto; height: clamp(26rem, calc(var(--hero-alto, 100svh) - 10.5rem), 42rem); }
-    /* deja de ir a sangre: margen igual por los cuatro lados. Arriba bajaba
-       de 22px a 12 y abajo el ticker arrancaba pegado a la tarjeta (0px) */
-    .hero-carousel { padding-left: 0.75rem; padding-right: 0.75rem; margin-top: 0.75rem; padding-bottom: 1rem; }
-    .hero-media-box { border-radius: var(--r-md); }
+    /* A SANGRE Y A PANTALLA COMPLETA. El video llega a los cuatro bordes:
+       sin margenes, sin esquinas redondeadas y hasta el borde inferior de
+       la pantalla.
+       El alto ya no lleva ni tope de 42rem ni una resta a ojo de 10,5rem.
+       Se resta --hero-tope, que el JS mide de verdad: lo que ocupan la
+       barra de aviso y la nav por encima del hero. Asi la tarjeta acaba
+       exactamente donde acaba la pantalla, en cualquier telefono. */
+    .hero-media-box {
+      aspect-ratio: auto;
+      height: calc(var(--hero-alto, 100svh) - var(--hero-tope, 6.5rem));
+      border-radius: 0;
+    }
+    .hero-carousel { padding: 0; margin-top: 0; }
+    /* el contenedor tambien: llevaba las dos esquinas de abajo redondeadas */
+    .hero-full { border-radius: 0; }
   }
 
   @media (min-width: 860px) {

@@ -807,15 +807,32 @@
      ley no puede venir marcada.
      Con checks y no con puntos: no es una lista de caracteristicas, es lo que
      te llevas de mas por elegir esa. */
-  .modo-ventajas { display: grid; gap: 0.22rem; margin-top: 0.5rem; }
-  .modo-ventajas span {
+  /* ACORDEON. Cerradas de salida, porque la que viene marcada es la compra
+     unica, y se abren al marcar la suscripcion.
+     La mecanica es la misma que la del acordeon de la FAQ de esta pagina:
+     la fila pasa de 0fr a 1fr y el hijo recorta lo que sobra. Nada de
+     max-height con un numero a ojo, que obliga a adivinar cuanto ocupa el
+     texto y descuadra el tiempo de la animacion cuando no acierta.
+     El aire va de MARGEN DEL PADRE y no de relleno del hijo: el relleno
+     cuenta para el tamano minimo del elemento de rejilla, y con la fila a 0fr
+     la caja seguia midiendo 8,8 px. De margen desaparece del todo.
+     Medido con las transiciones desactivadas: cerrada 0 px, abierta 99. */
+  .modo-ventajas {
+    display: grid; grid-template-rows: 0fr; margin-top: 0;
+    transition: grid-template-rows 0.32s cubic-bezier(.16,1,.3,1),
+                margin-top 0.32s cubic-bezier(.16,1,.3,1);
+  }
+  .modo:has(input:checked) .modo-ventajas { grid-template-rows: 1fr; margin-top: 0.55rem; }
+  .modo-ventajas-int { overflow: hidden; display: grid; gap: 0.22rem; }
+  .modo-ventajas-int > span {
     position: relative; padding-left: 1.05rem;
     font-size: var(--t-xs); color: var(--ink-soft); line-height: 1.35;
   }
-  .modo-ventajas span::before {
+  .modo-ventajas-int > span::before {
     content: "\2713"; position: absolute; left: 0; top: 0;
     color: var(--ink); font-weight: 700;
   }
+  @media (prefers-reduced-motion: reduce) { .modo-ventajas { transition: none; } }
 
   @media (max-width: 859px) {
     /* la galeria se va: en la referencia hay una sola foto, en caja y
@@ -823,18 +840,23 @@
        pack) dejan de verse en movil. */
     .galeria { display: none; }
 
-    /* 150 y no 132: la foto es lo unico que enseña el producto en movil,
-       ahora que la galeria no sale. Al quitar la nota del precio la columna
-       de la derecha tiene una linea menos, asi que aguanta el recorte. */
+    /* 165 y no 150: la foto es lo unico que enseña el producto en movil,
+       ahora que la galeria no sale, asi que se le da todo el ancho que la
+       columna de al lado puede ceder. El hueco entre columnas baja a 0,75rem
+       para que a la derecha sigan cabiendo las tres miniaturas de 44, que
+       piden 148 px justos. */
     .ficha-cabecera {
-      display: grid; grid-template-columns: 150px 1fr;
-      gap: 0.9rem; align-items: start; margin-bottom: 1.3rem;
+      display: grid; grid-template-columns: 165px 1fr;
+      gap: 0.75rem; align-items: start; margin-bottom: 1.4rem;
     }
     /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
-       nada y la caja se llena entera */
+       nada y la caja se llena entera.
+       Radio de 4 px y no --r-md (10): la esquina se nota mucho menos pero no
+       llega a viva. A 10 la foto se leia como una tarjeta de interfaz; a 0
+       se leia como un recorte. 4 es una foto con la esquina matada. */
     .ficha-foto {
       display: block; aspect-ratio: 3 / 4;
-      border-radius: var(--r-md); overflow: hidden; background: var(--tint);
+      border-radius: 4px; overflow: hidden; background: var(--tint);
     }
     .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -846,7 +868,9 @@
     /* 44 y no 48: tres de 48 con sus huecos piden 162 px y la columna mide
        159. 44 es el suelo de diana tactil, asi que no se baja de ahi. */
     .ficha-minis { display: flex; gap: 0.5rem; margin-top: 0.7rem; }
-    .ficha-minis .mini { width: 44px; height: 44px; }
+    /* mismo radio que la foto grande: son la misma cosa en pequeño. La tira
+       de la galeria, que es de escritorio, se queda con el suyo. */
+    .ficha-minis .mini { width: 44px; height: 44px; border-radius: 4px; }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
 
   }
@@ -1040,11 +1064,19 @@
             <!-- Las tres ventajas salen de la respuesta "¿Como funciona la
                  suscripcion?" de la FAQ de esta misma pagina. No se promete
                  nada que no estuviera ya escrito ahi.
-                 El ahorro no se repite: ya lo dice la pastilla de al lado. -->
+                 El ahorro no se repite: ya lo dice la pastilla de al lado.
+
+                 SE ABREN AL MARCAR LA OPCION y se cierran al marcar la otra.
+                 El envoltorio de dentro es lo que pide el acordeon de
+                 grid-template-rows: 0fr no puede llevar contenido suelto, y
+                 los margenes tienen que vivir en el hijo o se ven con la
+                 fila cerrada. -->
             <span class="modo-ventajas">
-              <span>Envío gratis</span>
-              <span>Cancelas en un clic, sin permanencia</span>
-              <span>Te avisamos por email antes de cada cobro</span>
+              <span class="modo-ventajas-int">
+                <span>Envío gratis</span>
+                <span>Cancelas en un clic, sin permanencia</span>
+                <span>Te avisamos por email antes de cada cobro</span>
+              </span>
             </span>
           </span>
         </label>
@@ -1641,13 +1673,17 @@
      copiados en cuanto cambia la opcion elegida, asi que añade lo que este
      marcado arriba y no una compra unica siempre.
      ================================================================ -->
+<!-- La barra YA NO AÑADE A LA CESTA: lleva al selector de compra.
+     Añadir desde aqui metia en la cesta la opcion marcada sin que se viera
+     cual era, porque la barra solo sale cuando el selector no esta en
+     pantalla. Ahora sube a las opciones y ahi se decide y se añade.
+     Por eso tampoco lleva ya data-add: si lo llevara, carrito.js lo
+     engancharia y haria las dos cosas.
+     Las dos garantias de debajo se van con ellas: estan en los sellos de la
+     ficha y en el pie, y aqui solo engordaban una barra que tapa contenido. -->
 <div class="barra-compra" id="barra-compra">
   <div class="wrap">
-    <button type="button" class="barra-btn" id="barra-btn">Añadir a la cesta</button>
-    <ul class="barra-garantias">
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Envío gratis desde 27,95&nbsp;&euro;</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.2 4.6v4.6h4.6"/></svg>Devolución en 30 días</li>
-    </ul>
+    <button type="button" class="barra-btn" id="barra-btn">Pedir Magnesio Bisglicinato</button>
   </div>
 </div>
 
@@ -1922,13 +1958,12 @@
     comprarBtn.setAttribute('data-sub', m.sub);
     comprarBtn.setAttribute('data-precio', m.precio);
     comprarBtn.setAttribute('data-img', 'ficha-magnesio.jpg');
-    // el boton de la barra de abajo es un espejo del de arriba: mismo texto
-    // y mismos datos, para que añada la opcion que este marcada y no una
-    // compra unica siempre
-    // los dos botones de mas abajo son espejos del de la ficha: mismo texto
-    // y mismos datos, para que añadan la opcion que este marcada y no una
-    // compra unica siempre
-    ['barra-btn', 'recompra-btn'].forEach(function (id) {
+    // el segundo punto de compra es espejo del de la ficha: mismo texto y
+    // mismos datos, para que añada la opcion que este marcada y no una
+    // compra unica siempre.
+    // La barra de abajo ya no esta en esta lista: no añade nada, lleva al
+    // selector, y su texto es fijo.
+    ['recompra-btn'].forEach(function (id) {
       var eco = document.getElementById(id);
       if (!eco) { return; }
       eco.textContent = m.txt;
@@ -1946,6 +1981,21 @@
   // Se resuelve mirando el scroll y no con IntersectionObserver: son dos
   // rectangulos por evento, el navegador ya agrupa los scroll, y asi la
   // decision se puede comprobar en cualquier momento llamando a decidir().
+  // El boton de la barra no añade: sube al selector de compra. La barra solo
+  // sale cuando el selector NO esta en pantalla, asi que añadir desde aqui
+  // metia en la cesta una opcion que no se estaba viendo.
+  // block:"center" deja las dos opciones en el medio de la pantalla, que es
+  // donde hay que decidir, y no pegadas al borde de arriba.
+  var barraBtn = document.getElementById('barra-btn');
+  if (barraBtn) {
+    barraBtn.addEventListener('click', function () {
+      var destino = document.querySelector('.modos');
+      if (!destino) { return; }
+      var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      destino.scrollIntoView({ behavior: quieto ? 'auto' : 'smooth', block: 'center' });
+    });
+  }
+
   var barra = document.getElementById('barra-compra');
   var selector = document.querySelector('.modos');
   var recompra = document.getElementById('comprar');
