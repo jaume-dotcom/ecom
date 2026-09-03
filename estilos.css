@@ -807,6 +807,21 @@
      implicita, y para probioticos no hay ni una autorizada en la UE. */
   .p-name { font-size: var(--t-xl); font-weight: 500; margin: 0; letter-spacing: var(--tracking-sm); }
   .p-desc { font-size: var(--t-xs); color: var(--ink-soft); margin: 0; }
+  /* EL PRODUCTO ANCLA. Tercer y ultimo sitio del acento en la portada.
+     Rotulo en teja y filete en la tarjeta, el mismo trato que la opcion
+     recomendada de la ficha y que el pack: donde hay una recomendacion,
+     hay teja; donde no, no.
+     Filete de 1px y no fondo tintado, igual que en el pack: la tarjeta
+     convive con otras tres blancas y teñirla la sacaria de la fila.
+     El boton de la tarjeta sigue en tinta. Sistema B: el acento senala,
+     no se pulsa. Teja sobre blanco da 5,41. */
+  .p-ancla {
+    margin: 0 0 0.1rem;
+    font-size: var(--t-3xs); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--acento);
+  }
+  .p-card--ancla { border-color: var(--acento); }
   /* beneficios en lista de comprobación. Los del probiótico son de
      composición, no de efecto: en la UE no hay alegaciones autorizadas
      para probióticos. */
@@ -873,23 +888,34 @@
      Tres sellos en una fila, debajo del boton. Van ahi y no en el pie: las
      dudas de "¿y si no me va bien?", "¿cuando llega?" y "¿es seguro pagar?"
      aparecen con el dedo encima del boton, no tres pantallas mas abajo. */
-  /* SE VAN LA CAJA, LOS FILETES, LOS ICONOS Y LAS VERSALITAS. Los cuatro
-     juntos son el sello de confianza generico de cualquier tienda, y de tan
-     visto ya no dice nada. Lo que queda es lo unico que informa: el dato
-     arriba y su etiqueta debajo, entre dos lineas de pelo.
+  /* SE VAN LA CAJA, LOS FILETES VERTICALES Y LAS VERSALITAS; EL ICONO SE
+     QUEDA. Lo que hacia que esta fila pareciera una plantilla no era el icono
+     en si, era la suma de los cuatro: caja con filete, rayas entre columnas,
+     versalitas con tracking y pictogramas gordos. Quitados los tres primeros
+     y afinado el cuarto, el icono ancla la lectura sin gritar.
+
+     18 px y trazo de 1,3: a 22 y 1,5 competian con el texto y eran lo primero
+     que se veia de la fila. En --ink-faint, no en tinta: acompañan al dato, no
+     son el dato.
 
      La cifra va en monoespaciada, que es como se escriben las cifras en esta
      marca desde la cuenta del pack de la portada. No es un adorno nuevo: es
      el idioma que ya habla la web.
 
-     Y en caja baja. Las versalitas con tracking eran la mitad del aire de
-     "plantilla": gritan sin decir nada y encima se leen peor. */
+     Y en caja baja. Las versalitas con tracking gritan sin decir nada y encima
+     se leen peor, que con un publico de 40-65 no es un detalle. */
   .garantia {
-    list-style: none; margin: 1.5rem 0 0; padding: 0.9rem 0;
+    list-style: none; margin: 1.5rem 0 0; padding: 1rem 0;
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
   }
   .garantia li { display: grid; gap: 0.1rem; align-content: start; }
+  .garantia svg {
+    width: 18px; height: 18px; margin-bottom: 0.4rem;
+    color: var(--ink-faint);
+    fill: none; stroke: currentColor; stroke-width: 1.3;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
   .garantia b {
     font-family: var(--font-mono); font-variant-numeric: tabular-nums;
     font-size: var(--t-sm); font-weight: 600; letter-spacing: -0.02em;
@@ -1594,11 +1620,18 @@
      sin pelearse con el.
      Ya no va sobre el marron del boton sino sobre la foto, asi que sube a 0.92
      de blanco y lleva sombra, como el resto del texto del hero. */
+  /* EL ACENTO EN LA PRIMERA PANTALLA. "Oferta de lanzamiento" es el ahorro
+     de la portada, que es justo el trabajo que tiene asignado el acento en
+     el sistema B, y estaba en blanco liso: la landing entera no tenia ni
+     una senal de acento por encima del pliegue.
+     Va en --acento-claro y no en teja solida porque el solido sobre este
+     video da 2,57, muy por debajo del 4,5 que pide un texto. El claro da
+     6,66 de media y 5,67 en el peor fotograma. */
   .hero-cta-nota {
     margin: 0.55rem 0 0;
     font-size: var(--t-2xs); font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--acento-claro);
     text-shadow: 0 1px 12px rgba(22, 19, 15, 0.55);
   }
 
