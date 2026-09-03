@@ -670,6 +670,11 @@
   /* misma excepcion que "¿No sabes por donde empezar?" en la portada: un
      titular, una frase y un campo. Nada con lo que alinearse, asi que se
      centra. Y asi coincide con la captura de la portada, que es la misma. */
+  /* titular y enlace en la misma linea, el enlace pegado a la derecha */
+  .resenas-cabeza { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .resenas-cabeza h2 { margin: 0; }
+  .resenas-cabeza .see-all { flex-shrink: 0; }
+
   .alta { text-align: center; }
   /* el h2 y su entradilla llevan text-align:left en sus propias reglas, que
      le ganan a la del bloque por especificidad: heredar no basta, hay que
@@ -1620,7 +1625,12 @@
        Se rellenan cuando haya clientes que las escriban.
        ================================================================ -->
   <section id="resenas">
-    <h2 class="reveal">Lo que dice <span class="h2-soft">quien lo toma</span></h2>
+    <!-- aqui el h2 va suelto, sin .section-head, asi que el enlace no puede
+         colgarse de esa rejilla: se le pone su propia fila -->
+    <div class="resenas-cabeza reveal">
+      <h2>Lo que dice <span class="h2-soft">quien lo toma</span></h2>
+      <a class="see-all" href="resenas.html">Ver todas</a>
+    </div>
 
     <ul class="resenas reveal-esc">
       <li class="resena">

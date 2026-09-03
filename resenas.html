@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valoraciones — ZEROX</title>
+<meta name="description" content="Todas las valoraciones de quien toma ZEROX.">
+<link rel="canonical" href="https://jaume-dotcom.github.io/ecom/resenas.html">
+<!-- La pagina no se indexa: hasta que haya valoraciones de verdad, lo unico
+     que hay aqui son huecos de relleno. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
+<noscript><style>
+  .reveal, .foot-anim { opacity: 1 !important; filter: none !important; transform: none !important; }
+</style></noscript>
+<style>
+  /* La barra de aviso y la nav se copian de la ficha: es la misma cabecera y
+     tiene que verse igual. Estas reglas viven en el HTML de cada pagina y no
+     en estilos.css, que es como esta montado el resto del sitio. */
+  /* ---------- barra de aviso + nav ---------- */
+  .topbar {
+    background: var(--ink); color: var(--paper);
+    font-size: var(--t-xs); text-align: center; padding: 0.6rem 1rem;
+  }
+  nav {
+    position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 1.1rem 0;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
+  nav > .logo {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  /* relative para colgarle el contador de la cesta, y el reset porque el de
+     la bolsa dejo de ser un <a> y ahora es un <button> */
+  .nav-ico {
+    position: relative;
+    width: 2.75rem; height: 2.75rem; margin: 0 -0.7rem;
+    display: grid; place-items: center; color: var(--ink);
+    background: none; border: 0; padding: 0; cursor: pointer;
+  }
+  .nav-ico svg { width: 21px; height: 21px; }
+
+  /* AQUI LAS VALORACIONES NO SON UN CARRUSEL, son una lista: es lo que se
+     viene a ver. .resenas de estilos.css es una rejilla de flujo por COLUMNAS
+     con anchos del 78 % y desplazamiento lateral, asi que no basta con poner
+     display:grid: hay que devolver el flujo a filas y soltar el ancho fijo. */
+  .resenas-todas {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-auto-flow: row;
+    grid-template-columns: 1fr; grid-auto-columns: auto;
+    gap: 0.9rem; overflow-x: visible;
+  }
+  /* y sin la proporcion cuadrada que llevan dentro del carrusel: aqui el alto
+     lo pone el texto */
+  .resenas-todas .resena { aspect-ratio: auto; align-content: start; padding: 0; }
+  /* una linea de pelo entre valoraciones. En el carrusel cada tarjeta se veia
+     porque iba en blanco sobre la banda; aqui el fondo tambien es blanco y sin
+     separador se leerian como un solo bloque de texto. */
+  .resenas-todas .resena + .resena {
+    border-top: 1px solid var(--line); padding-top: 1.5rem;
+  }
+  .resenas-todas { gap: 1.5rem; }
+  .resenas-cab { margin: 0 0 1.4rem; }
+  .resenas-cab h1 {
+    margin: 0 0 0.4rem; font-size: var(--t-6xl); font-weight: 600;
+    line-height: 1.15; letter-spacing: var(--tracking-lg);
+  }
+  .resenas-cab p { margin: 0; color: var(--ink-soft); }
+  .resenas-volver {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    min-height: 44px; margin: 1.6rem 0 0; padding: 0 1.2rem;
+    border: 1px solid var(--line); border-radius: 999px; background: #fff;
+    color: var(--ink); font-size: var(--t-base); font-weight: 500; cursor: pointer;
+    font-family: var(--font);
+  }
+  .resenas-volver svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  main.wrap { padding-top: 1.4rem; padding-bottom: 2.6rem; }
+  @media (min-width: 860px) {
+    .resenas-todas { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Envío gratuito desde 27,95 € · Devolución en 30 días</div>
+
+<div class="wrap">
+  <nav>
+    <a class="nav-ico" id="volver" href="index.html#resenas" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <span class="logo-word">ZEROX</span>
+    </a>
+    <button type="button" class="nav-ico" data-cart-abrir aria-label="Tu cesta, vacía">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <!-- ================================================================
+       OJO: TODAS ESTAS VALORACIONES SON HUECOS DE RELLENO.
+       No se escribe ni una sola inventada. Publicar opiniones falsas es
+       practica desleal per se desde el RDL 24/2021, que metio el articulo
+       21 bis en la Ley de Competencia Desleal. Se rellenan cuando haya
+       clientes que las escriban, y el recuento sale de contarlas.
+       ================================================================ -->
+  <div class="resenas-cab">
+    <h1>Lo que dice <span class="h2-soft">quien lo toma</span></h1>
+    <p>Todas las valoraciones, sin filtrar.</p>
+  </div>
+
+  <ul class="resenas resenas-todas">
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 1, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 2, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 3, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 4, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 5, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 6, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 7, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+      <li class="resena">
+        <span class="resena-estrellas" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="resena-texto">Aquí irá la valoración 8, con el largo que tenga. El hueco da para cuatro o cinco líneas, que es lo que ocupa una de verdad.</p>
+        <p class="resena-firma"><b>Nombre</b><span><svg class="resena-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>Compra verificada</span></p>
+      </li>
+  </ul>
+
+  <button type="button" class="resenas-volver" id="resenas-volver">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    Volver
+  </button>
+
+</main>
+
+<footer id="footer-signup">
+  <div class="foot-panel">
+    <span class="foot-hair" aria-hidden="true"></span>
+    <div class="foot-grid">
+
+      <div class="foot-brand reveal foot-anim">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="7">
+              <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+              <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+              <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+              <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+              <path d="M16 16 L84 84 M84 16 L16 84"/>
+            </g>
+          </svg>
+          <span class="logo-word">ZEROX</span>
+        </a>
+        <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
+        <p class="foot-copy">&copy; 2026 ZEROX</p>
+      </div>
+
+      <div class="foot-cols">
+        <div class="foot-col reveal foot-anim">
+          <h3>Fórmulas</h3>
+          <ul>
+            <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>La marca</h3>
+          <ul>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="libro.html">El libro</a></li>
+            <li><a href="#faq">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#alta">Acceso anticipado</a></li>
+            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="#footer-signup">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada.</span>
+      <span class="disclaimer">Vista previa: nombre y packaging provisionales, pendientes de confirmación de marca y dominio.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Volver a de donde se venia, no a un sitio fijo: a esta pagina se llega
+  // desde la portada y desde la ficha, y mandar siempre a la portada haria
+  // perder el sitio a quien venia de la ficha.
+  // Si no hay historia dentro del sitio —enlace compartido, pestaña nueva—
+  // el enlace de la nav ya apunta a la portada y hace de red.
+  (function () {
+    var propia = document.referrer && document.referrer.indexOf(location.origin) === 0;
+    function atras(ev) {
+      if (!propia) { return; }
+      ev.preventDefault();
+      history.back();
+    }
+    var b = document.getElementById('resenas-volver');
+    var n = document.getElementById('volver');
+    if (b) { b.addEventListener('click', function (ev) { if (propia) { atras(ev); } else { location.href = 'index.html#resenas'; } }); }
+    if (n) { n.addEventListener('click', atras); }
+  })();
+</script>
+
+</body>
+</html>
