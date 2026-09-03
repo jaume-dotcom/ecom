@@ -1735,16 +1735,16 @@
        altura del boton aporta entre 0,74 de opacidad abajo y 0,60 arriba.
        El resultado sigue siendo oscuro y el texto blanco se lee de sobra.
 
-       Medido sobre el video de verdad, no sobre una foto: 5.600 pixeles de
-       la caja del boton en 10 fotogramas repartidos por los 10 segundos,
-       componiendo el degradado fila a fila.
+       Medido sobre el video de verdad, no sobre una foto: los pixeles de
+       la caja del boton en 8 fotogramas repartidos por los 10 segundos,
+       componiendo el degradado fila a fila. Vuelto a medir despues del
+       hero a sangre, que cambio la caja de 644 a 708 px de alto:
          opacidad   contraste medio   el peor pixel de todo el video
-           18%           7,69                  5,20      <- en uso
-           20%           7,30                  4,99
-           22%           6,92                  4,80      <- toque
-           25%           6,40                  4,52      <- el techo
-           26%           6,24                  4,44      NO PASA
-       NO SUBIR DEL 25%. El minimo exigible es 4,5 y el margen que queda
+           18%           7,72                  5,11      <- en uso
+           22%           6,95                  4,79      <- toque
+           24%           6,60                  4,63      <- el techo
+           25%           6,43                  4,46      NO PASA
+       NO SUBIR DEL 24%. El minimo exigible es 4,5 y el margen que queda
        arriba es pequeno, asi que cualquier retoque hay que volver a medirlo.
 
        Con blanco puro en vez de este crema el techo baja al 20%: el oro es
