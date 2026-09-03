@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
 <link rel="stylesheet" href="estilos.css">
 <script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
      quedaria invisible, incluidos los avisos legales del pie */
@@ -1647,13 +1648,17 @@
   </section>
 
   <section class="alta" id="alta">
-    <h2 class="reveal">&iquest;Te avisamos <span class="h2-soft">el día que salga?</span></h2>
-    <p>Déjanos tu email y te avisamos el día que salga, con una oferta especial por ser de los primeros.</p>
-    <form id="form-alta">
+    <!-- Mismo copy que en la portada y en la del libro. El titular era una
+         pregunta y una pregunta invita a decir que no; ahora dice lo que se
+         lleva quien deja el correo. Y ya no promete "un solo email", porque la
+         lista se trabaja con Klaviyo y se mandara mas de uno. -->
+    <h2 class="reveal">Los primeros <span class="h2-soft">pagan menos</span></h2>
+    <p>Te mandamos un código de &minus;15&nbsp;% para tu primer pedido. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>
+    <form id="form-alta" data-alta="alta-ok" data-origen="bloque">
       <input type="email" placeholder="Tu email" aria-label="Tu email" required>
-      <button type="submit">Avísame</button>
+      <button type="submit">Quiero mi 15&nbsp;%</button>
     </form>
-    <p class="alta-ok" id="alta-ok">Apuntado. Serás de los primeros en saberlo.</p>
+    <p class="alta-ok" id="alta-ok">Hecho. El código te llega en el email de bienvenida.</p>
   </section>
 
 
@@ -2038,17 +2043,7 @@
     });
   });
 
-  // OJO: igual que en el index, esto todavía no envía el email a ninguna
-  // parte. Falta conectar el servicio antes de publicar.
-  var form = document.getElementById('form-alta');
-  var ok = document.getElementById('alta-ok');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      form.style.display = 'none';
-      ok.classList.add('on');
-    });
-  }
+  // El formulario lo lleva captura.js, el mismo modulo de las tres paginas.
 
   // el boton dice siempre lo que se ha elegido: con una suscripcion, que el
   // usuario sepa exactamente que esta contratando antes de pulsar no es un

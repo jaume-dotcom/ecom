@@ -2973,3 +2973,81 @@
     #libro .section-head h2 { font-size: var(--t-6xl); }
     #libro .section-head > div { display: grid; gap: 0.45rem; }
   }
+
+  /* ===== POP-UP DE CAPTURA =====
+     Lo monta captura.js; aqui solo esta el aspecto. No sale al entrar: espera
+     al 45 % de la pagina o a 25 segundos, y si se cierra o se rellena no
+     vuelve en 30 dias. Ver captura.js para el porque.
+     La caja sube desde abajo en movil, que es donde esta el pulgar, y se
+     centra en escritorio. */
+  .pop-alta {
+    position: fixed; inset: 0; z-index: 200;
+     display: none;
+  }
+  .pop-alta.visto { display: block; }
+  .pop-alta-velo {
+    position: absolute; inset: 0;
+    background: rgba(35, 39, 46, 0.55);
+  }
+  .pop-alta-caja {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: var(--paper); color: var(--ink);
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    padding: 1.6rem 1.3rem calc(1.6rem + env(safe-area-inset-bottom));
+    max-height: 86vh; overflow-y: auto;
+  }
+  /* la X, en su propia esquina y con 44 px de diana: cerrar tiene que ser mas
+     facil que rellenar, no al reves */
+  .pop-alta-x {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    width: 44px; height: 44px; padding: 0; border: 0;
+    background: none; color: var(--ink-soft); cursor: pointer;
+    display: grid; place-items: center;
+  }
+  .pop-alta-x svg {
+    width: 20px; height: 20px; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round;
+  }
+  .pop-alta-kicker {
+    margin: 0 0 0.35rem; font-family: var(--font-mono);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .pop-alta-titulo {
+    margin: 0 0 0.5rem; font-size: var(--t-5xl); font-weight: 600;
+    line-height: 1.15; letter-spacing: var(--tracking-lg);
+  }
+  .pop-alta-lede {
+    margin: 0 0 1.1rem; font-size: var(--t-md); line-height: 1.5;
+    color: var(--ink-soft); max-width: 42ch;
+  }
+  .pop-alta-form { display: grid; gap: 0.6rem; margin: 0; }
+  .pop-alta-form input {
+    width: 100%; padding: 0.95rem 1.1rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    font: inherit; font-size: var(--t-base); background: #fff; color: var(--ink);
+  }
+  .pop-alta-form button {
+    padding: var(--btn-relleno); border: 0; border-radius: var(--btn-radio);
+    background: var(--ink); color: var(--paper);
+    font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
+    cursor: pointer;
+  }
+  .pop-alta-ok { display: none; margin: 0.9rem 0 0; font-weight: 500; }
+  .pop-alta-ok.on { display: block; }
+  /* el aviso legal NO es letra pequeña de adorno: sin consentimiento expreso y
+     sin enlace a la politica no se puede recoger un email para marketing */
+  .pop-alta-legal {
+    margin: 0.9rem 0 0; font-size: var(--t-2xs); line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .pop-alta-legal a { color: var(--ink); text-decoration: underline; }
+
+  @media (min-width: 860px) {
+    .pop-alta-caja {
+      top: 50%; bottom: auto; left: 50%; right: auto;
+      transform: translate(-50%, -50%);
+      width: min(30rem, calc(100vw - 3rem));
+      border-radius: var(--r-lg); padding: 2.2rem 2rem;
+    }
+  }

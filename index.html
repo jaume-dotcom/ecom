@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
 <link rel="stylesheet" href="estilos.css">
 <script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
 <noscript><style>
   /* sin JS el observador no anade .in y todo lo animado al hacer scroll se
      quedaria invisible, incluidos los avisos legales del pie */
@@ -557,18 +558,27 @@
 </div>
 
   <div class="hero-center wrap" id="alta">
-    <h2 class="hero-alta-titulo">&iquest;Te avisamos <span class="h2-soft">el día que salga?</span></h2>
-    <p class="hero-signup-label">Un solo email, con precio de lanzamiento para quien esté en la lista.</p>
-    <form class="hero-signup" id="hero-form">
+    <!-- El titular era una pregunta, "¿Te avisamos el día que salga?", y una
+         pregunta invita a decir que no. Ademas pedia permiso en vez de ofrecer
+         algo. Ahora dice lo que se lleva quien deja el correo.
+
+         Y ya NO dice "un solo email": la lista se va a trabajar con Klaviyo, o
+         sea que se mandara mas de uno. Prometer un correo y enviar una
+         secuencia es la via rapida a que te marquen como spam, y ademas
+         contradice el "no hay trucos" de "Como elegimos". Se dice lo que hay:
+         que es una lista, que manda poco y que la baja es de un clic. -->
+    <h2 class="hero-alta-titulo">Los primeros <span class="h2-soft">pagan menos</span></h2>
+    <p class="hero-signup-label">Te mandamos un código de &minus;15&nbsp;% para tu primer pedido. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>
+    <form class="hero-signup" id="hero-form" data-alta="hero-success" data-origen="bloque">
       <label class="hero-signup-field">
         <svg class="hero-signup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         <input type="email" placeholder="Tu email" aria-label="Tu email" required />
       </label>
       <span class="shine">
-        <button type="submit">Avísame</button>
+        <button type="submit">Quiero mi 15&nbsp;%</button>
       </span>
     </form>
-    <p class="hero-signup-success" id="hero-success">Hecho. Te escribimos el día que salga.</p>
+    <p class="hero-signup-success" id="hero-success">Hecho. El código te llega en el email de bienvenida.</p>
   </div>
 
 <section class="faq-panel reveal" id="faq">
@@ -1112,18 +1122,8 @@
     }
   }
 
-  // OJO: ninguno de los dos formularios envía a ningún sitio todavía. Se muestra
-  // el mensaje de éxito y el email se pierde. Falta conectar backend o servicio.
-  [['hero-form', 'hero-success']].forEach(function (par) {
-    var f = document.getElementById(par[0]);
-    var ok = document.getElementById(par[1]);
-    if (!f || !ok) { return; }
-    f.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      ok.classList.add('show');
-      f.reset();
-    });
-  });
+  // El formulario lo lleva captura.js, que es el mismo modulo para las tres
+  // paginas y para el pop-up. Se reconoce por su data-alta.
 
   // FAQ: cada pregunta se abre y cierra por su cuenta. El componente original
   // cerraba las demás al abrir una; aquí no, porque comparar dos respuestas es
