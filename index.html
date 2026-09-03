@@ -111,10 +111,12 @@
            el video la tapaba medio segundo despues, y eso es el parpadeo de
            la primera carga. La foto entra desde el CSS solo si hay movimiento
            reducido o si el video falla, y asi ni siquiera se descarga. -->
-      <!-- el video lleva loop propio: ya no hay coreografia con el texto que
-           coordinar, porque el texto no entra ni sale -->
+      <!-- SIN loop. El video se reproduce una vez y se queda quieto en su
+           ultimo fotograma hasta que se recargue la pagina. En bucle, el salto
+           del final al principio se veia, y un salto en la primera pantalla es
+           lo primero que se nota de una web. -->
       <video class="hero-video" id="hero-video" src="hero-zerox.mp4"
-             width="720" height="1280" muted playsinline loop preload="auto" aria-hidden="true"></video>
+             width="720" height="1280" muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="hero-shade"></div>
 
       <!-- EL TEXTO YA NO ESPERA AL VIDEO. Entraba en el segundo 4,3, asi
@@ -972,15 +974,25 @@
   // hasta bien pasado el final: el video no lleva loop propio, termina, el
   // texto aguanta cinco segundos mas y solo entonces vuelve a empezar. Asi da
   // tiempo a leerlo, que en bucle seco duraba tres segundos.
-  // Ya no hay coreografia que coordinar. El texto no entra ni sale, asi que
-  // el video solo tiene que reproducirse en bucle, y de eso se encarga su
-  // atributo loop. Aqui queda lo unico que sigue haciendo falta: arrancarlo,
-  // porque el autoplay silencioso puede rechazarse, y tener a mano la foto
-  // fija por si el video no carga.
+  // Ya no hay coreografia que coordinar: el texto no entra ni sale. Aqui queda
+  // arrancarlo, porque el autoplay silencioso puede rechazarse, tener a mano la
+  // foto fija por si el video no carga, y CONGELARLO AL ACABAR.
+  //
+  // Lo de congelarlo no es solo quitar el loop. Al terminar, algunos
+  // navegadores devuelven currentTime a cero y lo que se queda en pantalla es
+  // el PRIMER fotograma, no el ultimo; y al volver a la pestaña, otros lo
+  // reanudan. Con pause() y el tiempo clavado justo antes del final, el
+  // fotograma que se ve es el que tiene que verse y no se mueve mas.
+  // 0,05 s antes y no en el final exacto: en duration justo algunos motores
+  // pintan un fotograma vacio.
   var heroVideo = document.getElementById('hero-video');
   if (heroVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     heroVideo.addEventListener('error', function () {
       heroVideo.closest('.hero-media-box').classList.add('sin-video');
+    });
+    heroVideo.addEventListener('ended', function () {
+      heroVideo.pause();
+      if (heroVideo.duration) { heroVideo.currentTime = Math.max(0, heroVideo.duration - 0.05); }
     });
     var intento = heroVideo.play();
     if (intento && intento.catch) { intento.catch(function () {}); }
