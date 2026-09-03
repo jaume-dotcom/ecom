@@ -133,8 +133,8 @@
       '<div class="cart-cuerpo"></div>' +
       '<div class="cart-pie">' +
         '<p class="cart-total"><span>Total</span><b></b></p>' +
-        '<p class="cart-aviso">Todavía no está a la venta. Déjanos tu email y te avisamos el día que salga, con precio de lanzamiento.</p>' +
-        '<a class="cart-cta" href="#alta">Avisadme cuando salga</a>' +
+        '<p class="cart-aviso">Todavía no está a la venta. Déjanos tu email y te reservamos el pack, con un 15 % para tu primer pedido.</p>' +
+        '<button type="button" class="cart-cta">Reservar con mi email</button>' +
       '</div>';
 
     document.body.appendChild(velo);
@@ -147,7 +147,15 @@
 
     velo.addEventListener('click', cerrar);
     panel.querySelector('.cart-x').addEventListener('click', cerrar);
-    panel.querySelector('.cart-cta').addEventListener('click', cerrar);
+    /* EL CTA ABRE LA CAPTURA, no salta a #alta. Saltaba a un ancla, y ese
+       bloque no existe en todas las paginas: en resenas.html el enlace no
+       llevaba a ningun sitio. El pop-up va montado en las cuatro.
+       Se abre a la fuerza porque lo esta pidiendo alguien: aunque ya lo
+       hubiera cerrado antes, aqui lo esta buscando. */
+    panel.querySelector('.cart-cta').addEventListener('click', function () {
+      cerrar();
+      if (window.zeroxCaptura) { window.zeroxCaptura.abrir(true); }
+    });
     // el enlace de la cesta vacia lleva a otra parte de la pagina: si el
     // panel se queda abierto encima, el salto no se ve
     cuerpo.addEventListener('click', function (ev) {

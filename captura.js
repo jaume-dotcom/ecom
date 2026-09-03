@@ -124,8 +124,9 @@
   var UMBRAL = 0.45;
   var ESPERA = 25000;
 
-  function montar() {
-    if (apuntado() || document.getElementById('pop-alta')) { return null; }
+  function montar(forzar) {
+    if (document.getElementById('pop-alta')) { return null; }
+    if (!forzar && apuntado()) { return null; }
 
     var pop = document.createElement('div');
     pop.className = 'pop-alta';
@@ -161,9 +162,13 @@
   var abierto = false;
   var devolverFoco = null;
 
-  function abrir() {
-    if (abierto || apuntado() || yaSalio()) { return; }
-    pop = pop || montar();
+  /* forzar: lo pide alguien a proposito —el boton de la cesta, o ?pop=1 para
+     probarlo— y entonces las dos memorias no cuentan. Sin esto, quien ya lo
+     cerro una vez no puede volver a abrirlo en 30 dias ni queriendo. */
+  function abrir(forzar) {
+    if (abierto) { return; }
+    if (!forzar && (apuntado() || yaSalio())) { return; }
+    pop = pop || montar(forzar);
     if (!pop) { return; }
     // se marca AL ABRIR, no al cerrar: quien lo ignora y cambia de pagina
     // tampoco tiene que volver a verlo
@@ -208,6 +213,22 @@
     window.addEventListener('scroll', mirar, { passive: true });
   }
 
+  /* ?pop=1 lo abre en el acto y saltandose las memorias. Es para poder verlo
+     sin esperar 25 segundos ni borrar el almacenamiento del navegador: una vez
+     que lo cierras, no vuelve en 30 dias, y probarlo se vuelve imposible. */
+  if (/[?&]pop=1(&|$)/.test(location.search)) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { abrir(true); });
+    } else { abrir(true); }
+  }
+
   /* para poder comprobarlo sin esperar 25 segundos ni desplazarse */
-  window.zeroxCaptura = { abrir: abrir, cerrar: cerrar, alta: alta, apuntado: apuntado, yaSalio: yaSalio, LLAVE: LLAVE, VISTO: VISTO };
+  window.zeroxCaptura = {
+    abrir: abrir, cerrar: cerrar, alta: alta,
+    apuntado: apuntado, yaSalio: yaSalio, LLAVE: LLAVE, VISTO: VISTO,
+    // borra las dos memorias, para poder volver a probarlo desde la consola
+    olvidar: function () {
+      try { localStorage.removeItem(LLAVE); sessionStorage.removeItem(VISTO); } catch (e) {}
+    }
+  };
 })();
