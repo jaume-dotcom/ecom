@@ -849,14 +849,16 @@
        Primero, la pagina: el relleno lateral baja de 1,6rem a 1rem, o sea de
        51 px de margen a 32. Eran el 13,6 % del ancho del telefono gastados en
        aire, y aqui dentro se estaban repartiendo dos columnas.
-       Segundo, la foto: 178 px. Al sacar las miniaturas de la columna de
-       texto, esa columna ya no tiene que medir 148 para que quepan tres
-       botones, asi que el ancho que sobra se lo lleva la foto.
-       178 y no mas: a 190 la columna de la derecha se quedaba en 141 px y
-       "90 capsulas - 30 dias", que pide 148, se partia en dos lineas. */
+       Segundo, el reparto de las dos columnas. La de la derecha lleva las
+       miniaturas debajo del precio, asi que no puede bajar de 157 px, que es
+       lo que piden tres botones de 48. Se le dan 159 y la foto se queda con
+       los 172 que sobran.
+       Ese es el trato: la tira dentro de la columna cuesta ancho de foto. Con
+       la tira fuera, cruzando las dos columnas, la foto llegaba a 178 y las
+       miniaturas a 56. */
     .wrap { padding-left: 1rem; padding-right: 1rem; }
     .ficha-cabecera {
-      display: grid; grid-template-columns: 178px 1fr;
+      display: grid; grid-template-columns: 172px 1fr;
       gap: 0.75rem; align-items: start; margin-bottom: 1.4rem;
     }
     /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
@@ -885,13 +887,12 @@
 
     /* 44 y no 48: tres de 48 con sus huecos piden 162 px y la columna mide
        159. 44 es el suelo de diana tactil, asi que no se baja de ahi. */
-    /* a todo lo ancho de la cabecera, debajo de las dos columnas */
-    .ficha-minis { grid-column: 1 / -1; display: flex; gap: 0.55rem; margin-top: 0.85rem; }
-    /* 56 y no 44: fuera de la columna estrecha ya no hay que apretarlas, y a
-       44 se veian como botones de emergencia. Mismo radio que la foto grande,
+    .ficha-minis { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
+    /* 48, que es lo mas grande que cabe: tres de 48 con dos huecos de 6,4
+       piden 157 px y la columna mide 159. Mismo radio que la foto grande,
        que es lo que son en pequeño. La tira de la galeria, que es de
        escritorio, se queda con el suyo. */
-    .ficha-minis .mini { width: 56px; height: 56px; border-radius: 4px; }
+    .ficha-minis .mini { width: 48px; height: 48px; border-radius: 4px; }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
 
   }
@@ -1019,23 +1020,24 @@
             <span class="precio-nota" id="precio-nota"></span>
           </div>
 
+          <!-- LA TIRA DE MINIATURAS, debajo del precio y dentro de la columna
+               de texto. Eso fija el ancho minimo de la columna: tres botones
+               de 48 con sus huecos piden 157 px, asi que la columna no puede
+               bajar de ahi y la foto se queda con lo que sobra. Es el reparto
+               que hay: si la tira sale de aqui la foto crece, y si entra, no.
 
-        </div>
+               Es una SEGUNDA tira, no la de la galeria: aquella vive dentro de
+               .galeria, que es hermana de esta columna. Solo se ve una de las
+               dos, en movil esta y en escritorio la de la galeria, la otra con
+               display:none, o sea fuera tambien del arbol de accesibilidad.
+               Las engancha el mismo JS, que busca .mini a secas. -->
+          <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
+            <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
+          </div>
 
-        <!-- LA TIRA DE MINIATURAS. Cruza las dos columnas y no vive dentro de
-             la de texto: encerrada ahi obligaba a que la columna midiera 148
-             px para que cupieran tres botones de 44, y ese ancho se lo estaba
-             quitando a la foto. A todo lo ancho caben de 56 y sobra sitio.
 
-             Es una SEGUNDA tira, no la de la galeria: aquella vive dentro de
-             .galeria, que es hermana de esta columna. Solo se ve una de las
-             dos, en movil esta y en escritorio la de la galeria, la otra con
-             display:none, o sea fuera tambien del arbol de accesibilidad.
-             Las engancha el mismo JS, que busca .mini a secas. -->
-        <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
-          <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-          <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-          <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
         </div>
       </div>
 
