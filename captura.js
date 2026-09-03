@@ -103,14 +103,22 @@
     // o falla, hacer esperar a quien ya ha dejado su correo no arregla nada
     if (ok) { ok.classList.add('on'); ok.classList.add('show'); }
     f.style.display = 'none';
+    // si el que se ha enviado es el del pop-up, la salida pasa a ser el unico
+    // boton que queda, y conviene que diga otra cosa
+    var no = document.querySelector('.pop-alta-no');
+    if (no && f.classList.contains('pop-alta-form')) { no.textContent = 'Seguir mirando'; }
   });
 
   /* ---------- el pop-up ---------- */
 
-  /* NO SALE AL ENTRAR. Google penaliza los intersticiales que tapan el
-     contenido nada mas llegar en movil, y ademas pedirle el correo a alguien
-     que todavia no ha visto nada es pedirlo antes de dar. Sale cuando se ha
-     leido casi la mitad de la pagina o tras 25 segundos, lo que pase antes.
+  /* NO SALE AL ENTRAR, y con este ocupando la pantalla entera importa mas que
+     antes: Google penaliza los intersticiales que tapan el contenido nada mas
+     llegar en movil. Ademas pedirle el correo a alguien que no ha visto nada
+     es pedirlo antes de dar. Sale cuando se ha leido casi la mitad de la
+     pagina o tras 25 segundos, lo que pase antes.
+     Solo se sale pulsando: no se cierra tocando fuera, porque a pantalla
+     completa no hay fuera. Escape SI cierra: es invisible para casi todo el
+     mundo, pero quien navega con teclado lo necesita.
      Si ya se apunto o ya lo cerro, no vuelve en 30 dias; y dentro de una misma
      visita sale UNA vez, aunque se recorran las cuatro paginas. */
   var UMBRAL = 0.45;
@@ -125,21 +133,25 @@
     pop.setAttribute('role', 'dialog');
     pop.setAttribute('aria-modal', 'true');
     pop.setAttribute('aria-labelledby', 'pop-alta-titulo');
+    // Sin velo y sin cruz. El pop-up ocupa la pantalla entera, asi que no hay
+    // un "fuera" que oscurecer, y la salida es un texto debajo del boton.
     pop.innerHTML =
-      '<div class="pop-alta-velo" data-pop-cerrar></div>' +
       '<div class="pop-alta-caja">' +
-        '<button type="button" class="pop-alta-x" data-pop-cerrar aria-label="Cerrar">' +
-          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
-        '</button>' +
         '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Te escribimos <span class="h2-soft">el día que salga</span></h2>' +
         '<p class="pop-alta-lede">Con un ' + DESCUENTO + ' para tu primer pedido, por llegar antes. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>' +
         '<form class="pop-alta-form" data-alta="pop-alta-ok" data-origen="popup">' +
           '<input type="email" placeholder="Tu email" aria-label="Tu email" required>' +
-          '<button type="submit">Apuntarme</button>' +
+          '<button type="submit">Quiero mi ' + DESCUENTO + ' de descuento</button>' +
         '</form>' +
         '<p class="pop-alta-ok" id="pop-alta-ok">Apuntado. Te escribimos el día que salga, con tu código dentro.</p>' +
         '<p class="pop-alta-legal">Al dejar tu email aceptas recibir nuestros correos comerciales. ' +
           '<a href="#">Politica de privacidad</a>.</p>' +
+        // LA SALIDA, en texto y no en cruz. Dice "Ahora no, gracias" y NO "no
+        // quiero mi descuento": eso ultimo es confirmshaming, hacer que decir
+        // que no suene a error. Funciona a corto plazo y deja mal cuerpo, y
+        // aqui ademas contradice lo que promete la propia web tres pantallas
+        // mas abajo: "no hay cuentas atras ni ofertas que caducan esta noche".
+        '<button type="button" class="pop-alta-no" data-pop-cerrar>Ahora no, gracias</button>' +
       '</div>';
     document.body.appendChild(pop);
     return pop;
@@ -159,6 +171,9 @@
     devolverFoco = document.activeElement;
     abierto = true;
     pop.classList.add('visto');
+    // se bloquea el desplazamiento de detras: si la pagina sigue moviendose
+    // por debajo, el pop-up a pantalla completa se lee como un fallo
+    document.documentElement.classList.add('sin-scroll');
     var campo = pop.querySelector('input[type="email"]');
     if (campo) { campo.focus(); }
   }
@@ -167,6 +182,7 @@
     if (!pop || !abierto) { return; }
     abierto = false;
     pop.classList.remove('visto');
+    document.documentElement.classList.remove('sin-scroll');
     recordar();   // cerrarlo tambien cuenta: no se insiste
     if (devolverFoco && devolverFoco.focus) { devolverFoco.focus(); }
   }

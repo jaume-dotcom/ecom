@@ -90,6 +90,13 @@
        7,39 sobre blanco, de sobra para una forma sin texto —el minimo es
        3— y desaturado para no cantar en una pagina de tinta y blanco. */
     --ok: #1c6144;
+    /* El acento ACLARADO, para fondo oscuro. No es un color mas: es el
+       mismo teja subido de luminosidad, porque el solido sobre el video del
+       hero da 2,57 y no llega ni de lejos al 4,5 que pide un texto.
+       Medido sobre el video publicado, en la banda del rotulo: 6,66 de
+       media y 5,67 en el peor pixel de 8 fotogramas.
+       Solo donde el acento cae sobre oscuro. En claro manda --acento. */
+    --acento-claro: #dda88f;
     /* El hover de los botones de accion BAJA en vez de subir: sobre fondo
        claro un boton oscuro que se oscurece se lee como que se hunde al
        pulsarlo. Blanco encima da 18,11. */
@@ -717,6 +724,13 @@
   .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; max-width: 22ch; }
   .section-head p { color: var(--ink-soft); margin: 0; max-width: 46ch; text-wrap: pretty; }
   .section-head .see-all { font-size: var(--t-sm); font-weight: 500; border-bottom: 1.5px solid var(--ink); white-space: nowrap; }
+  /* .section-head es una columna, asi que el enlace caia DEBAJO del titular y
+     alineado a la izquierda: se leia como un enlace suelto y no como el "ver
+     todas" de la esquina, que es lo que tiene que ser. Aqui vuelve a su fila. */
+  #resenas .section-head {
+    flex-direction: row; align-items: baseline; justify-content: space-between;
+    gap: 1rem;
+  }
 
   /* shop grid — Seed-style card: top block / media / bottom block, arrow-in-on-hover */
   .shop-grid {
@@ -3011,44 +3025,27 @@
      vuelve en 30 dias. Ver captura.js para el porque.
      La caja sube desde abajo en movil, que es donde esta el pulgar, y se
      centra en escritorio. */
-  .pop-alta {
-    position: fixed; inset: 0; z-index: 200;
-     display: none;
-  }
+  /* A PANTALLA COMPLETA. Sin velo, porque cubriendo todo no hay un "fuera"
+     que oscurecer, y sin cruz: la salida es un texto debajo del boton.
+     El contenido va centrado en vertical y con un ancho de lectura, no
+     estirado de borde a borde, que a 30 rem el ojo ya pierde el renglon. */
+  .pop-alta { position: fixed; inset: 0; z-index: 200; display: none; }
   .pop-alta.visto { display: block; }
-  .pop-alta-velo {
-    position: absolute; inset: 0;
-    background: rgba(35, 39, 46, 0.55);
-  }
   .pop-alta-caja {
-    position: absolute; left: 0; right: 0; bottom: 0;
+    position: absolute; inset: 0;
     background: var(--paper); color: var(--ink);
-    border-radius: var(--r-lg) var(--r-lg) 0 0;
-    padding: 1.6rem 1.3rem calc(1.6rem + env(safe-area-inset-bottom));
-    max-height: 86vh; overflow-y: auto;
+    display: grid; align-content: center; justify-items: start;
+    gap: 0;
+    padding: 2rem 1.4rem calc(2rem + env(safe-area-inset-bottom));
+    overflow-y: auto;
   }
-  /* la X, en su propia esquina y con 44 px de diana: cerrar tiene que ser mas
-     facil que rellenar, no al reves */
-  .pop-alta-x {
-    position: absolute; top: 0.5rem; right: 0.5rem;
-    width: 44px; height: 44px; padding: 0; border: 0;
-    background: none; color: var(--ink-soft); cursor: pointer;
-    display: grid; place-items: center;
-  }
-  .pop-alta-x svg {
-    width: 20px; height: 20px; fill: none; stroke: currentColor;
-    stroke-width: 1.8; stroke-linecap: round;
-  }
-  .pop-alta-kicker {
-    margin: 0 0 0.35rem; font-family: var(--font-mono);
-    font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-soft);
-  }
-  /* el titular deja libre la esquina de la X. Llevaba un sobretitulo delante
-     que hacia de tope; al quitarlo, el titular subio a la primera linea y se
-     metia debajo del boton de cerrar. */
+  .pop-alta-caja > * { width: 100%; max-width: 26rem; }
+  /* el desplazamiento de detras se bloquea mientras esta abierto: si la pagina
+     sigue moviendose por debajo, un pop-up a pantalla completa parece un fallo */
+  html.sin-scroll, html.sin-scroll body { overflow: hidden; }
+  /* sin la cruz en la esquina, el titular recupera todo el ancho */
   .pop-alta-titulo {
-    margin: 0 0 0.5rem; padding-right: 2.6rem;
+    margin: 0 0 0.5rem;
     font-size: var(--t-5xl); font-weight: 600;
     line-height: 1.15; letter-spacing: var(--tracking-lg);
   }
@@ -3078,11 +3075,23 @@
   }
   .pop-alta-legal a { color: var(--ink); text-decoration: underline; }
 
+  /* LA SALIDA. En texto y no en cruz, y con 44 px de alto: es el unico camino
+     fuera, asi que tiene que verse y poder pulsarse sin apuntar.
+     Subrayada y en gris: se lee como lo que es, la opcion secundaria, sin
+     esconderla. Esconder la salida de un pop-up a pantalla completa es la
+     diferencia entre un modal y una encerrona. */
+  .pop-alta-no {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; margin: 1.1rem 0 0; padding: 0;
+    border: 0; background: none; cursor: pointer;
+    font-family: var(--font); font-size: var(--t-sm); color: var(--ink-soft);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .pop-alta-no:hover { color: var(--ink); }
+
+  /* en escritorio tambien ocupa la pantalla; lo unico que cambia es que el
+     bloque de lectura se centra en vez de quedarse a la izquierda */
   @media (min-width: 860px) {
-    .pop-alta-caja {
-      top: 50%; bottom: auto; left: 50%; right: auto;
-      transform: translate(-50%, -50%);
-      width: min(30rem, calc(100vw - 3rem));
-      border-radius: var(--r-lg); padding: 2.2rem 2rem;
-    }
+    .pop-alta-caja { justify-items: center; text-align: center; padding: 3rem; }
+    .pop-alta-caja > * { max-width: 30rem; }
   }
