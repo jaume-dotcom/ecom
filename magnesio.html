@@ -149,6 +149,34 @@
     fill: none; stroke: var(--khaki-deep); stroke-width: 1.7;
     stroke-linecap: round; stroke-linejoin: round;
   }
+  .compra-fila { display: flex; align-items: stretch; gap: 0.6rem; }
+  .cantidad {
+    display: flex; align-items: center; flex-shrink: 0;
+    border: 1.5px solid var(--line); border-radius: var(--btn-radio);
+    background: #fff; overflow: hidden;
+  }
+  /* 40 px de ancho y 44 de alto minimo: por debajo de 44 se falla con el
+     dedo, y estos dos son los botones mas pequeños de la pagina */
+  .cant-btn {
+    width: 40px; min-height: 44px; padding: 0; border: 0; background: none;
+    font-family: var(--font); font-size: var(--t-2xl); line-height: 1;
+    color: var(--ink); cursor: pointer;
+  }
+  .cant-btn:disabled { color: var(--ink-faint); cursor: default; }
+  .cant-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .cant-num {
+    min-width: 1.4rem; text-align: center;
+    font-size: var(--t-base); font-weight: 600; font-variant-numeric: tabular-nums;
+  }
+  /* el boton de la fila baja de 16,8 a 15,2 y aprieta los laterales. Con el
+     selector de cantidad al lado le quedan 230 px y "Añadir a la cesta -
+     22,90 EUR" pedia 260, asi que partia en dos lineas.
+     Se toca el boton y NO el selector: bajar los pulsadores de 40 px para
+     ganar ancho es justo lo que no se hace con este publico. */
+  .compra-fila .btn-comprar {
+    flex: 1; width: auto;
+    font-size: var(--t-base); padding-left: 0.8rem; padding-right: 0.8rem;
+  }
   .btn-comprar {
     display: block; width: 100%; padding: var(--btn-relleno); border: 0;
     border-radius: var(--btn-radio); background: var(--ink); color: var(--paper);
@@ -164,13 +192,10 @@
   @media (max-width: 859px) {
 
     /* El ahorro de la opcion recomendada, con el peso que tiene en las
-       fichas de referencia: pastilla llena en vez de texto gris. Para que
-       no haya dos pastillas llenas peleandose, "Mejor relacion" pasa a
-       contorno: el sello dice cual es, pero el que se ve es el numero.
+       fichas de referencia: pastilla llena en vez de texto gris. Ahora es la
+       unica pastilla de la fila, asi que no compite con nada.
        Sigue sin premarcarse la cara, que es lo que prohibe el articulo 22:
-       esto cambia el peso visual, no cual viene marcada.
-       La otra mitad, "Mejor relacion" a contorno, esta mas abajo: tiene que
-       ir detras de la declaracion de .modo-etiqueta o no le llega. */
+       esto cambia el peso visual, no cual viene marcada. */
     .modo--destacado .modo-ahorro { background: var(--ink); color: #fff; }
   }
 
@@ -658,7 +683,7 @@
      se quedan como estaban, que es donde se decide. */
   .modo {
     display: flex; gap: 0.75rem; align-items: flex-start;
-    padding: 0.85rem 1rem; border: 1.5px solid var(--line);
+    padding: 0.85rem 0.9rem; border: 1.5px solid var(--line);
     border-radius: var(--r-md); background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
@@ -713,18 +738,33 @@
   .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
   .modo input:focus-visible + .modo-marca { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  .modo-cuerpo { flex: 1; display: grid; gap: 0.22rem; }
+  /* sin hueco entre la fila y el panel: con el panel cerrado el hueco se veia
+     igual y la tarjeta arrastraba 3,5 px de nada. El aire, cuando toca, lo
+     pone el margen del propio panel al abrirse. */
+  .modo-cuerpo { flex: 1; display: grid; gap: 0; }
   /* cerrada, cada opcion son dos lineas: nombre y precio arriba, sellos
      debajo. El precio por bote y por dia se ha ido al panel: se lee al
      elegirla, que es cuando se compara de verdad */
-  .modo-fila { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.8rem; }
-  .modo-nombre { font-size: var(--t-lg); font-weight: 600; }
+  /* UNA SOLA LINEA con la tarjeta cerrada: nombre, la pastilla del ahorro si
+     la hay, y el importe a la derecha. Todo lo demas —el precio por bote y
+     por dia, y las ventajas— vive dentro del panel y solo sale al marcarla.
+     Antes la cerrada ya enseñaba dos o cuatro lineas, y comparar dos bloques
+     de cuatro lineas es mas trabajo que comparar dos lineas. */
+  /* huecos de 0,4rem y no 0,5: la fila mide 279 px y el nombre, la pastilla y
+     el importe piden 262 juntos. Los 17 que quedan son para los dos huecos, y
+     con 8 cada uno se pasaba y "Suscripcion trimestral" partia en dos. */
+  .modo-fila { display: flex; align-items: center; gap: 0.4rem; }
+  .modo-precio { margin-left: auto; }
+  /* --t-base y no --t-lg: en la fila de 277 px tienen que caber nombre,
+     pastilla e importe. A 16 px "Suscripcion trimestral" pedia 152 y solo hay
+     139, asi que partia en dos lineas y se acababa la idea de la linea unica. */
+  .modo-nombre { font-size: var(--t-base); font-weight: 600; }
   /* el importe y su periodicidad, uno debajo del otro: en linea, "54,90 €
      cada 3 meses" partia por donde le venia bien */
   .modo-precio { text-align: right; white-space: nowrap; }
-  .modo-precio b { display: block; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .modo-precio b { display: block; font-size: var(--t-base); font-weight: 600; letter-spacing: var(--tracking-lg); }
   .modo-precio small { display: block; font-size: var(--t-xs); color: var(--ink-soft); }
-  .modo-sellos { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.15rem; }
+
   /* La opcion que mas conviene: filete y etiqueta, pero SIN venir
      premarcada. Premarcar la cara lo prohibe el articulo 22 de la directiva
      de derechos del consumidor, asi que la que viene marcada es la unica que
@@ -744,17 +784,15 @@
      y "Ahorras un 20 %", que a 375px partian en dos filas y estiraban la
      opcion casi un tercio de su alto. Dicen lo mismo con menos: el ahorro
      no necesita la palabra ahorro, le basta el signo. */
-  .modo-etiqueta {
-    display: inline-block;
-    font-size: var(--t-3xs); font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.06em; color: #fff; background: var(--ink);
-    border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
-  }
 
+  /* la pastilla vive ahora en la primera linea, entre el nombre y el importe.
+     Se le da un pelin mas de cuerpo que cuando estaba suelta abajo: ahi tenia
+     una fila para ella sola y aqui compite con dos cosas mas. */
   .modo-ahorro {
-    font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.06em;
-    color: var(--ink); background: rgba(35, 39, 46, 0.07);
-    border-radius: 999px; padding: 0.12rem 0.4rem; white-space: nowrap;
+    flex-shrink: 0;
+    font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.03em;
+    color: var(--ink); background: rgba(35, 39, 46, 0.08);
+    border-radius: 999px; padding: 0.15rem 0.35rem; white-space: nowrap;
   }
   .faq-lista { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
   .faq-lista li { position: relative; padding-left: 1.1rem; }
@@ -785,13 +823,6 @@
      .section-head. */
   @media (max-width: 859px) {
     h2 { line-height: 1.2; }
-    /* la otra mitad del cambio de sellos; la primera esta arriba, con
-       .btn-comprar. Aqui porque .modo-etiqueta se declara unas lineas mas
-       arriba y desde alli gana a lo de antes. */
-    .modo-etiqueta {
-      background: none; color: var(--ink);
-      box-shadow: inset 0 0 0 1px var(--ink-faint);
-    }
   }
 
 
@@ -846,13 +877,19 @@
      cuenta para el tamano minimo del elemento de rejilla, y con la fila a 0fr
      la caja seguia midiendo 8,8 px. De margen desaparece del todo.
      Medido con las transiciones desactivadas: cerrada 0 px, abierta 99. */
-  .modo-ventajas {
+  .modo-panel {
     display: grid; grid-template-rows: 0fr; margin-top: 0;
     transition: grid-template-rows 0.32s cubic-bezier(.16,1,.3,1),
                 margin-top 0.32s cubic-bezier(.16,1,.3,1);
   }
-  .modo:has(input:checked) .modo-ventajas { grid-template-rows: 1fr; margin-top: 0.55rem; }
-  .modo-ventajas-int { overflow: hidden; display: grid; gap: 0.22rem; }
+  .modo:has(input:checked) .modo-panel { grid-template-rows: 1fr; margin-top: 0.6rem; }
+  .modo-panel-int { overflow: hidden; display: grid; gap: 0.5rem; }
+  /* una linea de pelo entre el precio por bote y las ventajas, como en la
+     referencia: separa el dato de la oferta */
+  .modo-ventajas-int {
+    display: grid; gap: 0.3rem;
+    padding-top: 0.5rem; border-top: 1px solid var(--line);
+  }
   /* UN ICONO POR LINEA, no tres ticks iguales. Tres ticks solo dicen "bien,
      bien, bien"; el camion, el circulo tachado y el sobre dicen de que va
      cada una antes de leerla. */
@@ -866,7 +903,7 @@
     fill: none; stroke: var(--ink-soft); stroke-width: 1.5;
     stroke-linecap: round; stroke-linejoin: round;
   }
-  @media (prefers-reduced-motion: reduce) { .modo-ventajas { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .modo-panel { transition: none; } }
 
   @media (max-width: 859px) {
     /* la galeria se va: en la referencia hay una sola foto, en caja y
@@ -1099,7 +1136,11 @@
               <span class="modo-nombre">Compra única</span>
               <span class="modo-precio"><b>22,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
+            <span class="modo-panel">
+              <span class="modo-panel-int">
+                <span class="modo-desc">22,90&nbsp;&euro; el bote &middot; 0,76&nbsp;&euro; al día</span>
+              </span>
+            </span>
           </span>
         </label>
 
@@ -1107,30 +1148,28 @@
           <input type="radio" name="modo-compra" value="trimestral">
           <span class="modo-marca" aria-hidden="true"></span>
           <span class="modo-cuerpo">
+            <!-- La pastilla del ahorro sube a la primera linea, al lado del
+                 nombre. "Mejor relacion" se va de aqui: en 277 px de fila no
+                 caben nombre, dos pastillas y precio, y de las dos la que
+                 informa es el porcentaje. Lo de que conviene ya lo dicen el
+                 ahorro y las tres ventajas de dentro. -->
             <span class="modo-fila">
               <span class="modo-nombre">Suscripción trimestral</span>
+              <span class="modo-ahorro">&minus;20&nbsp;%</span>
               <span class="modo-precio"><b>54,90&nbsp;&euro;</b></span>
             </span>
-            <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
-            <span class="modo-sellos">
-              <span class="modo-etiqueta">Mejor relación</span>
-              <span class="modo-ahorro">&minus;20&nbsp;%</span>
-            </span>
-            <!-- Las tres ventajas salen de la respuesta "¿Como funciona la
-                 suscripcion?" de la FAQ de esta misma pagina. No se promete
-                 nada que no estuviera ya escrito ahi.
-                 El ahorro no se repite: ya lo dice la pastilla de al lado.
-
-                 SE ABREN AL MARCAR LA OPCION y se cierran al marcar la otra.
-                 El envoltorio de dentro es lo que pide el acordeon de
-                 grid-template-rows: 0fr no puede llevar contenido suelto, y
-                 los margenes tienen que vivir en el hijo o se ven con la
-                 fila cerrada. -->
-            <span class="modo-ventajas">
-              <span class="modo-ventajas-int">
+            <span class="modo-panel">
+              <span class="modo-panel-int">
+                <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
+                <!-- Las tres ventajas salen de la respuesta "¿Como funciona la
+                     suscripcion?" de la FAQ de esta misma pagina. No se promete
+                     nada que no estuviera ya escrito ahi.
+                     El ahorro no se repite: ya lo dice la pastilla de arriba. -->
+                <span class="modo-ventajas-int">
                 <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Envío gratis</span>
                 <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6.2 17.8L17.8 6.2"/></svg>Cancelas en un clic, sin permanencia</span>
                 <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3.6 7.4l8.4 5.9 8.4-5.9"/></svg>Te avisamos por email antes de cada cobro</span>
+                </span>
               </span>
             </span>
           </span>
@@ -1138,7 +1177,20 @@
 
       </fieldset>
 
-      <button type="button" class="btn-comprar" id="btn-comprar">Añadir a la cesta</button>
+      <!-- CANTIDAD Y BOTON en la misma fila. El numero no se escribe a mano a
+           proposito: un campo de texto en movil levanta el teclado y admite
+           cosas que luego hay que validar. Dos botones y una cifra no.
+           El valor viaja al carrito en data-cant; carrito.js lo lee al pulsar
+           y si no esta, añade uno, que es como se comportan los demas botones
+           de la web. -->
+      <div class="compra-fila">
+        <div class="cantidad" role="group" aria-label="Cantidad">
+          <button type="button" class="cant-btn" id="cant-menos" aria-label="Quitar una unidad">&minus;</button>
+          <span class="cant-num" id="cant-num" aria-live="polite">1</span>
+          <button type="button" class="cant-btn" id="cant-mas" aria-label="Añadir una unidad">+</button>
+        </div>
+        <button type="button" class="btn-comprar" id="btn-comprar" data-cant="1">Añadir a la cesta</button>
+      </div>
 
       <!-- ================================================================
            GARANTIA. Debajo del boton y no en el pie: la duda de "¿y si no
@@ -1994,11 +2046,37 @@
     // repetia palabra por palabra en la tarjeta de cada opcion, tres lineas
     // mas abajo. En la compra unica no hay periodicidad que dar, asi que va
     // vacia y el hueco desaparece.
-    trimestral: { txt: 'Suscribirme · 54,90 € cada 3 meses', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
+    // el txt de la trimestral ya no lleva "cada 3 meses": con el selector de
+    // cantidad al lado, al boton le quedan 229 px y la frase entera pedia 265,
+    // asi que partia en dos lineas. La periodicidad sigue a la vista en dos
+    // sitios de la misma pantalla: la nota bajo el precio del titular y el
+    // nombre de la propia opcion, "Suscripcion trimestral".
+    trimestral: { txt: 'Suscribirme · 54,90 €', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
                   euros: '54,90 €', nota: 'cada 3 meses' },
     unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
                   euros: '22,90 €', nota: '' }
   };
+  // el selector de cantidad. Solo toca data-cant del boton de la ficha; los
+  // otros dos puntos de compra de la pagina siguen añadiendo de uno en uno,
+  // que es lo suyo: alli no hay selector que mirar.
+  (function () {
+    var num = document.getElementById('cant-num');
+    var menos = document.getElementById('cant-menos');
+    var mas = document.getElementById('cant-mas');
+    var btn = document.getElementById('btn-comprar');
+    if (!num || !menos || !mas || !btn) { return; }
+    var n = 1;
+    function pintarCant() {
+      num.textContent = n;
+      btn.setAttribute('data-cant', n);
+      menos.disabled = n <= 1;
+      mas.disabled = n >= 9;
+    }
+    menos.addEventListener('click', function () { if (n > 1) { n -= 1; pintarCant(); } });
+    mas.addEventListener('click', function () { if (n < 9) { n += 1; pintarCant(); } });
+    pintarCant();
+  })();
+
   var precioNum = document.getElementById('precio-num');
   var precioNota = document.getElementById('precio-nota');
   function pintarModo() {

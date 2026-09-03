@@ -76,14 +76,18 @@
   /* ---------- operaciones ---------- */
 
   function añadir(datos) {
+    // cuantas unidades. Llega en data-cant desde el selector de cantidad de la
+    // ficha; sin ese atributo es 1, que es como se comportaba antes y como
+    // siguen comportandose todos los demas botones de la web.
+    var n = Math.max(1, parseInt(datos.cant, 10) || 1);
     var y = null;
     for (var i = 0; i < carrito.length; i++) {
       if (carrito[i].id === datos.id) { y = carrito[i]; break; }
     }
-    if (y) { y.cant += 1; } else {
+    if (y) { y.cant += n; } else {
       carrito.push({
         id: datos.id, nombre: datos.nombre, sub: datos.sub || '',
-        img: datos.img || '', precio: datos.precio, cant: 1
+        img: datos.img || '', precio: datos.precio, cant: n
       });
     }
     guardar(carrito);
@@ -301,7 +305,8 @@
       nombre: b.getAttribute('data-nombre'),
       sub: b.getAttribute('data-sub'),
       img: b.getAttribute('data-img'),
-      precio: parseFloat(b.getAttribute('data-precio'))
+      precio: parseFloat(b.getAttribute('data-precio')),
+      cant: b.getAttribute('data-cant')
     });
     abrir();
   });
