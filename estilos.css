@@ -750,6 +750,12 @@
 
   /* section shells */
   section.band { padding: 4rem 0; }
+  /* En movil 4rem arriba y 4rem abajo dejan 128 px de blanco entre dos bloques,
+     el 16 % de la pantalla de un telefono. A 2,5rem son 80, que sigue separando
+     de sobra sin obligar a recorrer vacio entre seccion y seccion.
+     En escritorio se queda en 4rem: alli el ancho da aire de por si y el hueco
+     vertical es lo que evita que la pagina se lea como un listado. */
+  @media (max-width: 859px) { section.band { padding: 2.5rem 0; } }
   .band.tint { background: var(--tint); border-radius: var(--r-lg); }
   /* centrado: la página alterna bloques centrados (hero, cierre) con estos
      alineados a la izquierda, y esa mezcla es lo que la hacía ver desordenada */
@@ -768,7 +774,10 @@
   /* shop grid — Seed-style card: top block / media / bottom block, arrow-in-on-hover */
   .shop-grid {
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 1.1rem;
-    overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x proximity;
+    /* mandatory y no proximity: con proximity el navegador decide si engancha,
+       y en la practica una pasada corta se queda con dos medias tarjetas a la
+       vista. Con mandatory siempre cae en la siguiente. */
+    overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x mandatory;
     /* la barra del sistema se sustituye por los puntos de abajo */
     scrollbar-width: none; -ms-overflow-style: none;
   }
@@ -2460,7 +2469,9 @@
   .resenas {
     list-style: none; margin: 0; padding-bottom: 0.5rem;
     display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;
-    overflow-x: auto; scroll-snap-type: x proximity;
+    /* mandatory, por lo mismo que el carrusel de producto: proximity dejaba la
+       pasada a medias entre dos resenas */
+    overflow-x: auto; scroll-snap-type: x mandatory;
     scrollbar-width: none; -ms-overflow-style: none;
   }
   .resenas::-webkit-scrollbar { display: none; }
