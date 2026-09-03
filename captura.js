@@ -30,17 +30,14 @@
 
   var DESCUENTO = '15 %';
 
-  /* DOS MEMORIAS, y hacen cosas distintas.
-     LLAVE (localStorage): quien se apunto o cerro el pop-up. Ese dijo que no
-     o ya esta dentro, y no se le insiste en 30 dias.
-     VISTO (sessionStorage): con que SE HAYA ABIERTO basta. El sitio son
-     cuatro paginas y sin esto salia una vez por pagina: veias el pop-up en
-     la portada, lo ignorabas, entrabas en la ficha y volvia a saltar. Una
-     visita, una vez. Al cerrar la pestaña se olvida, asi que quien vuelva
-     otro dia sin haberlo cerrado si lo vera. */
-  var LLAVE = 'zerox-alta';
+  /* UNA SOLA MEMORIA, y dura lo que dura la visita.
+     Con que el pop-up SE HAYA ABIERTO basta para no repetirlo: el sitio son
+     cuatro paginas y sin esto salia una vez por pagina.
+     Antes habia ademas un silencio de 30 dias en localStorage, y se retira:
+     dejaba el pop-up imposible de volver a ver durante un mes en cuanto
+     alguien lo cerraba una vez, y eso hacia imposible probarlo. Ahora, al
+     cerrar la pestaña se olvida y en la siguiente visita vuelve a salir. */
   var VISTO = 'zerox-alta-visto';
-  var DIAS_SILENCIO = 30;
 
   /* ---------- el envio ---------- */
 
@@ -70,17 +67,6 @@
 
   /* ---------- memoria ---------- */
 
-  function apuntado() {
-    try {
-      var v = localStorage.getItem(LLAVE);
-      if (!v) { return false; }
-      return (Date.now() - parseInt(v, 10)) < DIAS_SILENCIO * 864e5;
-    } catch (e) { return false; }
-  }
-  function recordar() {
-    try { localStorage.setItem(LLAVE, String(Date.now())); } catch (e) {}
-  }
-
   function yaSalio() {
     try { return sessionStorage.getItem(VISTO) === '1'; } catch (e) { return false; }
   }
@@ -98,7 +84,9 @@
     if (!campo || !campo.value) { return; }
     var ok = document.getElementById(f.getAttribute('data-alta'));
     alta(campo.value, f.getAttribute('data-origen') || 'bloque');
-    recordar();
+    // quien acaba de dejar su correo no tiene que volver a ver el pop-up en
+    // esta visita, aunque lo haya enviado desde el bloque de la pagina
+    marcarSalida();
     // el mensaje sale igual que antes, sin esperar a la red: si Klaviyo tarda
     // o falla, hacer esperar a quien ya ha dejado su correo no arregla nada
     if (ok) { ok.classList.add('on'); ok.classList.add('show'); }
@@ -119,14 +107,13 @@
      Solo se sale pulsando: no se cierra tocando fuera, porque a pantalla
      completa no hay fuera. Escape SI cierra: es invisible para casi todo el
      mundo, pero quien navega con teclado lo necesita.
-     Si ya se apunto o ya lo cerro, no vuelve en 30 dias; y dentro de una misma
-     visita sale UNA vez, aunque se recorran las cuatro paginas. */
+     Dentro de una misma visita sale UNA vez, aunque se recorran las cuatro
+     paginas. En la siguiente visita vuelve a salir. */
   var UMBRAL = 0.45;
   var ESPERA = 25000;
 
-  function montar(forzar) {
+  function montar() {
     if (document.getElementById('pop-alta')) { return null; }
-    if (!forzar && apuntado()) { return null; }
 
     var pop = document.createElement('div');
     pop.className = 'pop-alta';
@@ -163,12 +150,11 @@
   var devolverFoco = null;
 
   /* forzar: lo pide alguien a proposito —el boton de la cesta, o ?pop=1 para
-     probarlo— y entonces las dos memorias no cuentan. Sin esto, quien ya lo
-     cerro una vez no puede volver a abrirlo en 30 dias ni queriendo. */
+     probarlo— y entonces la memoria no cuenta. */
   function abrir(forzar) {
     if (abierto) { return; }
-    if (!forzar && (apuntado() || yaSalio())) { return; }
-    pop = pop || montar(forzar);
+    if (!forzar && yaSalio()) { return; }
+    pop = pop || montar();
     if (!pop) { return; }
     // se marca AL ABRIR, no al cerrar: quien lo ignora y cambia de pagina
     // tampoco tiene que volver a verlo
@@ -188,7 +174,7 @@
     abierto = false;
     pop.classList.remove('visto');
     document.documentElement.classList.remove('sin-scroll');
-    recordar();   // cerrarlo tambien cuenta: no se insiste
+    // cerrarlo ya cuenta como visto en esta visita; lo marco abrir()
     if (devolverFoco && devolverFoco.focus) { devolverFoco.focus(); }
   }
 
@@ -199,7 +185,7 @@
     if (ev.key === 'Escape') { cerrar(); }
   });
 
-  if (!apuntado() && !yaSalio()) {
+  if (!yaSalio()) {
     var reloj = setTimeout(abrir, ESPERA);
     var mirar = function () {
       var alto = document.documentElement.scrollHeight - window.innerHeight;
@@ -224,11 +210,15 @@
 
   /* para poder comprobarlo sin esperar 25 segundos ni desplazarse */
   window.zeroxCaptura = {
-    abrir: abrir, cerrar: cerrar, alta: alta,
-    apuntado: apuntado, yaSalio: yaSalio, LLAVE: LLAVE, VISTO: VISTO,
-    // borra las dos memorias, para poder volver a probarlo desde la consola
+    abrir: abrir, cerrar: cerrar, alta: alta, yaSalio: yaSalio, VISTO: VISTO,
+    // borra la memoria de la visita, para poder volver a probarlo sin cerrar
+    // la pestaña. Tambien limpia la llave vieja de los 30 dias, que puede
+    // seguir guardada en navegadores que ya la tenian.
     olvidar: function () {
-      try { localStorage.removeItem(LLAVE); sessionStorage.removeItem(VISTO); } catch (e) {}
+      try {
+        sessionStorage.removeItem(VISTO);
+        localStorage.removeItem('zerox-alta');
+      } catch (e) {}
     }
   };
 })();
