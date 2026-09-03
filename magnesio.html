@@ -114,11 +114,30 @@
 
   /* LA LUZ DE DISPONIBILIDAD. El punto de dentro esta quieto y el de fuera se
      expande y se apaga, que es como se dibuja un estado en vivo.
-     EN TINTA, ni en verde ni en el acento. El verde es la convencion pero esta
-     paleta no tiene verde, y el acento teja tiene un solo trabajo asignado en
-     el sistema de color —la opcion recomendada y su ahorro, y si aparece en
-     mas de cuatro sitios esta mal—. Un punto de 8 px no vale ese gasto.
-     Lo que dice "en vivo" aqui es el latido, no el color. */
+
+     EN VERDE, y no en tinta ni en el acento. Estuvo en tinta con el
+     razonamiento de que "esta paleta no tiene verde", y ahi esta el fallo:
+     un verde de estado NO entra en la paleta de marca ni gasta presupuesto
+     de acento. Son dos cosas distintas:
+       acento     identidad. Uno, racionado, y significa "esto te recomiendo"
+       semantico  funcion. Disponible, error, aviso. Significa UNA cosa fija,
+                  no viaja a ningun otro sitio y por eso no diluye nada
+     Un sistema admite el acento MAS dos o tres semanticos sin despeinarse.
+
+     El acento aqui seria un error de verdad: teja significa "esto es lo que
+     te recomiendo", y el stock no es una recomendacion, es un estado. Dos
+     significados para un color es exactamente lo que mato al ambar.
+
+     Y la tinta no estaba mal, estaba muda: un punto oscuro que late se lee
+     como un indicador de carga, no como "disponible". El verde-disponible es
+     una convencion que ya trae el significado puesto.
+
+     #1c6144 y no un verde vivo: 7,39 sobre blanco, sobrado para una forma
+     sin texto (el minimo es 3), y desaturado para que no cante al lado de
+     una pagina que es tinta y blanco.
+     Sobre el daltonismo rojo-verde, que afecta a uno de cada doce hombres:
+     aqui no es un problema porque el color NO carga el significado solo —
+     al lado pone "En stock". El color confirma, la palabra informa. */
   .ficha-stock {
     display: flex; align-items: center; gap: 0.45rem;
     /* el margen de abajo es un suelo minimo. La tira de miniaturas se empuja
@@ -129,11 +148,11 @@
   .stock-luz {
     position: relative; flex-shrink: 0;
     width: 8px; height: 8px; border-radius: 50%;
-    background: var(--ink);
+    background: var(--ok);
   }
   .stock-luz::after {
     content: ""; position: absolute; inset: 0; border-radius: 50%;
-    background: var(--ink);
+    background: var(--ok);
     animation: stock-latido 2.4s ease-out infinite;
   }
   @keyframes stock-latido {

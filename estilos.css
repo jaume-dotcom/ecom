@@ -79,6 +79,17 @@
        nuevo: la tentacion siempre es meterlo en un kicker mas. */
     --acento: #b14a2a;
     --acento-tinte: #faeeea;   /* fondo de la opcion marcada */
+    /* SEMANTICO, que NO es lo mismo que acento y por eso no gasta
+       presupuesto de paleta: el acento es identidad y significa "esto te
+       recomiendo"; un semantico es funcion, significa UNA cosa fija y no
+       viaja a ningun otro sitio. Un sistema admite el acento mas dos o tres
+       semanticos sin diluirse.
+       De momento solo hace falta uno, disponible. Si algun dia entran error
+       o aviso van aqui, y con el mismo criterio: solo para estado, jamas
+       para decorar.
+       7,39 sobre blanco, de sobra para una forma sin texto —el minimo es
+       3— y desaturado para no cantar en una pagina de tinta y blanco. */
+    --ok: #1c6144;
     /* El hover de los botones de accion BAJA en vez de subir: sobre fondo
        claro un boton oscuro que se oscurece se lee como que se hunde al
        pulsarlo. Blanco encima da 18,11. */
