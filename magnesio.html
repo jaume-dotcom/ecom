@@ -110,45 +110,7 @@
      relajacion, ni sueno—. Solo lo que lleva el bote y cuanto.
      Es ademas lo que mejor funciona con este comprador: desconfia del
      marketing, y un dato comprobable le dice mas que una promesa. */
-  /* LA COMPOSICION, COMO UNA FICHA TECNICA Y NO COMO UNA LISTA DE VENTAJAS.
-     Eran cuatro frases con un tick delante, todas del mismo peso, y habia
-     que leerlas enteras para sacar el dato. Ahora el dato va delante, en
-     monoespaciada y en columna, y la explicacion detras en gris: se puede
-     recorrer con la vista sin leer una palabra.
-     Los ticks se van con ellas. Un tick dice "esto es bueno", y 360 mg no es
-     bueno ni malo, es lo que hay en el bote. Lo que separa las filas es una
-     linea de pelo, como en la tabla nutricional de mas abajo.
-     Monoespaciada porque es el mismo idioma que la cuenta del pack de la
-     portada: en esta marca las cifras se escriben asi. */
-  .ficha-claves {
-    list-style: none; margin: 0.9rem 0 1.7rem; padding: 0;
-  }
-  .ficha-claves li {
-    display: grid; grid-template-columns: 6.6rem 1fr; gap: 0.7rem;
-    align-items: baseline;
-    padding: 0.62rem 0; border-top: 1px solid var(--line);
-    font-size: var(--t-sm); line-height: 1.4;
-  }
-  .ficha-claves li:last-child { border-bottom: 1px solid var(--line); }
-  .ficha-claves b {
-    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
-    font-weight: 600; letter-spacing: -0.02em; color: var(--ink);
-  }
-  .ficha-claves span { color: var(--ink-soft); }
 
-  /* la disponibilidad. Era "En stock - Envio en 24-48 h" con un camion; el
-     plazo ya lo dice el sello de aqui arriba, asi que se queda el stock y el
-     icono pasa a ser un visto: es una confirmacion, no un envio. */
-  .ficha-stock {
-    display: flex; align-items: center; gap: 0.45rem;
-    /* aire tras la caja de sellos, que va pegada al boton */
-    margin: 1.5rem 0 0; font-size: var(--t-sm); color: var(--ink-soft);
-  }
-  .ficha-stock svg {
-    width: 17px; height: 17px; flex-shrink: 0;
-    fill: none; stroke: var(--khaki-deep); stroke-width: 1.7;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
   .compra-fila { display: flex; align-items: stretch; gap: 0.6rem; }
   .cantidad {
     display: flex; align-items: center; flex-shrink: 0;
@@ -1252,34 +1214,14 @@
           <span>Pago<br>seguro</span>
         </li>
       </ul>
-      <!-- ================================================================
-           DISPONIBILIDAD Y COMPOSICION, DEBAJO DEL BOTON.
-           Va detras de los sellos y no entre ellos y el boton: los sellos
-           son la respuesta a "¿y si no me va bien?", que es una duda que
-           aparece con el dedo encima del boton. Meter cuatro datos tecnicos
-           en medio los despega de la pregunta que contestan.
-
-           TEXTO QUE SE VA, por estar dos veces en la misma pantalla:
-             "Envio en 24-48 h"  -> ya lo dice el sello de aqui arriba
-             "90 capsulas, para 30 dias" -> ya lo dice la linea de formato
-                                            debajo del nombre
-
-           COMPOSICION, NO EFECTO. Ni una palabra sobre descanso, sueño o
-           relajacion: el magnesio no tiene ninguna alegacion autorizada en
-           la UE y esta pagina esta publicada. Los cuatro datos salen de la
-           tabla nutricional de mas abajo y del comparador de formas.
-           ================================================================ -->
-      <p class="ficha-stock">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-4.9"/></svg>
-        <span>En stock</span>
-      </p>
-
-      <ul class="ficha-claves">
-        <li><b>360&nbsp;mg</b> <span>de magnesio elemental por dosis</span></li>
-        <li><b>96&nbsp;%</b> <span>del valor de referencia</span></li>
-        <li><b>Bisglicinato</b> <span>sin óxido de magnesio</span></li>
-        <li><b>3 cápsulas</b> <span>al día</span></li>
-      </ul>
+      <!-- La ficha tecnica que habia aqui se retira: los cuatro datos estaban
+           todos repetidos en la misma pagina. 360 mg y "sin oxido" los dice
+           el comparador de formas; el 96 % del VRN y las 3 capsulas al dia,
+           la tabla nutricional; y el formato, la linea que va debajo del
+           nombre.
+           Con ella se va tambien "En stock", que era lo unico que no estaba
+           en ningun otro sitio. Si hace falta recuperarlo, su sitio es el
+           titular, al lado del precio, y no debajo del boton. -->
 
 
       <!-- Los mismos cinco atributos, pero en movimiento: en rejilla
