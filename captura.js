@@ -28,7 +28,9 @@
   var KLAVIYO_ID = '';        // company_id / public API key
   var KLAVIYO_LISTA = '';     // id de la lista
 
-  var DESCUENTO = '15 %';
+  // con espacio duro: el pop-up es estrecho y sin el, '15' y '%' pueden
+  // acabar en lineas distintas
+  var DESCUENTO = '15 %';
 
   /* UNA SOLA MEMORIA, y dura lo que dura la visita.
      Con que el pop-up SE HAYA ABIERTO basta para no repetirlo: el sitio son
@@ -125,11 +127,16 @@
     // un "fuera" que oscurecer, y la salida es un texto debajo del boton.
     pop.innerHTML =
       '<div class="pop-alta-caja">' +
-        '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Te escribimos <span class="h2-soft">el día que salga</span></h2>' +
-        '<p class="pop-alta-lede">Con un ' + DESCUENTO + ' para tu primer pedido, por llegar antes. Después, poco correo: lanzamientos y avisos de stock. Te das de baja en un clic.</p>' +
+        '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Llega antes <span class="h2-soft">y paga menos</span></h2>' +
+        // El parrafo NO empieza por lo que se pide. Las versiones anteriores iban
+        // directas a la mecanica —"te escribimos", "baja en un clic"— y se leian
+        // como unas condiciones de servicio. Este da primero el contexto, que es
+        // el motivo real por el que alguien deja su correo aqui: la web todavia
+        // no vende. Y cierra con la promesa de marca, no con administracion.
+        '<p class="pop-alta-lede">Todavía no hemos abierto. Cuando lo hagamos, quien esté en la lista se entera antes y entra con un ' + DESCUENTO + ' en su primer pedido. Después escribimos poco, y siempre de lo mismo: qué lleva y por qué.</p>' +
         '<form class="pop-alta-form" data-alta="pop-alta-ok" data-origen="popup">' +
           '<input type="email" placeholder="Tu email" aria-label="Tu email" required>' +
-          '<button type="submit">Quiero mi ' + DESCUENTO + ' de descuento</button>' +
+          '<button type="submit">Quiero mi código</button>' +
         '</form>' +
         '<p class="pop-alta-ok" id="pop-alta-ok">Apuntado. Te escribimos el día que salga, con tu código dentro.</p>' +
         '<p class="pop-alta-legal">Al dejar tu email aceptas recibir nuestros correos comerciales. ' +
