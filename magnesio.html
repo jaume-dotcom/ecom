@@ -1004,8 +1004,14 @@
        Radio de 4 px y no --r-md (10): la esquina se nota mucho menos pero no
        llega a viva. A 10 la foto se leia como una tarjeta de interfaz; a 0
        se leia como un recorte. 4 es una foto con la esquina matada. */
+    /* MAS ALTA. Antes solo seguia la altura de la columna de texto, que la
+       dejaba en 249 px; con min-height manda ella y la fila crece. En un movil
+       de hoy sobra pantalla ahi arriba, y es lo unico que enseña el producto.
+       El ancho lo sigue mandando la columna, asi que el recorte lo resuelve el
+       object-fit:cover. */
     .ficha-foto {
-      display: block; align-self: stretch;
+      display: block; align-self: stretch; min-height: 300px;
+      position: relative; cursor: zoom-in;
       /* width y min-width explicitos: un elemento de rejilla tiene min-width
          auto, o sea su contenido minimo, y como dentro hay una imagen estirada
          al alto de la fila ese minimo crecia con ella y la caja se salia de su
@@ -1014,6 +1020,60 @@
       border-radius: 4px; overflow: hidden; background: var(--tint);
     }
     .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ficha-foto:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    /* la lupa: sin ella, que la foto se pueda pulsar no lo sabe nadie. Pequeña
+       y en una esquina, que la foto es lo que se viene a ver. */
+    .ficha-foto-lupa {
+      position: absolute; right: 0.5rem; bottom: 0.5rem;
+      width: 30px; height: 30px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 1px 4px rgba(35, 39, 46, 0.18);
+    }
+    .ficha-foto-lupa svg {
+      width: 15px; height: 15px; color: var(--ink);
+      fill: none; stroke: currentColor; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ---------- visor a pantalla completa ---------- */
+    /* Fondo en tinta y no en blanco: aqui se viene a mirar una foto, y un
+       fondo oscuro deja de competir con ella. Es ademas lo unico oscuro de la
+       ficha, asi que se lee como "otro sitio" y no como otra seccion. */
+    .visor {
+      position: fixed; inset: 0; z-index: 300; display: none;
+      background: var(--ink);
+    }
+    .visor.abierto { display: grid; grid-template-rows: auto 1fr auto; }
+    .visor-barra { display: flex; justify-content: flex-end; padding: 0.5rem; }
+    .visor-x {
+      width: 44px; height: 44px; border: 0; background: none; padding: 0;
+      display: grid; place-items: center; cursor: pointer;
+      color: var(--paper);
+    }
+    .visor-x svg {
+      width: 22px; height: 22px; fill: none; stroke: currentColor;
+      stroke-width: 1.8; stroke-linecap: round;
+    }
+    .visor-lienzo { display: grid; place-items: center; overflow: hidden; padding: 0 0.6rem; }
+    /* contain y no cover: en el visor la foto se ve entera, que es justo lo que
+       no se puede hacer en la cabecera */
+    .visor-img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    .visor-puntos {
+      display: flex; justify-content: center; gap: 0.5rem;
+      padding: 1rem 0 calc(1.4rem + env(safe-area-inset-bottom));
+    }
+    /* la diana es de 44 px aunque el punto mida 8: el punto es la señal, no el
+       sitio donde hay que acertar */
+    .visor-punto {
+      width: 44px; height: 44px; padding: 0; border: 0; background: none;
+      display: grid; place-items: center; cursor: pointer;
+    }
+    .visor-punto::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(238, 240, 244, 0.4);
+    }
+    .visor-punto[aria-current="true"]::before { background: var(--paper); }
 
 
     /* el h1 vuelve a 24: con la pagina mas ancha la columna da de si y
@@ -1117,10 +1177,18 @@
            de la columna izquierda, que no se toca.
            ================================================================ -->
       <div class="ficha-cabecera">
-        <div class="ficha-foto">
+        <!-- Pulsable: abre el visor a pantalla completa con las tres imagenes.
+             Lleva role y tabindex porque es un div y no un boton; cambiarlo a
+             boton obligaria a rehacer la rejilla de la cabecera, que depende de
+             que esta caja sea un elemento de rejilla con su propio alto. -->
+        <div class="ficha-foto" id="ficha-foto" role="button" tabindex="0"
+             aria-label="Ver las imágenes del producto">
           <img src="ficha-magnesio.jpg" width="761" height="1024"
                alt="Bote de Magnesio Bisglicinato de ZEROX sobre piedra"
                decoding="async">
+          <span class="ficha-foto-lupa" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M15.8 15.8L20 20"/><path d="M11 8.6v4.8M8.6 11h4.8"/></svg>
+          </span>
         </div>
         <div class="ficha-cab-txt">
 
@@ -2008,6 +2076,111 @@
     items.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // ===== VISOR DE IMAGENES =====
+  // Al pulsar la foto de la cabecera se abren las tres a pantalla completa.
+  // En movil la galeria con su carrusel no se ve, asi que sin esto las otras
+  // dos fotos solo se podian mirar del tamaño de una miniatura.
+  //
+  // Las fuentes se leen de las diapositivas de la galeria y no se escriben otra
+  // vez: el dia que cambie una foto se cambia en un sitio.
+  (function () {
+    var caja = document.getElementById('ficha-foto');
+    var fotos = Array.prototype.slice.call(document.querySelectorAll('#gal-track img'));
+    if (!caja || fotos.length < 2) { return; }
+
+    var visor = null, img = null, puntos = [], i = 0, volverA = null;
+
+    function montarVisor() {
+      visor = document.createElement('div');
+      visor.className = 'visor';
+      visor.setAttribute('role', 'dialog');
+      visor.setAttribute('aria-modal', 'true');
+      visor.setAttribute('aria-label', 'Imágenes del producto');
+      visor.innerHTML =
+        '<div class="visor-barra"><button type="button" class="visor-x" aria-label="Cerrar">' +
+          '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
+        '</button></div>' +
+        '<div class="visor-lienzo"><img class="visor-img" alt=""></div>' +
+        '<div class="visor-puntos"></div>';
+      document.body.appendChild(visor);
+      img = visor.querySelector('.visor-img');
+      var tira = visor.querySelector('.visor-puntos');
+      fotos.forEach(function (f, n) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'visor-punto';
+        b.setAttribute('aria-label', 'Imagen ' + (n + 1) + ' de ' + fotos.length);
+        b.addEventListener('click', function () { ir(n); });
+        tira.appendChild(b);
+        puntos.push(b);
+      });
+      visor.querySelector('.visor-x').addEventListener('click', cerrarVisor);
+      // pulsar el fondo tambien cierra, pero NO la foto ni los controles
+      visor.addEventListener('click', function (ev) {
+        if (ev.target === visor || ev.target.classList.contains('visor-lienzo')) { cerrarVisor(); }
+      });
+      deslizar(visor);
+    }
+
+    function ir(n) {
+      i = Math.max(0, Math.min(n, fotos.length - 1));
+      img.src = fotos[i].getAttribute('src');
+      img.alt = fotos[i].getAttribute('alt') || '';
+      puntos.forEach(function (b, k) {
+        if (k === i) { b.setAttribute('aria-current', 'true'); }
+        else { b.removeAttribute('aria-current'); }
+      });
+    }
+
+    function deslizar(el) {
+      if (!window.PointerEvent) { return; }
+      var x = null, dx = 0;
+      el.addEventListener('pointerdown', function (ev) { x = ev.clientX; dx = 0; });
+      el.addEventListener('pointermove', function (ev) { if (x !== null) { dx = ev.clientX - x; } });
+      var fin = function () {
+        if (x !== null && Math.abs(dx) > 45) { ir(i + (dx < 0 ? 1 : -1)); }
+        x = null; dx = 0;
+      };
+      el.addEventListener('pointerup', fin);
+      el.addEventListener('pointercancel', fin);
+    }
+
+    function abrirVisor() {
+      if (!visor) { montarVisor(); }
+      volverA = document.activeElement;
+      // se abre por la foto que se estaba viendo, no siempre por la primera
+      var actual = caja.querySelector('img').getAttribute('src');
+      var n = 0;
+      fotos.forEach(function (f, k) { if (f.getAttribute('src') === actual) { n = k; } });
+      ir(n);
+      visor.classList.add('abierto');
+      document.documentElement.classList.add('sin-scroll');
+      visor.querySelector('.visor-x').focus();
+    }
+
+    function cerrarVisor() {
+      if (!visor) { return; }
+      visor.classList.remove('abierto');
+      document.documentElement.classList.remove('sin-scroll');
+      // al salir, la cabecera se queda en la foto que se estaba mirando
+      if (typeof window.zeroxGalIr === 'function') { window.zeroxGalIr(i); }
+      if (volverA && volverA.focus) { volverA.focus(); }
+    }
+
+    caja.addEventListener('click', abrirVisor);
+    caja.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); abrirVisor(); }
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (!visor || !visor.classList.contains('abierto')) { return; }
+      if (ev.key === 'Escape') { cerrarVisor(); }
+      if (ev.key === 'ArrowRight') { ir(i + 1); }
+      if (ev.key === 'ArrowLeft') { ir(i - 1); }
+    });
+
+    window.zeroxVisor = { abrir: abrirVisor, cerrar: cerrarVisor, ir: ir };
+  })();
+
   // galeria: miniaturas + deslizar. Las miniaturas se desplazan solas para que
   // la activa quede siempre a la vista, tambien cuando se avanza deslizando
   var galTrack = document.getElementById('gal-track');
@@ -2045,6 +2218,8 @@
     galMinis.forEach(function (m) {
       m.addEventListener('click', function () { galIr(parseInt(m.dataset.i, 10)); });
     });
+    // el visor la necesita para dejar la cabecera en la foto que se miraba
+    window.zeroxGalIr = galIr;
 
     if (window.PointerEvent) {
       var galX = null, galDx = 0;
