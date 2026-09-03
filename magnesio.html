@@ -646,14 +646,19 @@
      subrayaban todos los enlaces, solo en esta pagina. */
 
   /* ---------- modos de compra ---------- */
-  .modos { border: 0; margin: 0 0 1.3rem; padding: 0; display: grid; gap: 0.7rem; }
+  .modos { border: 0; margin: 0 0 1.1rem; padding: 0; display: grid; gap: 0.55rem; }
   .modos-legend {
     padding: 0; margin: 0 0 0.9rem; font-size: var(--t-lg); font-weight: 600;
     letter-spacing: var(--tracking-lg);
   }
+  /* MAS BAJAS. Dos tarjetas de 88 y 121 px de alto para decir un nombre y un
+     precio era demasiado bulto justo donde hay que comparar: no cabian las
+     dos y el boton en la misma pantalla.
+     Lo que se recorta es relleno y huecos, no letra: el nombre y el importe
+     se quedan como estaban, que es donde se decide. */
   .modo {
-    display: flex; gap: 0.85rem; align-items: flex-start;
-    padding: 1.1rem 1.2rem; border: 1.5px solid var(--line);
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.85rem 1rem; border: 1.5px solid var(--line);
     border-radius: var(--r-md); background: #fff; cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
@@ -689,7 +694,7 @@
   .modo:has(input:checked) .modo-marca::after { transform: scale(1); }
   .modo input:focus-visible + .modo-marca { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  .modo-cuerpo { flex: 1; display: grid; gap: 0.3rem; }
+  .modo-cuerpo { flex: 1; display: grid; gap: 0.22rem; }
   /* cerrada, cada opcion son dos lineas: nombre y precio arriba, sellos
      debajo. El precio por bote y por dia se ha ido al panel: se lee al
      elegirla, que es cuando se compara de verdad */
@@ -840,13 +845,18 @@
        pack) dejan de verse en movil. */
     .galeria { display: none; }
 
-    /* 165 y no 150: la foto es lo unico que enseña el producto en movil,
-       ahora que la galeria no sale, asi que se le da todo el ancho que la
-       columna de al lado puede ceder. El hueco entre columnas baja a 0,75rem
-       para que a la derecha sigan cabiendo las tres miniaturas de 44, que
-       piden 148 px justos. */
+    /* LA CABECERA SE ENSANCHA POR LOS DOS LADOS.
+       Primero, la pagina: el relleno lateral baja de 1,6rem a 1rem, o sea de
+       51 px de margen a 32. Eran el 13,6 % del ancho del telefono gastados en
+       aire, y aqui dentro se estaban repartiendo dos columnas.
+       Segundo, la foto: 178 px. Al sacar las miniaturas de la columna de
+       texto, esa columna ya no tiene que medir 148 para que quepan tres
+       botones, asi que el ancho que sobra se lo lleva la foto.
+       178 y no mas: a 190 la columna de la derecha se quedaba en 141 px y
+       "90 capsulas - 30 dias", que pide 148, se partia en dos lineas. */
+    .wrap { padding-left: 1rem; padding-right: 1rem; }
     .ficha-cabecera {
-      display: grid; grid-template-columns: 165px 1fr;
+      display: grid; grid-template-columns: 178px 1fr;
       gap: 0.75rem; align-items: start; margin-bottom: 1.4rem;
     }
     /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
@@ -861,16 +871,27 @@
     .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 
-    /* el h1 baja de 28 a 22,4: en una columna de 160 px "Bisglicinato" a 28
-       se salia, y a 24 llegaba justo al borde */
-    .ficha-cab-txt h1 { margin: 0 0 0.15rem; font-size: var(--t-3xl); }
+    /* el h1 vuelve a 24: con la pagina mas ancha la columna da de si y
+       "Bisglicinato" ya no llega al borde. A 22,4 se leia pequeño para lo que
+       es, que es el nombre del producto. */
+    .ficha-cab-txt h1 { margin: 0 0 0.2rem; font-size: var(--t-4xl); }
+    /* toda la columna sube un escalon: la valoracion, el formato y el precio
+       estaban en el minimo de la escala y en un movil se leian como notas al
+       pie de su propio producto */
+    .ficha-cab-txt .ficha-rating { font-size: var(--t-xs); }
+    .ficha-cab-txt .ficha-estrellas svg { width: 15px; height: 15px; }
+    .ficha-cab-txt .ficha-sub { font-size: var(--t-base); }
+    .ficha-cab-txt .precio { font-size: var(--t-6xl); }
 
     /* 44 y no 48: tres de 48 con sus huecos piden 162 px y la columna mide
        159. 44 es el suelo de diana tactil, asi que no se baja de ahi. */
-    .ficha-minis { display: flex; gap: 0.5rem; margin-top: 0.7rem; }
-    /* mismo radio que la foto grande: son la misma cosa en pequeño. La tira
-       de la galeria, que es de escritorio, se queda con el suyo. */
-    .ficha-minis .mini { width: 44px; height: 44px; border-radius: 4px; }
+    /* a todo lo ancho de la cabecera, debajo de las dos columnas */
+    .ficha-minis { grid-column: 1 / -1; display: flex; gap: 0.55rem; margin-top: 0.85rem; }
+    /* 56 y no 44: fuera de la columna estrecha ya no hay que apretarlas, y a
+       44 se veian como botones de emergencia. Mismo radio que la foto grande,
+       que es lo que son en pequeño. La tira de la galeria, que es de
+       escritorio, se queda con el suyo. */
+    .ficha-minis .mini { width: 56px; height: 56px; border-radius: 4px; }
     .ficha-cab-txt .ficha-precio { margin-bottom: 0.2rem; }
 
   }
@@ -998,20 +1019,23 @@
             <span class="precio-nota" id="precio-nota"></span>
           </div>
 
-          <!-- LA TIRA DE MINIATURAS, bajo el precio. Es una SEGUNDA tira, no la
-               de la galeria: aquella vive dentro de .galeria, que es hermana de
-               esta columna, y desde CSS no se puede meter un hermano dentro de
-               otro. Duplicar tres botones sale mas barato que reordenar la
-               ficha entera y arriesgar el escritorio.
-               Solo una de las dos se ve a la vez: en movil esta y en escritorio
-               la de la galeria, la otra con display:none, o sea fuera tambien
-               del arbol de accesibilidad.
-               Las engancha el mismo JS, que busca .mini a secas. -->
-          <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
-            <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-            <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-            <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
-          </div>
+
+        </div>
+
+        <!-- LA TIRA DE MINIATURAS. Cruza las dos columnas y no vive dentro de
+             la de texto: encerrada ahi obligaba a que la columna midiera 148
+             px para que cupieran tres botones de 44, y ese ancho se lo estaba
+             quitando a la foto. A todo lo ancho caben de 56 y sobra sitio.
+
+             Es una SEGUNDA tira, no la de la galeria: aquella vive dentro de
+             .galeria, que es hermana de esta columna. Solo se ve una de las
+             dos, en movil esta y en escritorio la de la galeria, la otra con
+             display:none, o sea fuera tambien del arbol de accesibilidad.
+             Las engancha el mismo JS, que busca .mini a secas. -->
+        <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
+          <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+          <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+          <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
         </div>
       </div>
 
