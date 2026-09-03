@@ -92,7 +92,7 @@
     display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.3rem;
   }
   .precio { font-size: var(--t-4xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
-  .precio-nota { font-size: var(--t-md); color: var(--ink-soft); }
+
   /* El precio, arriba y no solo dentro de las opciones. Lo pedia la
      comparacion: quien mira tres fichas de tres marcas busca el numero
      antes que nada, y aqui habia que leerse el selector para encontrarlo.
@@ -100,7 +100,7 @@
      cuando es suscripcion: un importe sin "cada 3 meses" al lado es
      justo lo que no se puede publicar. */
   .ficha-precio { flex-wrap: wrap; }
-  .precio-nota { line-height: 1.35; }
+
 
 
   /* LOS CUATRO DATOS, BAJO EL TITULO.
@@ -870,9 +870,8 @@
   /* la tira de la cabecera es solo de movil; en escritorio manda la de la
      galeria, que esta debajo de su visor */
   .ficha-minis { display: none; }
-  /* en compra unica la nota va vacia; sin esto deja su linea en blanco.
-     Fuera del media de movil: en escritorio pasaba lo mismo. */
-  .precio-nota:empty { display: none; }
+
+
 
   /* Aspecto, no maquetacion: estas tres van FUERA del media de movil.
      Estuvieron dentro y en escritorio las estrellas salian del tamano de su
@@ -956,10 +955,17 @@
        la tira fuera, cruzando las dos columnas, la foto llegaba a 178 y las
        miniaturas a 56. */
     .wrap { padding-left: 1rem; padding-right: 1rem; }
+    /* align-items en stretch y no en start: la columna de texto ocupa todo el
+       alto de la fila, que lo marca la foto, y asi la tira de miniaturas puede
+       empujarse al fondo y quedar al mismo suelo que la imagen grande. */
     .ficha-cabecera {
       display: grid; grid-template-columns: 172px 1fr;
-      gap: 0.75rem; align-items: start; margin-bottom: 1.4rem;
+      gap: 0.75rem; align-items: stretch; margin-bottom: 1.4rem;
     }
+    .ficha-cab-txt { display: flex; flex-direction: column; }
+    /* el margen automatico se come el hueco que sobre: las miniaturas caen
+       siempre abajo, este el texto mas alto o mas bajo */
+    .ficha-minis { margin-top: auto; }
     /* 3/4, que es la proporcion de ficha-magnesio.jpg: con cover no recorta
        nada y la caja se llena entera.
        Radio de 4 px y no --r-md (10): la esquina se nota mucho menos pero no
@@ -986,7 +992,7 @@
 
     /* 44 y no 48: tres de 48 con sus huecos piden 162 px y la columna mide
        159. 44 es el suelo de diana tactil, asi que no se baja de ahi. */
-    .ficha-minis { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
+    .ficha-minis { display: flex; gap: 0.4rem; }
     /* 48, que es lo mas grande que cabe: tres de 48 con dos huecos de 6,4
        piden 157 px y la columna mide 159. Mismo radio que la foto grande,
        que es lo que son en pequeño. La tira de la galeria, que es de
@@ -1111,12 +1117,8 @@
                este marcada, asi que arranca en la compra unica. -->
           <div class="ficha-precio">
             <span class="precio" id="precio-num">22,90&nbsp;&euro;</span>
-            <!-- La nota se queda VACIA en la compra unica: el precio por bote y
-                 por dia ya esta en la tarjeta de su opcion, dos dedos mas abajo.
-                 Pero NO se borra el elemento: en la suscripcion tiene que decir
-                 "cada 3 meses", porque un importe grande sin periodicidad al
-                 lado no dice lo que se contrata. -->
-            <span class="precio-nota" id="precio-nota"></span>
+            <!-- Aqui iba una nota con la periodicidad. Se retira: "cada 3 meses"
+                 pasa a la linea de la propia opcion, que es donde se elige. -->
           </div>
 
           <!-- LA DISPONIBILIDAD, pegada al precio. Estuvo debajo del boton y de
@@ -1200,7 +1202,11 @@
             </span>
             <span class="modo-panel">
               <span class="modo-panel-int">
-                <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; 0,61&nbsp;&euro; al día</span>
+                <!-- la periodicidad va aqui y no bajo el precio del titular: es
+                     el sitio donde se elige, y ahi el importe y el "cada 3 meses"
+                     se leen de una vez. Sustituye al precio por dia, que era el
+                     dato menos util de los tres. -->
+                <span class="modo-desc">18,30&nbsp;&euro; el bote &middot; cada 3 meses</span>
                 <!-- Las tres ventajas salen de la respuesta "¿Como funciona la
                      suscripcion?" de la FAQ de esta misma pagina. No se promete
                      nada que no estuviera ya escrito ahi.
@@ -2085,19 +2091,17 @@
   // proposito: un importe grande sin "cada 3 meses" al lado no informa de
   // lo que se contrata, y es lo primero que mira quien desconfia.
   var MODOS = {
-    // la nota solo lleva la PERIODICIDAD. El precio por bote y por dia se
-    // repetia palabra por palabra en la tarjeta de cada opcion, tres lineas
-    // mas abajo. En la compra unica no hay periodicidad que dar, asi que va
-    // vacia y el hueco desaparece.
+    // La periodicidad ya no vive aqui: se escribe en la linea de la propia
+    // opcion, en el HTML. Este mapa solo pinta importe, texto del boton y los
+    // datos que se mandan a la cesta.
     // el txt de la trimestral ya no lleva "cada 3 meses": con el selector de
     // cantidad al lado, al boton le quedan 229 px y la frase entera pedia 265,
-    // asi que partia en dos lineas. La periodicidad sigue a la vista en dos
-    // sitios de la misma pantalla: la nota bajo el precio del titular y el
-    // nombre de la propia opcion, "Suscripcion trimestral".
+    // asi que partia en dos lineas. La periodicidad se lee en la tarjeta de la
+    // opcion, que esta justo encima: en su nombre y en su linea de detalle.
     trimestral: { txt: 'Suscribirme · 54,90 €', sub: 'Suscripción trimestral · un envío cada 3 meses', precio: '54.90',
-                  euros: '54,90 €', nota: 'cada 3 meses' },
+                  euros: '54,90 €' },
     unica:      { txt: 'Añadir a la cesta · 22,90 €',        sub: 'Bisglicinato · 360 mg · compra única',           precio: '22.90',
-                  euros: '22,90 €', nota: '' }
+                  euros: '22,90 €' }
   };
   // EL INDICE. Marca la pastilla de la seccion que se esta leyendo.
   // Se CALCULA a partir de una posicion en vez de observarse con un
@@ -2166,13 +2170,13 @@
   })();
 
   var precioNum = document.getElementById('precio-num');
-  var precioNota = document.getElementById('precio-nota');
+
   function pintarModo() {
     var sel = document.querySelector('input[name="modo-compra"]:checked');
     if (!sel || !comprarBtn) { return; }
     var m = MODOS[sel.value] || MODOS.unica;
     if (precioNum) { precioNum.textContent = m.euros; }
-    if (precioNota) { precioNota.textContent = m.nota; }
+
     comprarBtn.textContent = m.txt;
     comprarBtn.setAttribute('data-add', 'mag-' + sel.value);
     comprarBtn.setAttribute('data-nombre', 'Magnesio');
