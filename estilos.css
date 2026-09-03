@@ -473,13 +473,17 @@
      Es el unico sitio de la pagina donde se pide algo a cambio de nada, y
      ahora es tambien el unico bloque oscuro del tramo final: el ojo para ahi
      porque cambia el fondo, no porque se lo pida un titular mas grande.
-     Sangra a los lados con margenes negativos, igual que hacia el panel de
-     resenas, porque .wrap tiene relleno propio y sin esto el negro se
-     quedaria con dos franjas blancas a los lados. */
+     SIN MARGENES NEGATIVOS. Los llevaba para cancelar el relleno de un .wrap
+     padre, pero este bloque no cuelga de ninguno: en la portada es hijo del
+     body y en la del libro de .hero-full, y los dos tienen relleno cero. El
+     resultado era una caja de 426 px en una pagina de 375, o sea 26 px fuera
+     por cada lado.
+     El relleno propio se lo da su clase .wrap, asi que sin tocar nada mas el
+     bloque llega a los dos bordes y el texto respeta el margen de la pagina. */
   #alta.hero-center {
     background: var(--ink); color: var(--paper);
-    max-width: none; margin-left: -1.6rem; margin-right: -1.6rem;
-    padding: 2.6rem 1.6rem;
+    max-width: none; margin-left: 0; margin-right: 0;
+    padding-top: 2.6rem; padding-bottom: 2.6rem;
   }
   #alta .hero-alta-titulo { color: var(--paper); }
   #alta .hero-alta-titulo .h2-soft { color: var(--paper); }

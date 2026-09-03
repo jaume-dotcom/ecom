@@ -699,10 +699,14 @@
      pide algo, y el cambio de fondo es lo que hace que el ojo pare.
      Aqui el bloque tiene su propio HTML, asi que las reglas van aparte; el
      texto es el mismo y el resultado tiene que ser el mismo. */
-  .alta {
+  /* #alta.alta y no .alta a secas: con un solo selector de clase el margen
+     negativo se lo comia una regla posterior y el bloque se quedaba encajado
+     dentro del margen de la pagina, mientras en la portada y en la del libro va
+     a sangre. El mismo bloque tiene que verse igual en las tres. */
+  #alta.alta {
     background: var(--ink); color: var(--paper);
     margin-left: -1rem; margin-right: -1rem;
-    padding: 2.6rem 1rem; border-radius: var(--r-lg);
+    padding: 2.6rem 1rem; border-radius: 0;
   }
   .alta h2, .alta h2 .h2-soft { color: var(--paper); }
   .alta > p { color: rgba(238, 240, 244, 0.78); }
