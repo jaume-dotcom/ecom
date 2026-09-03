@@ -22,7 +22,6 @@
   'use strict';
 
   var LLAVE = 'zerox-carrito';
-  var ENVIO_GRATIS = 27.95;
 
   /* La foto viaja en data-img desde el boton, pero hace falta una red de
      seguridad: una cesta guardada ANTES de que existieran las fotos sigue
@@ -108,7 +107,7 @@
   /* ---------- el panel, montado desde aqui para no repetirlo en cada
        pagina. Si mañana hay una cuarta, hereda el carrito sin tocarla ---- */
 
-  var panel, velo, cuerpo, pieTotal, barra, barraTexto, ultimoFoco;
+  var panel, velo, cuerpo, pieTotal, ultimoFoco;
 
   function montar() {
     velo = document.createElement('div');
@@ -121,18 +120,23 @@
     panel.hidden = true;
     panel.setAttribute('role', 'dialog');
     panel.setAttribute('aria-modal', 'true');
-    panel.setAttribute('aria-label', 'Tu cesta');
+    panel.setAttribute('aria-label', 'Tu reserva');
     panel.innerHTML =
       '<div class="cart-cab">' +
-        '<h2>Tu cesta</h2>' +
+        '<h2>Tu reserva</h2>' +
         '<button type="button" class="cart-x" aria-label="Cerrar la cesta">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
         '</button>' +
       '</div>' +
-      '<div class="cart-envio"><div class="cart-barra"><span></span></div><p></p></div>' +
+      // SIN BARRA DE ENVIO GRATIS. Era la pieza que mas hacia parecer esto un
+      // pedido: una barra que se llena, un "¡conseguido!" y un umbral que
+      // empuja a añadir mas. Aqui no se compra nada todavia, asi que empujar a
+      // gastar mas para un envio que no existe es prometer dos veces.
+      // El envio gratis desde 27,95 sigue dicho en la barra de arriba y en el
+      // pie; lo que se retira es el marcador de progreso.
       '<div class="cart-cuerpo"></div>' +
       '<div class="cart-pie">' +
-        '<p class="cart-total"><span>Total</span><b></b></p>' +
+        '<p class="cart-total"><span>Total orientativo</span><b></b></p>' +
         '<p class="cart-aviso">Todavía no está a la venta. Déjanos tu email y te reservamos el pack, con un 15 % para tu primer pedido.</p>' +
         '<button type="button" class="cart-cta">Reservar con mi email</button>' +
       '</div>';
@@ -142,8 +146,7 @@
 
     cuerpo = panel.querySelector('.cart-cuerpo');
     pieTotal = panel.querySelector('.cart-total b');
-    barra = panel.querySelector('.cart-barra span');
-    barraTexto = panel.querySelector('.cart-envio p');
+
 
     velo.addEventListener('click', cerrar);
     panel.querySelector('.cart-x').addEventListener('click', cerrar);
@@ -229,7 +232,7 @@
         void punto.offsetWidth;
         punto.classList.add('golpe');
       }
-      b.setAttribute('aria-label', n === 0 ? 'Tu cesta, vacía' : 'Tu cesta, ' + n + (n === 1 ? ' artículo' : ' artículos'));
+      b.setAttribute('aria-label', n === 0 ? 'Tu reserva, vacía' : 'Tu reserva, ' + n + (n === 1 ? ' artículo' : ' artículos'));
     });
 
     if (!cuerpo) { return; }
@@ -245,7 +248,7 @@
       cuerpo.innerHTML =
         '<div class="cart-vacia">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z"/><path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3"/></svg>' +
-          '<p>Tu cesta está vacía.</p>' +
+          '<p>Todavía no has reservado nada.</p>' +
           '<a href="' + aDonde + '">Ver las cuatro fórmulas</a>' +
         '</div>';
     } else {
@@ -276,25 +279,6 @@
     }
 
     pieTotal.textContent = euros(total());
-
-    // El mensaje cambia segun lo cerca que se este, que es lo que lo hace
-    // util: "te faltan 5 €" con la cesta vacia no dice nada, y el mismo
-    // texto a un euro del objetivo desaprovecha el momento.
-    // Sin cuentas atras ni prisas: aqui se anima, no se mete presion.
-    var falta = ENVIO_GRATIS - total();
-    var pct = Math.min(100, Math.round((total() / ENVIO_GRATIS) * 100));
-    barra.style.width = pct + '%';
-
-    var msg;
-    if (falta <= 0) { msg = '¡Envío gratis conseguido!'; }
-    else if (!total()) { msg = 'Envío gratis a partir de ' + euros(ENVIO_GRATIS); }
-    else if (pct >= 80) { msg = '¡Casi! Te faltan ' + euros(falta) + ' para el envío gratis'; }
-    else if (pct >= 50) { msg = 'Vas por la mitad: ' + euros(falta) + ' más y el envío es gratis'; }
-    else { msg = 'Te faltan ' + euros(falta) + ' para el envío gratis'; }
-
-    barraTexto.textContent = msg;
-    barraTexto.classList.toggle('cart-envio-ok', falta <= 0);
-    barraTexto.classList.toggle('cart-envio-casi', falta > 0 && pct >= 80);
   }
 
   /* ---------- enganches ---------- */

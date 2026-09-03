@@ -137,8 +137,20 @@
              para que el boton no creciera habia que bajar la letra de las dos.
              Ahora el boton dice una sola cosa, a su tamano normal, y el rotulo
              la explica debajo sin ocupar sitio dentro. -->
-        <a class="hero-cta hero-cta--oferta" href="#libro">Lo quiero &middot; 39,90&nbsp;&euro;</a>
-        <p class="hero-cta-nota">Oferta de lanzamiento</p>
+        <!-- DOS SALIDAS Y NO UNA. Con un solo boton, quien no quiere el pack
+             no tiene a donde ir desde la primera pantalla y le toca
+             desplazarse a ciegas. El primero manda al pack y el segundo al
+             catalogo, que son las dos unicas cosas que se pueden hacer aqui.
+
+             "Reservar" y no "Comprar": no esta a la venta.
+             "Las formulas" y no "Esenciales": la nav ya las llama formulas y
+             el bloque de criterio tambien. Un tercer nombre para lo mismo en
+             la misma pagina se paga en cada lectura. -->
+        <div class="hero-ctas-par">
+          <a class="hero-cta hero-cta--oferta" href="#libro">Reservar &middot; 39,90&nbsp;&euro;</a>
+          <a class="hero-cta hero-cta--linea" href="#catalogo">Las fórmulas</a>
+        </div>
+        <p class="hero-cta-nota">Pack de lanzamiento</p>
       </div>
     </div>
   </div>
@@ -746,7 +758,7 @@
           <h3>Legal</h3>
           <ul>
             <li><a href="#">Aviso legal</a></li>
-            <li><a href="#">Privacidad</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
             <li><a href="#">Cookies</a></li>
           </ul>
         </div>

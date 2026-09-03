@@ -146,7 +146,7 @@
         '</form>' +
         '<p class="pop-alta-ok" id="pop-alta-ok">Apuntado. Te escribimos el día que salga, con tu código dentro.</p>' +
         '<p class="pop-alta-legal">Al dejar tu email aceptas recibir nuestros correos comerciales. ' +
-          '<a href="#">Politica de privacidad</a>.</p>' +
+          '<a href="privacidad.html">Política de privacidad</a>.</p>' +
         // LA SALIDA, en texto y no en cruz. Dice "Ahora no, gracias" y NO "no
         // quiero mi descuento": eso ultimo es confirmshaming, hacer que decir
         // que no suene a error. Funciona a corto plazo y deja mal cuerpo, y

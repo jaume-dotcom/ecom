@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad — ZEROX</title>
+<meta name="description" content="Qué datos recoge ZEROX, para qué y cómo ejercer tus derechos.">
+<link rel="canonical" href="https://jaume-dotcom.github.io/ecom/privacidad.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
+<noscript><style>
+  .reveal, .foot-anim { opacity: 1 !important; filter: none !important; transform: none !important; }
+</style></noscript>
+<style>
+  /* la cabecera se copia de la ficha: es la misma y tiene que verse igual.
+     Estas reglas viven en el HTML de cada pagina y no en estilos.css, que es
+     como esta montado el resto del sitio. */
+  /* ---------- barra de aviso + nav ---------- */
+  .topbar {
+    background: var(--ink); color: var(--paper);
+    font-size: var(--t-xs); text-align: center; padding: 0.6rem 1rem;
+  }
+  nav {
+    position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 1.1rem 0;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
+  nav > .logo {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  /* relative para colgarle el contador de la cesta, y el reset porque el de
+     la bolsa dejo de ser un <a> y ahora es un <button> */
+  .nav-ico {
+    position: relative;
+    width: 2.75rem; height: 2.75rem; margin: 0 -0.7rem;
+    display: grid; place-items: center; color: var(--ink);
+    background: none; border: 0; padding: 0; cursor: pointer;
+  }
+  .nav-ico svg { width: 21px; height: 21px; }
+
+  /* pagina de texto: una sola columna estrecha y jerarquia clara. Nada mas. */
+  .legal { max-width: 46rem; margin: 0 auto; padding: 1.6rem 0 3rem; }
+  .legal h1 {
+    margin: 0 0 0.4rem; font-size: var(--t-6xl); font-weight: 600;
+    line-height: 1.15; letter-spacing: var(--tracking-lg);
+  }
+  .legal .legal-fecha { margin: 0 0 2rem; font-size: var(--t-sm); color: var(--ink-soft); }
+  .legal h2 {
+    margin: 2.2rem 0 0.6rem; font-size: var(--t-2xl); font-weight: 600;
+    letter-spacing: var(--tracking-lg);
+  }
+  .legal p, .legal li { font-size: var(--t-base); line-height: 1.6; color: var(--ink-soft); }
+  .legal p { margin: 0 0 0.9rem; }
+  .legal ul { margin: 0 0 0.9rem; padding-left: 1.1rem; }
+  .legal li { margin-bottom: 0.4rem; }
+  .legal b { color: var(--ink); font-weight: 600; }
+  .legal a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  /* LO QUE FALTA POR RELLENAR, marcado a la vista. Un dato legal inventado es
+     peor que un hueco: el hueco se ve y se corrige, el inventado se publica. */
+  .falta {
+    display: inline-block; padding: 0.05rem 0.4rem; border-radius: 4px;
+    background: rgba(177, 74, 42, 0.12); color: var(--acento);
+    font-family: var(--font-mono); font-size: 0.9em; font-weight: 600;
+  }
+  .legal-aviso {
+    margin: 0 0 2rem; padding: 1rem 1.1rem;
+    border: 1px solid var(--acento); border-radius: var(--r-md);
+  }
+  .legal-aviso p { margin: 0; color: var(--ink); }
+  .legal-tabla { width: 100%; border-collapse: collapse; margin: 0 0 0.9rem; }
+  .legal-tabla th, .legal-tabla td {
+    text-align: left; padding: 0.6rem 0.6rem 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--t-sm); line-height: 1.45; vertical-align: top;
+  }
+  .legal-tabla th { color: var(--ink); font-weight: 600; }
+  .legal-tabla td { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="topbar">Envío gratuito desde 27,95 € · Devolución en 30 días</div>
+
+<div class="wrap">
+  <nav>
+    <a class="nav-ico" href="index.html" aria-label="Volver a la portada">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <span class="logo-word">ZEROX</span>
+    </a>
+    <button type="button" class="nav-ico" data-cart-abrir aria-label="Tu cesta, vacía">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </nav>
+</div>
+
+<main class="wrap">
+  <div class="legal">
+
+    <h1>Política de privacidad</h1>
+    <p class="legal-fecha">Última actualización: <span class="falta">[PENDIENTE: fecha de publicación]</span></p>
+
+    <!-- ================================================================
+         ESTE DOCUMENTO NO ESTA TERMINADO Y NO DEBE PUBLICARSE TAL CUAL.
+         Todo lo marcado con .falta son datos que solo puede dar el
+         responsable: razon social, NIF, domicilio y correo de contacto.
+         NO SE INVENTAN. Una politica con una identidad falsa es peor que no
+         tener politica: incumple igual y ademas induce a error.
+         El resto —que datos se recogen, para que, con que base legal y con
+         quien se comparten— si sale de lo que la web hace de verdad, que es
+         lo que se ha podido comprobar leyendo el codigo.
+         ================================================================ -->
+    <div class="legal-aviso">
+      <p><b>Borrador.</b> Faltan los datos identificativos del responsable, marcados en el texto. No publicar hasta completarlos.</p>
+    </div>
+
+    <h2>Quién trata tus datos</h2>
+    <p>El responsable del tratamiento es <span class="falta">[PENDIENTE: razón social]</span>, con NIF <span class="falta">[PENDIENTE: NIF]</span> y domicilio en <span class="falta">[PENDIENTE: domicilio]</span>.</p>
+    <p>Para cualquier cuestión sobre tus datos puedes escribir a <span class="falta">[PENDIENTE: correo de contacto]</span>.</p>
+
+    <h2>Qué datos recogemos y para qué</h2>
+    <table class="legal-tabla">
+      <tr>
+        <th>Tu correo electrónico</th>
+        <td>Cuando lo dejas en el formulario de la web o en la ventana de reserva. Lo usamos para avisarte del lanzamiento, enviarte tu código de descuento y mandarte comunicaciones comerciales sobre nuestros productos.<br><b>Base legal:</b> tu consentimiento, que das al enviar el formulario.</td>
+      </tr>
+      <tr>
+        <th>La página desde la que te apuntaste</th>
+        <td>Guardamos si te apuntaste desde la ventana de reserva o desde el bloque de la página, para saber qué funciona.<br><b>Base legal:</b> tu consentimiento.</td>
+      </tr>
+      <tr>
+        <th>Datos de navegación</th>
+        <td>Si aceptas las cookies de medición, recogemos datos agregados sobre qué contenidos se leen.<br><b>Base legal:</b> tu consentimiento, que puedes retirar en cualquier momento.</td>
+      </tr>
+    </table>
+    <p>No pedimos ni almacenamos datos de pago: la web todavía no vende, y no hay pasarela de cobro.</p>
+
+    <h2>Qué guarda tu navegador</h2>
+    <p>Parte de lo que hace la web no sale de tu propio dispositivo. No son cookies y no viajan a ningún servidor:</p>
+    <ul>
+      <li><b>Tu reserva</b>, para que no se pierda si cierras la pestaña.</li>
+      <li><b>Si ya has visto la ventana de reserva</b>, para no volver a enseñártela.</li>
+      <li><b>Tu elección sobre las cookies</b>.</li>
+    </ul>
+    <p>Puedes borrarlo todo vaciando los datos del sitio en tu navegador.</p>
+
+    <h2>Con quién los compartimos</h2>
+    <p>Solo con proveedores que nos prestan un servicio y que tratan los datos siguiendo nuestras instrucciones:</p>
+    <ul>
+      <li><b>Klaviyo</b>, para gestionar la lista de correo y enviar los emails. Es una empresa estadounidense; las transferencias se amparan en el marco de adecuación entre la UE y Estados Unidos y, en su defecto, en cláusulas contractuales tipo.</li>
+      <li><b>GitHub Pages</b>, donde está alojada esta web.</li>
+    </ul>
+    <p>No vendemos tus datos ni los cedemos a terceros para sus propios fines.</p>
+
+    <h2>Cuánto tiempo los guardamos</h2>
+    <p>Tu correo permanece en la lista hasta que te des de baja. Puedes hacerlo desde el enlace que lleva cada email o escribiéndonos. Después lo eliminamos, salvo lo mínimo necesario para acreditar que en su día diste tu consentimiento.</p>
+
+    <h2>Tus derechos</h2>
+    <p>Puedes pedirnos en cualquier momento acceder a tus datos, rectificarlos, suprimirlos, limitar u oponerte a su tratamiento, y solicitar que te los entreguemos en un formato portable. También puedes retirar tu consentimiento cuando quieras, sin que eso afecte a lo hecho antes.</p>
+    <p>Basta con escribir a <span class="falta">[PENDIENTE: correo de contacto]</span>. Si crees que no te hemos atendido bien, puedes reclamar ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>.</p>
+
+    <h2>Cambios</h2>
+    <p>Si cambiamos esta política, actualizaremos la fecha de arriba. Si el cambio es relevante y estás en la lista, te lo diremos por email.</p>
+
+  </div>
+</main>
+
+<footer id="footer-signup">
+  <div class="foot-panel">
+    <span class="foot-hair" aria-hidden="true"></span>
+    <div class="foot-grid">
+
+      <div class="foot-brand reveal foot-anim">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="7">
+              <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+              <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+              <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+              <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+              <path d="M16 16 L84 84 M84 16 L16 84"/>
+            </g>
+          </svg>
+          <span class="logo-word">ZEROX</span>
+        </a>
+        <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
+        <p class="foot-copy">&copy; 2026 ZEROX</p>
+      </div>
+
+      <div class="foot-cols">
+        <div class="foot-col reveal foot-anim">
+          <h3>Fórmulas</h3>
+          <ul>
+            <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>La marca</h3>
+          <ul>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="libro.html">El libro</a></li>
+            <li><a href="#faq">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#alta">Acceso anticipado</a></li>
+            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="#footer-signup">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada.</span>
+      <span class="disclaimer">Vista previa: nombre y packaging provisionales, pendientes de confirmación de marca y dominio.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

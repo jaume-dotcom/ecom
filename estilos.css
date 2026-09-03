@@ -566,6 +566,39 @@
     .hero-pie { margin-top: 1.4rem; }
   }
 
+  /* los dos botones del hero, uno al lado del otro y centrados. En 343 px de
+     ancho entran los dos: "Reservar - 39,90 EUR" pide unos 137 y "Las
+     formulas" unos 117, asi que sobra sitio incluso con el hueco.
+     El segundo va a contorno: hay una accion principal y una salida, y dos
+     botones macizos no dejarian claro cual es cual. */
+  .hero-ctas-par {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.6rem;
+  }
+  /* laterales mas apretados que un boton suelto: con el relleno normal los
+     dos piden 352 px y en la tarjeta hay 330, asi que se apilaban. A 0,9rem
+     por lado suman 309 y entran en una fila con holgura. */
+  .hero-ctas-par .hero-cta {
+    width: auto; min-width: 0;
+    padding-left: 0.9rem; padding-right: 0.9rem;
+  }
+  /* EL SEGUNDO, CLARAMENTE POR DEBAJO DEL PRIMERO. Hereda el cristal de
+     .hero-cta y con el mismo fondo los dos se veian identicos, que es lo mismo
+     que no tener jerarquia.
+     Va con .hero-ctas-par delante a proposito: el cristal de .hero-cta se
+     declara mas abajo en esta hoja, asi que con un solo selector de clase
+     ganaba el de abajo y estas reglas no llegaban a aplicarse.
+     Fondo oscuro y no transparente del todo: debajo hay una foto, y sobre una
+     zona clara el texto blanco de un boton a contorno se pierde. */
+  .hero-ctas-par .hero-cta--linea {
+    background: rgba(35, 39, 46, 0.3);
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .hero-ctas-par .hero-cta--linea:hover { background: rgba(35, 39, 46, 0.46); }
+
   .hero-media-box {
     position: relative; width: 100%; overflow: hidden; border-radius: var(--r-md); background: #e9ebef;
   }
