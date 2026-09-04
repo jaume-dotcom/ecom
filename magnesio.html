@@ -322,9 +322,19 @@
     /* width auto ademas de los margenes: .ticker lleva width 100% en la hoja
        compartida, asi que los margenes negativos la movian pero no la
        ensanchaban, y se quedaba corta por la derecha */
+    /* -1rem y no -1,6: el relleno de .wrap bajo a 1rem en movil y estos
+       margenes seguian calculados para el viejo, asi que la tira se pasaba 9,6
+       px por cada lado y dejaba la pagina desplazable en horizontal. */
     .ticker--sellos {
-      margin-left: -1.6rem; margin-right: -1.6rem;
+      margin-left: -1rem; margin-right: -1rem;
       width: auto; max-width: none;
+    }
+    /* el panel de cifras sangraba igual y con el mismo error de calculo.
+       Con #cifras delante porque su regla base se declara mas abajo en este
+       mismo fichero y con un solo selector de clase ganaba aquella. */
+    #cifras.cifras-panel {
+      margin-left: -1rem; margin-right: -1rem;
+      padding-left: 1rem; padding-right: 1rem;
     }
   }
   /* 24s para las cinco frases: da los mismos ~34 px/s que la portada */
@@ -703,10 +713,13 @@
      negativo se lo comia una regla posterior y el bloque se quedaba encajado
      dentro del margen de la pagina, mientras en la portada y en la del libro va
      a sangre. El mismo bloque tiene que verse igual en las tres. */
+  /* mismas medidas que el panel del pie: 12 px de cada borde de la pagina y
+     esquinas de 16. Aqui el bloque vive dentro de .wrap, que tiene 16 px de
+     relleno, asi que le hacen falta -4 para llegar a los 12. */
   #alta.alta {
     background: var(--ink); color: var(--paper);
-    margin-left: -1rem; margin-right: -1rem;
-    padding: 2.6rem 1rem; border-radius: 0;
+    margin-left: -4px; margin-right: -4px;
+    padding: 2.6rem 1.4rem; border-radius: var(--r-lg);
   }
   .alta h2, .alta h2 .h2-soft { color: var(--paper); }
   .alta > p { color: rgba(238, 240, 244, 0.78); }

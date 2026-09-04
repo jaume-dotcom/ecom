@@ -494,10 +494,15 @@
      por cada lado.
      El relleno propio se lo da su clase .wrap, asi que sin tocar nada mas el
      bloque llega a los dos bordes y el texto respeta el margen de la pagina. */
+  /* MISMAS MEDIDAS QUE EL PANEL DEL PIE, que va justo debajo: encajado a 12 px
+     de cada borde y con esquinas de 16. Iba a sangre y el pie no, asi que dos
+     bloques oscuros pegados uno a otro tenian anchos distintos, y eso es lo que
+     se lee como "descuadrado": no que uno este mal, sino que no coinciden. */
   #alta.hero-center {
     background: var(--ink); color: var(--paper);
-    max-width: none; margin-left: 0; margin-right: 0;
-    padding-top: 2.6rem; padding-bottom: 2.6rem;
+    max-width: none; margin-left: 12px; margin-right: 12px;
+    border-radius: var(--r-lg);
+    padding: 2.6rem 1.4rem;
   }
   #alta .hero-alta-titulo { color: var(--paper); }
   #alta .hero-alta-titulo .h2-soft { color: var(--paper); }
