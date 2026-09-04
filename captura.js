@@ -106,9 +106,9 @@
      llegar en movil. Ademas pedirle el correo a alguien que no ha visto nada
      es pedirlo antes de dar. Sale cuando se ha leido casi la mitad de la
      pagina o tras 25 segundos, lo que pase antes.
-     Solo se sale pulsando: no se cierra tocando fuera, porque a pantalla
-     completa no hay fuera. Escape SI cierra: es invisible para casi todo el
-     mundo, pero quien navega con teclado lo necesita.
+     Solo se sale pulsando: aunque ahora es una tarjeta con velo, tocar fuera
+     no cierra, que era lo pedido. Escape SI cierra: es invisible para casi
+     todo el mundo, pero quien navega con teclado lo necesita.
      Dentro de una misma visita sale UNA vez, aunque se recorran las cuatro
      paginas. En la siguiente visita vuelve a salir. */
   var UMBRAL = 0.45;
@@ -123,9 +123,11 @@
     pop.setAttribute('role', 'dialog');
     pop.setAttribute('aria-modal', 'true');
     pop.setAttribute('aria-labelledby', 'pop-alta-titulo');
-    // Sin velo y sin cruz. El pop-up ocupa la pantalla entera, asi que no hay
-    // un "fuera" que oscurecer, y la salida es un texto debajo del boton.
+    // El velo vuelve: ahora es una tarjeta y si hay un "fuera" que oscurecer.
+    // Sigue sin cruz —la salida es el texto de debajo del boton— y sigue sin
+    // cerrarse al tocar fuera: hay que pulsar.
     pop.innerHTML =
+      '<div class="pop-alta-velo"></div>' +
       '<div class="pop-alta-caja">' +
         '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Llega antes <span class="h2-soft">y paga menos</span></h2>' +
         // UNA LINEA. La version larga ocupaba cinco lineas en un movil y hacia

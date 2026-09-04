@@ -3162,23 +3162,29 @@
      vuelve en 30 dias. Ver captura.js para el porque.
      La caja sube desde abajo en movil, que es donde esta el pulgar, y se
      centra en escritorio. */
-  /* A PANTALLA COMPLETA. Sin velo, porque cubriendo todo no hay un "fuera"
-     que oscurecer, y sin cruz: la salida es un texto debajo del boton.
-     El contenido va centrado en vertical y con un ancho de lectura, no
-     estirado de borde a borde, que a 30 rem el ojo ya pierde el renglon. */
+  /* TARJETA Y NO PANTALLA COMPLETA. A pantalla completa y en blanco pesaba
+     demasiado: tapaba la web entera y se leia como si te hubieran echado de la
+     pagina. Una tarjeta se lee como una interrupcion, que es lo que es.
+
+     Y EN TINTA, no en papel. Es el mismo componente que el bloque de captura
+     del final de la pagina, que ya va en oscuro: si los dos dicen lo mismo con
+     el mismo boton, tienen que verse igual. De paso, sobre el velo una tarjeta
+     oscura se recorta sola y no necesita sombra. */
   .pop-alta { position: fixed; inset: 0; z-index: 200; display: none; }
-  .pop-alta.visto { display: block; }
+  .pop-alta.visto { display: grid; place-items: center; padding: 1.2rem; }
+  /* el velo vuelve: con una tarjeta ya hay un "fuera" que oscurecer, y sin el
+     la tarjeta flotaria sobre una pagina que sigue compitiendo por la vista */
+  .pop-alta-velo { position: absolute; inset: 0; background: rgba(16, 18, 22, 0.62); }
   .pop-alta-caja {
-    position: absolute; inset: 0;
-    background: var(--paper); color: var(--ink);
-    display: grid; align-content: center; justify-items: start;
-    gap: 0;
-    padding: 2rem 1.4rem calc(2rem + env(safe-area-inset-bottom));
-    overflow-y: auto;
+    position: relative;
+    width: 100%; max-width: 24rem;
+    max-height: calc(100vh - 2.4rem); overflow-y: auto;
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--r-lg);
+    padding: 1.9rem 1.4rem;
+    text-align: center;
   }
-  .pop-alta-caja > * { width: 100%; max-width: 26rem; }
-  /* el desplazamiento de detras se bloquea mientras esta abierto: si la pagina
-     sigue moviendose por debajo, un pop-up a pantalla completa parece un fallo */
+  /* el desplazamiento de detras se bloquea mientras esta abierto */
   html.sin-scroll, html.sin-scroll body { overflow: hidden; }
   /* sin la cruz en la esquina, el titular recupera todo el ancho */
   .pop-alta-titulo {
@@ -3186,31 +3192,40 @@
     font-size: var(--t-5xl); font-weight: 600;
     line-height: 1.15; letter-spacing: var(--tracking-lg);
   }
+  /* la mitad en serif iba en tinta y sobre la tarjeta oscura desaparecia: se
+     leia solo "Llega antes". Y el titular se centra como el resto de la
+     tarjeta, que h2 trae text-align:left de la hoja compartida. */
+  .pop-alta-titulo, .pop-alta-titulo .h2-soft { color: var(--paper); }
+  .pop-alta-titulo { text-align: center; }
   .pop-alta-lede {
     margin: 0 0 1.1rem; font-size: var(--t-md); line-height: 1.5;
-    color: var(--ink-soft); max-width: 42ch;
+    color: rgba(238, 240, 244, 0.78);
   }
   .pop-alta-form { display: grid; gap: 0.6rem; margin: 0; }
+  /* campo y boton en papel, igual que en el bloque del final de la pagina:
+     sobre tinta el que manda es el claro. El boton estaba en --ink y aqui se
+     habria quedado invisible. */
   .pop-alta-form input {
     width: 100%; padding: 0.95rem 1.1rem;
-    border: 1px solid var(--line); border-radius: 999px;
-    font: inherit; font-size: var(--t-base); background: #fff; color: var(--ink);
+    border: 0; border-radius: 999px;
+    font: inherit; font-size: var(--t-base); background: var(--paper); color: var(--ink);
+    text-align: center;
   }
   .pop-alta-form button {
     padding: var(--btn-relleno); border: 0; border-radius: var(--btn-radio);
-    background: var(--ink); color: var(--paper);
+    background: var(--paper); color: var(--ink);
     font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
     cursor: pointer;
   }
-  .pop-alta-ok { display: none; margin: 0.9rem 0 0; font-weight: 500; }
+  .pop-alta-ok { display: none; margin: 0.9rem 0 0; font-weight: 500; color: var(--pop); }
   .pop-alta-ok.on { display: block; }
   /* el aviso legal NO es letra pequeña de adorno: sin consentimiento expreso y
      sin enlace a la politica no se puede recoger un email para marketing */
   .pop-alta-legal {
     margin: 0.9rem 0 0; font-size: var(--t-2xs); line-height: 1.45;
-    color: var(--ink-soft);
+    color: rgba(238, 240, 244, 0.62);
   }
-  .pop-alta-legal a { color: var(--ink); text-decoration: underline; }
+  .pop-alta-legal a { color: var(--pop); text-decoration: underline; }
 
   /* LA SALIDA. En texto y no en cruz, y con 44 px de alto: es el unico camino
      fuera, asi que tiene que verse y poder pulsarse sin apuntar.
@@ -3221,14 +3236,12 @@
     display: inline-flex; align-items: center; justify-content: center;
     min-height: 44px; margin: 1.1rem 0 0; padding: 0;
     border: 0; background: none; cursor: pointer;
-    font-family: var(--font); font-size: var(--t-sm); color: var(--ink-soft);
+    font-family: var(--font); font-size: var(--t-sm); color: rgba(238, 240, 244, 0.7);
     text-decoration: underline; text-underline-offset: 3px;
   }
-  .pop-alta-no:hover { color: var(--ink); }
+  .pop-alta-no:hover { color: var(--paper); }
 
-  /* en escritorio tambien ocupa la pantalla; lo unico que cambia es que el
-     bloque de lectura se centra en vez de quedarse a la izquierda */
+  /* la tarjeta ya se centra sola con place-items; en escritorio solo respira */
   @media (min-width: 860px) {
-    .pop-alta-caja { justify-items: center; text-align: center; padding: 3rem; }
-    .pop-alta-caja > * { max-width: 30rem; }
+    .pop-alta-caja { padding: 2.4rem 2rem; }
   }
