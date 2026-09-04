@@ -128,12 +128,12 @@
     pop.innerHTML =
       '<div class="pop-alta-caja">' +
         '<h2 class="pop-alta-titulo" id="pop-alta-titulo">Llega antes <span class="h2-soft">y paga menos</span></h2>' +
-        // El parrafo NO empieza por lo que se pide. Las versiones anteriores iban
-        // directas a la mecanica —"te escribimos", "baja en un clic"— y se leian
-        // como unas condiciones de servicio. Este da primero el contexto, que es
-        // el motivo real por el que alguien deja su correo aqui: la web todavia
-        // no vende. Y cierra con la promesa de marca, no con administracion.
-        '<p class="pop-alta-lede">Todavía no hemos abierto. Cuando lo hagamos, quien esté en la lista se entera antes y entra con un ' + DESCUENTO + ' en su primer pedido. Después escribimos poco, y siempre de lo mismo: qué lleva y por qué.</p>' +
+        // UNA LINEA. La version larga ocupaba cinco lineas en un movil y hacia
+        // que el bloque pesara mas que cualquier otro de la pagina. Lo que hay
+        // que decir aqui son dos datos: cuanto y cuando. El resto —que se manda
+        // poco correo, que la baja es de un clic— vive en la politica de
+        // privacidad, que esta enlazada dos lineas mas abajo.
+        '<p class="pop-alta-lede">Un ' + DESCUENTO + ' en tu primer pedido el día que abramos.</p>' +
         '<form class="pop-alta-form" data-alta="pop-alta-ok" data-origen="popup">' +
           '<input type="email" placeholder="Tu email" aria-label="Tu email" required>' +
           '<button type="submit">Quiero mi código</button>' +
