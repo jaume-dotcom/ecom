@@ -873,7 +873,7 @@
   }
   .p-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,0.08); }
 
-  .p-thumb { aspect-ratio: 1/1; overflow: hidden; background: var(--tint); }
+  .p-thumb { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--tint); }
   .p-thumb img, .p-thumb video {
     width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block;
   }
@@ -904,11 +904,23 @@
      convive con otras tres blancas y teñirla la sacaria de la fila.
      El boton de la tarjeta sigue en tinta. Sistema B: el acento senala,
      no se pulsa. Teja sobre blanco da 5,41. */
+  /* SOBRE LA FOTO Y FUERA DEL FLUJO. Encima del nombre era el unico elemento
+     que solo tenia una de las cuatro tarjetas, asi que en esa —y solo en esa—
+     el nombre, la dosis, la clave y el boton caian 23 px mas abajo. En una
+     fila de tarjetas iguales eso se ve enseguida y se lee como un descuadre.
+
+     Sobre la foto no ocupa sitio en la columna de texto y ademas se lee mejor:
+     un rotulo asi es una etiqueta, y las etiquetas van sobre el producto.
+
+     Va en papel con el texto en teja y NO en teja sobre la foto directamente:
+     el fotograma de debajo cambia, y sobre una zona clara la teja se pierde.
+     Con la capsula el contraste es siempre el mismo 5,41 de teja sobre blanco. */
   .p-ancla {
-    margin: 0 0 0.1rem;
+    position: absolute; top: 0.7rem; left: 0.7rem; z-index: 1; margin: 0;
     font-size: var(--t-3xs); font-weight: 600;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--acento);
+    background: var(--paper); padding: 0.32rem 0.6rem; border-radius: 1000px;
   }
   /* SIN FILETE DE ACENTO. La tarjeta ancla lo llevaba en teja y en una tira
      donde las cuatro son iguales, una con el borde de color se leia como si
