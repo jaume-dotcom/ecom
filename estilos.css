@@ -78,6 +78,20 @@
     /* EL ACENTO. Un solo trabajo. Ver arriba antes de usarlo en un sitio
        nuevo: la tentacion siempre es meterlo en un kicker mas. */
     --acento: #b14a2a;
+
+    /* EL ORO DE LAS ESTRELLAS. Es la unica excepcion al sistema de un solo
+       acento, y va documentada para que no parezca un descuido.
+       Las estrellas de valoracion no son expresion de marca, son una
+       CONVENCION: se leen como "esto es una nota" antes de leer el numero, y
+       en tinta parecian un adorno tipografico mas. Es el mismo caso que el
+       candado de un pago o la papelera de borrar.
+       No entra en el recuento del acento porque no señala nada que se pulse ni
+       nada que se compre: solo colorea un simbolo que ya significa lo que
+       significa en cualquier web del mundo.
+       Un poco por debajo del amarillo puro: sobre papel, un #ffb400 separa 1,7
+       y se lee lavado. El valor va ademas escrito al lado, asi que la nota no
+       depende del color. */
+    --estrella: #d99400;
     --acento-tinte: #faeeea;   /* fondo de la opcion marcada */
     /* SEMANTICO, que NO es lo mismo que acento y por eso no gasta
        presupuesto de paleta: el acento es identidad y significa "esto te
@@ -2510,7 +2524,7 @@
     padding: 1.3rem 1.2rem;
     background: var(--paper); border: 0; border-radius: 0;
   }
-  .resena-estrellas { color: var(--ink); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
+  .resena-estrellas { color: var(--estrella); font-size: var(--t-base); letter-spacing: 0.14em; line-height: 1; }
   .resena-texto { margin: 0; font-size: var(--t-base); line-height: 1.5; color: var(--ink); }
   .resena-firma { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-sm); }
   .resena-firma b { color: var(--ink); font-weight: 600; }

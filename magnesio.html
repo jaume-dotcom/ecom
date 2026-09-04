@@ -939,7 +939,9 @@
     font-size: var(--t-2xs); color: var(--ink-soft);
   }
   .ficha-estrellas { display: inline-flex; gap: 1px; }
-  .ficha-estrellas svg { width: 13px; height: 13px; fill: var(--ink); }
+  /* el mismo oro que las estrellas de las valoraciones: es la misma cosa,
+     una nota, y no puede leerse distinta en dos sitios de la misma web */
+  .ficha-estrellas svg { width: 13px; height: 13px; fill: var(--estrella); }
   .ficha-rating b { color: var(--ink); font-weight: 600; }
 
   /* el formato, debajo del nombre. En la referencia esa linea dice de que
