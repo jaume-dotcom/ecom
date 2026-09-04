@@ -306,6 +306,63 @@
     </ul>
   </section>
 
+  <!-- ================================================================
+       PARA QUIEN ES. Va detras del catalogo: primero se ven las cuatro
+       formulas y despues se le pone cara a quien las toma, para que quien
+       llega pueda reconocerse en una y seguir por ahi.
+
+       EL COPY SE CIÑE A ALEGACIONES AUTORIZADAS, una por tarjeta, del
+       reglamento 432/2012. El titular describe A LA PERSONA y no un efecto,
+       que es lo que permite hablar de entrenar o de acabar el dia acelerado
+       sin prometer nada: la promesa la hace solo la linea de debajo, y esa
+       esta autorizada palabra por palabra.
+       Ojo con la tentacion de escribir "duerme mejor" en la segunda: el
+       descanso NO tiene alegacion autorizada para el magnesio. Lo que si la
+       tiene es el funcionamiento normal del sistema nervioso.
+
+       FOTOS PROVISIONALES. Son las que ya habia en el proyecto y estan
+       reutilizadas de la ficha del magnesio. Hacen falta tres retratos
+       propios, uno por perfil, en vertical y con sitio abajo para el texto.
+       ================================================================ -->
+  <section class="band" id="perfiles">
+    <div class="section-head reveal">
+      <div>
+        <h2>Para quién <span class="h2-soft">es</span></h2>
+        <p>Tres maneras de llegar a lo mismo: saber qué tomas y cuánto.</p>
+      </div>
+    </div>
+
+    <ul class="perfiles-tira reveal">
+      <li class="perfil">
+        <img src="bene-cansancio.avif" width="800" height="533" alt="Corredora en plena zancada" loading="lazy" decoding="async">
+        <div class="perfil-txt">
+          <h3>Para quien entrena</h3>
+          <p>El magnesio contribuye a la función muscular normal y a disminuir el cansancio y la fatiga.</p>
+        </div>
+      </li>
+      <li class="perfil">
+        <img src="hero-magnesio.jpg" width="558" height="1024" alt="Una mujer sentada en la cama al final del día" loading="lazy" decoding="async">
+        <div class="perfil-txt">
+          <h3>Para quien acaba el día acelerado</h3>
+          <p>El magnesio contribuye al funcionamiento normal del sistema nervioso.</p>
+        </div>
+      </li>
+      <li class="perfil">
+        <img src="bene-musculos.avif" width="800" height="1000" alt="Mujer haciendo ejercicio de fuerza" loading="lazy" decoding="async">
+        <div class="perfil-txt">
+          <h3>Para quien se cuida a largo plazo</h3>
+          <p>La vitamina D contribuye al mantenimiento de los huesos y al funcionamiento normal del sistema inmunitario.</p>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="shop-puntos reveal" data-puntos="perfiles">
+      <li><button type="button" class="act" data-i="0" aria-label="Ir al perfil 1 de 3"></button></li>
+      <li><button type="button" data-i="1" aria-label="Ir al perfil 2 de 3"></button></li>
+      <li><button type="button" data-i="2" aria-label="Ir al perfil 3 de 3"></button></li>
+    </ul>
+  </section>
+
   <!-- ==================================================================
        QUIEN FIRMA. Va antes del catalogo a proposito: hasta este punto la
        unica razon para creerse las dosis era la palabra de la marca.
@@ -943,6 +1000,8 @@
                document.querySelectorAll('#shop-puntos button'), '.p-card');
   montarPuntos(document.querySelector('.resenas'),
                document.querySelectorAll('[data-puntos="resenas"] button'), '.resena');
+  montarPuntos(document.querySelector('.perfiles-tira'),
+               document.querySelectorAll('[data-puntos="perfiles"] button'), '.perfil');
 
 
   // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el

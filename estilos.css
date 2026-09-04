@@ -3245,3 +3245,57 @@
   @media (min-width: 860px) {
     .pop-alta-caja { padding: 2.4rem 2rem; }
   }
+
+  /* ===== PARA QUIEN ES =====
+     EN MOVIL LA FOTO ES LA TARJETA. El texto va ENCIMA de la imagen y no en
+     una caja debajo: en una tira que se desliza, cada tarjeta tiene que
+     leerse de un vistazo, y foto arriba mas texto abajo parte esa lectura en
+     dos y obliga a tarjetas el doble de altas.
+
+     El degradado no es un adorno: sobre la parte clara de una foto el texto
+     blanco desaparece. Sube hasta el 78 % para que el titular tenga fondo
+     aunque ocupe dos lineas. */
+  .perfiles-tira {
+    list-style: none; margin: 0; padding-bottom: 0.5rem;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 0.9rem;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .perfiles-tira::-webkit-scrollbar { display: none; }
+  .perfil {
+    position: relative; scroll-snap-align: start;
+    aspect-ratio: 3 / 4; overflow: hidden;
+    border-radius: var(--r-md); background: var(--ink);
+  }
+  .perfil img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .perfil::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top,
+      rgba(16, 18, 22, 0.9) 0%,
+      rgba(16, 18, 22, 0.62) 34%,
+      rgba(16, 18, 22, 0.12) 62%,
+      transparent 78%);
+  }
+  .perfil-txt {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    padding: 1.1rem 1.1rem 1.2rem; color: var(--paper);
+  }
+  .perfil-txt h3 {
+    margin: 0 0 0.35rem; font-size: var(--t-2xl); font-weight: 600;
+    line-height: 1.2; letter-spacing: var(--tracking-lg); color: var(--paper);
+  }
+  /* la alegacion, en el gris claro del sistema y no en blanco puro: separa
+     lo que es titular de lo que es la letra que lo respalda */
+  .perfil-txt p {
+    margin: 0; font-size: var(--t-sm); line-height: 1.4;
+    color: rgba(238, 240, 244, 0.88);
+  }
+  /* en escritorio caben las tres a la vez y la tira deja de deslizarse */
+  @media (min-width: 860px) {
+    .perfiles-tira {
+      grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr);
+      overflow-x: visible; gap: 1.1rem;
+    }
+    .perfil { aspect-ratio: 4 / 5; }
+    [data-puntos="perfiles"] { display: none; }
+  }
