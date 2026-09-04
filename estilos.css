@@ -3308,6 +3308,33 @@
     margin: 0; font-size: var(--t-sm); line-height: 1.4;
     color: rgba(238, 240, 244, 0.88);
   }
+  /* ===== A SANGRE Y MAS GRANDE EN MOVIL =====
+     Cada tarjeta ocupa el ancho entero de la pantalla. Se cancela el relleno
+     lateral del .wrap con margenes negativos de la misma medida (1,6rem) y la
+     columna pasa de 78 % a 100 %.
+
+     SE VA EL HUECO Y SE VA EL REDONDEO. Con tarjetas a sangre, el hueco entre
+     dos fotos deja una franja de papel en mitad de la pantalla, y unas esquinas
+     redondeadas contra el borde del movil se leen como un fallo de maquetacion:
+     una foto a sangre no tiene esquinas, tiene bordes de pantalla.
+
+     Y como el ancho sube de 284 a 375, la proporcion 3/4 le da 500 px de alto
+     en vez de 379. Mas grande en los dos sentidos, que era lo pedido. */
+  @media (max-width: 859px) {
+    .perfiles-tira {
+      margin-left: -1.6rem; margin-right: -1.6rem;
+      grid-auto-columns: 100%; gap: 0;
+      /* padding y NO padding-bottom: un <ul> arrastra 40 px de sangria por
+         defecto del navegador que la regla de arriba nunca llego a quitar. Con
+         columnas al 78 % pasaba desapercibido; a sangre dejaba la tarjeta en
+         335 px y la tira arrancaba desplazada 40. */
+      padding: 0;
+    }
+    .perfil { aspect-ratio: 3 / 4; border-radius: 0; }
+    /* el texto se queda a 1,6rem del borde: la misma linea vertical que el
+       titulo de la seccion y que todo lo demas de la pagina */
+    .perfil-txt { padding: 1.3rem 1.6rem 1.5rem; }
+  }
   /* en escritorio caben las tres a la vez y la tira deja de deslizarse */
   @media (min-width: 860px) {
     .perfiles-tira {

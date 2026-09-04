@@ -1004,6 +1004,69 @@
                document.querySelectorAll('[data-puntos="perfiles"] button'), '.perfil');
 
 
+  /* LA TIRA DE PERFILES AVANZA SOLA cada 3 s. Es la unica de la pagina que lo
+     hace, y a proposito: aqui las tres tarjetas son alternativas entre si —te
+     tienes que reconocer en una— y a sangre solo se ve una cada vez, asi que
+     sin movimiento la segunda y la tercera no existen. En el catalogo no haria
+     falta, porque alli se asoma media tarjeta siguiente.
+
+     SE PARA PARA SIEMPRE EN CUANTO TOCAN. No se reanuda a los pocos segundos:
+     que la pagina te mueva la foto justo cuando ibas a leerla es de las cosas
+     que mas molestan de un carrusel. Quien toca, manda.
+
+     Ademas no corre si no se ve (IntersectionObserver), ni con la pestaña de
+     fondo, ni si no hay nada que deslizar —en escritorio las tres caben a la
+     vez, asi que este codigo no llega a arrancar—, ni si el sistema pide menos
+     movimiento. */
+  (function () {
+    var tira = document.querySelector('.perfiles-tira');
+    if (!tira) { return; }
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+    var PAUSA = 3000;
+    var reloj = null;
+    var parado = false;
+
+    var paso = function () {
+      var c = tira.querySelector('.perfil');
+      if (!c) { return 0; }
+      return c.getBoundingClientRect().width + (parseFloat(getComputedStyle(tira).columnGap) || 0);
+    };
+    var avanzar = function () {
+      var d = paso();
+      if (!d) { return; }
+      var n = tira.querySelectorAll('.perfil').length;
+      var i = Math.round(tira.scrollLeft / d) + 1;
+      if (i > n - 1) { i = 0; }   // de la ultima vuelve a la primera
+      tira.scrollTo({ left: d * i, behavior: 'smooth' });
+    };
+    var frenar = function () { clearInterval(reloj); reloj = null; };
+    var arrancar = function () {
+      if (parado || reloj) { return; }
+      // si no sobra ancho no hay nada que deslizar: escritorio
+      if (tira.scrollWidth <= tira.clientWidth + 4) { return; }
+      reloj = setInterval(avanzar, PAUSA);
+    };
+    var parar = function () { parado = true; frenar(); };
+
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) {
+      tira.addEventListener(ev, parar, { passive: true, once: true });
+    });
+    document.querySelectorAll('[data-puntos="perfiles"] button').forEach(function (b) {
+      b.addEventListener('click', parar);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { frenar(); } else { arrancar(); }
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { arrancar(); } else { frenar(); }
+      }, { threshold: 0.4 }).observe(tira);
+    } else { arrancar(); }
+  })();
+
+
   // Las cifras de Sento suben desde cero al entrar en pantalla. Se guarda el
   // texto final y se reconstruye en cada cuadro respetando el signo de
   // delante, la coma decimal y la unidad de detras: si no, "+2,9 M" acaba
