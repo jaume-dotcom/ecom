@@ -910,7 +910,11 @@
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--acento);
   }
-  .p-card--ancla { border-color: var(--acento); }
+  /* SIN FILETE DE ACENTO. La tarjeta ancla lo llevaba en teja y en una tira
+     donde las cuatro son iguales, una con el borde de color se leia como si
+     estuviera seleccionada o en oferta, no como "empieza por aqui".
+     Eso ya lo dice su rotulo, que sigue en teja y sigue siendo el unico sitio
+     del bloque con color. El filete solo repetia el mensaje gritando. */
   /* beneficios en lista de comprobación. Los del probiótico son de
      composición, no de efecto: en la UE no hay alegaciones autorizadas
      para probióticos. */
@@ -929,6 +933,20 @@
      asi que al cambiar el tamaño de letra la marca no acompañaba y quedaba
      gorda al lado de un texto pequeño. En negro y no en marron: el marron
      de la marca significa "esto se pulsa", y un tick no se pulsa */
+  /* ===== LA TARJETA, MAS CORTA EN MOVIL =====
+     Medida antes de tocarla: 613 px de alto, de los cuales 122 eran la lista
+     de tres claves con su separador. Tres lineas con tick convierten cada
+     tarjeta en una lista, y en una tira que se desliza lo que hay que leer de
+     un vistazo es que es, que lleva y cuanto cuesta.
+     Se queda UNA. Las otras dos siguen en el HTML y se ven en escritorio,
+     donde la rejilla de cuatro columnas si tiene sitio, y las tres estan
+     enteras en la ficha de cada producto. */
+  @media (max-width: 859px) {
+    .p-bens { margin-top: 0.55rem; padding-top: 0; border-top: 0; }
+    .p-bens li:nth-child(n+2) { display: none; }
+    .p-info { padding: 1rem 1.1rem 1.1rem; gap: 0.7rem; }
+  }
+
   .p-bens li::before {
     content: ""; position: absolute; left: 0.1em; top: 0.34em;
     width: 0.95em; height: 0.55em;
