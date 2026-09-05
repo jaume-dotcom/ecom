@@ -979,16 +979,66 @@
     });
   })();
 
+  /* LAS ENTRADAS AL APARECER. Todo lo que lleva .reveal arranca en opacidad 0
+     y solo el JS lo enseña. Es comodo y es peligroso a partes iguales: si el
+     observador no llega a disparar, ese texto no se ve NUNCA. No es teorico —el
+     umbral es del 12 %, asi que un bloque mas alto que la pantalla del movil
+     puede no llegar a cumplirlo nunca, y ademas hay restauraciones desde la
+     cache de atras/adelante en las que el observador no vuelve a evaluar. */
   var items = document.querySelectorAll('.reveal');
+  function enseñar(el) { el.classList.add('in'); }
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting) { enseñar(e.target); io.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
     items.forEach(function (el) { io.observe(el); });
+
+    /* SALVAVIDAS. Repasa lo que esta A LA VISTA y lo enseña, cumpla o no el 12 %.
+       Basta con que asome: si lo estas viendo, tiene que leerse.
+       Se engancha al scroll y se desengancha solo cuando ya no queda nada por
+       enseñar, asi que no cuesta nada una vez recorrida la pagina. No enseña lo
+       que esta fuera de pantalla: la animacion se conserva entera. */
+    var pendientes = Array.prototype.slice.call(items);
+    var pide = 0;
+    function repasar() {
+      pendientes = pendientes.filter(function (el) {
+        if (el.classList.contains('in')) { return false; }
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) { enseñar(el); io.unobserve(el); return false; }
+        return true;
+      });
+      if (!pendientes.length) {
+        window.removeEventListener('scroll', pedir);
+        window.removeEventListener('resize', pedir);
+      }
+    }
+    /* el limitador va con reloj y NO con requestAnimationFrame, aunque rAF sea
+       lo habitual para esto. Este trozo es precisamente el salvavidas: colgarlo
+       de otra cosa que el navegador tambien estrangula —rAF no corre con la
+       pestaña de fondo— seria dejarlo dependiendo de lo mismo que intenta
+       cubrir. Y repasar() es barato: recorre una lista que solo encoge. */
+    function pedir() {
+      var ahora = Date.now();
+      if (ahora - pide < 100) { return; }
+      pide = ahora;
+      repasar();
+    }
+    window.addEventListener('scroll', pedir, { passive: true });
+    window.addEventListener('resize', pedir, { passive: true });
+    /* y una pasada al volver de la cache de atras/adelante, donde el observador
+       puede no reevaluar nada */
+    window.addEventListener('pageshow', repasar);
+    /* y dos pasadas sueltas despues de cargar: si algo entra en pantalla por su
+       cuenta —una fuente que llega tarde y recoloca, una imagen que asienta la
+       altura— no hace falta esperar a que alguien mueva la pagina */
+    repasar();
+    setTimeout(repasar, 400);
+    setTimeout(repasar, 1500);
   } else {
-    items.forEach(function (el) { el.classList.add('in'); });
+    items.forEach(enseñar);
   }
 
 
