@@ -542,6 +542,22 @@
   </section>
 
   <section class="band" id="criterio">
+    <!-- LAS FOTOS DE FONDO. Una por estado: la de reposo mas una por cada uno
+         de los tres apartados. Solo se ve la que lleva .is-on; el cambio lo
+         hace el script de abajo con una transicion de opacidad, asi que las
+         cuatro estan cargadas y el salto es instantaneo.
+
+         LAS CUATRO SON PROVISIONALES: son fotos que ya estaban en el proyecto,
+         puestas para poder ver el mecanismo funcionando. Para cambiar una basta
+         con tocar su src; el data-fondo la une al boton que le toca.
+
+         aria-hidden porque no aportan nada que no diga el texto: son ambiente. -->
+    <div class="crit-fondos" aria-hidden="true">
+      <img class="crit-fondo is-on" data-fondo="base" src="ctx-ritmo.jpg" alt="" loading="lazy" decoding="async">
+      <img class="crit-fondo" data-fondo="1" src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async">
+      <img class="crit-fondo" data-fondo="2" src="ctx-alimentacion.jpg" alt="" loading="lazy" decoding="async">
+      <img class="crit-fondo" data-fondo="3" src="ctx-sol.jpg" alt="" loading="lazy" decoding="async">
+    </div>
     <div class="closing reveal">
       <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
         <g fill="none" stroke="currentColor" stroke-width="5">
@@ -552,12 +568,14 @@
           <path d="M16 16 L84 84 M84 16 L16 84"/>
         </g>
       </svg>
+      <!-- solo se ve en movil: en escritorio el bloque no cambia -->
+      <p class="crit-kicker"><span aria-hidden="true"></span>Nuestro método</p>
       <h2>Cómo <span class="h2-soft">elegimos</span></h2>
       <p class="closing-lede">Cuatro fórmulas y ninguna más. Entran solo si podemos publicar la cantidad exacta, la forma y de dónde sale.</p>
 
       <ul class="crit">
         <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
+          <h3 class="acc-h"><button type="button" class="crit-q" data-fondo="1" id="crit-t1" aria-expanded="false" aria-controls="crit-p1">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">La dosis</span>
             <span class="crit-mas" aria-hidden="true"></span>
@@ -567,7 +585,7 @@
           </div>
         </li>
         <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
+          <h3 class="acc-h"><button type="button" class="crit-q" data-fondo="2" id="crit-t2" aria-expanded="false" aria-controls="crit-p2">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que publicamos</span>
             <span class="crit-mas" aria-hidden="true"></span>
@@ -584,7 +602,7 @@
           </div>
         </li>
         <li class="crit-item">
-          <h3 class="acc-h"><button type="button" class="crit-q" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
+          <h3 class="acc-h"><button type="button" class="crit-q" data-fondo="3" id="crit-t3" aria-expanded="false" aria-controls="crit-p3">
             <span class="crit-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path class="cap-fill" transform="rotate(180 12 12)" d="M8.5 8.5 L12 4.9 A5 5 0 0 1 19.1 12 L15.5 15.5 Z"/><path d="M4.9 19.1a5 5 0 0 1 0-7.1l7.1-7.1a5 5 0 0 1 7.1 7.1l-7.1 7.1a5 5 0 0 1-7.1 0z"/><path d="M8.5 8.5l7 7"/></svg></span>
             <span class="crit-title">Lo que no hacemos</span>
             <span class="crit-mas" aria-hidden="true"></span>
@@ -1307,6 +1325,33 @@
       if (panel) { panel.classList.toggle('open', !abierto); }
     });
   });
+
+  /* LA FOTO DE FONDO SIGUE AL APARTADO ABIERTO. Cada boton dice cual le toca
+     con data-fondo; si no hay ninguno abierto se vuelve a la de reposo.
+
+     Se lee el estado DESPUES de que el manejador de arriba lo haya cambiado, y
+     se lee del DOM en vez de llevar la cuenta aparte: los tres apartados se
+     abren y cierran por su cuenta, asi que puede haber dos abiertos a la vez y
+     manda el primero. Un contador propio seria una segunda version de la
+     verdad y acabaria descuadrandose.
+
+     Solo se nota en movil, que es donde la seccion ocupa la pantalla y tiene
+     fondo. En escritorio las fotos no se pintan y esto no cambia nada. */
+  (function () {
+    var fondos = document.querySelectorAll('.crit-fondo');
+    if (!fondos.length) { return; }
+    var poner = function (cual) {
+      fondos.forEach(function (f) {
+        f.classList.toggle('is-on', f.getAttribute('data-fondo') === cual);
+      });
+    };
+    document.querySelectorAll('.crit-q').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var ab = document.querySelector('.crit-q[aria-expanded="true"]');
+        poner(ab ? ab.getAttribute('data-fondo') : 'base');
+      });
+    });
+  })();
 
   document.querySelectorAll('.faq-q').forEach(function (b) {
     b.addEventListener('click', function () {

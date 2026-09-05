@@ -3380,3 +3380,89 @@
     .perfil { aspect-ratio: 4 / 5; }
     [data-puntos="perfiles"] { display: none; }
   }
+
+  /* ===== COMO ELEGIMOS: A PANTALLA COMPLETA, SOLO EN MOVIL =====
+     El bloque pasa a ser una pantalla entera con foto detras y el panel
+     flotando encima. Es el formato de la referencia, y aqui encaja porque este
+     bloque es el argumento de la marca: el unico sitio de la pagina donde
+     interesa que quien lee se pare.
+
+     La seccion se sale del .wrap con margenes negativos de 1,6rem, la misma
+     medida de su relleno, para que la foto llegue a los bordes del movil.
+
+     min-height y no height: al abrir un apartado el panel crece, y con altura
+     fija el contenido se saldria por abajo. 100svh y no 100vh porque la barra
+     del navegador del movil se cuenta dentro de vh y la ultima linea acabaria
+     escondida debajo del borde. */
+  /* en escritorio el bloque no cambia, asi que el rotulo no existe. Tiene que
+     apagarse FUERA de la consulta: sin esto, un <p> sin reglas se pinta como
+     parrafo normal y en PC aparecia un "Nuestro método" suelto sobre el titulo. */
+  /* Lo mismo con las fotos: sin esta linea los cuatro <img> se pintan en el
+     flujo y en escritorio salian cuatro fotos gigantes encima del panel. En PC
+     el bloque sigue siendo el panel oscuro de siempre, sin fondo. */
+  .crit-fondos { display: none; }
+  .crit-kicker { display: none; }
+
+  @media (max-width: 859px) {
+    #criterio {
+      position: relative; overflow: hidden;
+      margin-left: -1.6rem; margin-right: -1.6rem;
+      padding: 0; min-height: 100svh;
+      display: grid; align-content: center;
+    }
+    .crit-fondos { display: block; position: absolute; inset: 0; z-index: 0; background: var(--ink); }
+    .crit-fondo {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0;
+      transition: opacity 0.55s ease;
+    }
+    .crit-fondo.is-on { opacity: 1; }
+    /* EL VELO NO ES DECORACION. Las fotos definitivas estan por elegir, asi que
+       puede caer una clara, y sin velo el texto en papel desapareceria encima.
+       Con 0,78 arriba y 0,9 abajo, aunque la foto fuese blanca del todo el
+       texto sigue pasando de 4,5 de contraste. */
+    .crit-fondos::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(16, 18, 22, 0.78), rgba(16, 18, 22, 0.9));
+    }
+
+    /* el panel deja de ser una caja opaca y pasa a flotar sobre la foto */
+    #criterio .closing {
+      position: relative; z-index: 1;
+      margin: 1.2rem; width: auto;
+      padding: 2.2rem 1.4rem 2rem;
+      background: rgba(20, 23, 28, 0.62);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      border: 1px solid rgba(238, 240, 244, 0.14);
+      border-radius: var(--r-lg);
+    }
+    /* la marca de agua sobra: ya hay una foto detras y dos texturas compiten */
+    #criterio .closing-marca { display: none; }
+
+    /* el rotulo de arriba, con su punto en teja */
+    .crit-kicker {
+      display: flex; align-items: center; gap: 0.5rem; margin: 0;
+      font-size: var(--t-3xs); font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(238, 240, 244, 0.75);
+    }
+    .crit-kicker span {
+      width: 0.45rem; height: 0.45rem; border-radius: 50%;
+      background: var(--acento); flex-shrink: 0;
+    }
+
+    /* 01 02 03 EN VEZ DEL ICONO. Van con contador y no escritos en el HTML:
+       asi el dia que se añada o se quite un apartado la numeracion se recoloca
+       sola, que es justo lo que un numero escrito a mano no hace. */
+    .crit { counter-reset: crit; }
+    .crit-item { counter-increment: crit; }
+    .crit-ico svg { display: none; }
+    .crit-ico::before {
+      content: counter(crit, decimal-leading-zero);
+      font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.02em;
+      color: rgba(238, 240, 244, 0.9);
+    }
+    /* el circulo ya no gira: un icono girado se lee como una flecha que se
+       abre, pero un numero girado se lee como un numero torcido */
+    .crit-q[aria-expanded="true"] .crit-ico { transform: none; }
+  }
