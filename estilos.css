@@ -3592,3 +3592,31 @@
     .faq-cierre { text-align: center; }
   }
   @media (prefers-reduced-motion: reduce) { .faq-indice button { transition: none; } }
+
+  /* ===== "¿TE LO LLEVAS?", SIN FONDO Y CENTRADO =====
+     EL TITULAR, CENTRADO. Es el unico de la pagina que no encabeza una lectura:
+     debajo no hay texto que seguir, hay una tarjeta centrada con una foto
+     centrada y un boton a todo el ancho. Alineado a la izquierda era lo unico
+     descolgado de un bloque que por lo demas es simetrico.
+
+     EL FONDO SE VA, PERO EL TINTE NO SE PIERDE: SE MUEVE. La tarjeta iba en
+     tinte con la foto en papel dentro, o sea el color por fuera y el blanco en
+     el centro, justo al reves de lo que interesa. Ahora la tarjeta es papel y el
+     tinte pasa al hueco de la foto: el bote se recorta contra el color y la
+     tarjeta se apoya en su filete, que es como funcionan las del catalogo.
+
+     Y se va la sombra. Servia para despegar la tarjeta del papel de la pagina
+     cuando la tarjeta era de otro color; ahora que las dos son papel, una sombra
+     solo la haria flotar sin motivo. La separa el filete.
+
+     Un poco mas de relleno arriba, que sin fondo la tarjeta pide aire para no
+     leerse como una lista de tres cosas sueltas. */
+  @media (max-width: 859px) {
+    #comprar > h2 { text-align: center; }
+    .recompra-caja {
+      background: var(--paper);
+      box-shadow: none;
+      padding: 1.5rem 1.2rem 1.2rem;
+    }
+    .recompra-foto { background: var(--tint); }
+  }
