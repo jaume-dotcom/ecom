@@ -690,6 +690,25 @@
         <h2>Preguntas <span class="h2-soft">frecuentes</span></h2>
       </div>
     </div>
+
+    <!-- INDICE DE LA FAQ, la misma tira de capsulas que la ficha de producto.
+         Aqui cada capsula es un tema y no una seccion, porque las siete
+         preguntas tienen tema distinto: pulsar abre esa pregunta y lleva a
+         ella. Sirve para lo que sirve un indice —ver de un vistazo de que se
+         habla— sin obligar a bajar abriendo una por una.
+
+         Solo en movil: en escritorio las siete caben casi de una pantalla y la
+         tira solo quitaria sitio. Es el mismo criterio que en la ficha. -->
+    <nav class="faq-indice" aria-label="Temas de las preguntas frecuentes">
+      <button type="button" data-faq="faq-t0">La marca</button>
+      <button type="button" data-faq="faq-t1">Catálogo</button>
+      <button type="button" data-faq="faq-t2">Combinar</button>
+      <button type="button" data-faq="faq-t3">Seguridad</button>
+      <button type="button" data-faq="faq-t4">Calidad</button>
+      <button type="button" data-faq="faq-t5">Envíos</button>
+      <button type="button" data-faq="faq-t6">Lanzamiento</button>
+    </nav>
+
     <ul class="faq">
       <li class="faq-item">
         <h3 class="acc-h"><button type="button" class="faq-q" id="faq-t0" aria-expanded="false" aria-controls="faq-p0">
@@ -1363,6 +1382,51 @@
       if (panel) { panel.classList.toggle('open', !abierto); }
     });
   });
+
+  /* EL INDICE DE LA FAQ. Pulsar una capsula abre su pregunta y baja hasta
+     ella; la capsula de lo que este abierto se queda marcada.
+
+     Se marca leyendo aria-expanded de cada pregunta y no llevando la cuenta
+     aparte: las preguntas tambien se abren pulsandolas directamente, y con dos
+     sitios donde apuntar lo mismo acaban discrepando. Por eso este manejador
+     se registra DESPUES del de arriba: cuando corre, el estado ya esta puesto.
+
+     Abrir y no alternar: quien pulsa en un indice quiere ir a leer eso, no
+     cerrarlo si resulta que ya estaba abierto. */
+  (function () {
+    var tira = document.querySelector('.faq-indice');
+    if (!tira) { return; }
+    var capsulas = Array.prototype.slice.call(tira.querySelectorAll('button'));
+
+    function pintar() {
+      capsulas.forEach(function (c) {
+        var b = document.getElementById(c.getAttribute('data-faq'));
+        var on = !!b && b.getAttribute('aria-expanded') === 'true';
+        c.classList.toggle('on', on);
+        if (on) { c.setAttribute('aria-current', 'true'); }
+        else { c.removeAttribute('aria-current'); }
+      });
+    }
+
+    capsulas.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var b = document.getElementById(c.getAttribute('data-faq'));
+        if (!b) { return; }
+        if (b.getAttribute('aria-expanded') !== 'true') {
+          b.setAttribute('aria-expanded', 'true');
+          var panel = document.getElementById(b.getAttribute('aria-controls'));
+          if (panel) { panel.classList.add('open'); }
+        }
+        b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        pintar();
+      });
+    });
+
+    document.querySelectorAll('.faq-q').forEach(function (b) {
+      b.addEventListener('click', pintar);
+    });
+    pintar();
+  })();
 
   // Consentimiento de cookies. Hoy la web no instala ninguna cookie ni analítica:
   // el aviso queda listo para cuando se añada. Cualquier script de medición debe

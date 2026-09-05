@@ -3546,3 +3546,49 @@
        el vacio del panel liso para no parecer apretado */
     #asesoria { padding: 4rem 1.6rem 4.2rem; }
   }
+
+  /* ===== INDICE DE LA FAQ =====
+     Las mismas capsulas de la ficha de producto, y por la misma razon: en un
+     movil una lista de siete preguntas cerradas es una columna de titulares
+     que hay que recorrer entera para saber si esta la tuya. La tira la enseña
+     de un vistazo.
+
+     Sangra de borde a borde con margenes negativos: una tira de capsulas con
+     margen a los lados se lee como una tarjeta suelta, no como una barra. El
+     relleno lateral se lo devuelve el padding, para que la primera capsula
+     empiece donde empieza el texto.
+
+     No es sticky, al reves que la de la ficha: alli recorre la pagina entera y
+     tiene que seguirte; esta pertenece a un bloque y fuera de el no pinta
+     nada. */
+  .faq-indice { display: none; }
+  @media (max-width: 859px) {
+    .faq-indice {
+      display: flex; gap: 0.4rem;
+      margin: 0 -1.6rem 1.4rem; padding: 0.2rem 1.6rem 0.6rem;
+      overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .faq-indice::-webkit-scrollbar { display: none; }
+    .faq-indice button {
+      flex: 0 0 auto; display: inline-flex; align-items: center;
+      /* 40 px de alto: el minimo para acertar con el dedo sin apuntar */
+      min-height: 40px; padding: 0 0.85rem;
+      border: 1px solid var(--line); border-radius: 999px;
+      background: #fff; color: var(--ink-soft);
+      font-family: var(--font); font-size: var(--t-sm); white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    /* la del tema que tienes abierto, en tinta llena */
+    .faq-indice button.on {
+      background: var(--ink); border-color: var(--ink); color: var(--paper);
+    }
+    /* al saltar, la pregunta no puede quedar debajo de la barra de arriba */
+    .faq-item { scroll-margin-top: 5rem; }
+
+    /* EL CIERRE, CENTRADO. Es la unica linea suelta del bloque: debajo de una
+       lista de preguntas alineadas a la izquierda, pegada al margen parecia el
+       principio de una octava pregunta en vez del final de la seccion. */
+    .faq-cierre { text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .faq-indice button { transition: none; } }
