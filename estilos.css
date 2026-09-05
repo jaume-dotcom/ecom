@@ -959,19 +959,21 @@
      asi que al cambiar el tamaño de letra la marca no acompañaba y quedaba
      gorda al lado de un texto pequeño. En negro y no en marron: el marron
      de la marca significa "esto se pulsa", y un tick no se pulsa */
-  /* ===== LA TARJETA, MAS CORTA EN MOVIL =====
-     Medida antes de tocarla: 613 px de alto, de los cuales 122 eran la lista
-     de tres claves con su separador. Tres lineas con tick convierten cada
-     tarjeta en una lista, y en una tira que se desliza lo que hay que leer de
-     un vistazo es que es, que lleva y cuanto cuesta.
-     Se queda UNA. Las otras dos siguen en el HTML y se ven en escritorio,
-     donde la rejilla de cuatro columnas si tiene sitio, y las tres estan
-     enteras en la ficha de cada producto. */
-  @media (max-width: 859px) {
-    .p-bens { margin-top: 0.55rem; padding-top: 0; border-top: 0; }
-    .p-bens li:nth-child(n+2) { display: none; }
-    .p-info { padding: 1rem 1.1rem 1.1rem; gap: 0.7rem; }
-  }
+  /* ===== LA TARJETA, MAS CORTA =====
+     Medida antes de tocarla: 613 px de alto en un movil, de los cuales 122
+     eran la lista de tres claves con su separador. Tres lineas con tick
+     convierten cada tarjeta en una lista, y de una tarjeta de catalogo lo que
+     hay que leer de un vistazo es que es, que lleva y cuanto cuesta.
+     Se queda UNA. Las otras dos siguen en el HTML y siguen enteras en la ficha
+     de cada producto, que es donde se va a comparar.
+
+     Antes esto era solo de movil, con el argumento de que en escritorio la
+     rejilla de cuatro columnas tiene sitio. Tener sitio no es razon para
+     llenarlo: la columna mide practicamente lo mismo que la tarjeta del movil
+     —290 px frente a 335— asi que la tarjeta se leia igual de cargada. */
+  .p-bens { margin-top: 0.55rem; padding-top: 0; border-top: 0; }
+  .p-bens li:nth-child(n+2) { display: none; }
+  .p-info { padding: 1rem 1.1rem 1.1rem; gap: 0.7rem; }
 
   /* ===== EL TICK, ICONO DE VERDAD Y MAS PEQUEÑO =====
      Estaba hecho con dos bordes de una caja girada 45 grados. Es el truco de
@@ -3376,13 +3378,23 @@
        titulo de la seccion y que todo lo demas de la pagina */
     .perfil-txt { padding: 1.3rem 1.6rem 1.5rem; }
   }
-  /* en escritorio caben las tres a la vez y la tira deja de deslizarse */
+  /* En escritorio caben las tres a la vez y la tira deja de deslizarse, pero
+     tambien va a sangre: se sale del .wrap de 1280 con el truco del 50 % menos
+     medio viewport, y se quedan tres fotos pegadas de borde a borde. Sin hueco
+     y sin redondeo, igual que en movil, porque el motivo es el mismo: entre dos
+     fotos a sangre una franja de papel no se lee como separacion.
+
+     No hay avance automatico aqui, y no es un olvido: con las tres a la vista
+     no hay nada que enseñar que no se este viendo ya. El propio codigo se
+     apaga solo al ver que no sobra ancho que deslizar. */
   @media (min-width: 860px) {
     .perfiles-tira {
       grid-auto-flow: unset; grid-template-columns: repeat(3, 1fr);
-      overflow-x: visible; gap: 1.1rem;
+      overflow-x: visible; gap: 0; padding: 0;
+      margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
     }
-    .perfil { aspect-ratio: 4 / 5; }
+    .perfil { aspect-ratio: 4 / 5; border-radius: 0; }
+    .perfil-txt { padding: 1.6rem 1.8rem 1.8rem; }
     [data-puntos="perfiles"] { display: none; }
   }
 
@@ -3405,23 +3417,64 @@
   /* Lo mismo con las fotos: sin esta linea los cuatro <img> se pintan en el
      flujo y en escritorio salian cuatro fotos gigantes encima del panel. En PC
      el bloque sigue siendo el panel oscuro de siempre, sin fondo. */
-  .crit-fondos { display: none; }
-  .crit-kicker { display: none; }
-
-  @media (max-width: 859px) {
+  .crit-fondos { display: block; position: absolute; inset: 0; z-index: 0; background: var(--ink); }
+  .crit-fondo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+  .crit-fondo.is-on { opacity: 1; }
+  .crit-kicker {
+    display: flex; align-items: center; gap: 0.5rem; margin: 0;
+    font-size: var(--t-3xs); font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(238, 240, 244, 0.75);
+  }
+  .crit-kicker span {
+    width: 0.45rem; height: 0.45rem; border-radius: 50%;
+    background: var(--acento); flex-shrink: 0;
+  }
+  .crit-fondos::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(16, 18, 22, 0.78), rgba(16, 18, 22, 0.9));
+  }
+  #criterio .closing {
+    position: relative; z-index: 1;
+    margin: 1.2rem; width: auto;
+    background: rgba(20, 23, 28, 0.62);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1px solid rgba(238, 240, 244, 0.14);
+    border-radius: var(--r-lg);
+  }
+  #criterio .closing-marca { display: none; }
+  .crit { counter-reset: crit; }
+  .crit-item { counter-increment: crit; }
+  .crit-ico svg { display: none; }
+  .crit-ico::before {
+    content: counter(crit, decimal-leading-zero);
+    font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.02em;
+    color: rgba(238, 240, 244, 0.9);
+  }
+  .crit-q[aria-expanded="true"] .crit-ico { transform: none; }
+  /* en escritorio la seccion se sale del .wrap de 1280 para que la foto llegue
+     a los bordes, y la tarjeta se queda en una medida de lectura centrada: a
+     1280 px estirada de lado a lado el renglon seria imposible de seguir */
+  @media (min-width: 860px) {
     #criterio {
-      position: relative; overflow: hidden;
-      margin-left: -1.6rem; margin-right: -1.6rem;
-      padding: 0; min-height: 100svh;
-      display: grid; align-content: center;
+      margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+      justify-content: center;
     }
-    .crit-fondos { display: block; position: absolute; inset: 0; z-index: 0; background: var(--ink); }
-    .crit-fondo {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0;
-      transition: opacity 0.55s ease;
-    }
-    .crit-fondo.is-on { opacity: 1; }
+    #criterio .closing { max-width: 46rem; margin: 2rem; padding: 3.4rem 3rem; }
+  }
+
+  #criterio {
+    position: relative; overflow: hidden;
+    margin-left: -1.6rem; margin-right: -1.6rem;
+    padding: 0; min-height: 100svh;
+    display: grid; align-content: center;
+  }
+  @media (max-width: 859px) {
+    /* nada: la capa de fotos ya esta declarada fuera de la consulta */
     /* EL VELO NO ES DECORACION. Las fotos definitivas estan por elegir, asi que
        puede caer una clara, y sin velo el texto en papel desapareceria encima.
        Con 0,78 arriba y 0,9 abajo, aunque la foto fuese blanca del todo el
@@ -3528,25 +3581,16 @@
      El velo, del 0,72 al 0,86: esta foto es clara y de fondo gris, y sin el el
      titular en papel se perderia. Con estos valores, aunque la foto fuese
      blanca del todo el texto sigue por encima de 4,5 de contraste. */
-  .ayuda-fondo { display: none; }
+  .ayuda-fondo {
+    display: block; position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    filter: blur(3px); transform: scale(1.08);
+  }
   @media (max-width: 859px) {
-    .ayuda-fondo {
-      display: block; position: absolute; inset: 0; z-index: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      filter: blur(3px); transform: scale(1.08);
-    }
     /* z-index 1 y no 0: la foto es un <img> de verdad y el ::before se pinta
        antes que ella, asi que con los dos a 0 el velo quedaba DEBAJO de la foto
        y no hacia nada. Se veia la lupa a plena luz con el texto blanco encima. */
-    #asesoria::before {
-      content: ""; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to bottom, rgba(16, 18, 22, 0.72), rgba(16, 18, 22, 0.86));
-    }
-    /* y el texto, por encima del velo */
-    #asesoria .ayuda { z-index: 2; }
-    /* la marca de agua sobra: ya hay una foto detras y dos texturas compiten,
-       igual que en el criterio */
-    #asesoria .closing-marca { display: none; }
+    /* nada: velo, texto y marca de agua ya estan resueltos fuera */
     /* mas aire: con foto detras el bloque pide respirar, y antes se apoyaba en
        el vacio del panel liso para no parecer apretado */
     #asesoria { padding: 4rem 1.6rem 4.2rem; }
@@ -3624,4 +3668,74 @@
       padding: 1.5rem 1.2rem 1.2rem;
     }
     .recompra-foto { background: var(--tint); }
+  }
+
+  /* ===== LO DE HOY, TAMBIEN EN ESCRITORIO =====
+     Todo lo que sigue estaba dentro de @media (max-width: 859px) y sale fuera.
+     Cuando algo necesita otra medida en pantalla grande, lleva su propia
+     consulta de 860 justo debajo. */
+
+  /* el velo y el orden de capas del bloque de asesoria */
+  #asesoria::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to bottom, rgba(16, 18, 22, 0.72), rgba(16, 18, 22, 0.86));
+  }
+  #asesoria .ayuda { z-index: 2; }
+  #asesoria .closing-marca { display: none; }
+
+  /* la captura y el pie, a sangre. En escritorio habia ademas una consulta de
+     860 que devolvia el redondeo al panel del pie: se cancela aqui, que va
+     despues. */
+  #alta.hero-center {
+    margin-left: 0; margin-right: 0;
+    border-radius: 0;
+    padding: 2.6rem 1.6rem;
+  }
+  footer#footer-signup { padding: 0; }
+  .foot-panel { border-radius: 0; }
+  @media (min-width: 860px) {
+    #alta.hero-center { padding: 3.4rem 2rem; }
+    .foot-panel { padding: 3.4rem 2.4rem 1.8rem; }
+  }
+
+  /* aire antes de las resenas: el bloque de arriba ocupa una pantalla en las
+     dos medidas, asi que el motivo vale para las dos */
+  #resenas { padding-top: 3.2rem; }
+
+  /* el indice de la FAQ. En escritorio no hace falta que se deslice —las siete
+     capsulas caben— asi que se reparten en varias lineas si hiciera falta y la
+     tira deja de sangrar: alli el bloque tiene un ancho de lectura y una barra
+     de borde a borde se saldria de el. */
+  .faq-indice { display: flex; }
+  @media (min-width: 860px) {
+    .faq-indice {
+      flex-wrap: wrap; overflow-x: visible;
+      margin: 0 auto 1.8rem; padding: 0; max-width: 46rem;
+    }
+  }
+  .faq-cierre { text-align: center; }
+
+  /* "¿Te lo llevas?" */
+  #comprar > h2 { text-align: center; }
+  .recompra-caja { background: var(--paper); box-shadow: none; padding: 1.5rem 1.2rem 1.2rem; }
+  .recompra-foto { background: var(--tint); }
+
+  /* ===== LOS DOS BLOQUES A SANGRE EN ESCRITORIO =====
+     Va al final del fichero a proposito: son las dos reglas que tienen que
+     ganar a las universales de mas arriba, que llevan los -1,6rem del movil.
+
+     calc(50% - 50vw) saca el bloque del .wrap de 1280 y lo lleva a los bordes
+     de la ventana. El problema conocido de ese truco es que 50vw CUENTA la
+     barra de desplazamiento y el .wrap no, asi que el bloque se pasa la mitad
+     del ancho de la barra por cada lado —medido: 8 px de desbordamiento
+     horizontal, o sea una barra de scroll lateral en toda la pagina.
+
+     Lo arregla overflow-x: clip en html. clip y NO hidden: hidden convierte el
+     elemento en contenedor de desplazamiento y eso rompe todos los position:
+     sticky de dentro —el indice de la ficha, entre otros. clip recorta y ya. */
+  html { overflow-x: clip; }
+  @media (min-width: 860px) {
+    #criterio, .perfiles-tira {
+      margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+    }
   }
