@@ -476,10 +476,16 @@
       </div>
 
       <div class="pack-body">
-        <!-- El precio va PRIMERO y la lista debajo. Antes se leia al reves:
-             dos lineas de contenido y solo despues cuanto costaba, asi que
-             el numero, que es el que decide, llegaba el ultimo.
-             El boton ya no repite el importe: lo tiene justo encima. -->
+        <!-- EL PRECIO YA NO VA SUELTO ARRIBA. Estuvo ahi, en grande, entre las
+             fotos y la cuenta, y con el la tarjeta enseñaba SEIS importes:
+             39,90 arriba, 22,90, 24,90, 47,80 tachado, -7,90 y otra vez 39,90
+             en el boton. Con seis numeros compitiendo ninguno es "el precio".
+             (El comentario que habia aqui decia que el boton ya no repetia el
+              importe. Lo repetia: el boton se cambio despues y esto se quedo.)
+
+             Ahora la cuenta se lee como un ticket de verdad y TERMINA en el
+             total, que es donde el ojo lo espera: pieza, pieza, por separado,
+             descuento, total. El boton lo confirma, que es lo normal. -->
         <!-- Las dos piezas, en pequeno y juntas. Entran para recuperar lo
              unico que se perdia al quitar la foto grande: la portada del
              libro no aparece en ningun otro sitio de la landing.
@@ -498,9 +504,6 @@
           <span class="foto-libro"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></span>
         </div>
 
-        <div class="pack-price">
-          <span class="pack-now">39,90&nbsp;&euro;</span>
-        </div>
 
         <!-- La lista se lee como una suma: cada pieza con SU precio, el signo
              mas entre las dos, y abajo el total por separado tachado. Antes el
@@ -533,6 +536,8 @@
         <dl class="pack-suma">
           <div><dt>Por separado</dt><dd class="pack-was">47,80&nbsp;&euro;</dd></div>
           <div><dt>Descuento 16&nbsp;%</dt><dd class="pack-dto">&minus;7,90&nbsp;&euro;</dd></div>
+          <!-- el total cierra la resta a la vista: 47,80 menos 7,90 son 39,90 -->
+          <div class="pack-total"><dt>Total</dt><dd>39,90&nbsp;&euro;</dd></div>
         </dl>
 
         <button type="button" class="pack-cta" data-add="pack" data-img="pack-magnesio-libro.jpg"

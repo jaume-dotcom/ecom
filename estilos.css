@@ -3739,3 +3739,65 @@
       margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
     }
   }
+
+  /* ===== EL PACK, REPASADO =====
+     Cinco cosas, y todas van del mismo problema: demasiadas señales pidiendo
+     atencion a la vez en una tarjeta de 529 px.
+
+     1. FUERA EL FILETE DE TEJA. La tarjeta lo llevaba y ademas el descuento va
+     en pastilla de teja: dos acentos en la misma tarjeta, y el borde es el que
+     menos dice. La pastilla explica QUE es lo especial —que te ahorras 7,90—;
+     el borde solo lo grita. Pasa a filete normal y el acento se queda en un
+     solo sitio, que es la regla de esta marca.
+
+     2. A SANGRE EN MOVIL. Medía 324 px con los bloques de arriba y abajo a
+     375. Antes se notaba poco; desde que el criterio, los perfiles, la captura
+     y el pie llegan al borde, la tarjeta encajada parecia de otra pagina. En
+     escritorio no cambia: alli es una tarjeta de 52rem centrada con la foto a
+     la izquierda, y eso en una pantalla ancha esta bien como esta.
+
+     3. LAS DOS FOTOS, EN UN SOLO HUECO. Cada una tenia su fondo en tinte y el
+     signo + quedaba suelto sobre el blanco, entre dos cajas. Un unico hueco en
+     tinte las agrupa, sujeta el signo y de paso apaga la portada del libro,
+     que es lo mas saturado de toda la web contra una paleta apagada.
+
+     4. LA CUENTA TERMINA EN EL TOTAL, con la ultima linea en tinta y sin
+     puntitos: es la unica que no es un concepto mas, es el resultado.
+
+     5. AIRE Y NO OTRA LINEA entre las piezas y el ajuste. Ya hay bastantes
+     filetes; lo que separa dos cosas distintas aqui es el hueco. */
+  #libro .pack { border-color: var(--line); }
+
+  /* el hueco de las fotos */
+  @media (max-width: 859px) {
+    #libro .pack {
+      margin-left: -1.6rem; margin-right: -1.6rem;
+      max-width: none; border-radius: 0;
+      border-left: 0; border-right: 0;
+    }
+    /* el relleno lateral, a 1,6rem: con la tarjeta a sangre el texto tiene que
+       caer en la misma linea vertical que el titulo de la seccion y que el resto
+       de la pagina. Iba a 1,3rem y se quedaba 5 px por dentro. */
+    #libro .pack-compacto .pack-body { padding: 1.5rem 1.6rem 1.4rem; }
+    .pack-compacto .pack-fotos {
+      background: var(--tint); border-radius: var(--r-sm);
+      padding: 0.9rem; margin-bottom: 1.2rem;
+    }
+    /* las piezas ya no llevan fondo propio: lo pone el hueco que las contiene */
+    .pack-compacto .pack-fotos > span:not(.pack-mas) { background: none; }
+    /* mas hueco entre las piezas y el ajuste: son dos cosas distintas y las
+       separa el aire, no un filete mas */
+    .pack-compacto .pack-suma { margin: 1.3rem 0 1.2rem; }
+  }
+
+  /* la ultima linea de la cuenta: el total */
+  .pack-suma .pack-total {
+    margin-top: 0.75rem; padding-top: 0.6rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink); font-weight: 600;
+  }
+  .pack-suma .pack-total dd { font-size: var(--t-md); }
+  /* sin puntitos: la linea de puntos une un concepto con su importe, y el
+     total no es un concepto, es el resultado de los de arriba */
+  .pack-suma .pack-total::before { content: none; }
+  .pack-suma .pack-total { justify-content: space-between; }
