@@ -819,13 +819,18 @@
   .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: var(--tracking-lg); margin: 0; text-wrap: balance; max-width: 22ch; }
   .section-head p { color: var(--ink-soft); margin: 0; max-width: 46ch; text-wrap: pretty; }
   .section-head .see-all { font-size: var(--t-sm); font-weight: 500; border-bottom: 1.5px solid var(--ink); white-space: nowrap; }
-  /* .section-head es una columna, asi que el enlace caia DEBAJO del titular y
-     alineado a la izquierda: se leia como un enlace suelto y no como el "ver
-     todas" de la esquina, que es lo que tiene que ser. Aqui vuelve a su fila. */
-  #resenas .section-head {
-    flex-direction: row; align-items: baseline; justify-content: space-between;
-    gap: 1rem;
-  }
+  /* EL ENLACE, DEBAJO DEL TITULAR Y NO EN SU FILA.
+     Estuvo a la derecha, en la esquina, que es donde suele ir un "ver todas".
+     El problema es que ahi ocupa ancho: le robaba unos 90 px al titular y
+     "Lo que dice quien lo toma" se partia en dos lineas. Un titular de dos
+     lineas por culpa de un enlace pequeño es mal negocio —manda el titular—,
+     asi que el enlace baja y el titular recupera la linea entera.
+
+     Y con el enlace debajo hay que quitarle el tope de 22ch al h2: ese tope
+     existe para que los titulares largos no crucen la pantalla, pero aqui es
+     justo lo que impide que quepa en una linea. */
+  #resenas .section-head { gap: 0.8rem; }
+  #resenas .section-head h2 { max-width: none; }
 
   /* shop grid — Seed-style card: top block / media / bottom block, arrow-in-on-hover */
   .shop-grid {
