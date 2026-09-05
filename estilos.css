@@ -3466,3 +3466,41 @@
        abre, pero un numero girado se lee como un numero torcido */
     .crit-q[aria-expanded="true"] .crit-ico { transform: none; }
   }
+
+  /* ===== LA CAPTURA Y EL PIE, A SANGRE EN MOVIL =====
+     Los dos iban encajados a 12 px de cada borde y con esquinas de 16. Ese
+     encaje tenia sentido cuando eran los unicos bloques oscuros del final: se
+     leian como una tarjeta. Ahora, con el criterio a sangre justo antes, el que
+     desentonaba era este tramo: dos cajas flotando con marco entre bloques que
+     llegan al borde.
+
+     Se van los 12 px y se va el redondeo. En un movil, una caja oscura que casi
+     llega al borde pero no del todo deja una franja de papel de 12 px que no se
+     lee como margen, se lee como un fallo de maquetacion.
+
+     El relleno lateral pasa de 1,4 a 1,6rem, el mismo del .wrap: sin el encaje,
+     el texto de estos dos bloques tiene que caer en la misma linea vertical que
+     el del resto de la pagina. Antes lo hacia por casualidad —12 px de margen
+     mas 1,4rem de relleno dan 34,4, cerca de los 25,6 del wrap pero no iguales.
+
+     Escritorio no se toca: alli el pie ya tiene su propia regla en la consulta
+     de 860 y la captura sigue centrada con su medida corta. */
+  @media (max-width: 859px) {
+    #alta.hero-center {
+      margin-left: 0; margin-right: 0;
+      border-radius: 0;
+      padding: 2.6rem 1.6rem;
+    }
+    footer#footer-signup { padding: 0; }
+
+    /* AIRE ANTES DE LAS RESEÑAS. Llevaban padding-top: 0.5rem, ocho pixeles,
+       de cuando encima tenian un panel oscuro que ya hacia de separacion. Desde
+       que arriba esta "Como elegimos" a pantalla completa, el titulo quedaba
+       pegado al borde de la foto. Vuelve al ritmo normal de la pagina —los
+       2,5rem de section.band— y un poco mas, que despues de una pantalla entera
+       el ojo necesita un respiro mayor del habitual. */
+    #resenas { padding-top: 3.2rem; }
+    /* la linea difuminada de arriba se queda: sin esquinas redondeadas es lo
+       unico que marca donde empieza el pie */
+    .foot-panel { border-radius: 0; padding: 2.6rem 1.6rem 1.6rem; }
+  }
