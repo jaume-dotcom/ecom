@@ -3504,3 +3504,45 @@
        unico que marca donde empieza el pie */
     .foot-panel { border-radius: 0; padding: 2.6rem 1.6rem 1.6rem; }
   }
+
+  /* ===== "NO SABES POR DONDE EMPEZAR", CON FOTO DETRAS =====
+     Mismo sistema que "Como elegimos": una foto al fondo y un velo encima que
+     la deja en ambiente. Los dos bloques son los que explican como funciona la
+     marca, asi que conviene que se lean como pareja.
+
+     Aqui NO hay tarjeta flotando. En el criterio la tarjeta existe porque
+     dentro hay tres apartados, cifras y un pie; esto son un titular, una frase
+     y un boton. Ponerle marco lo haria pesar mas que el bloque principal, y
+     este es una pausa entre dos secciones, no una seccion.
+
+     LA FOTO VA DESENFOCADA. Es ambiente, no contenido: una lupa nitida detras
+     de un titular compite con el. El scale(1.08) no es capricho —un blur deja
+     los bordes transparentes y sin agrandar la imagen se veria una franja
+     clara en los cuatro lados.
+
+     El velo, del 0,72 al 0,86: esta foto es clara y de fondo gris, y sin el el
+     titular en papel se perderia. Con estos valores, aunque la foto fuese
+     blanca del todo el texto sigue por encima de 4,5 de contraste. */
+  .ayuda-fondo { display: none; }
+  @media (max-width: 859px) {
+    .ayuda-fondo {
+      display: block; position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      filter: blur(3px); transform: scale(1.08);
+    }
+    /* z-index 1 y no 0: la foto es un <img> de verdad y el ::before se pinta
+       antes que ella, asi que con los dos a 0 el velo quedaba DEBAJO de la foto
+       y no hacia nada. Se veia la lupa a plena luz con el texto blanco encima. */
+    #asesoria::before {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, rgba(16, 18, 22, 0.72), rgba(16, 18, 22, 0.86));
+    }
+    /* y el texto, por encima del velo */
+    #asesoria .ayuda { z-index: 2; }
+    /* la marca de agua sobra: ya hay una foto detras y dos texturas compiten,
+       igual que en el criterio */
+    #asesoria .closing-marca { display: none; }
+    /* mas aire: con foto detras el bloque pide respirar, y antes se apoyaba en
+       el vacio del panel liso para no parecer apretado */
+    #asesoria { padding: 4rem 1.6rem 4.2rem; }
+  }
