@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cómo elegir la tuya — ZEROX</title>
-<meta name="description" content="Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa y por qué no las otras tres.">
+<meta name="description" content="Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa, y qué mirar en la etiqueta para comprobarlo.">
 <link rel="canonical" href="https://jaume-dotcom.github.io/ecom/elegir.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,8 +108,18 @@
      de tener la misma altura; en columna se leen como una lista de opciones,
      que es lo que son. */
   .el-metas { list-style: none; margin: 0 0 2.6rem; padding: 0; display: grid; gap: 0.6rem; }
+  /* UN ICONO POR OPCION, a la izquierda y en columna propia. No es adorno:
+     cinco cajas de texto seguidas se leen como un formulario, y con el icono
+     cada una tiene una forma distinta que se reconoce de un vistazo sin leerla
+     entera. Es de trazo y no de relleno, como los demas iconos del sitio.
+
+     NO SE USAN FOTOS. La de producto destriparia la respuesta —ver el bote de
+     omega-3 al lado de "corazon, cerebro y vista" convierte la pregunta en un
+     catalogo— y las de personas ya estan las tres en "Para quien es" de la
+     portada, asi que repetirlas empequeñece la web. */
   .el-meta {
-    width: 100%; display: grid; gap: 0.2rem; text-align: left;
+    width: 100%; display: grid; grid-template-columns: auto 1fr;
+    align-items: start; column-gap: 0.85rem; row-gap: 0.2rem; text-align: left;
     /* 44 px de alto minimo los pasa de largo, pero se deja explicito: es el
        control principal de la pagina y no puede quedarse corto nunca */
     min-height: 44px; padding: 1rem 1.1rem;
@@ -127,6 +137,16 @@
      falta saber de un vistazo que se ha pulsado */
   .el-meta[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
   .el-meta[aria-pressed="true"] b, .el-meta[aria-pressed="true"] span { color: var(--paper); }
+  .el-txt { display: grid; gap: 0.2rem; min-width: 0; }
+  .el-ico {
+    width: 22px; height: 22px; flex-shrink: 0;
+    /* 0,15em de desplazamiento: alinea el trazo con la linea de base de la
+       primera linea del titulo, que es donde el ojo lo espera */
+    margin-top: 0.15em;
+    fill: none; stroke: var(--ink-soft); stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .el-meta[aria-pressed="true"] .el-ico { stroke: var(--paper); }
   .el-meta b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
   .el-meta span { font-size: var(--t-sm); color: var(--ink-soft); line-height: 1.45; }
 
@@ -147,14 +167,6 @@
     -webkit-mask: var(--icono-tick) center / contain no-repeat;
     mask: var(--icono-tick) center / contain no-repeat;
   }
-  /* EL BLOQUE QUE NO TIENE NADIE: por que NO las otras tres. Va en tinte y no
-     en blanco porque es lo que distingue a esta pagina, y si va igual que el
-     resto se lee como una nota al pie. Los puntos NO llevan tick: no son
-     ventajas, son descartes, y el mismo simbolo para las dos cosas confunde. */
-  .el-descartes { background: var(--tint); border-radius: var(--r-md); padding: 1.2rem 1.3rem; }
-  .el-descartes li { padding-left: 0; }
-  .el-descartes li::before { content: none; }
-  .el-descartes li b { color: var(--ink); font-weight: 600; }
 
   .el-acciones { display: grid; gap: 0.6rem; margin-top: 1.6rem; }
   .el-cta {
@@ -218,7 +230,7 @@
 
   <p class="el-kicker"><span aria-hidden="true"></span>Antes de comprar</p>
   <h1 class="el-titulo">Cómo elegir <span class="h2-soft">la tuya</span></h1>
-  <p class="el-lede">Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa y —lo que no suele contarse— por qué no las otras tres.</p>
+  <p class="el-lede">Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa, y qué mirar en la etiqueta para comprobarlo tú.</p>
 
 
   <h2 class="el-paso">¿Qué quieres cubrir?</h2>
@@ -229,24 +241,29 @@
        de la alegacion que le corresponde. -->
   <ul class="el-metas">
     <li><button type="button" class="el-meta" data-meta="mag" aria-pressed="false">
-      <b>Cansancio, músculo y sistema nervioso</b>
-      <span>Entrenas, o acabas el día con el cuerpo pasado.</span>
+      <svg class="el-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h5.2L10 21l8-10.5h-5.2L13 3z"/></svg>
+      <span class="el-txt"><b>Cansancio, músculo y sistema nervioso</b>
+      <span>Entrenas, o acabas el día con el cuerpo pasado.</span></span>
     </button></li>
     <li><button type="button" class="el-meta" data-meta="d3" aria-pressed="false">
-      <b>Huesos y defensas</b>
-      <span>Pasas poco tiempo al sol o quieres cubrir el invierno.</span>
+      <svg class="el-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 5.5 6v5.6c0 4 2.7 7.4 6.5 8.9 3.8-1.5 6.5-4.9 6.5-8.9V6L12 3.5z"/></svg>
+      <span class="el-txt"><b>Huesos y defensas</b>
+      <span>Pasas poco tiempo al sol o quieres cubrir el invierno.</span></span>
     </button></li>
     <li><button type="button" class="el-meta" data-meta="om3" aria-pressed="false">
-      <b>Corazón, cerebro y vista</b>
-      <span>Comes poco pescado azul.</span>
+      <svg class="el-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2S3.8 15 3.8 9.4A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 8.2 2.4c0 5.6-8.2 10.8-8.2 10.8z"/></svg>
+      <span class="el-txt"><b>Corazón, cerebro y vista</b>
+      <span>Comes poco pescado azul.</span></span>
     </button></li>
     <li><button type="button" class="el-meta" data-meta="pro" aria-pressed="false">
-      <b>La flora intestinal</b>
-      <span>Vienes de un antibiótico o quieres probar con probióticos.</span>
+      <svg class="el-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4c0 8-4.6 12.5-11 12.5"/><path d="M20 4C9.6 4 5.4 8 5.4 12.6c0 2.2 1.4 3.9 3.6 3.9"/><path d="M6.5 20.5c.6-2.4 1.6-4.4 2.5-5.4"/></svg>
+      <span class="el-txt"><b>La flora intestinal</b>
+      <span>Vienes de un antibiótico o quieres probar con probióticos.</span></span>
     </button></li>
     <li><button type="button" class="el-meta" data-meta="todas" aria-pressed="false">
-      <b>No lo tengo claro</b>
-      <span>Enséñame las cuatro y qué hace cada una.</span>
+      <svg class="el-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.4a2.4 2.4 0 0 1 4.6.8c0 1.6-2.3 1.9-2.3 3.3"/><path d="M12 17.2v.01"/></svg>
+      <span class="el-txt"><b>No lo tengo claro</b>
+      <span>Enséñame las cuatro y qué hace cada una.</span></span>
     </button></li>
   </ul>
 
@@ -412,15 +429,12 @@
       }
     };
 
-    /* Los descartes se escriben una sola vez y se reutilizan: cada formula
-       enseña las tres que no son la suya. Escribir 4x3 frases a mano seria
-       tener doce sitios donde el mismo texto se puede desincronizar. */
-    var DESCARTE = {
-      mag: '<b>Magnesio</b> — es para cansancio, músculo y sistema nervioso. Si no vas a por eso, no te aporta.',
-      d3: '<b>Vitamina D3 + K2</b> — es para huesos y defensas. No hace nada por el músculo cansado.',
-      om3: '<b>Omega–3</b> — es para corazón, cerebro y vista. Tarda semanas en notarse y no sustituye a lo anterior.',
-      pro: '<b>Probiótico</b> — no podemos prometerte ningún efecto, porque en la UE no hay ninguno autorizado para probióticos.'
-    };
+    /* AQUI ESTUVO "POR QUE NO LAS OTRAS TRES", una tabla con una frase por
+       formula que se pintaba al final de cada respuesta. Se retira: en
+       pantalla eran tres lineas describiendo productos que no has elegido,
+       justo antes del boton, y alargaban la respuesta sin ayudar a decidir.
+       La idea sigue viva donde si sirve: en "Qué mirar en la etiqueta", que
+       explica sin hablar de las otras. Vuelve mirando el historial de git. */
 
     var caja = document.getElementById('el-res');
     var botones = Array.prototype.slice.call(document.querySelectorAll('.el-meta'));
@@ -432,7 +446,6 @@
 
     function pintarFormula(k) {
       var f = FORMULAS[k];
-      var otras = Object.keys(FORMULAS).filter(function (x) { return x !== k; });
       var html = '';
       html += '<p class="el-res-rotulo">Te toca</p>';
       html += '<h2 class="el-res-nombre">' + f.nombre + '</h2>';
@@ -446,8 +459,6 @@
 
       html += '<div class="el-bloque"><h3>Qué mirar en la etiqueta</h3><p>' + f.mira + '</p></div>';
 
-      html += '<div class="el-bloque el-descartes"><h3>Por qué no las otras tres</h3>';
-      html += lista(otras.map(function (x) { return DESCARTE[x]; })) + '</div>';
 
       html += '<div class="el-acciones">';
       html += '<button type="button" class="el-cta" data-add="' + f.add + '" data-img="' + f.img + '"' +

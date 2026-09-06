@@ -417,12 +417,23 @@
   /* ---------- valoraciones ----------
      Mismo bloque que en la portada: .resenas y .resena salen de estilos.css.
      Aqui solo hay que repintar el titulo, porque esta pagina no usa
-     .section-head sino h2 suelto dentro de section. */
-  #resenas h2, #resenas h2 .h2-soft { color: var(--paper); }
-  #resenas > p { color: rgba(238, 240, 244, 0.66); }
+     .section-head sino h2 suelto dentro de section.
+
+     TODO ESTO IBA EN CLARO. El bloque era un panel oscuro y dejo de serlo, pero
+     los colores se quedaron: el titulo en --paper sobre una seccion que ahora es
+     transparente, o sea BLANCO SOBRE BLANCO. El titular estaba ahi, ocupando sus
+     260x58 px, y no se veia; el enlace "Ver todas" si, porque ese va en tinta.
+     Lo mismo el parrafo y los puntos del carrusel. */
+  #resenas h2, #resenas h2 .h2-soft { color: var(--ink); }
+  #resenas > p { color: var(--ink-soft); }
   /* el filete lo pinta el ::before, asi que el color va ahi y no en el boton */
-  #resenas .shop-puntos li button::before { background: rgba(238, 240, 244, 0.28); }
-  #resenas .shop-puntos li button.act::before { background: var(--pop); }
+  #resenas .shop-puntos li button::before { background: rgba(35, 39, 46, 0.22); }
+  #resenas .shop-puntos li button.act::before { background: var(--ink); }
+
+  /* EL ENLACE, DEBAJO DEL TITULAR. Misma decision que en la portada: a la
+     derecha le robaba ancho al titular y "Lo que dice quien lo toma" se partia
+     en dos lineas. Manda el titular. */
+  .resenas-cabeza { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
 
   /* ---------- comparativa de formas ----------
      Se comparan FORMAS, nunca marcas: la publicidad comparativa con marca
