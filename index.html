@@ -315,6 +315,51 @@
     </ul>
   </section>
 
+  <!-- Bloque de ayuda. Absorbe al antiguo puente al libro, que decia lo
+       mismo con otras palabras: los dos preguntaban por donde empezar.
+       Ya tiene destino propio: elegir.html, que pregunta que quieres cubrir y
+       explica por que esa formula y por que no las otras tres. -->
+  <!-- VA PEGADO AL CATALOGO. La duda aparece en el momento exacto en el que
+       ves cuatro botes y no sabes cual: ahi es donde tiene que estar la mano
+       que se ofrece, no dos bloques mas abajo. Estuvo detras de "Para quien
+       es" porque antes venia detras del bloque de Sento, y ese razonamiento
+       —primero quien pone la dosis, luego la ayuda— se cayo con el bloque.
+       Se probo tambien por encima del catalogo, como lo tiene Be Levels, y no
+       convence: ofrecer ayuda antes de enseñar nada es ayuda sobre la nada. -->
+  <section class="band" id="asesoria">
+    <!-- LA FOTO DE FONDO, solo en movil. Va desenfocada a proposito: no es
+         contenido, es ambiente, y una lupa nitida detras de un titular compite
+         con el. Desenfocada dice lo mismo —aqui se mira de cerca— sin pedir
+         que la mires. El desenfoque va en CSS y no quemado en el fichero para
+         poder subirlo o bajarlo sin volver a exportar.
+
+         Fuera de la consulta de movil no se pinta: en escritorio el bloque
+         sigue siendo el panel oscuro con la marca de agua. -->
+    <img class="ayuda-fondo" src="fondo-asesoria.avif" alt="" aria-hidden="true" loading="lazy" decoding="async">
+    <!-- la marca de agua sale de dentro de .ayuda y cuelga de la seccion:
+         asi se pasea por el panel entero y no por la caja del texto -->
+    <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="5">
+        <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+        <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+        <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+        <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+        <path d="M16 16 L84 84 M84 16 L16 84"/>
+      </g>
+    </svg>
+    <div class="ayuda reveal">
+      <h2 class="ayuda-titulo">&iquest;No sabes <span class="h2-soft">por dónde empezar?</span></h2>
+      <p class="ayuda-sub">No hace falta que lo adivines.</p>
+      <div class="ayuda-botones">
+        <!-- ESTE BOTON ES LA PUERTA DE elegir.html. Llevaba a libro.html, que
+             esta en pausa, y estuvo apuntando un rato a #criterio como parche.
+             Ahora tiene destino propio: una pagina que pregunta que quieres
+             cubrir y explica por que esa formula y por que no las otras tres. -->
+        <a class="btn btn-solid ayuda-btn" href="elegir.html">Cómo elegir la tuya</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ================================================================
        PARA QUIEN ES. Va detras del catalogo: primero se ven las cuatro
        formulas y despues se le pone cara a quien las toma, para que quien
@@ -423,49 +468,6 @@
     </figure>
   </section>
 
-  <!-- Bloque de ayuda. Absorbe al antiguo puente al libro, que decia lo
-       mismo con otras palabras: los dos preguntaban por donde empezar.
-       OJO: el destino sigue siendo provisional. Lo suyo seria un
-       cuestionario que recomiende formula; hasta que exista, lleva a la
-       pagina de educacion, que es la ayuda que si hay. -->
-  <!-- Va detras del catalogo y no delante: primero se ven las cuatro y
-       luego se le da salida a quien no sepa cual le toca. Se probo por
-       encima, como lo tiene Be Levels, y no convence.
-       Y detras de Sento: primero quien pone la dosis y luego la ayuda para
-       elegir. Asi la mano que se ofrece ya tiene cara y nombre detras. -->
-  <section class="band" id="asesoria">
-    <!-- LA FOTO DE FONDO, solo en movil. Va desenfocada a proposito: no es
-         contenido, es ambiente, y una lupa nitida detras de un titular compite
-         con el. Desenfocada dice lo mismo —aqui se mira de cerca— sin pedir
-         que la mires. El desenfoque va en CSS y no quemado en el fichero para
-         poder subirlo o bajarlo sin volver a exportar.
-
-         Fuera de la consulta de movil no se pinta: en escritorio el bloque
-         sigue siendo el panel oscuro con la marca de agua. -->
-    <img class="ayuda-fondo" src="fondo-asesoria.avif" alt="" aria-hidden="true" loading="lazy" decoding="async">
-    <!-- la marca de agua sale de dentro de .ayuda y cuelga de la seccion:
-         asi se pasea por el panel entero y no por la caja del texto -->
-    <svg class="closing-marca" viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="none" stroke="currentColor" stroke-width="5">
-        <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
-        <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
-        <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
-        <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
-        <path d="M16 16 L84 84 M84 16 L16 84"/>
-      </g>
-    </svg>
-    <div class="ayuda reveal">
-      <h2 class="ayuda-titulo">&iquest;No sabes <span class="h2-soft">por dónde empezar?</span></h2>
-      <p class="ayuda-sub">No hace falta que lo adivines.</p>
-      <div class="ayuda-botones">
-        <!-- ESTE BOTON ES LA PUERTA DE elegir.html. Llevaba a libro.html, que
-             esta en pausa, y estuvo apuntando un rato a #criterio como parche.
-             Ahora tiene destino propio: una pagina que pregunta que quieres
-             cubrir y explica por que esa formula y por que no las otras tres. -->
-        <a class="btn btn-solid ayuda-btn" href="elegir.html">Cómo elegir la tuya</a>
-      </div>
-    </div>
-  </section>
 </div>
 <div class="wrap">
 
@@ -953,7 +955,11 @@
       </div>
     </div>
     <a href="#catalogo">Catálogo</a>
-    <a href="#quien">Quién está detrás</a>
+    <a href="elegir.html">Cómo elegir la tuya</a>
+    <!-- los dos de Sento, en pausa con el. "Quien esta detras" apuntaba a
+         #quien, que esta oculto: el enlace llevaba a un ancla que ya no existe
+         en la pagina y dejaba la hamburguesa sin hacer nada al pulsarlo. -->
+    <a class="pendiente-sento" href="#quien" hidden>Quién está detrás</a>
     <a class="pendiente-sento" href="libro.html" hidden>El libro de Sento</a>
     <a href="#criterio">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
