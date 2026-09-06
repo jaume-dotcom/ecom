@@ -113,7 +113,12 @@
     /* 44 px de alto minimo los pasa de largo, pero se deja explicito: es el
        control principal de la pagina y no puede quedarse corto nunca */
     min-height: 44px; padding: 1rem 1.1rem;
-    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
+    /* EN TINTE Y SIN FILETE. En papel con un borde fino eran cinco rectangulos
+       sobre una pagina blanca: habia que mirarlos para saber que se podian
+       pulsar. Rellenas destacan solas y ademas el tinte es lo que en esta web
+       significa "aqui va algo" —el hueco de la foto del pack, el de la ficha—,
+       asi que no es un color nuevo, es el mismo de siempre haciendo lo suyo. */
+    background: var(--tint); border: 1px solid transparent; border-radius: var(--r-md);
     font-family: var(--font); cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
@@ -215,11 +220,6 @@
   <h1 class="el-titulo">Cómo elegir <span class="h2-soft">la tuya</span></h1>
   <p class="el-lede">Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa y —lo que no suele contarse— por qué no las otras tres.</p>
 
-  <!-- EL AVISO VA ARRIBA Y NO EN LETRA PEQUEÑA AL FINAL. Una pagina que
-       recomienda un complemento tiene que decir desde el principio hasta donde
-       llega, y quien toma medicacion necesita leerlo ANTES de elegir, no
-       despues de que le hayan dicho cual comprar. -->
-  <p class="el-aviso">Esto orienta, no diagnostica. Un complemento no trata ni previene ninguna enfermedad, y esta página no sustituye a tu médico ni a tu farmacéutico. Si tomas medicación, estás embarazada o en periodo de lactancia, pregúntales antes.</p>
 
   <h2 class="el-paso">¿Qué quieres cubrir?</h2>
   <!-- LAS OPCIONES SON OBJETIVOS, NO SINTOMAS. La diferencia no es de estilo:
@@ -249,6 +249,17 @@
       <span>Enséñame las cuatro y qué hace cada una.</span>
     </button></li>
   </ul>
+
+
+  <!-- EL AVISO, ENTRE LAS OPCIONES Y LA RESPUESTA. Estuvo arriba del todo y
+       estorbaba: lo primero que se leia en una pagina que existe para ayudarte
+       era una lista de advertencias.
+
+       Aqui sigue cumpliendo lo importante, que no es estar arriba sino estar
+       ANTES DE LA DECISION: la respuesta se escribe justo debajo de este
+       parrafo, asi que quien toma medicacion lo lee antes de que le digamos
+       cual comprar, y no en letra pequeña al final cuando ya ha decidido. -->
+  <p class="el-aviso">Esto orienta, no diagnostica. Un complemento no trata ni previene ninguna enfermedad, y esta página no sustituye a tu médico ni a tu farmacéutico. Si tomas medicación, estás embarazada o en periodo de lactancia, pregúntales antes.</p>
 
   <!-- la respuesta se escribe desde el script: son cinco variantes del mismo
        molde y tenerlas en el HTML seria repetir cinco veces la misma caja -->
