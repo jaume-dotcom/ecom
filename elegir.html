@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo elegir la tuya — ZEROX</title>
+<meta name="description" content="Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa y por qué no las otras tres.">
+<link rel="canonical" href="https://jaume-dotcom.github.io/ecom/elegir.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
+<noscript><style>
+  .reveal, .foot-anim { opacity: 1 !important; filter: none !important; transform: none !important; }
+</style></noscript>
+<style>
+  /* La barra de aviso y la nav se copian de la ficha: es la misma cabecera y
+     tiene que verse igual. Estas reglas viven en el HTML de cada pagina y no
+     en estilos.css, que es como esta montado el resto del sitio. */
+  /* ---------- barra de aviso + nav ---------- */
+  .topbar {
+    background: var(--ink); color: var(--paper);
+    font-size: var(--t-xs); text-align: center; padding: 0.6rem 1rem;
+  }
+  nav {
+    position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 1.1rem 0;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
+  nav > .logo {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  /* relative para colgarle el contador de la cesta, y el reset porque el de
+     la bolsa dejo de ser un <a> y ahora es un <button> */
+  .nav-ico {
+    position: relative;
+    width: 2.75rem; height: 2.75rem; margin: 0 -0.7rem;
+    display: grid; place-items: center; color: var(--ink);
+    background: none; border: 0; padding: 0; cursor: pointer;
+  }
+  .nav-ico svg { width: 21px; height: 21px; }
+
+  /* AQUI LAS VALORACIONES NO SON UN CARRUSEL, son una lista: es lo que se
+     viene a ver. .resenas de estilos.css es una rejilla de flujo por COLUMNAS
+     con anchos del 78 % y desplazamiento lateral, asi que no basta con poner
+     display:grid: hay que devolver el flujo a filas y soltar el ancho fijo. */
+  .resenas-todas {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-auto-flow: row;
+    grid-template-columns: 1fr; grid-auto-columns: auto;
+    gap: 0.9rem; overflow-x: visible;
+  }
+  /* y sin la proporcion cuadrada que llevan dentro del carrusel: aqui el alto
+     lo pone el texto */
+  .resenas-todas .resena { aspect-ratio: auto; align-content: start; padding: 0; }
+  /* una linea de pelo entre valoraciones. En el carrusel cada tarjeta se veia
+     porque iba en blanco sobre la banda; aqui el fondo tambien es blanco y sin
+     separador se leerian como un solo bloque de texto. */
+  .resenas-todas .resena + .resena {
+    border-top: 1px solid var(--line); padding-top: 1.5rem;
+  }
+  .resenas-todas { gap: 1.5rem; }
+  .resenas-cab { margin: 0 0 1.4rem; }
+  .resenas-cab h1 {
+    margin: 0 0 0.4rem; font-size: var(--t-6xl); font-weight: 600;
+    line-height: 1.15; letter-spacing: var(--tracking-lg);
+  }
+  .resenas-cab p { margin: 0; color: var(--ink-soft); }
+  .resenas-volver {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    min-height: 44px; margin: 1.6rem 0 0; padding: 0 1.2rem;
+    border: 1px solid var(--line); border-radius: 999px; background: #fff;
+    color: var(--ink); font-size: var(--t-base); font-weight: 500; cursor: pointer;
+    font-family: var(--font);
+  }
+  .resenas-volver svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  main.wrap { padding-top: 1.4rem; padding-bottom: 2.6rem; }
+  @media (min-width: 860px) {
+    .resenas-todas { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ---------- COMO ELEGIR LA TUYA ----------
+     La pagina entera es un solo gesto: eliges que quieres cubrir y sale la
+     respuesta. Lo que la separa de un quiz al uso es que la respuesta explica
+     POR QUE esa y por que NO las otras tres, que es lo que de verdad le falta
+     a quien esta delante de cuatro botes y no sabe cual coger. */
+  .el-kicker {
+    display: flex; align-items: center; gap: 0.5rem; margin: 2rem 0 0.9rem;
+    font-size: var(--t-3xs); font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .el-kicker span {
+    width: 0.45rem; height: 0.45rem; border-radius: 50%;
+    background: var(--acento); flex-shrink: 0;
+  }
+  .el-titulo { margin: 0 0 0.7rem; font-size: var(--t-4xl); font-weight: 500; letter-spacing: var(--tracking-lg); }
+  .el-lede { margin: 0 0 2.4rem; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); max-width: 46ch; }
+
+  .el-paso { margin: 0 0 1rem; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+
+  /* Las metas, una debajo de otra y a todo el ancho. En rejilla de dos
+     columnas los textos largos se partian en tres lineas y las cajas dejaban
+     de tener la misma altura; en columna se leen como una lista de opciones,
+     que es lo que son. */
+  .el-metas { list-style: none; margin: 0 0 2.6rem; padding: 0; display: grid; gap: 0.6rem; }
+  .el-meta {
+    width: 100%; display: grid; gap: 0.2rem; text-align: left;
+    /* 44 px de alto minimo los pasa de largo, pero se deja explicito: es el
+       control principal de la pagina y no puede quedarse corto nunca */
+    min-height: 44px; padding: 1rem 1.1rem;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
+    font-family: var(--font); cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .el-meta:hover { border-color: var(--ink-faint); }
+  /* la elegida, en tinta llena: es el unico sitio de la pagina donde hace
+     falta saber de un vistazo que se ha pulsado */
+  .el-meta[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
+  .el-meta[aria-pressed="true"] b, .el-meta[aria-pressed="true"] span { color: var(--paper); }
+  .el-meta b { font-size: var(--t-lg); font-weight: 600; color: var(--ink); }
+  .el-meta span { font-size: var(--t-sm); color: var(--ink-soft); line-height: 1.45; }
+
+  /* ---------- la respuesta ---------- */
+  .el-res { border-top: 1px solid var(--line); padding-top: 2rem; margin-bottom: 2.6rem; }
+  .el-res-rotulo { margin: 0 0 0.4rem; font-size: var(--t-3xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+  .el-res-nombre { margin: 0; font-size: var(--t-3xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .el-res-sub { margin: 0.2rem 0 1.4rem; font-size: var(--t-md); color: var(--ink-soft); }
+
+  .el-bloque { margin: 0 0 1.4rem; }
+  .el-bloque h3 { margin: 0 0 0.6rem; font-size: var(--t-base); font-weight: 600; letter-spacing: 0.02em; }
+  .el-bloque p { margin: 0 0 0.6rem; font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); }
+  .el-bloque ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .el-bloque li { position: relative; padding-left: 1.25rem; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
+  .el-bloque li::before {
+    content: ""; position: absolute; left: 0; top: 0.42em;
+    width: 0.75em; height: 0.75em; background: var(--ink);
+    -webkit-mask: var(--icono-tick) center / contain no-repeat;
+    mask: var(--icono-tick) center / contain no-repeat;
+  }
+  /* EL BLOQUE QUE NO TIENE NADIE: por que NO las otras tres. Va en tinte y no
+     en blanco porque es lo que distingue a esta pagina, y si va igual que el
+     resto se lee como una nota al pie. Los puntos NO llevan tick: no son
+     ventajas, son descartes, y el mismo simbolo para las dos cosas confunde. */
+  .el-descartes { background: var(--tint); border-radius: var(--r-md); padding: 1.2rem 1.3rem; }
+  .el-descartes li { padding-left: 0; }
+  .el-descartes li::before { content: none; }
+  .el-descartes li b { color: var(--ink); font-weight: 600; }
+
+  .el-acciones { display: grid; gap: 0.6rem; margin-top: 1.6rem; }
+  .el-cta {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    width: 100%; min-height: 48px; padding: 0.95rem 1.2rem;
+    border: 0; border-radius: 999px; background: var(--ink); color: var(--paper);
+    font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso);
+    cursor: pointer; transition: background 0.2s ease;
+  }
+  .el-cta:hover { background: var(--accion-hover); }
+  .el-otro { text-align: center; font-size: var(--t-sm); color: var(--ink-soft); }
+  .el-otro a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- el aviso ---------- */
+  .el-aviso {
+    margin: 0 0 2.4rem; padding: 1rem 1.1rem;
+    border-left: 2px solid var(--line);
+    font-size: var(--t-sm); line-height: 1.55; color: var(--ink-soft);
+  }
+
+  @media (min-width: 860px) {
+    .el-titulo { font-size: var(--t-5xl); }
+    .el-metas { grid-template-columns: repeat(2, 1fr); }
+    .el-res { max-width: 46rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .el-meta, .el-cta { transition: none; } }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">Envío gratuito desde 27,95 € · Devolución en 30 días</div>
+
+<div class="wrap">
+  <nav>
+    <a class="nav-ico" id="volver" href="index.html#asesoria" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <span class="logo-word">ZEROX</span>
+    </a>
+    <button type="button" class="nav-ico" data-cart-abrir aria-label="Tu cesta, vacía">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </nav>
+</div>
+
+<main class="wrap">
+
+  <p class="el-kicker"><span aria-hidden="true"></span>Antes de comprar</p>
+  <h1 class="el-titulo">Cómo elegir <span class="h2-soft">la tuya</span></h1>
+  <p class="el-lede">Cuatro fórmulas y una pregunta. Te decimos cuál te toca, por qué esa y —lo que no suele contarse— por qué no las otras tres.</p>
+
+  <!-- EL AVISO VA ARRIBA Y NO EN LETRA PEQUEÑA AL FINAL. Una pagina que
+       recomienda un complemento tiene que decir desde el principio hasta donde
+       llega, y quien toma medicacion necesita leerlo ANTES de elegir, no
+       despues de que le hayan dicho cual comprar. -->
+  <p class="el-aviso">Esto orienta, no diagnostica. Un complemento no trata ni previene ninguna enfermedad, y esta página no sustituye a tu médico ni a tu farmacéutico. Si tomas medicación, estás embarazada o en periodo de lactancia, pregúntales antes.</p>
+
+  <h2 class="el-paso">¿Qué quieres cubrir?</h2>
+  <!-- LAS OPCIONES SON OBJETIVOS, NO SINTOMAS. La diferencia no es de estilo:
+       preguntar por sintomas y responder con un producto es una alegacion de
+       salud, y en complementos alimenticios solo valen las autorizadas por el
+       reglamento 432/2012. Cada objetivo esta escrito con las palabras exactas
+       de la alegacion que le corresponde. -->
+  <ul class="el-metas">
+    <li><button type="button" class="el-meta" data-meta="mag" aria-pressed="false">
+      <b>Cansancio, músculo y sistema nervioso</b>
+      <span>Entrenas, o acabas el día con el cuerpo pasado.</span>
+    </button></li>
+    <li><button type="button" class="el-meta" data-meta="d3" aria-pressed="false">
+      <b>Huesos y defensas</b>
+      <span>Pasas poco tiempo al sol o quieres cubrir el invierno.</span>
+    </button></li>
+    <li><button type="button" class="el-meta" data-meta="om3" aria-pressed="false">
+      <b>Corazón, cerebro y vista</b>
+      <span>Comes poco pescado azul.</span>
+    </button></li>
+    <li><button type="button" class="el-meta" data-meta="pro" aria-pressed="false">
+      <b>La flora intestinal</b>
+      <span>Vienes de un antibiótico o quieres probar con probióticos.</span>
+    </button></li>
+    <li><button type="button" class="el-meta" data-meta="todas" aria-pressed="false">
+      <b>No lo tengo claro</b>
+      <span>Enséñame las cuatro y qué hace cada una.</span>
+    </button></li>
+  </ul>
+
+  <!-- la respuesta se escribe desde el script: son cinco variantes del mismo
+       molde y tenerlas en el HTML seria repetir cinco veces la misma caja -->
+  <div class="el-res" id="el-res" hidden></div>
+
+</main>
+
+<footer id="footer-signup">
+  <div class="foot-panel">
+    <span class="foot-hair" aria-hidden="true"></span>
+    <div class="foot-grid">
+
+      <div class="foot-brand reveal foot-anim">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="7">
+              <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+              <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+              <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+              <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+              <path d="M16 16 L84 84 M84 16 L16 84"/>
+            </g>
+          </svg>
+          <span class="logo-word">ZEROX</span>
+        </a>
+        <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
+        <p class="foot-copy">&copy; 2026 ZEROX</p>
+      </div>
+
+      <div class="foot-cols">
+        <div class="foot-col reveal foot-anim">
+          <h3>Fórmulas</h3>
+          <ul>
+            <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>La marca</h3>
+          <ul>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="elegir.html">Cómo elegir la tuya</a></li>
+            <li class="pendiente-sento" hidden><a href="libro.html">El libro</a></li>
+            <li><a href="#faq">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#alta">Acceso anticipado</a></li>
+            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="#footer-signup">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada.</span>
+      <span class="disclaimer">Vista previa: nombre y packaging provisionales, pendientes de confirmación de marca y dominio.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  /* ===========================================================================
+     COMO ELEGIR LA TUYA.
+
+     Un solo paso: se elige un objetivo y se escribe la respuesta. No hay mas
+     preguntas a proposito. Con cuatro productos, un cuestionario de seis
+     preguntas es teatro: quien lo hace nota que las respuestas no cambian nada.
+
+     Lo que si aporta es el bloque de descartes. Decir por que NO las otras tres
+     es la parte que no hace nadie, y es la que convierte una recomendacion en
+     una explicacion.
+
+     TODO EL TEXTO DE "POR QUE ESTA" SALE DE ALEGACIONES AUTORIZADAS por el
+     reglamento 432/2012, palabra por palabra. No se añade ni una promesa que no
+     este en esa lista, y el probiotico es el caso limite: no tiene ninguna
+     autorizada, asi que su respuesta lo dice en vez de inventarse uno.
+     =========================================================================== */
+  (function () {
+    var FORMULAS = {
+      mag: {
+        nombre: 'Magnesio Bisglicinato',
+        sub: '360 mg de magnesio elemental · 90 cápsulas, para 30 días · 22,90 €',
+        add: 'mag', img: 'ficha-magnesio.jpg', precio: '22.90',
+        addNombre: 'Magnesio', addSub: 'Bisglicinato · 360 mg',
+        ficha: 'magnesio.html',
+        porQue: [
+          'Contribuye a disminuir el cansancio y la fatiga.',
+          'Contribuye a la función muscular normal.',
+          'Contribuye al funcionamiento normal del sistema nervioso.'
+        ],
+        mira: 'Mira el <b>magnesio elemental</b> por dosis, no el peso de la sal. Un bote que anuncia «1.000 mg de citrato» puede llevar 160 de magnesio de verdad. Aquí son 360, y va delante.'
+      },
+      d3: {
+        nombre: 'Vitamina D3 + K2',
+        sub: '2.000–4.000 UI · 18,90 €',
+        add: 'd3', img: 'hero-d3k2.jpg', precio: '18.90',
+        addNombre: 'Vitamina D3', addSub: 'Con K2 · 2.000–4.000 UI',
+        porQue: [
+          'Contribuye al mantenimiento de los huesos y los dientes en condiciones normales.',
+          'Contribuye al funcionamiento normal del sistema inmunitario.',
+          'Contribuye a la absorción y utilización normales del calcio.'
+        ],
+        mira: 'Mira las <b>UI por cápsula</b> y si lleva K2. Y mira la fecha: la vitamina D se agota en invierno, que es justo cuando hace falta.'
+      },
+      om3: {
+        nombre: 'Omega–3 EPA+DHA',
+        sub: '1.000–2.000 mg · 27,90 €',
+        add: 'om3', img: 'hero-omega3.jpg', precio: '27.90',
+        addNombre: 'Omega–3', addSub: 'EPA+DHA · 1.000–2.000 mg',
+        porQue: [
+          'El DHA contribuye al mantenimiento de la función cerebral normal.',
+          'El DHA contribuye al mantenimiento de la visión en condiciones normales.',
+          'El EPA y el DHA contribuyen al funcionamiento normal del corazón.'
+        ],
+        mira: 'Mira el <b>EPA y el DHA</b>, no los «miligramos de aceite de pescado». Son cosas distintas y la segunda no dice nada: un aceite de 1.000 mg puede llevar 300 de omega-3 útil.'
+      },
+      pro: {
+        nombre: 'Probiótico Multicepa',
+        sub: '10–20 mil millones de UFC · 24,90 €',
+        add: 'pro', img: 'hero-probiotico.jpg', precio: '24.90',
+        addNombre: 'Probiótico', addSub: 'Multicepa · 10–20 mil M UFC',
+        /* EL CASO LIMITE, y el momento en el que esta pagina se gana el nombre.
+           En la UE no hay ni una sola alegacion de salud autorizada para
+           probioticos: la palabra «probiotico» se considera por si misma una
+           alegacion. Asi que aqui no se promete un efecto. Se dice que no se
+           puede prometer, que es informacion util y ademas es la verdad. */
+        sinAlegacion: true,
+        porQue: [
+          'Cápsula gastrorresistente: llega al intestino sin deshacerse en el estómago.',
+          'Cepas seleccionadas por resistencia, con su nombre y su número en la etiqueta.',
+          'Sin azúcares ni edulcorantes.'
+        ],
+        mira: 'Mira las <b>cepas con nombre y apellido</b> —género, especie y cepa— y las UFC <b>al final de la vida útil</b>, no en el momento de fabricar. Casi nadie publica la segunda.'
+      }
+    };
+
+    /* Los descartes se escriben una sola vez y se reutilizan: cada formula
+       enseña las tres que no son la suya. Escribir 4x3 frases a mano seria
+       tener doce sitios donde el mismo texto se puede desincronizar. */
+    var DESCARTE = {
+      mag: '<b>Magnesio</b> — es para cansancio, músculo y sistema nervioso. Si no vas a por eso, no te aporta.',
+      d3: '<b>Vitamina D3 + K2</b> — es para huesos y defensas. No hace nada por el músculo cansado.',
+      om3: '<b>Omega–3</b> — es para corazón, cerebro y vista. Tarda semanas en notarse y no sustituye a lo anterior.',
+      pro: '<b>Probiótico</b> — no podemos prometerte ningún efecto, porque en la UE no hay ninguno autorizado para probióticos.'
+    };
+
+    var caja = document.getElementById('el-res');
+    var botones = Array.prototype.slice.call(document.querySelectorAll('.el-meta'));
+    if (!caja || !botones.length) { return; }
+
+    function lista(arr) {
+      return '<ul>' + arr.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    }
+
+    function pintarFormula(k) {
+      var f = FORMULAS[k];
+      var otras = Object.keys(FORMULAS).filter(function (x) { return x !== k; });
+      var html = '';
+      html += '<p class="el-res-rotulo">Te toca</p>';
+      html += '<h2 class="el-res-nombre">' + f.nombre + '</h2>';
+      html += '<p class="el-res-sub">' + f.sub + '</p>';
+
+      html += '<div class="el-bloque"><h3>' + (f.sinAlegacion ? 'Lo que sí podemos decirte' : 'Por qué esta') + '</h3>';
+      if (f.sinAlegacion) {
+        html += '<p>Aquí toca parar un momento. En la Unión Europea <b>no hay ninguna alegación de salud autorizada para probióticos</b>, así que nadie puede prometerte legalmente un efecto, y quien te lo promete te lo está colando. Lo que sí podemos hacer es enseñarte exactamente qué lleva:</p>';
+      }
+      html += lista(f.porQue) + '</div>';
+
+      html += '<div class="el-bloque"><h3>Qué mirar en la etiqueta</h3><p>' + f.mira + '</p></div>';
+
+      html += '<div class="el-bloque el-descartes"><h3>Por qué no las otras tres</h3>';
+      html += lista(otras.map(function (x) { return DESCARTE[x]; })) + '</div>';
+
+      html += '<div class="el-acciones">';
+      html += '<button type="button" class="el-cta" data-add="' + f.add + '" data-img="' + f.img + '"' +
+              ' data-nombre="' + f.addNombre + '" data-sub="' + f.addSub + '" data-precio="' + f.precio + '">Añadir a la cesta</button>';
+      /* solo el magnesio tiene ficha propia todavia; para las otras tres el
+         enlace honesto es el catalogo, no una pagina que no existe */
+      html += f.ficha
+        ? '<p class="el-otro"><a href="' + f.ficha + '">Ver la ficha completa</a></p>'
+        : '<p class="el-otro"><a href="index.html#catalogo">Verla en el catálogo</a></p>';
+      html += '</div>';
+      return html;
+    }
+
+    function pintarTodas() {
+      var html = '<p class="el-res-rotulo">Las cuatro</p>';
+      html += '<h2 class="el-res-nombre">Qué hace cada una</h2>';
+      html += '<p class="el-res-sub">Y para qué no sirve ninguna: ninguna sustituye a comer bien.</p>';
+      Object.keys(FORMULAS).forEach(function (k) {
+        var f = FORMULAS[k];
+        html += '<div class="el-bloque"><h3>' + f.nombre + '</h3>' + lista(f.porQue) + '</div>';
+      });
+      html += '<div class="el-acciones"><p class="el-otro"><a href="index.html#catalogo">Ver las cuatro con su precio</a></p></div>';
+      return html;
+    }
+
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.getAttribute('data-meta');
+        botones.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        caja.innerHTML = (k === 'todas') ? pintarTodas() : pintarFormula(k);
+        caja.hidden = false;
+        /* se lleva la vista a la respuesta: en un movil la caja nace por debajo
+           del pliegue y sin esto parece que el boton no ha hecho nada */
+        caja.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
