@@ -2295,6 +2295,24 @@
     letter-spacing: inherit; line-height: inherit;
   }
 
+  /* ===== LA REGLA DEL TERCIO =====
+     Los titulares se parten en dos tipografias: la romana dice la CATEGORIA y
+     la italica dice lo ESPECIFICO. "Preguntas · frecuentes". "Lo que dice ·
+     quien lo toma". Funciona mientras las dos mitades pesen.
+
+     Medido en movil, la italica ocupa entre el 45 y el 76 % de los titulares
+     de la web. La excepcion era "Para quién es": 17 px de italica contra 121
+     de romana, un 13 %, y encima con el verbo dentro. No se leia como una
+     intencion, se leia como una errata.
+
+     DOS CONDICIONES ANTES DE PARTIR UN TITULAR:
+       1. La italica se lleva al menos un tercio del ancho.
+       2. Se lleva la parte con significado, no el conector ni el verbo.
+     Si el titular no da para las dos, NO SE PARTE: va entero en romana.
+
+     Esto no se puede comprobar desde CSS —no hay forma de medir texto en una
+     hoja de estilos— asi que vive aqui como norma de redaccion. Al escribir un
+     titular corto, mirarla. */
   .h2-soft {
     font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
     font-style: italic; font-weight: 400; text-transform: none;
