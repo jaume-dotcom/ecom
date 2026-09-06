@@ -119,16 +119,22 @@
      portada, asi que repetirlas empequeñece la web. */
   .el-meta {
     width: 100%; display: grid; grid-template-columns: auto 1fr;
-    align-items: start; column-gap: 0.85rem; row-gap: 0.2rem; text-align: left;
+    align-items: center; column-gap: 0.9rem; text-align: left;
     /* 44 px de alto minimo los pasa de largo, pero se deja explicito: es el
        control principal de la pagina y no puede quedarse corto nunca */
     min-height: 44px; padding: 1rem 1.1rem;
-    /* EN TINTE Y SIN FILETE. En papel con un borde fino eran cinco rectangulos
-       sobre una pagina blanca: habia que mirarlos para saber que se podian
-       pulsar. Rellenas destacan solas y ademas el tinte es lo que en esta web
-       significa "aqui va algo" —el hueco de la foto del pack, el de la ficha—,
-       asi que no es un color nuevo, es el mismo de siempre haciendo lo suyo. */
-    background: var(--tint); border: 1px solid transparent; border-radius: var(--r-md);
+    /* EN --pop Y NO EN --tint. Las dos son las que tiene el sistema para
+       rellenar una caja; la diferencia es la temperatura. El tinte es calido y
+       en esta web significa "aqui va un producto": el hueco de la foto del pack,
+       el de la tarjeta de la ficha. Estas cajas no son productos, son preguntas,
+       y en calido se leian como cuatro cosas a la venta.
+       --pop es el neutro frio del sistema y aqui hace lo suyo: rellena y enfria.
+
+       OJO SI SE PIDE MAS AZUL: esto no es azul, es un gris con temperatura fria.
+       Un azul de verdad seria un color de marca nuevo, y el sistema de esta web
+       es una familia neutra mas UN acento; meter un segundo color hay que
+       decidirlo, no colarlo en una caja. */
+    background: var(--pop); border: 1px solid transparent; border-radius: var(--r-md);
     font-family: var(--font); cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
@@ -139,10 +145,11 @@
   .el-meta[aria-pressed="true"] b, .el-meta[aria-pressed="true"] span { color: var(--paper); }
   .el-txt { display: grid; gap: 0.2rem; min-width: 0; }
   .el-ico {
-    width: 22px; height: 22px; flex-shrink: 0;
-    /* 0,15em de desplazamiento: alinea el trazo con la linea de base de la
-       primera linea del titulo, que es donde el ojo lo espera */
-    margin-top: 0.15em;
+    /* 26 y no 22: a 22 el trazo de 1,6 se quedaba fino al lado de un titulo de
+       16 px en negrita y el icono parecia una nota al margen. Y centrado en la
+       caja, no alineado con la primera linea: con titulos de una y de dos lineas
+       mezclados, alinearlo arriba dejaba los cinco iconos a alturas distintas. */
+    width: 26px; height: 26px; flex-shrink: 0;
     fill: none; stroke: var(--ink-soft); stroke-width: 1.6;
     stroke-linecap: round; stroke-linejoin: round;
   }
