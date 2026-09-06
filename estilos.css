@@ -3367,6 +3367,13 @@
   .perfil-txt {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
     padding: 1.1rem 1.1rem 1.2rem; color: var(--paper);
+    /* EL BORDE DEL TEXTO, en halo y NO en contorno. -webkit-text-stroke dibuja
+       un filete sobre la propia letra y a 14 px se come los trazos finos: la
+       Inter se vuelve papilla y justo en la web de una marca cuyo publico pasa
+       de los cuarenta. El halo hace lo mismo por fuera y no toca la letra.
+       Dos sombras: una pegada, que define el canto contra la foto, y otra
+       abierta y floja, que separa el bloque entero del fondo. */
+    text-shadow: 0 1px 2px rgba(16, 18, 22, 0.55), 0 0 10px rgba(16, 18, 22, 0.35);
     background: rgba(16, 18, 22, 0.28);
     -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
     /* el borde de arriba del panel, en vez de un corte seco */
