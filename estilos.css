@@ -3347,12 +3347,20 @@
     border-radius: var(--r-md); background: var(--ink);
   }
   .perfil img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* EL DEGRADADO AFLOJA ABAJO, de 0,9 a 0,6. Con 0,9 el pie de la foto era casi
+     negro y la caja de texto —que tambien es oscura— desaparecia dentro: dentro
+     y fuera eran el mismo color y no habia caja que ver.
+     El contraste no se pierde, se MUEVE: lo que antes ponia el degradado ahora
+     lo pone el fondo de la propia caja, que sube a 0,7. Cuentas sobre el peor
+     caso posible, una foto blanca del todo: fuera de la caja queda en 0,44 de
+     luminancia y dentro en 0,17, o sea 4,7 de contraste para el texto blanco.
+     Y de paso la foto se ve mas, que era el motivo de ponerla. */
   .perfil::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(to top,
-      rgba(16, 18, 22, 0.9) 0%,
-      rgba(16, 18, 22, 0.62) 34%,
-      rgba(16, 18, 22, 0.12) 62%,
+      rgba(16, 18, 22, 0.6) 0%,
+      rgba(16, 18, 22, 0.42) 34%,
+      rgba(16, 18, 22, 0.1) 62%,
       transparent 78%);
   }
   /* EL TEXTO, SOBRE UN PANEL ESMERILADO. Antes iba directamente sobre la foto
@@ -3364,8 +3372,16 @@
      NO oscurece. Sobre una foto clara, un panel solo desenfocado deja el texto
      blanco en 2,0 de contraste. Quien pone el contraste es el degradado; el
      desenfoque solo quita el ruido de debajo. */
+  /* UNA CAJA DE VERDAD, no una franja pegada al borde. Encajada 0,9rem por los
+     tres lados y con filete claro: sobre la foto se lee como una tarjeta puesta
+     encima, que es lo que hace la referencia. Pegada abajo parecia el pie de la
+     imagen; separada, es una pieza. */
   .perfil-txt {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    position: absolute; left: 0.9rem; right: 0.9rem; bottom: 0.9rem; z-index: 1;
+    /* el filete a 0,38 y no a 0,22: por debajo de eso, sobre la parte oscura
+       del degradado, la caja no se ve y vuelve a leerse como una franja */
+    border: 1px solid rgba(238, 240, 244, 0.38);
+    border-radius: var(--r-sm);
     padding: 1.1rem 1.1rem 1.2rem; color: var(--paper);
     /* EL BORDE DEL TEXTO, en halo y NO en contorno. -webkit-text-stroke dibuja
        un filete sobre la propia letra y a 14 px se come los trazos finos: la
@@ -3374,11 +3390,14 @@
        Dos sombras: una pegada, que define el canto contra la foto, y otra
        abierta y floja, que separa el bloque entero del fondo. */
     text-shadow: 0 1px 2px rgba(16, 18, 22, 0.55), 0 0 10px rgba(16, 18, 22, 0.35);
-    background: rgba(16, 18, 22, 0.28);
+    /* el escalon respecto a lo de fuera. Es quien pone ahora el contraste del
+       texto, asi que no baja de aqui sin recalcular */
+    background: rgba(16, 18, 22, 0.7);
     -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    /* el borde de arriba del panel, en vez de un corte seco */
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.6rem);
-    mask-image: linear-gradient(to bottom, transparent, #000 1.6rem);
+    /* SIN MASCARA. Cuando el panel iba a sangre, un degradado arriba evitaba el
+       corte seco contra la foto. Ahora la caja tiene filete y esquinas: la
+       mascara desvanecia el borde de arriba y dejaba un marco abierto por un
+       lado, que es peor que el corte que venia a arreglar. */
   }
   /* la negrita, en blanco puro: el resto del parrafo va al 88 % y asi la parte
      destacada se separa sin cambiar de tamaño ni de color */
