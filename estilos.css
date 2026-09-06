@@ -3801,3 +3801,11 @@
      total no es un concepto, es el resultado de los de arriba */
   .pack-suma .pack-total::before { content: none; }
   .pack-suma .pack-total { justify-content: space-between; }
+
+  /* hidden tiene que ganar a cualquier display. El atributo trae de serie
+     display: none, pero es la regla mas debil que existe y cualquier
+     .band { display: grid } de la hoja se la lleva por delante. Con esto,
+     poner hidden en un elemento lo quita de verdad —y ademas lo saca del
+     arbol de accesibilidad y del recorrido con el tabulador, que es lo que
+     hay que hacer con un enlace que no debe usarse. */
+  [hidden] { display: none !important; }

@@ -1198,13 +1198,20 @@
               <p class="gal-lede">Contribuye a disminuir el cansancio y la fatiga.</p>
             </div>
           </div>
+          <!-- EN PAUSA A LA ESPERA DE SENTO: la caja con su libro. Va comentada
+               y no con hidden porque el carrusel cuenta galTrack.children, y una
+               diapositiva oculta seguiria ocupando su turno con un hueco vacio.
+               Al devolverla hay que subir los aria-label a "de 3" otra vez.
           <div class="galeria-slide"><img src="pack-magnesio-libro.jpg" width="1000" height="1241" alt="La caja abierta con el bote y el libro de Sento Segarra" loading="lazy" decoding="async"></div>
+          -->
         </div>
       </div>
       <div class="galeria-minis" id="gal-minis" role="tablist" aria-label="Imágenes del producto">
-        <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-        <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+        <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 2" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+        <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 2"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+        <!-- EN PAUSA A LA ESPERA DE SENTO
         <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
+        -->
       </div>
     </div>
 
@@ -1286,9 +1293,11 @@
                display:none, o sea fuera tambien del arbol de accesibilidad.
                Las engancha el mismo JS, que busca .mini a secas. -->
           <div class="galeria-minis ficha-minis" role="tablist" aria-label="Imágenes del producto">
-            <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 3" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
-            <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 3"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini is-on" data-i="0" aria-label="Imagen 1 de 2" aria-current="true"><img src="ficha-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <button type="button" class="mini" data-i="1" aria-label="Imagen 2 de 2"><img src="hero-magnesio.jpg" alt="" loading="lazy" decoding="async"></button>
+            <!-- EN PAUSA A LA ESPERA DE SENTO
             <button type="button" class="mini" data-i="2" aria-label="Imagen 3 de 3"><img src="pack-magnesio-libro.jpg" alt="" loading="lazy" decoding="async"></button>
+            -->
           </div>
 
 
@@ -2047,7 +2056,7 @@
           <h3>La marca</h3>
           <ul>
             <li><a href="index.html#criterio">Cómo elegimos</a></li>
-            <li><a href="libro.html">El libro</a></li>
+            <li class="pendiente-sento" hidden><a href="libro.html">El libro</a></li>
             <li><a href="#faq">Preguntas</a></li>
           </ul>
         </div>

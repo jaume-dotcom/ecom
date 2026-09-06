@@ -84,7 +84,7 @@
           </div>
         </div>
         <a class="navmenu-link" href="#catalogo">Catálogo</a>
-        <a class="navmenu-link" href="libro.html">El libro</a>
+        <a class="navmenu-link pendiente-sento" href="libro.html" hidden>El libro</a>
         <a class="navmenu-link" href="#criterio">Cómo elegimos</a>
       </div>
 
@@ -154,7 +154,8 @@
              Y sin rotulo debajo: decia "Pack de lanzamiento", que es justo lo
              que ahora dice el boton. -->
         <div class="hero-ctas-par">
-          <a class="hero-cta hero-cta--oferta" href="#libro">Pack de lanzamiento</a>
+          <!-- apuntaba al pack, que esta en pausa: vuelve cuando vuelva el -->
+          <a class="hero-cta hero-cta--oferta pendiente-sento" href="#libro" hidden>Pack de lanzamiento</a>
           <a class="hero-cta hero-cta--linea" href="#catalogo">Fórmulas</a>
         </div>
       </div>
@@ -381,7 +382,13 @@
 
        La foto la cede el, con su permiso. El blanco y negro lo pone el CSS.
        =================================================================== -->
-  <section class="band" id="quien">
+  <!-- ================================================================
+       EN PAUSA A LA ESPERA DE SENTO. Fuera de la web hasta que el de su
+       visto bueno; entonces se quita el atributo hidden y vuelve tal cual.
+       No se borra nada: todo el bloque sigue aqui entero.
+       Buscar "pendiente-sento" para encontrar los demas sitios.
+       ================================================================ -->
+  <section class="band pendiente-sento" id="quien" hidden>
     <div class="section-head reveal">
       <div>
         <h2>&iquest;Quién <span class="h2-soft">pone la dosis?</span></h2>
@@ -450,7 +457,10 @@
       <h2 class="ayuda-titulo">&iquest;No sabes <span class="h2-soft">por dónde empezar?</span></h2>
       <p class="ayuda-sub">No hace falta que lo adivines.</p>
       <div class="ayuda-botones">
-        <a class="btn btn-solid ayuda-btn" href="libro.html">Cómo elegir la tuya</a>
+        <!-- llevaba a libro.html, que esta en pausa. Pasa a "Como elegimos",
+             que es el otro sitio de la pagina que explica con que criterio se
+             elige. Cuando vuelva el libro, se devuelve el destino. -->
+        <a class="btn btn-solid ayuda-btn" href="#criterio">Cómo elegir la tuya</a>
       </div>
     </div>
   </section>
@@ -458,7 +468,13 @@
 <div class="wrap">
 
 
-  <section class="band" id="libro">
+  <!-- ================================================================
+       EN PAUSA A LA ESPERA DE SENTO. Fuera de la web hasta que el de su
+       visto bueno; entonces se quita el atributo hidden y vuelve tal cual.
+       No se borra nada: todo el bloque sigue aqui entero.
+       Buscar "pendiente-sento" para encontrar los demas sitios.
+       ================================================================ -->
+  <section class="band pendiente-sento" id="libro" hidden>
     <div class="section-head reveal">
       <div>
         <h2>Oferta <span class="h2-soft">de lanzamiento</span></h2>
@@ -865,7 +881,7 @@
           <h3>La marca</h3>
           <ul>
             <li><a href="#criterio">Cómo elegimos</a></li>
-            <li><a href="libro.html">El libro</a></li>
+            <li class="pendiente-sento" hidden><a href="libro.html">El libro</a></li>
             <li><a href="#faq">Preguntas</a></li>
           </ul>
         </div>
@@ -935,7 +951,7 @@
     </div>
     <a href="#catalogo">Catálogo</a>
     <a href="#quien">Quién está detrás</a>
-    <a href="libro.html">El libro de Sento</a>
+    <a class="pendiente-sento" href="libro.html" hidden>El libro de Sento</a>
     <a href="#criterio">Cómo elegimos</a>
     <a href="#footer-signup">Contacto</a>
   </nav>
