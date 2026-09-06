@@ -3355,10 +3355,27 @@
       rgba(16, 18, 22, 0.12) 62%,
       transparent 78%);
   }
+  /* EL TEXTO, SOBRE UN PANEL ESMERILADO. Antes iba directamente sobre la foto
+     y solo lo sostenia el degradado. El desenfoque de detras le da un suelo:
+     la foto sigue viendose —es lo que hace que no parezca una caja pegada—
+     pero deja de tener detalle justo donde hay que leer.
+
+     EL DEGRADADO SE QUEDA, y no es redundante: backdrop-filter desenfoca pero
+     NO oscurece. Sobre una foto clara, un panel solo desenfocado deja el texto
+     blanco en 2,0 de contraste. Quien pone el contraste es el degradado; el
+     desenfoque solo quita el ruido de debajo. */
   .perfil-txt {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
     padding: 1.1rem 1.1rem 1.2rem; color: var(--paper);
+    background: rgba(16, 18, 22, 0.28);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    /* el borde de arriba del panel, en vez de un corte seco */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 1.6rem);
+    mask-image: linear-gradient(to bottom, transparent, #000 1.6rem);
   }
+  /* la negrita, en blanco puro: el resto del parrafo va al 88 % y asi la parte
+     destacada se separa sin cambiar de tamaño ni de color */
+  .perfil-txt p b { color: var(--paper); font-weight: 600; }
   .perfil-txt h3 {
     margin: 0 0 0.35rem; font-size: var(--t-2xl); font-weight: 600;
     line-height: 1.2; letter-spacing: var(--tracking-lg); color: var(--paper);
