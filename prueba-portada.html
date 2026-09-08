@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba de portada — ZEROX</title>
+<meta name="description" content="Página de prueba interna.">
+<!-- La pagina no se indexa: hasta que haya valoraciones de verdad, lo unico
+     que hay aqui son huecos de relleno. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3Eg%7Bstroke:%2323272e%7D@media(prefers-color-scheme:dark)%7Bg%7Bstroke:%23eef0f4%7D%7D%3C/style%3E%3Cg fill='none' stroke-width='7'%3E%3Cpath d='M80.15 34.30 A 34 34 0 0 1 80.15 65.70'/%3E%3Cpath d='M65.70 80.15 A 34 34 0 0 1 34.30 80.15'/%3E%3Cpath d='M19.85 65.70 A 34 34 0 0 1 19.85 34.30'/%3E%3Cpath d='M34.30 19.85 A 34 34 0 0 1 65.70 19.85'/%3E%3Cpath d='M16 16 L84 84 M84 16 L16 84'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<script src="carrito.js" defer></script>
+<script src="captura.js" defer></script>
+<noscript><style>
+  .reveal, .foot-anim { opacity: 1 !important; filter: none !important; transform: none !important; }
+</style></noscript>
+<style>
+  /* La barra de aviso y la nav se copian de la ficha: es la misma cabecera y
+     tiene que verse igual. Estas reglas viven en el HTML de cada pagina y no
+     en estilos.css, que es como esta montado el resto del sitio. */
+  /* ---------- barra de aviso + nav ---------- */
+  .topbar {
+    background: var(--ink); color: var(--paper);
+    font-size: var(--t-xs); text-align: center; padding: 0.6rem 1rem;
+  }
+  nav {
+    position: relative; display: flex; align-items: center;
+    justify-content: space-between; padding: 1.1rem 0;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink); }
+  .logo-mark { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+  .logo-word { font-weight: 600; font-size: var(--t-2xl); letter-spacing: 0.2em; text-indent: 0.2em; }
+  nav > .logo {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  /* relative para colgarle el contador de la cesta, y el reset porque el de
+     la bolsa dejo de ser un <a> y ahora es un <button> */
+  .nav-ico {
+    position: relative;
+    width: 2.75rem; height: 2.75rem; margin: 0 -0.7rem;
+    display: grid; place-items: center; color: var(--ink);
+    background: none; border: 0; padding: 0; cursor: pointer;
+  }
+  .nav-ico svg { width: 21px; height: 21px; }
+  /* AQUI LAS VALORACIONES NO SON UN CARRUSEL, son una lista: es lo que se
+     viene a ver. .resenas de estilos.css es una rejilla de flujo por COLUMNAS
+     con anchos del 78 % y desplazamiento lateral, asi que no basta con poner
+     display:grid: hay que devolver el flujo a filas y soltar el ancho fijo. */
+  .resenas-todas {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-auto-flow: row;
+    grid-template-columns: 1fr; grid-auto-columns: auto;
+    gap: 0.9rem; overflow-x: visible;
+  }
+  /* y sin la proporcion cuadrada que llevan dentro del carrusel: aqui el alto
+     lo pone el texto */
+  .resenas-todas .resena { aspect-ratio: auto; align-content: start; padding: 0; }
+  /* una linea de pelo entre valoraciones. En el carrusel cada tarjeta se veia
+     porque iba en blanco sobre la banda; aqui el fondo tambien es blanco y sin
+     separador se leerian como un solo bloque de texto. */
+  .resenas-todas .resena + .resena {
+    border-top: 1px solid var(--line); padding-top: 1.5rem;
+  }
+  .resenas-todas { gap: 1.5rem; }
+  .resenas-cab { margin: 0 0 1.4rem; }
+  .resenas-cab h1 {
+    margin: 0 0 0.4rem; font-size: var(--t-6xl); font-weight: 600;
+    line-height: 1.15; letter-spacing: var(--tracking-lg);
+  }
+  .resenas-cab p { margin: 0; color: var(--ink-soft); }
+  .resenas-volver {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    min-height: 44px; margin: 1.6rem 0 0; padding: 0 1.2rem;
+    border: 1px solid var(--line); border-radius: 999px; background: #fff;
+    color: var(--ink); font-size: var(--t-base); font-weight: 500; cursor: pointer;
+    font-family: var(--font);
+  }
+  .resenas-volver svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  main.wrap { padding-top: 1.4rem; padding-bottom: 2.6rem; }
+  @media (min-width: 860px) {
+    .resenas-todas { grid-template-columns: 1fr 1fr; }
+  }
+<meta name="robots" content="noindex">
+
+  /* ================================================================
+     PRUEBA. Arquitectura reconstruida a partir de seed.com, con el
+     sistema de ZEROX: sus tokens, sus fotos, su copy y sus reglas.
+     NO hay CSS, texto ni imagenes de la referencia: lo que se copia
+     es el ESQUELETO —que bloques hay, en que orden y que resuelve
+     cada uno—, que es lo que no tiene dueño.
+     ================================================================ */
+
+  .pr-aviso {
+    background: var(--acento); color: var(--paper);
+    font-size: var(--t-2xs); letter-spacing: 0.04em;
+    padding: 0.5rem 1rem; text-align: center;
+  }
+
+  /* ---------- piezas comunes ---------- */
+  .pr-kicker {
+    display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.9rem;
+    font-size: var(--t-3xs); font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .pr-kicker i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--acento); }
+  .pr-h2 { margin: 0 0 0.8rem; font-size: var(--t-4xl); font-weight: 500; letter-spacing: var(--tracking-lg); }
+  .pr-lede { margin: 0 0 2rem; font-size: var(--t-lg); line-height: 1.55; color: var(--ink-soft); max-width: 46ch; }
+  .pr-band { padding: 3.5rem 0; }
+  .pr-band--tint { background: var(--tint); }
+  .pr-band--ink { background: var(--ink); color: var(--paper); }
+  .pr-band--ink .pr-h2, .pr-band--ink .h2-soft { color: var(--paper); }
+  .pr-band--ink .pr-lede { color: rgba(238, 240, 244, 0.8); }
+  .pr-band--ink .pr-kicker { color: rgba(238, 240, 244, 0.7); }
+  /* NO HACE FALTA SACAR ESTAS BANDAS DEL .wrap: cuelgan del body, no de el.
+     Se les puso el mismo truco de margenes negativos que en la portada real y
+     ahi si hace falta —alli las secciones viven dentro de un .wrap— pero aqui
+     sobraba y empujaba la pagina 26 px por cada lado: 26 de desbordamiento
+     horizontal medido. El relleno lateral se lo da el .wrap de dentro. */
+  .pr-sangre { margin-left: -1.6rem; margin-right: -1.6rem; padding-left: 1.6rem; padding-right: 1.6rem; }
+  @media (min-width: 860px) {
+    .pr-sangre { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: 2rem; padding-right: 2rem; }
+    .pr-h2 { font-size: var(--t-5xl); }
+    .pr-band { padding: 5rem 0; }
+  }
+
+  /* ---------- hero ---------- */
+  .pr-hero { position: relative; overflow: hidden; min-height: 78svh; display: grid; align-content: end; }
+  .pr-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pr-hero::after {
+    content: ""; position: absolute; inset: 0;
+    /* la foto del hero es CLARA —botes blancos sobre piedra clara— asi que el
+       velo tiene que llegar mas arriba de lo que pediria una foto normal: el
+       titular cae a media altura y ahi el degradado suave lo dejaba en gris
+       sobre gris. Con una foto oscura estos numeros se pueden aflojar. */
+    background: linear-gradient(to top, rgba(16,18,22,0.88) 0%, rgba(16,18,22,0.72) 38%, rgba(16,18,22,0.3) 75%, rgba(16,18,22,0.1) 100%);
+  }
+  .pr-hero-txt { position: relative; z-index: 1; padding: 0 0 2.4rem; color: var(--paper); }
+  .pr-hero-txt h1 { margin: 0 0 0.7rem; font-size: var(--t-5xl); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.1; }
+  .pr-hero-txt p { margin: 0 0 1.6rem; font-size: var(--t-lg); color: rgba(238,240,244,0.9); max-width: 34ch; }
+  .pr-ctas { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .pr-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 48px; padding: 0.9rem 1.5rem; border-radius: 999px; border: 0;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--font); font-size: var(--btn-txt); font-weight: var(--btn-peso); cursor: pointer;
+  }
+  .pr-cta--linea { background: transparent; color: var(--paper); border: 1px solid rgba(238,240,244,0.5); }
+
+  /* ---------- explicativo de dos partes (el patron del bloque tecnico) ---------- */
+  .pr-doble { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  .pr-parte {
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md);
+    padding: 1.3rem 1.4rem;
+  }
+  .pr-band--ink .pr-parte { background: rgba(238,240,244,0.06); border-color: rgba(238,240,244,0.16); }
+  .pr-parte h3 { margin: 0 0 0.4rem; font-size: var(--t-2xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+  .pr-band--ink .pr-parte h3 { color: rgba(238,240,244,0.7); }
+  .pr-parte b { display: block; font-size: var(--t-3xl); font-weight: 600; letter-spacing: var(--tracking-lg); margin-bottom: 0.4rem; }
+  .pr-parte p { margin: 0; font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); }
+  .pr-band--ink .pr-parte p { color: rgba(238,240,244,0.78); }
+  @media (min-width: 720px) { .pr-doble { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- manifiesto ---------- */
+  .pr-manif { position: relative; overflow: hidden; }
+  .pr-manif img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(2px); transform: scale(1.06); }
+  .pr-manif::after { content: ""; position: absolute; inset: 0; background: rgba(16,18,22,0.8); }
+  .pr-manif-txt { position: relative; z-index: 1; color: var(--paper); text-align: center; padding: 4rem 0; }
+  .pr-manif-txt h2 { margin: 0 auto 1rem; font-size: var(--t-5xl); font-weight: 500; letter-spacing: var(--tracking-lg); line-height: 1.15; max-width: 18ch; }
+  .pr-manif-txt p { margin: 0 auto 1.8rem; font-size: var(--t-lg); line-height: 1.6; color: rgba(238,240,244,0.85); max-width: 44ch; }
+
+  /* ---------- titular solo, como pausa ---------- */
+  .pr-pausa { text-align: center; padding: 3rem 0; }
+  .pr-pausa p { margin: 0 auto; font-size: var(--t-3xl); font-weight: 500; line-height: 1.3; max-width: 24ch; letter-spacing: var(--tracking-lg); }
+
+  /* ---------- tabla comparativa ---------- */
+  .pr-tabla { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
+  .pr-tabla th, .pr-tabla td { padding: 0.85rem 0.6rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .pr-tabla thead th { font-size: var(--t-3xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .pr-tabla td:first-child { font-weight: 600; color: var(--ink); }
+  .pr-tabla .si { color: var(--ok, #1c6144); font-weight: 600; }
+  .pr-tabla .no { color: var(--ink-faint); }
+  .pr-tabla-caja { overflow-x: auto; }
+
+  /* ---------- ingrediente a ingrediente ---------- */
+  .pr-ing { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+  .pr-ing li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.2rem 1.3rem; }
+  .pr-ing h3 { margin: 0 0 0.15rem; font-size: var(--t-xl); font-weight: 600; letter-spacing: var(--tracking-lg); }
+  .pr-ing .dosis { display: block; font-size: var(--t-sm); color: var(--acento); font-weight: 600; margin-bottom: 0.5rem; }
+  .pr-ing p { margin: 0; font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); }
+
+  /* ---------- pasos ---------- */
+  .pr-pasos { list-style: none; margin: 0; padding: 0; counter-reset: pr; display: grid; gap: 0; }
+  .pr-pasos li { counter-increment: pr; display: grid; grid-template-columns: 2.4rem 1fr; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+  .pr-pasos li:last-child { border-bottom: 0; }
+  .pr-pasos li::before {
+    content: counter(pr, decimal-leading-zero);
+    width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 1px solid var(--line);
+    display: grid; place-items: center; font-size: var(--t-2xs); font-weight: 600; color: var(--ink-soft);
+  }
+  .pr-pasos b { display: block; font-size: var(--t-lg); font-weight: 600; margin-bottom: 0.2rem; }
+  .pr-pasos p { margin: 0; font-size: var(--t-md); line-height: 1.5; color: var(--ink-soft); }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">Envío gratuito desde 27,95 € · Devolución en 30 días</div>
+
+<div class="wrap">
+  <nav>
+    <a class="nav-ico" id="volver" href="index.html" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7">
+          <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+          <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+          <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+          <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+          <path d="M16 16 L84 84 M84 16 L16 84"/>
+        </g>
+      </svg>
+      <span class="logo-word">ZEROX</span>
+    </a>
+    <button type="button" class="nav-ico" data-cart-abrir aria-label="Tu cesta, vacía">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5.5 8h13l-1.1 12.2H6.6L5.5 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9 8.5V6.2a3 3 0 0 1 6 0v2.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </nav>
+</div>
+
+<div class="pr-aviso">PRUEBA — arquitectura de seed.com reconstruida con el sistema de ZEROX. No enlazada desde la web.</div>
+
+<!-- 1 · HERO A SANGRE. En la referencia es una foto de ambiente a pantalla
+     casi completa con titular, una linea y dos botones: uno solido y uno de
+     linea. La portada de ZEROX ya hace esto; aqui cambia que la foto es de
+     ambiente y no de producto, y que el titular baja al pie de la imagen. -->
+<section class="pr-hero">
+  <img src="hero-zerox.jpg" alt="" loading="eager" decoding="async">
+  <div class="wrap pr-hero-txt">
+    <h1>Cero incógnitas <span class="h2-soft">en lo que tomas</span></h1>
+    <p>Cuatro fórmulas con la dosis que usaron los estudios que las avalan.</p>
+    <div class="pr-ctas">
+      <a class="pr-cta" href="index.html#catalogo">Ver las fórmulas</a>
+      <a class="pr-cta pr-cta--linea" href="elegir.html">No sé cuál me toca</a>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- 2 · LAS CUATRO. En la referencia, una tira de tarjetas de producto con
+       un titular de argumento encima. Es lo que ZEROX ya tiene en #catalogo,
+       asi que aqui solo se enseña el titular y se enlaza, para no duplicar
+       cuatro tarjetas que ya existen y se mantendrian por dos sitios. -->
+  <section class="pr-band">
+    <p class="pr-kicker"><i aria-hidden="true"></i>El catálogo</p>
+    <h2 class="pr-h2">Cuatro fórmulas <span class="h2-soft">y ninguna más</span></h2>
+    <p class="pr-lede">Entran solo si podemos publicar la cantidad exacta, la forma y de dónde sale.</p>
+    <div class="pr-ctas"><a class="pr-cta" style="background:var(--ink);color:var(--paper)" href="index.html#catalogo">Ver las cuatro</a></div>
+  </section>
+
+</main>
+
+<!-- 3 · EL BLOQUE TECNICO. Es LA pieza que vale la pena traerse: un
+     explicativo largo, en oscuro, que desmonta una sola cosa y la parte en dos
+     mitades enfrentadas. En la referencia explican su capsula; aqui explica lo
+     unico que de verdad separa a ZEROX de su competencia y que hoy vive
+     escondido dentro de un acordeon: el magnesio elemental. -->
+<section class="pr-band pr-band--ink">
+  <div class="wrap">
+    <p class="pr-kicker"><i aria-hidden="true"></i>Lo que dice la etiqueta</p>
+    <h2 class="pr-h2">1.000 mg de citrato <span class="h2-soft">no son 1.000 mg de magnesio</span></h2>
+    <p class="pr-lede">Dos botes con el mismo nombre pueden no parecerse en nada. Lo que cuenta es el mineral que llega, no el peso de la sal que lo transporta.</p>
+    <ul class="pr-doble">
+      <li class="pr-parte">
+        <h3>Lo que pesa el bote</h3>
+        <b>1.000 mg</b>
+        <p>Es la sal entera: el mineral más la molécula que lo acompaña. Es la cifra grande de la parte de delante, y es la que no te sirve para nada.</p>
+      </li>
+      <li class="pr-parte">
+        <h3>Lo que llega</h3>
+        <b>360 mg</b>
+        <p>Es el magnesio elemental por dosis. Vive en la letra pequeña de la parte de atrás de casi todos los botes. En el nuestro va delante.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4 · MANIFIESTO. En la referencia es una pantalla entera con una
+     afirmacion de marca sobre una foto, sin producto ni precio. Es una pausa
+     que sirve para decir en que creen. -->
+<section class="pr-manif">
+  <img src="ctx-ritmo.jpg" alt="" loading="lazy" decoding="async">
+  <div class="wrap pr-manif-txt">
+    <h2>Nadie debería fiarse de una etiqueta</h2>
+    <p>Ni de la nuestra. Por eso publicamos la cantidad exacta, la forma química y el análisis del lote: para que no tengas que creernos.</p>
+    <div class="pr-ctas" style="justify-content:center"><a class="pr-cta" href="index.html#criterio">Cómo elegimos</a></div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- 5 · PAUSA DE UN SOLO TITULAR. En la referencia hay una seccion que solo
+       tiene una frase. Cuesta 300 px y le da respiro a la pagina. -->
+  <section class="pr-pausa">
+    <p>Lo difícil no es formular. Es publicar lo que llevas dentro.</p>
+  </section>
+
+  <!-- 6 · PRUEBA SOCIAL. En la referencia van dos bloques seguidos:
+       valoraciones y una rejilla de fotos de clientes.
+       AQUI NO HAY NI UNA COSA NI LA OTRA: ZEROX no ha vendido nada. En vez de
+       rellenar el hueco con valoraciones inventadas —que es lo que pide el
+       formato y lo que seria ilegal— el bloque dice lo que hay. -->
+  <section class="pr-band">
+    <p class="pr-kicker"><i aria-hidden="true"></i>Todavía no</p>
+    <h2 class="pr-h2">Aquí irán <span class="h2-soft">las valoraciones</span></h2>
+    <p class="pr-lede">Cuando haya clientes que las escriban. La referencia pone aquí un millón de testimonios y una pared de fotos; nosotros no hemos vendido un bote todavía, y este hueco se queda vacío hasta que deje de estarlo.</p>
+  </section>
+
+</main>
+
+<!-- 7 · CIERRE. La referencia remata con un bloque de marca y un CTA. Aqui,
+     el de captura, que es el que ZEROX necesita hasta que abra. -->
+<section class="pr-band pr-band--ink">
+  <div class="wrap" style="text-align:center">
+    <h2 class="pr-h2">Llega antes <span class="h2-soft">y paga menos</span></h2>
+    <p class="pr-lede" style="margin-left:auto;margin-right:auto">Un 15&nbsp;% en tu primer pedido el día que abramos.</p>
+    <div class="pr-ctas" style="justify-content:center"><a class="pr-cta" href="index.html#alta">Quiero mi código</a></div>
+  </div>
+</section>
+
+
+<footer id="footer-signup">
+  <div class="foot-panel">
+    <span class="foot-hair" aria-hidden="true"></span>
+    <div class="foot-grid">
+
+      <div class="foot-brand reveal foot-anim">
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="7">
+              <path d="M80.15 34.30 A 34 34 0 0 1 80.15 65.70"/>
+              <path d="M65.70 80.15 A 34 34 0 0 1 34.30 80.15"/>
+              <path d="M19.85 65.70 A 34 34 0 0 1 19.85 34.30"/>
+              <path d="M34.30 19.85 A 34 34 0 0 1 65.70 19.85"/>
+              <path d="M16 16 L84 84 M84 16 L16 84"/>
+            </g>
+          </svg>
+          <span class="logo-word">ZEROX</span>
+        </a>
+        <p class="foot-claim">Qué lleva, cuánto lleva y por qué.</p>
+        <p class="foot-copy">&copy; 2026 ZEROX</p>
+      </div>
+
+      <div class="foot-cols">
+        <div class="foot-col reveal foot-anim">
+          <h3>Fórmulas</h3>
+          <ul>
+            <li><a href="magnesio.html">Magnesio Bisglicinato</a></li>
+            <li><a href="index.html#catalogo">Vitamina D3 + K2</a></li>
+            <li><a href="index.html#catalogo">Omega&ndash;3 EPA+DHA</a></li>
+            <li><a href="index.html#catalogo">Probiótico Multicepa</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>La marca</h3>
+          <ul>
+            <li><a href="index.html#criterio">Cómo elegimos</a></li>
+            <li><a href="elegir.html">Cómo elegir la tuya</a></li>
+            <li class="pendiente-sento" hidden><a href="libro.html">El libro</a></li>
+            <li><a href="#faq">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Ayuda</h3>
+          <ul>
+            <li><a href="#alta">Acceso anticipado</a></li>
+            <li><a href="#faq">Envíos y devoluciones</a></li>
+            <li><a href="#footer-signup">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot-col reveal foot-anim">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Aviso legal</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot-bottom">
+      <span>Complemento alimenticio. No sustituye una dieta variada y equilibrada ni un estilo de vida saludable. No superar la dosis diaria recomendada.</span>
+      <span class="disclaimer">Vista previa: nombre y packaging provisionales, pendientes de confirmación de marca y dominio.</span>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
